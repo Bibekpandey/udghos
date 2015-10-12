@@ -1,3 +1,9 @@
 from django.contrib import admin
+from complain.models import *
 
-# Register your models here.
+admin.autodiscover()
+
+admin.site.register(Account)
+admin.site.register(Tag)
+admin.site.register(Complaint)
+admin.site.register(Comment)
