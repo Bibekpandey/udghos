@@ -1,4 +1,51 @@
+{% extends "complain/base.html" %}
 {% block content %}
-This is the content<br>
-<a href="{% url 'login' %}">Login</a>page.
+
+    {% if user.username %}
+        Hi {{user.username }}<br>
+        Post a <a href="{% url 'post' 'complaint' %}">complaint</a><br>
+        Post a <a href="{% url 'post' 'discussion'%}">discussion</a><br>
+        <h2>Recent threads </h2>
+        {% if threads|length == 0 %}
+            no threads to show<br><br>
+        {% else %}
+        <ul>
+            {% for x in threads %}
+                <li>votes[<span id="vote_{{x.id}}">{{x.votes}}</span>] 
+                    <a href="#"><b>{{ x.title }}</b></a> 
+                    <a href="#" onclick="upvote({{x.id}})">upvote</a> ||||
+                    <a href="#" onclick="downvote({{x.id}})">downvote</a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <a href="{% url 'logout' %}">Logout</a>
+        <div id="test">
+        </div>
+
+    {% else %}
+        You have not logged in.<br><br>
+        Here is <a href="{% url 'login' %}">Login</a> page.
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    function upvote(id)
+    {
+        var votes = parseInt($("#vote_"+id).text());
+        votes++;
+        $("#vote_"+id).text(votes.toString());
+    }
+
+    function downvote(id)
+    {
+        var votes = parseInt($("#vote_"+id).text());
+        votes--;
+        $("#vote_"+id).text(votes.toString());
+    }
+</script>
+
 {% endblock %}

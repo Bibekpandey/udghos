@@ -1,0 +1,18 @@
+{% block content %}
+    <h2>{{ form_heading }}</h2> 
+    {% if message %}
+        {{message}} <br><br>
+    {% endif %}
+    <form method="post" action="{% url 'post' thread_type %}">
+        {% csrf_token %}
+        <input type="hidden" name="thread_type" value="{{thread_type}}"/>
+        Title:<input type="text" name="title" placeholder="The title of the post" /><br>
+
+        Details:<textarea name="content"></textarea><br>
+
+        Tags:<input id="tags_input" type="text" name="tags" placeholder="Write tags separated by comma"/><br>
+
+        <input type="submit" value="Post" />
+    </form><br>
+    back to <a href="{% url 'index' %}">Home</a> page.
+{% endblock %}

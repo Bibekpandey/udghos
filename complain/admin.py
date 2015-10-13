@@ -5,5 +5,5 @@ admin.autodiscover()
 
 admin.site.register(Account)
 admin.site.register(Tag)
-admin.site.register(Complaint)
+admin.site.register(Thread)
 admin.site.register(Comment)
