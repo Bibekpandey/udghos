@@ -7,4 +7,6 @@ urlpatterns =  [
         url(r'^logout/', logout_user, name='logout'),
         url(r'^vote/', vote, name='vote'),
         url(r'^post-thread/([a-z]+)/', Post.as_view(), name='post'),
+        url(r'^thread/([0-9]+)/', ThreadPage.as_view(), name='thread'),
+        url(r'^comment/', comment, name='comment'),
 ]

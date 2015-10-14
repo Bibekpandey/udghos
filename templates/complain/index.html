@@ -1,4 +1,5 @@
 {% extends "complain/base.html" %}
+{% load zip %}
 {% block content %}
 
     {% if user.username %}
@@ -11,9 +12,10 @@
             no threads to show<br><br>
         {% else %}
         <ul>
-            {% for x in threads %}
+            {% for x, y in threads|zip:num_comments %}
                 <li>votes[<span id="vote_{{x.id}}">{{x.votes}}</span>] 
-                    <a href="#"><b>{{ x.title }}</b></a> 
+                <span>{{y}} comments</span>
+                    <a href="{% url 'thread' x.id %}"><b>{{ x.title }}</b></a> 
                     <a href="#" onclick="vote({{x.id}},'upvote')">upvote</a> ||||
                     <a href="#" onclick="vote({{x.id}}, 'downvote')">downvote</a>
                 </li>

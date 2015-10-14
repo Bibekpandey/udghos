@@ -17,7 +17,7 @@ class Index(View):
         if request.user.is_authenticated():
             self.context['user'] = request.user
 
-        self.context['threads'], self.context['num_comments'] = get_recent_thrads(20)
+        self.context['threads'], self.context['num_comments'] = get_recent_threads(20)
         return render(request, "complain/index.html", self.context)
 
 
@@ -148,12 +148,49 @@ def vote(request):
         else:
             return HttpResponse('user not authenticated')
 
+class ThreadPage(View):
+    context = {}
+
+    def get(self, request, thread_id):
+        if request.user.is_authenticated():
+            self.context['user'] = request.user
+
+        thread = Thread.objects.get(id=thread_id)
+        self.context['thread'] = thread
+
+        comments = Comment.objects.filter(thread=thread)
+        self.context['comments']= comments
+
+        self.context['total_comments'] = len(comments)
+
+        return render(request, "complain/thread.html", self.context)
+
+
+def comment(request):
+    if request.method=='POST':
+        try:
+            content = request.POST['comment']
+            if request.user.is_authenticated() and content.strip()!='':
+                thread_id = int(request.POST['thread_id'])
+                account = Account.objects.get(user=request.user)
+                thread = Thread.objects.get(id=thread_id)
+
+                comment = Comment(account=account, 
+                            thread=thread, text=content)
+                comment.save()
+                return redirect(reverse('thread', args=[str(thread_id)]))
+        except TypeError:
+            return HttpResponse('Invalid thread id')
+        except Exception as e:
+            return HttpResponse(e.args)
+    return redirect('index')
+
 
 #########################################
 #####       HELPER FUNCTIONS        #####
 #########################################
 
-def get_recent_thrads(n): # return n threads with number of comments
+def get_recent_threads(n): # return n threads with number of comments
     try:
         threads = Thread.objects.order_by('-time')[:n]
     except: # n greater than total length
