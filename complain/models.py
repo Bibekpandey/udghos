@@ -66,6 +66,6 @@ class Upvote(models.Model):
     account = models.ForeignKey(Account)
     thread = models.ForeignKey(Thread)
 
-class DownVote(models.Model):
+class Downvote(models.Model):
     account = models.ForeignKey(Account)
     thread = models.ForeignKey(Thread)

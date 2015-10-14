@@ -88,29 +88,61 @@ class Post(View):
         return HttpResponse('Thread posted.<br>Go to <a href="/complain/">Home</a> page')
 
 
-def upvote(request):
+def vote(request):
     if request.method=='POST':
         if request.user.is_authenticated():
             user = request.user
+            vote_type = request.POST.get('type', '')
             try:
                 thread_id = request.POST['thread_id']
                 thread_id = int(thread_id)
 
                 thrd = Thread.objects.get(id=thread_id)
                 accnt = Account.objects.get(user=user)
+
                 upvote = Upvote.objects.filter(account=accnt, thread=thrd)
-                if len(upvote)==1:
-                    thrd.votes-=1
-                    thrd.save()
-                    upvote[0].delete()
-                    return HttpResponse(-1)
-                else:
-                    # user has not upvoted the thread
-                    thrd.votes+=1
-                    thrd.save()
-                    upvote = Upvote(account=accnt, thread=thrd)
-                    upvote.save()
-                    return HttpResponse(1)
+                downvote = Downvote.objects.filter(account=accnt, thread=thrd)
+
+                if vote_type == 'upvote':
+                    if len(upvote)==1: # means already upvoted
+                        thrd.votes-=1
+                        thrd.save()
+                        upvote[0].delete()
+                        return HttpResponse(-1)
+                    elif len(upvote)==0:
+                        # user has not upvoted the thread
+                        inc = 1
+                        if len(downvote)>0: # user has downvoted, so increase by 2
+                            inc = 2
+                            downvote[0].delete()
+                        thrd.votes+=inc
+                        thrd.save()
+                        upvote = Upvote(account=accnt, thread=thrd)
+                        upvote.save()
+                        return HttpResponse(inc)
+                    else:
+                        raise 404('Error')
+
+                elif vote_type == 'downvote':
+                    if len(downvote)==1: # means already downvoted
+                        thrd.votes+=1
+                        thrd.save()
+                        downvote[0].delete()
+                        return HttpResponse(1)
+                    elif len(downvote)==0:
+                        # user has not upvoted the thread
+                        inc = -1
+                        if len(upvote)>0: # user has downvoted, so increase by 2
+                            inc = -2
+                            upvote[0].delete()
+                        thrd.votes+=inc
+                        thrd.save()
+                        downvote = Downvote(account=accnt, thread=thrd)
+                        downvote.save()
+                        return HttpResponse(inc)
+                    else:
+                        raise 404('Error')
+
             except Exception as e:
                 return HttpResponse(e.args)
         else:

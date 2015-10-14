@@ -14,8 +14,8 @@
             {% for x in threads %}
                 <li>votes[<span id="vote_{{x.id}}">{{x.votes}}</span>] 
                     <a href="#"><b>{{ x.title }}</b></a> 
-                    <a href="#" onclick="upvote({{x.id}})">upvote</a> ||||
-                    <a href="#" onclick="downvote({{x.id}})">downvote</a>
+                    <a href="#" onclick="vote({{x.id}},'upvote')">upvote</a> ||||
+                    <a href="#" onclick="vote({{x.id}}, 'downvote')">downvote</a>
                 </li>
             {% endfor %}
         </ul>
@@ -45,13 +45,14 @@
         }
     }
 
-    function upvote(id)
+    function vote(id, vote_type)
     {
         var inc;
-        $.post("/complain/upvote/",
+        $.post("/complain/vote/",
             {
                 thread_id:id,
-                csrfmiddlewaretoken:g_csrf
+                csrfmiddlewaretoken:g_csrf,
+                type:vote_type
             }, function(data, status) { 
                 inc = parseInt(data);
                 var votes = parseInt($("#vote_"+id).text());
@@ -60,13 +61,6 @@
 
             }
         );
-            }
-
-    function downvote(id)
-    {
-        var votes = parseInt($("#vote_"+id).text());
-        votes--;
-        $("#vote_"+id).text(votes.toString());
     }
 </script>
 
