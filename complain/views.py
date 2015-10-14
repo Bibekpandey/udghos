@@ -161,6 +161,13 @@ class ThreadPage(View):
         comments = Comment.objects.filter(thread=thread)
         self.context['comments']= comments
 
+        replies = []
+        for comment in comments:
+            replys = Reply.objects.filter(comment=comment)
+            replies.append(list(replys))
+
+        self.context['replies'] = replies
+
         self.context['total_comments'] = len(comments)
 
         return render(request, "complain/thread.html", self.context)
@@ -178,6 +185,26 @@ def comment(request):
                 comment = Comment(account=account, 
                             thread=thread, text=content)
                 comment.save()
+                return redirect(reverse('thread', args=[str(thread_id)]))
+        except TypeError:
+            return HttpResponse('Invalid thread id')
+        except Exception as e:
+            return HttpResponse(e.args)
+    return redirect('index')
+
+def reply(request):
+    if request.method=='POST':
+        try:
+            content = request.POST['reply']
+            if request.user.is_authenticated() and content.strip()!='':
+                thread_id = int(request.POST['thread_id'])
+                comment_id = int(request.POST['comment_id'])
+                account = Account.objects.get(user=request.user)
+                comment = Comment.objects.get(id=comment_id)
+
+                reply = Reply(account=account, 
+                            comment=comment, text=content)
+                reply.save()
                 return redirect(reverse('thread', args=[str(thread_id)]))
         except TypeError:
             return HttpResponse('Invalid thread id')

@@ -1,0 +1,61 @@
+{% extends "complain/base.html" %}
+{% load zip %}
+
+{% block content %}
+<div id="thread">
+    <span></span>
+    <h2>{{thread.title}}</h2>
+    <p>{{thread.content}}</p>
+</div>
+
+<div id="comments">
+    <div id="comments_title">
+        <h3>{{total_comments}} total comments</h3>
+        <h4>Showing {{pagination.size}} top comments</h4>
+    </div>
+    <div id="comments_body">
+        {% for comment, cmt_replies in comments|zip:replies %}
+        <div class="comment">
+        <b>{{comment.account}}</b>[{{comment.time.date}}] 
+                {{comment.text}}
+            <div class="replies">
+                <ul>
+                {% for reply in cmt_replies %}
+                <li>
+                    <b><span>{{reply.account.user}}</span></b>
+                    [{{reply.time.date}}] &nbsp; {{reply.text}}
+                </li>
+                {% endfor %}
+                </ul>
+                    <form method="post" action="{% url 'reply' %}">
+                    {% csrf_token %}
+                        <input type="hidden" name="thread_id" value="{{thread.id}}" />
+                        <input type="hidden" name="comment_id" value="{{comment.id}}" />
+                        <textarea name="reply" placeholder="reply"></textarea>
+                        <br>
+                        <input type="submit" value="Reply" />
+                    </form>
+
+
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+    <div>
+        Go to <a href="{% url 'index' %}">Home</a> page.
+    </div>
+    {% if user.username %}
+    <div id="comment_form">
+        <h3> LEAVE A COMMENT:</h3>
+        <form method="post" action="{% url 'comment' %}">
+            {% csrf_token %}
+            Comment:<textarea name="comment" placeholder="Your comment here"></textarea>
+            <br>
+            <input type="hidden" name="thread_id" value="{{thread.id}}"/><br>
+            <input type="submit" value="Leave Comment"/><br>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
