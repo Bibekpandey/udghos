@@ -87,8 +87,34 @@ class Post(View):
         thread.save()
         return HttpResponse('Thread posted.<br>Go to <a href="/complain/">Home</a> page')
 
+
 def upvote(request):
     if request.method=='POST':
+        if request.user.is_authenticated():
+            user = request.user
+            try:
+                thread_id = request.POST['thread_id']
+                thread_id = int(thread_id)
+
+                thrd = Thread.objects.get(id=thread_id)
+                accnt = Account.objects.get(user=user)
+                upvote = Upvote.objects.filter(account=accnt, thread=thrd)
+                if len(upvote)==1:
+                    thrd.votes-=1
+                    thrd.save()
+                    upvote[0].delete()
+                    return HttpResponse(-1)
+                else:
+                    # user has not upvoted the thread
+                    thrd.votes+=1
+                    thrd.save()
+                    upvote = Upvote(account=accnt, thread=thrd)
+                    upvote.save()
+                    return HttpResponse(1)
+            except Exception as e:
+                return HttpResponse(e.args)
+        else:
+            return HttpResponse('user not authenticated')
 
 
 #########################################

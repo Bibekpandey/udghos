@@ -2,6 +2,7 @@
 {% block content %}
 
     {% if user.username %}
+        {% csrf_token %}
         Hi {{user.username }}<br>
         Post a <a href="{% url 'post' 'complaint' %}">complaint</a><br>
         Post a <a href="{% url 'post' 'discussion'%}">discussion</a><br>
@@ -33,12 +34,33 @@
 {% block scripts %}
 
 <script>
+    var g_csrf;
+    var a = document.getElementsByTagName("input");
+    for(x in a)
+    {
+        if(a[x].getAttribute("type")=="hidden")
+        {
+            g_csrf=a[x].value;
+            break;
+        }
+    }
+
     function upvote(id)
     {
-        var votes = parseInt($("#vote_"+id).text());
-        votes++;
-        $("#vote_"+id).text(votes.toString());
-    }
+        var inc;
+        $.post("/complain/upvote/",
+            {
+                thread_id:id,
+                csrfmiddlewaretoken:g_csrf
+            }, function(data, status) { 
+                inc = parseInt(data);
+                var votes = parseInt($("#vote_"+id).text());
+                votes+=inc;
+                $("#vote_"+id).text(votes.toString());
+
+            }
+        );
+            }
 
     function downvote(id)
     {

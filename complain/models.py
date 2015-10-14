@@ -60,3 +60,12 @@ class Reply(models.Model):
 
     def __str__(self):
         return  self.text[:5] + '... [' + self.account.user.username+']'
+
+
+class Upvote(models.Model):
+    account = models.ForeignKey(Account)
+    thread = models.ForeignKey(Thread)
+
+class DownVote(models.Model):
+    account = models.ForeignKey(Account)
+    thread = models.ForeignKey(Thread)
