@@ -62,10 +62,18 @@ class Reply(models.Model):
         return  self.text[:5] + '... [' + self.account.user.username+']'
 
 
-class Upvote(models.Model):
+class ThreadUpvote(models.Model):
     account = models.ForeignKey(Account)
     thread = models.ForeignKey(Thread)
 
-class Downvote(models.Model):
+class ThreadDownvote(models.Model):
     account = models.ForeignKey(Account)
     thread = models.ForeignKey(Thread)
+
+class CommentUpvote(models.Model):
+    account = models.ForeignKey(Account)
+    comment = models.ForeignKey(Comment)
+
+class CommentDownvote(models.Model):
+    account = models.ForeignKey(Account)
+    comment = models.ForeignKey(Comment)

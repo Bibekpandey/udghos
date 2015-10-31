@@ -16,8 +16,13 @@
     <div id="comments_body">
         {% for comment, cmt_replies in comments|zip:replies %}
         <div class="comment">
+        <span>votes[<span_id="vote_comment_{{comment.id}}">{{comment.votes}}</span>]
         <b>{{comment.account}}</b>[{{comment.time.date}}] 
-                {{comment.text}}
+                {{comment.text}}<br>
+        <a href="#" onclick="vote({{comment.id}},'upvote', 'comment')">upvote</a> 
+        ||||
+        <a href="#" onclick="vote({{comment.id}}, 'downvote', 'comment')">downvote</a>
+
             <div class="replies">
                 <ul>
                 {% for reply in cmt_replies %}

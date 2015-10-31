@@ -13,11 +13,11 @@
         {% else %}
         <ul>
             {% for x, y in threads|zip:num_comments %}
-                <li>votes[<span id="vote_{{x.id}}">{{x.votes}}</span>] 
+                <li>votes[<span id="vote_thread_{{x.id}}">{{x.votes}}</span>] 
                 <span>{{y}} comments</span>
                     <a href="{% url 'thread' x.id %}"><b>{{ x.title }}</b></a> 
-                    <a href="#" onclick="vote({{x.id}},'upvote')">upvote</a> ||||
-                    <a href="#" onclick="vote({{x.id}}, 'downvote')">downvote</a>
+                    <a href="#" onclick="vote({{x.id}},'upvote', 'thread')">upvote</a> ||||
+                    <a href="#" onclick="vote({{x.id}}, 'downvote', 'thread')">downvote</a>
                 </li>
             {% endfor %}
         </ul>
@@ -33,37 +33,3 @@
 
 {% endblock %}
 
-{% block scripts %}
-
-<script>
-    var g_csrf;
-    var a = document.getElementsByTagName("input");
-    for(x in a)
-    {
-        if(a[x].getAttribute("type")=="hidden")
-        {
-            g_csrf=a[x].value;
-            break;
-        }
-    }
-
-    function vote(id, vote_type)
-    {
-        var inc;
-        $.post("/complain/vote/",
-            {
-                thread_id:id,
-                csrfmiddlewaretoken:g_csrf,
-                type:vote_type
-            }, function(data, status) { 
-                inc = parseInt(data);
-                var votes = parseInt($("#vote_"+id).text());
-                votes+=inc;
-                $("#vote_"+id).text(votes.toString());
-
-            }
-        );
-    }
-</script>
-
-{% endblock %}

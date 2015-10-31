@@ -88,65 +88,78 @@ class Post(View):
         return HttpResponse('Thread posted.<br>Go to <a href="/complain/">Home</a> page')
 
 
+def calculate_delta_vote(action, upvotes, downvotes): 
+    return (1+action)/2 * (-2*upvotes + downvotes + 1) \
+                + (1-action)/2 *(2*downvotes - upvotes - 1)
+
+
+def vote_thread(thread_id, account, action): # action is 1 for upvote and -1 for downvote
+    thread = Thread.objects.get(id=thread_id)
+    upvotes = ThreadUpvote.objects.filter(account=account, thread=thread)
+    n_ups = len(upvotes)
+    downvotes = ThreadDownvote.objects.filter(account=account, thread=thread)
+    n_downs = len(downvotes)
+
+    if n_ups==1:
+        upvotes[0].delete()
+    elif n_ups==0:
+        upvote = ThreadUpvote.create(account=account, thread=thread)
+        upvote.save()
+    else: raise Exception('error in vote evaluation')
+
+    delta_vote = calculate_delta_vote(action, n_ups, n_downs)
+    thread.votes+=delta_vote
+    thread.save()
+    print(delta_vote)
+    return delta_vote
+
+def vote_comment(thread_id, account, comment_id, action):
+    thread = Thread.objects.get(id=thread_id)
+    comment = Comment.objects.get(id=comment_id)
+    upvotes = CommentUpvote.objects.filter(account=account, thread=thread)
+    n_ups = len(upvotes)
+    downvotes = CommentDownvote.objects.filter(account=account, thread=thread)
+    n_downs = len(downvotes)
+
+    if n_ups==1:
+        upvotes[0].delete()
+    elif n_ups==0:
+        upvote = CommentUpvote.create(account=account, comment=comment)
+        upvote.save()
+    else: raise Exception('error in vote evaluation')
+
+    delta_vote = calculate_delta_vote(action, n_ups, n_downs)
+    comment.votes+=delta_vote
+    comment.save()
+    return delta_vote
+
+
 def vote(request):
+    val = {'upvote':1, 'downvote':0}
     if request.method=='POST':
-        if request.user.is_authenticated():
-            user = request.user
+        try:
+            item = request.POST['vote_item']
+            thread_id = int(request.POST['thread_id'])
             vote_type = request.POST.get('type', '')
-            try:
-                thread_id = request.POST['thread_id']
-                thread_id = int(thread_id)
 
-                thrd = Thread.objects.get(id=thread_id)
-                accnt = Account.objects.get(user=user)
+            if request.user.is_authenticated():
 
-                upvote = Upvote.objects.filter(account=accnt, thread=thrd)
-                downvote = Downvote.objects.filter(account=accnt, thread=thrd)
+                user = request.user
+                account = Account.objects.get(user=user)
 
-                if vote_type == 'upvote':
-                    if len(upvote)==1: # means already upvoted
-                        thrd.votes-=1
-                        thrd.save()
-                        upvote[0].delete()
-                        return HttpResponse(-1)
-                    elif len(upvote)==0:
-                        # user has not upvoted the thread
-                        inc = 1
-                        if len(downvote)>0: # user has downvoted, so increase by 2
-                            inc = 2
-                            downvote[0].delete()
-                        thrd.votes+=inc
-                        thrd.save()
-                        upvote = Upvote(account=accnt, thread=thrd)
-                        upvote.save()
-                        return HttpResponse(inc)
-                    else:
-                        raise 404('Error')
-
-                elif vote_type == 'downvote':
-                    if len(downvote)==1: # means already downvoted
-                        thrd.votes+=1
-                        thrd.save()
-                        downvote[0].delete()
-                        return HttpResponse(1)
-                    elif len(downvote)==0:
-                        # user has not upvoted the thread
-                        inc = -1
-                        if len(upvote)>0: # user has downvoted, so increase by 2
-                            inc = -2
-                            upvote[0].delete()
-                        thrd.votes+=inc
-                        thrd.save()
-                        downvote = Downvote(account=accnt, thread=thrd)
-                        downvote.save()
-                        return HttpResponse(inc)
-                    else:
-                        raise 404('Error')
-
-            except Exception as e:
-                return HttpResponse(e.args)
-        else:
-            return HttpResponse('user not authenticated')
+                # get the commment object if vote is for comment
+                #comment_id = request.POST['comment_id'] # -1 if not a comment vote
+                cmmt = None
+                return HttpResponse('testing')
+                if item=='comment':
+                    return HttpResponse('comment')
+                    return HttpResponse(vote_comment(thread_id, account, comment_id, val[vote_type]))
+                else:
+                    return HttpResponse('thread')
+                    return HttpResponse(vote_thread(thread_id, account, val[vote_type]))
+        except Exception as e:
+            return HttpResponse(e.args)
+          
 
 class ThreadPage(View):
     context = {}
@@ -191,6 +204,7 @@ def comment(request):
         except Exception as e:
             return HttpResponse(e.args)
     return redirect('index')
+
 
 def reply(request):
     if request.method=='POST':
