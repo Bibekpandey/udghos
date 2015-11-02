@@ -100,46 +100,64 @@ def vote_thread(thread_id, account, action): # action is 1 for upvote and -1 for
     downvotes = ThreadDownvote.objects.filter(account=account, thread=thread)
     n_downs = len(downvotes)
 
-    if n_ups==1:
+    if n_ups==1 and action==1:
         upvotes[0].delete()
-    elif n_ups==0:
-        upvote = ThreadUpvote.create(account=account, thread=thread)
+    elif n_ups==0 and action==1:
+        upvote = ThreadUpvote.objects.create(account=account, thread=thread)
         upvote.save()
+        # delete existing downvote
+        if n_downs==1:downvotes[0].delete()
+    elif n_downs==1 and action==-1:
+        downvotes[0].delete()
+    elif n_downs==0 and action==-1:
+        downvote = ThreadDownvote.objects.create(account=account, thread=thread)
+        downvote.save()
+        # delete existing upvote
+        if n_ups==1: upvotes[0].delete()
+    elif n_ups==0 and n_downs==0:pass
     else: raise Exception('error in vote evaluation')
 
-    delta_vote = calculate_delta_vote(action, n_ups, n_downs)
+    delta_vote = int(calculate_delta_vote(action, n_ups, n_downs))
     thread.votes+=delta_vote
     thread.save()
-    print(delta_vote)
     return delta_vote
 
-def vote_comment(thread_id, account, comment_id, action):
-    thread = Thread.objects.get(id=thread_id)
+def vote_comment(comment_id, account, action):
     comment = Comment.objects.get(id=comment_id)
-    upvotes = CommentUpvote.objects.filter(account=account, thread=thread)
+    upvotes = CommentUpvote.objects.filter(account=account, comment=comment)
     n_ups = len(upvotes)
-    downvotes = CommentDownvote.objects.filter(account=account, thread=thread)
+    downvotes = CommentDownvote.objects.filter(account=account, comment=comment)
     n_downs = len(downvotes)
 
-    if n_ups==1:
+    if n_ups==1 and action==1:
         upvotes[0].delete()
-    elif n_ups==0:
-        upvote = CommentUpvote.create(account=account, comment=comment)
+    elif n_ups==0 and action==1:
+        upvote = CommentUpvote.objects.create(account=account, comment=comment)
         upvote.save()
+        # delete existing downvote
+        if n_downs==1:downvotes[0].delete()
+    elif n_downs==1 and action==-1:
+        downvotes[0].delete()
+    elif n_downs==0 and action==-1:
+        downvote = CommentDownvote.objects.create(account=account, comment=comment)
+        downvote.save()
+        # delete existing upvote
+        if n_ups==1: upvotes[0].delete()
+    elif n_downs==0 and n_ups==0:pass
     else: raise Exception('error in vote evaluation')
 
-    delta_vote = calculate_delta_vote(action, n_ups, n_downs)
+    delta_vote = int(calculate_delta_vote(action, n_ups, n_downs))
     comment.votes+=delta_vote
     comment.save()
     return delta_vote
 
 
 def vote(request):
-    val = {'upvote':1, 'downvote':0}
+    val = {'upvote':1, 'downvote':-1}
     if request.method=='POST':
         try:
             item = request.POST['vote_item']
-            thread_id = int(request.POST['thread_id'])
+            object_id = int(request.POST['object_id'])
             vote_type = request.POST.get('type', '')
 
             if request.user.is_authenticated():
@@ -150,13 +168,11 @@ def vote(request):
                 # get the commment object if vote is for comment
                 #comment_id = request.POST['comment_id'] # -1 if not a comment vote
                 cmmt = None
-                return HttpResponse('testing')
                 if item=='comment':
-                    return HttpResponse('comment')
-                    return HttpResponse(vote_comment(thread_id, account, comment_id, val[vote_type]))
+                    #return HttpResponse('comment')
+                    return HttpResponse(vote_comment(object_id, account, val[vote_type]))
                 else:
-                    return HttpResponse('thread')
-                    return HttpResponse(vote_thread(thread_id, account, val[vote_type]))
+                    return HttpResponse(vote_thread(object_id, account, val[vote_type]))
         except Exception as e:
             return HttpResponse(e.args)
           

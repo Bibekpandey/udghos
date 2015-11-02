@@ -5,5 +5,7 @@ admin.autodiscover()
 
 admin.site.register(Account)
 admin.site.register(Tag)
-admin.site.register(Thread)
 admin.site.register(Comment)
+admin.site.register(Thread)
+admin.site.register(ThreadDownvote)
+admin.site.register(ThreadUpvote)
