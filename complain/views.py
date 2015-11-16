@@ -9,6 +9,8 @@ from django.db.models import Q
 from django.views.generic import View
 from complain.models import *
 
+import math, traceback
+
 COMPLAINT, DISCUSSION = 0, 1
 
 class Index(View):
@@ -151,6 +153,18 @@ def vote_comment(comment_id, account, action):
     comment.save()
     return delta_vote
 
+def update_user_points(owner, voter, item, delta):
+    if item=='thread':
+        factor = 10 # hight weightage for threads
+    else: # comment
+        factor =  7 # less weightage for comments
+    voter_points = voter.points
+    item_votes = item.votes
+    d_points = factor * math.e**(voter_points/100 - item_votes/10) * delta
+    owner.points += d_points
+    owner.save()
+    return d_points
+
 
 def vote(request):
     val = {'upvote':1, 'downvote':-1}
@@ -167,14 +181,23 @@ def vote(request):
 
                 # get the commment object if vote is for comment
                 #comment_id = request.POST['comment_id'] # -1 if not a comment vote
-                cmmt = None
+                owner = None # owner is the user whose point/rating is to be updated 
+                itm = object
+                voter = account
+                delta = None
                 if item=='comment':
-                    #return HttpResponse('comment')
-                    return HttpResponse(vote_comment(object_id, account, val[vote_type]))
+                    itm = Comment.objects.get(id=object_id)
+                    owner = itm.account
+                    delta = vote_comment(object_id, account, val[vote_type])
+                    return HttpResponse(delta)
                 else:
-                    return HttpResponse(vote_thread(object_id, account, val[vote_type]))
+                    itm = Thread.objects.get(id=object_id)
+                    owner = itm.account
+                    delta = vote_comment(object_id, account, val[vote_type])
+                    return HttpResponse(delta)
+                update_user_points(owner, voter, item, delta)
         except Exception as e:
-            return HttpResponse(e.args)
+            return HttpResponse(traceback.format_exc())
           
 
 class ThreadPage(View):
