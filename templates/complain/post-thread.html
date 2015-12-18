@@ -3,12 +3,13 @@
     {% if message %}
         {{message}} <br><br>
     {% endif %}
-    <form method="post" action="{% url 'post' thread_type %}">
+    <form  method="post" action="{% url 'post' thread_type %}" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="hidden" name="thread_type" value="{{thread_type}}"/>
         Title:<input type="text" name="title" placeholder="The title of the post" /><br>
 
         Details:<textarea name="content"></textarea><br>
+        Image(s):<input type="file" name="images" multiple accept="image/*" />
 
         Tags:<input id="tags_input" type="text" name="tags" placeholder="Write tags separated by comma"/><br>
 

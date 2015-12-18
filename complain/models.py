@@ -11,7 +11,7 @@ class Account(models.Model):
     verification_key = models.CharField(max_length=10)
     verified = models.BooleanField(default=False)
     address = models.CharField(max_length=50)
-    email = models.EmailField(max_length=30)
+    email = models.EmailField(blank=True, null=True, max_length=30)
     points = models.IntegerField(default=10)
 
     def __str__(self):
@@ -77,3 +77,18 @@ class CommentUpvote(models.Model):
 class CommentDownvote(models.Model):
     account = models.ForeignKey(Account)
     comment = models.ForeignKey(Comment)
+
+def getFileName(instance, filename):
+    ext = filename.split('.')[-1]
+    name = str(instance.thread.id) + '_' + str(instance.pk) + '.'+ ext
+    return  'images/' + name
+
+class ThreadImage(models.Model):
+    name = models.CharField(max_length=100)
+    thread = models.ForeignKey(Thread)
+    image = models.ImageField(upload_to=getFileName)
+
+    def save(self, *args, **kwargs):
+        super(ThreadImage, self).save(*args, **kwargs)
+        self.name = self.image.name
+        super(ThreadImage, self).save(*args, **kwargs)

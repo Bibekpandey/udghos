@@ -1,8 +1,17 @@
-{% block content %}
+<html>
+<head>
+</head>
+<body>
+
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     username:<input type="text" name="username" /><br>
     password:<input type="password" name="password" /><br>
     <input type="submit" value="Login"/><br>
 </form>
-{% endblock %}
+<a href="{% url 'social:begin' 'twitter' %}">Login with twitter</a><br>
+<a href="{% url 'social:begin' 'google-oauth2' %}">Login with google</a><br>
+<a href="{% url 'social:begin' 'facebook' %}">Login with facebook</a><br>
+
+</body>
+</html>

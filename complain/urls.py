@@ -10,4 +10,6 @@ urlpatterns =  [
         url(r'^thread/([0-9]+)/', ThreadPage.as_view(), name='thread'),
         url(r'^comment/', comment, name='comment'),
         url(r'^reply/', reply, name='reply'),
+        url(r'^error/', error, name='error'),
+
 ]

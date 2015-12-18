@@ -5,7 +5,12 @@
 <div id="thread">
     <span></span>
     <h2>{{thread.title}}</h2>
-    <p>{{thread.content}}</p>
+    <p>
+        {{thread.content}}
+     {% for image in images %}
+        <img src="/media/{{image}}" width=300 height=200 >
+     {% endfor %}
+    </p>
 </div>
 
 <div id="comments">

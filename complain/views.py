@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.views.generic import View
 from complain.models import *
@@ -13,18 +14,41 @@ import math, traceback
 
 COMPLAINT, DISCUSSION = 0, 1
 
+def error(request):
+    return HttpResponse('Login error')
+
 class Index(View):
     def get(self, request):
         self.context = {}
+        extra = request.GET.get('social', '')
         if request.user.is_authenticated():
             self.context['user'] = request.user
+
+            # now, if extra is 1 then we have user from social site
+            if extra=='1':
+                # so create a new account
+                createAccount(request.user)
 
         self.context['threads'], self.context['num_comments'] = get_recent_threads(20)
         return render(request, "complain/index.html", self.context)
 
+# CREATE ACCOUNT, takes in user object
+def createAccount(userobj):
+    print('in ccreate acccount')
+    # check if Account already exists
+    try:
+        accnt = Account.objects.get(user=userobj)
+        return
+    except ObjectDoesNotExist:
+        return 
+    account = Account(user=userobj, address="home", email="abc@def.ghi", verified=True)
+    account.save()
+    
 
 class Login(View):
     def get(self, request):
+        if request.user.is_authenticated():
+            return redirect('index')
         self.context = {}
         return render(request, "complain/login.html", self.context)
 
@@ -77,7 +101,11 @@ class Post(View):
         title = request.POST.get('title', '')
         content = request.POST.get('content', '')
         tags = request.POST.get('tags', '')
-        
+        ''' MULTIPLE FILES UPLOAD
+        for afile in request.FILES.getlist('files'):
+        File(file=afile, files=test).save()
+        '''
+                
         if title=='' or content =='':
             self.context['message'] = 'Title/content can\'t be empty'
             return self.get(request, thread_type)
@@ -87,6 +115,14 @@ class Post(View):
         thread = Thread(thread_type=th_type, title=title, 
                     content=content, account=account)
         thread.save()
+
+        images = request.FILES.getlist('images')
+        for image in images:
+            img = ThreadImage(name=image.name, thread=thread)
+            img.save()
+            img.image = image # to get pk of image object
+            img.save()
+
         return HttpResponse('Thread posted.<br>Go to <a href="/complain/">Home</a> page')
 
 
@@ -214,6 +250,12 @@ class ThreadPage(View):
         self.context['comments']= comments
 
         replies = []
+        # images
+        images = ThreadImage.objects.filter(thread=thread)
+        self.context['images'] = []
+        for i in images:
+            self.context['images'].append(i.name)
+        # comments
         for comment in comments:
             replys = Reply.objects.filter(comment=comment)
             replies.append(list(replys))
@@ -282,6 +324,3 @@ def get_recent_threads(n): # return n threads with number of comments
         num_comments.append(num_cmts)
 
     return (threads, num_comments)
-
-
-
