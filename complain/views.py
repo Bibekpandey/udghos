@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, Http404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail, EmailMultiAlternatives
@@ -26,8 +26,9 @@ class Index(View):
 
             # now, if extra is 1 then we have user from social site
             if extra=='1':
+                pass
                 # so create a new account
-                createAccount(request.user)
+                #createAccount(request.user)
 
         self.context['threads'], self.context['num_comments'] = get_recent_threads(20)
         return render(request, "complain/index.html", self.context)
@@ -229,7 +230,7 @@ def vote(request):
                 else:
                     itm = Thread.objects.get(id=object_id)
                     owner = itm.account
-                    delta = vote_comment(object_id, account, val[vote_type])
+                    delta = vote_thread(object_id, account, val[vote_type])
                     return HttpResponse(delta)
                 update_user_points(owner, voter, item, delta)
         except Exception as e:
@@ -306,6 +307,36 @@ def reply(request):
         except Exception as e:
             return HttpResponse(e.args)
     return redirect('index')
+
+def new_social(request):
+    if request.method=="GET":
+        return render(request, "complain/new-social.html", {})
+    else:
+        uid = request.POST.get("userid", "")
+        uname = request.POST.get("username", "")
+        if uid == "":
+            raise Http404("user not found")
+        if uname == "":
+            return render(request, "complain/new-social.html", 
+                {"message":"username can't be empty"}
+            )
+        else:
+            try:
+                user = User.objects.get(id=int(uid))
+                usrs = User.objects.filter(username=uname)
+                if len(usrs) > 1:
+                    return render(request, "complain/new-social.html", 
+                    {"message":"username not available"}
+                    )
+                user.username = uname
+                user.save()
+                # Create Account
+                acc = Account(user=user, verified=True, address="")
+                acc.save()
+                return HttpResponseRedirect("/")
+            except:
+                raise Http404("user not found")
+
 
 
 #########################################

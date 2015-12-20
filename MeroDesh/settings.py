@@ -46,8 +46,8 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '990a6074547ba3f24f625d71df5a74dd'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='79811044211-sh17bc48d064afgth0qum1ltar9jaqc0.apps.googleusercontent.com' 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'EmlDdAQXHgGfr78U23_1KQBb'
 
-SOCIAL_AUTH_TWITTER_KEY = ''
-SOCIAL_AUTH_TWITTER_SECRET = ''
+SOCIAL_AUTH_TWITTER_KEY = 'GYl0ArIVOoc6Gv0AZ3PXgubzJ'
+SOCIAL_AUTH_TWITTER_SECRET = 'VptaqoNhE56hXqEdp23AdJTEkVtWa8I3rQ0gFvnfA42HsR3DmQ'
 
 # Application definition
 INSTALLED_APPS = (
@@ -95,7 +95,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.auth_allowed',
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
-    'example.app.pipeline.require_email',
     'social.pipeline.mail.mail_validation',
     'social.pipeline.user.create_user',
     'social.pipeline.social_auth.associate_user',
@@ -110,6 +109,7 @@ SOCIAL_AUTH_PIPELINE = (
 LOGIN_URL          = '/login/'
 LOGIN_REDIRECT_URL          = '/complain/?social=1'
 LOGIN_ERROR_URL ='/complain/error/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/complain/new-social/'
 
 ROOT_URLCONF = 'MeroDesh.urls'
 

@@ -11,5 +11,6 @@ urlpatterns =  [
         url(r'^comment/', comment, name='comment'),
         url(r'^reply/', reply, name='reply'),
         url(r'^error/', error, name='error'),
+        url(r'^new-social/', new_social, name='new_social'),
 
 ]

@@ -16,8 +16,8 @@
                 <li>votes[<span id="vote_thread_{{x.id}}">{{x.votes}}</span>] 
                 <span>{{y}} comments</span>
                     <a href="{% url 'thread' x.id %}"><b>{{ x.title }}</b></a> 
-                    <a href="#" onclick="vote({{x.id}},'upvote', 'thread')">upvote</a> ||||
-                    <a href="#" onclick="vote({{x.id}}, 'downvote', 'thread')">downvote</a>
+                    <a href="javascript:vote({{x.id}},'upvote', 'thread')">upvote</a> ||||
+                    <a href="javascript:vote({{x.id}}, 'downvote', 'thread')">downvote</a>
                 </li>
             {% endfor %}
         </ul>

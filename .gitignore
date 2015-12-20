@@ -1,4 +1,9 @@
 manage.py
 *.pyc
 */__pycache__/
-
+__init__.py
+wsgi.py
+migrations/
+db.sqlite3
+media/
+requirements.txt
