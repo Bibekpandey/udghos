@@ -1,0 +1,490 @@
+/* CSS used here will be applied after bootstrap.css */
+html,
+body {
+  height: 100%;
+  background-color: #fff;
+  font-family: Ubuntu ; 
+  color: #000;
+  background-size:cover;  
+}
+.btn-my {
+  font-family: Ubuntu;
+  background: #990012;
+  
+  -webkit-border-radius: 3;
+  -moz-border-radius: 3;
+  border-radius: 3px;
+  
+  color: #fff;
+  font-size: 15px;
+  float: right;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+  margin-bottom: px;
+}
+
+.btn-my:hover {
+  background: #aa1123;
+
+  text-decoration: none;
+  color: white;
+
+}
+.box{
+  font-family: Ubuntu;
+  position: block;
+  min-height: 20px;
+  padding: 20px;
+  margin: 2px;
+  margin-bottom: 5px;
+  background-color: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 1px;
+  box-shadow: 1px 1px 3px #777;
+}
+.box-post{
+  font-family: Ubuntu;
+  position: block;
+  min-height: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 1px;
+}
+.box-posts{
+  margin-top: 60px;
+  font-family: Ubuntu;
+  position: block;
+  min-height: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 1px;
+}
+.box1{
+  margin-top: 10px;
+  margin-left: -2px;
+  padding: 2px;
+  min-height: 20px;
+  background-color: #fff;
+}
+.box-top{
+  font-family: Ubuntu;
+  font-size: .9em;
+  background-color: #fff;
+  margin:2px;
+  border: 1px solid #ddd;
+}
+.box-top-logo{
+  background-color: #fff;
+  margin:2px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.tab-content{
+  padding: 10px;
+}
+#content-top{
+  margin-top: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.icons-ld{
+  display: inline-block;
+  margin-top: 10px;
+  float: left;
+}
+.glyphicon:hover{
+  color: red;
+}
+.glyphicon-thumbs-up{
+  font-size: 15px;
+  color: #777;
+}
+.glyphicon-thumbs-down{
+  font-size: 15px;
+  color: #777;
+}
+
+.navbar-left{
+  margin-top: 7px;
+}
+#navcolor1 {
+  background-color:#990012 ;
+  border-bottom: 1px solid #555;
+}
+#navcolor2{
+  display: none;
+  background-color:#990012 ;
+}
+#gly-bell{
+    font-size: 20px;
+    padding-right: 0px;
+}
+#geoicon{
+  padding: 0px;
+  width: 15px;
+  height: 17px;
+}
+#btn-post{
+  float: right;
+}
+.post-actions{
+  float: right;
+}
+#tag-position{
+  position: relative;
+}
+#profile{
+  -webkit-column-rule: 1px solid;
+  -moz-column-rule: 1px solid;
+    column-count: 3;
+    column-rule: 1px solid;
+}
+
+#tab-stories{
+  display: inline-block;
+  padding: 0px;
+  width:100%;  
+  padding: 0px;
+}
+.post-body{
+  padding: -5px;
+  font-size: 18px;
+  font-family:Ubuntu;
+  margin:0px;
+  margin-left: 10px;
+  color:#444;
+}
+.post-body>a{
+  text-decoration: none;
+  color: blue;
+}
+.display-tags{
+  display: inline-block;
+}
+#tag-post{
+  float: right;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+#navblock {
+  float: right;
+  border-bottom: none; 
+  color: #fff;
+
+}
+.tagname{
+  margin-top: 5px;
+  float: right;
+  display: inline-block;
+  margin-left: 2.5px;
+  margin-right: 2.5px;
+  text-decoration: none; 
+  padding: 0px 2px 0px 2px;
+  background-color:#ddd ;
+  color:#333;
+  text-shadows:0px 5px 5px #777;
+  border-radius: 2px;
+}
+#action-element{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+#user-name {
+  color:#282985;
+  font-weight: ;
+}
+.my-tags{
+  margin-top: 10px;
+  color: #555;
+  border-top: 1px solid #999;
+}
+.heading-property{
+  border-bottom: none;
+  color: #000;
+  margin-top: 0px;
+}
+.heading-post{
+  margin-left: -10px;
+}
+
+.inner-addon { 
+    position: relative; 
+}
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 5px;
+  pointer-events: none;
+}
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+/* add padding  */
+.left-addon  input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+
+
+
+ol
+{
+list-style:none;
+margin:0px;
+padding:0px;
+}
+.stbody {
+  min-height:70px;
+  margin-bottom:10px;
+  border-bottom:solid 1px #ccc;
+}
+.stimg
+{
+float:left;
+height:50px;
+width:50px;
+}
+.sttext
+{
+min-height:50px;
+word-wrap:break-word;
+overflow:hidden;
+padding:5px;
+display:block;
+font-family:Ubuntu;
+color:#555;
+}
+.sttime{
+  float: left;
+  font-size: 12px;
+  color: #777;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+#navhead{
+  margin-left: -50px;
+  color: #fff;
+  font-size: 25px;
+  display: inline-block;
+  position: relative;
+}
+.navbar-body{
+  display: inline-block;
+}
+#headnav{
+  position: relative;
+}
+.navmob-header{
+  width: 100%;
+}
+.navbar-icon{
+  display: block;
+  float: right;
+  margin-top: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 50px;
+  line-height: 20px;
+  color: #fff;
+}
+
+
+.navbar-icon:hover,
+.navbar-icon:focus {
+  text-decoration: none;
+  color: #eee;
+}
+.navbar-icon > img {
+  display: block;
+}
+
+
+
+.icons{
+  display: none;
+}
+.top-heading {
+  color: #fff;
+  font-size: 20px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #555;
+}
+.post-heading {
+  margin-top: 0px;
+  margin-bottom: -10px;
+  padding: 5px;
+  background-color: ;
+  border-bottom: 1px solid #ddd;
+}
+.post-content{
+  margin-top: -10px;
+}
+#logo{
+  margin-left: 45px;
+}
+
+
+#sticky {
+    margin-top: 50px;
+    padding: 15px;
+    color: #fff;
+}
+#sticky.stick {
+    position: fixed;
+    margin-top: 0;
+    z-index: 100;
+}
+
+#post-icon-top{
+  margin-top: 5px;
+  display: none;
+  float: left;
+  position: relative;
+}
+.glyphicon-triangle-bottom{
+  color: #fff;
+}
+.glyphicon-bell{
+  color: #fff;
+}
+.glyphicon-bell:hover{
+  color: #991010;
+}
+#tag-bar{
+  width: 35%;
+}
+.form-tag-control{
+  display: block;
+  width: 95%;
+  height: 30px;
+  padding: 6px 5px;
+  margin-left: 15px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+#form-title{
+  display: none;
+}
+.btn-image{
+  margin-top: 0px;
+  height: 30px;
+  float: right;
+  margin-right: 45%;
+}
+#show-btn{
+  display: none;
+}
+
+.nav-tabs>li>a{
+  margin-top: -5px;
+  background-color: #fff;
+  color: #333;
+  border-top: 4px solid #;
+}
+.nav-tabs > li.active > a{
+    color: #fff;
+    background-color: #990012;
+}
+.nav-tabs>li>a:hover{
+  background-color: #990012;
+  color: #fff;
+}
+#share-top{
+  margin-top: 17px;
+  margin-bottom: 2px;
+  float: right;
+}
+div.share button {
+    
+    height: 20px;
+    background: none;
+    position: relative;
+    border: none;
+    width: 72px;
+    margin-top: -20px;
+    background-repeat: no-repeat;
+    border-radius: 2px;
+    color: white;
+    font-family: Ubuntu;
+    font-size: 14px;
+    border-bottom: 2px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    box-shadow: 0 2px 2px -2px gray;
+    text-shadow: rgba(0, 0, 0, .5) -1px -1px 0;
+
+}
+div.share > .facebook {
+  font-weight:bold;
+  position: center;
+  margin-right: 80px;
+  float: right;
+    background-image: url(http://i.imgur.com/v2bi4gW.png);
+    background-size: 20px 20px;
+    background-repeat:no-repeat;
+    background-color: #3B5998;
+}
+div.share> .twitter {
+  font-weight:bold;
+  float: right;
+  background-repeat:no-repeat;
+    background-image: url(http://i.imgur.com/AR0S6e3.png);
+    background-size: 20px 20px;
+    background-color: #55ACEE;
+}
+.text-share{
+  float: right;
+}
+.net-vote{
+  margin-left: 7px;
+}
+
+.comment-form{
+  margin-top: 5px;
+  padding: 0px 0px 0px 10px;
+  display: none;
+}
+.form-comment {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+}
+.form-comment:focus {
+  border-color: #626EF0;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.post-action>a{
+  text-decoration: none;
+}
+.img-navbar{
+  border-radius: 50%;
+  background-color: #fff;
+}
+.navbar-name{
+  margin-left: 5px;
+  margin-top: 5px;
+  text-decoration: none;
+  float: right;
+  color: #fff;
+}
+.glyphicon-triangle-bottom{
+  font-size: 15px;
+}

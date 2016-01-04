@@ -20,7 +20,6 @@ function get_csrf(){
                 type:vote_type,
                 vote_item:item
             }, function(data, status) { 
-                alert(data);
                 inc = parseInt(data);
                 var votes = parseInt($("#vote_"+item+"_"+id).text());
                 votes+=inc;

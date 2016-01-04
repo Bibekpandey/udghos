@@ -1,0 +1,286 @@
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+/* Custom default button */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritence from `body` */
+  background-color: #fff;
+  
+}
+
+.btn-my {
+  background: #2BAB93;
+  
+  -webkit-border-radius: 3;
+  -moz-border-radius: 3;
+  border-radius: 3px;
+  text-shadow: 2px 2px 2px #666666;
+  -webkit-box-shadow: 2px 2px 5px #666666;
+  -moz-box-shadow: 2px 2px 5px #666666;
+  box-shadow: 2px 2px 5px #666666;
+  font-weight:bold;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.btn-my:hover {
+  background: #3BBCA4;
+
+  text-decoration: none;
+  color: white;
+
+}
+
+
+
+
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  background-color: #ffffff;
+  font-family: Josefin Sans;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  abackground-image: url("../img/nepal.jpg");
+  background-size:cover;  
+}
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+  display: table;
+  vertical-align: right;
+  
+  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+}
+.site-wrapper-inner {
+  display: table-cell;
+  vertical-align: top;
+}
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Padding for spacing */
+.inner {
+  padding: 10px;
+  color: #333;
+}
+.a-foot{
+  color: #333; 
+}
+
+
+
+
+
+
+/*
+ * Header
+ */
+.navhead-brand {
+text-align:center;
+}
+
+.navhead-nav > li {
+  display: inline-block;
+  margin-top: 15px;
+}
+.navhead-nav > li + li {
+  margin-left: 20px;
+}
+.navhead-nav > li > a {
+  padding: 0px;
+  font-size: 20px;
+
+
+  color: #fff; /* IE8 proofing */
+  
+  border-bottom: 2px solid transparent;
+}
+.navhead-nav > li > a:hover,
+.navhead-nav > li > a:focus {
+  background-color: transparent;
+  border-bottom-color: #fff;
+  border-bottom-color: rgba(255,255,255,0.8);
+}
+.navhead-nav > .active > a,
+.navhead-nav > .active > a:hover,
+.navhead-nav > .active > a:focus {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (min-width: 768px) {
+  .navhead-brand {
+    float: left;
+  }
+  .navhead-nav {
+    float: right;
+  }
+}
+
+
+/*
+ * Cover
+ */
+
+.cover {
+  float:right;
+}
+ 
+/*
+ * Footer
+ */
+
+.mastfoot {
+  color: #999; /* IE8 proofing */
+  color: rgba(255,255,255,.5);
+}
+
+
+
+/*
+ * Affix and center
+ */
+
+@media (min-width: 768px) {
+  /* Pull out the header and footer */
+  .navhead {
+    position: fixed;
+    top: 0;
+  }
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+  }
+  /* Start the vertical centering */
+  .site-wrapper-inner {
+    vertical-align: middle ;
+  }
+  /* Handle the widths */
+  .navhead,
+  .mastfoot,
+  .cover-container {
+    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+
+@media (min-width: 992px) {
+  .navhead,
+  .mastfoot,
+  .cover-container {
+    width: 700px;
+  }
+}
+
+#text-login{
+  color: #111;
+}
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 15px;
+  
+}
+.form-signin-heading{
+  margin-top:5px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.p-signin{
+  padding-top: 5px;
+}
+.signin-heading{
+  margin-top:25%;
+}
+.well-signin {
+  overflow: hidden;
+  padding-left:1%;
+  padding-right:1%;
+  margin-left:10%;
+  margin-right:10%;
+  margin-top: 30%;
+  min-height: 20px;
+  background-color: #444;
+  border-radius: 2px;
+}
+
+
+@media (max-width: 720px) {
+  .well-signin {
+    margin:0px;
+  }
+}
+
+#navcolor{
+  background-color:#990012 ;
+  border: none; 
+}
+.navbar-default{
+  border: none;
+}
+nav >ul>li>a{
+  color: #fff;
+}
+
+#navhead{
+  font-size: 25px;
+  color: #fff;
+}
+#navhead:hover{
+  color: #ddd;
+}
+
+

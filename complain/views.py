@@ -23,6 +23,8 @@ class Index(View):
         extra = request.GET.get('social', '')
         if request.user.is_authenticated():
             self.context['user'] = request.user
+            acc = Account.objects.get(user=request.user)
+            self.context['address'] = acc.address
 
             # now, if extra is 1 then we have user from social site
             if extra=='1':
@@ -30,8 +32,9 @@ class Index(View):
                 # so create a new account
                 #createAccount(request.user)
 
-        self.context['threads'], self.context['num_comments'] = get_recent_threads(20)
-        return render(request, "complain/index.html", self.context)
+            self.context['threads'], self.context['num_comments'] = get_recent_threads(20)
+            return render(request, "complain/home.html", self.context)
+        return redirect('login')
 
 # CREATE ACCOUNT, takes in user object
 def createAccount(userobj):
@@ -51,7 +54,7 @@ class Login(View):
         if request.user.is_authenticated():
             return redirect('index')
         self.context = {}
-        return render(request, "complain/login.html", self.context)
+        return render(request, "complain/signin.html", self.context)
 
     def post(self, request):
         username = request.POST.get('username', '').strip()
@@ -107,9 +110,11 @@ class Post(View):
         File(file=afile, files=test).save()
         '''
                 
+        '''
         if title=='' or content =='':
             self.context['message'] = 'Title/content can\'t be empty'
             return self.get(request, thread_type)
+        '''
 
         # now with storage of the thread
         account = Account.objects.get(user=request.user)

@@ -27,7 +27,7 @@ class Tag(models.Model):
 
 class Thread(models.Model):
     thread_type = models.IntegerField(default=0) # 0 for complaint, 1 for discussion thread
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, blank=True, null=True)
     content = models.TextField()
     tags = models.ManyToManyField(Tag, blank=True, null=True)
     account = models.ForeignKey(Account)
