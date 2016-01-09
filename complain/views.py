@@ -14,6 +14,7 @@ import math, traceback
 
 COMPLAINT, DISCUSSION = 0, 1
 
+#error message
 def error(request):
     return HttpResponse('Login error')
 
