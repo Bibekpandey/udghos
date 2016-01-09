@@ -7,3 +7,4 @@ migrations/
 db.sqlite3
 media/
 requirements.txt
+img/
