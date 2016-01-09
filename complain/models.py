@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from datetime import datetime
 
+
 (COMPLAINT, DISCUSSTION) = (0, 1)
 
 class Account(models.Model):
