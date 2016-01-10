@@ -108,7 +108,7 @@
                   </a>
                   </div>
                   <div class="display-tag">
-                    <span id="tag-post" class="glyphicon glyphicon-tags"></span>
+                    <span id="tag-post1" class="glyphicon glyphicon-tags"></span>
               
                     <a class="tagname" href="#">Blockades</a>
                     <a class="tagname" href="#">Nepal</a>                
@@ -164,7 +164,7 @@
             <div id="recent" class="tab-pane fade in active">
               <div class="stimg">
                 <img class="img-circle" src="{% static 'img/nepal.png' %}" width=50 height=50/>
-              <div class="icons-ld">
+                <div class="icons-ld">
                   <a id="action-element" href="javascript:vote({{x.id}}, 'upvote', 'thread')">
                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                   </a><br><span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_{{x.id}}">{{x.votes}}</span><br>
@@ -176,7 +176,7 @@
               <div class="post-actions">
                       <i class="glyphicon glyphicon-chevron-down"></i>
               </div> 
-              <div class="sttext">
+              <div id="textst" class="sttext">
                 <div class="post-body">
                   <a href="/profile/">
                   <h4 class="heading-property heading-post">{{x.account.user}}</h4></a>
@@ -188,12 +188,12 @@
                   {{x.time}}
                 </div>
                 <div class="display-tag">
-                  <span id="tag-post" class="glyphicon glyphicon-tags"></span>
+                  <span id="tag-post2" class="glyphicon glyphicon-tags"></span>
               
-                  <a class="tagname" href="#">Blockades</a>
-                  <a class="tagname" href="#">Nepal</a>                
-              
+                  <a class="tagname tagname2" href="#">Blockades</a>
+                  <a class="tagname tagname2" href="#">Nepal</a>                
                 </div>
+          
               </div>
             </div>
           </div>
@@ -259,11 +259,11 @@
   <script>
     $('.box').mousedown(function() {
       this.style.boxShadow = "1px 1px 2px #666";
-      this.style.padding="19px";
+      this.style.padding="9px 14px 14px 14px";
     });
     $('.box').mouseup(function() {
       this.style.boxShadow = "1px 1px 3px #777";
-      this.style.padding="20px";
+      this.style.padding="10px 15px 15px 15px";
     });
   </script>
   <script>
