@@ -474,7 +474,26 @@ div.share> .twitter {
 .comment-form{
   margin-top: 5px;
   padding: 0px 0px 0px 10px;
-  display: none;
+  display:none;
+}
+
+.comment {
+    margin:3px;
+    padding:2px;
+    background:#eee;
+}
+
+.comment-user {
+    font-weight:bold;
+    float:left;
+    margin-right:10px;
+}
+.comment-date {
+    color:#999;
+}
+.comment-text {
+    font-weight:lighter;
+    color:#333;
 }
 .form-comment {
   display: block;

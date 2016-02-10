@@ -9,6 +9,7 @@ urlpatterns =  [
         url(r'^post-thread/([a-z]+)/', Post.as_view(), name='post'),
         url(r'^thread/([0-9]+)/', ThreadPage.as_view(), name='thread'),
         url(r'^comment/', comment, name='comment'),
+        url(r'^get-comments/', get_comments, name='get_comments'),
         url(r'^reply/', reply, name='reply'),
         url(r'^error/', error, name='error'),
         url(r'^new-social/', new_social, name='new_social'),

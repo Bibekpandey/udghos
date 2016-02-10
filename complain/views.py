@@ -6,6 +6,7 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import JsonResponse
 
 from django.views.generic import View
 from complain.models import *
@@ -36,6 +37,21 @@ class Index(View):
             self.context['threads'], self.context['num_comments'] = get_recent_threads(20)
             return render(request, "complain/home.html", self.context)
         return redirect('login')
+
+def get_comments(request):
+    try:
+        threadid = int(request.POST.get('threadid'))
+        comments = Comment.objects.filter(thread__id=threadid)
+        templist = []
+        templist = map(lambda x:{'user':x.account.user.username,
+                                'comment':x.text,
+                                'date':x.time.strftime("%I:%M %p, %d %b %Y")
+                                }, comments)
+
+        ret = {"comments":list(templist)}
+        return JsonResponse(ret)
+    except Exception as e:
+        print(repr(e))
 
 # CREATE ACCOUNT, takes in user object
 def createAccount(userobj):
@@ -286,12 +302,19 @@ def comment(request):
                 comment = Comment(account=account, 
                             thread=thread, text=content)
                 comment.save()
-                return redirect(reverse('thread', args=[str(thread_id)]))
+                ret = {}
+                ret['comment'] = {"comment":comment.text,
+                                'date':comment.time.strftime("%I:%M %p, %d %b %Y"),
+                                "user":comment.account.user.username
+                }
+                return JsonResponse(ret)
+                #return redirect(reverse('thread', args=[str(thread_id)]))
         except TypeError:
             return HttpResponse('Invalid thread id')
         except Exception as e:
             return HttpResponse(e.args)
-    return redirect('index')
+    return HttpResponse('nope')
+    #return redirect('index')
 
 
 def reply(request):
