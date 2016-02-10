@@ -146,7 +146,7 @@ class Post(View):
             img.image = image # to get pk of image object
             img.save()
 
-        return HttpResponse('Thread posted.<br>Go to <a href="/complain/">Home</a> page')
+        return redirect('index')
 
 
 def calculate_delta_vote(action, upvotes, downvotes): 
