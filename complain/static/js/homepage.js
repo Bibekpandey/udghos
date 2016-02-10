@@ -10,7 +10,6 @@ $("#comment-click").click(function(){
 	$("#display-form").show("fast");
 });
 
-
 var windowWidth = $(window).width();
     if(windowWidth >= 768){
 		$("#navcolor2").hide("fast");
@@ -21,6 +20,13 @@ var windowWidth = $(window).width();
     $( "#navcolor1" ).hide("fast");
  }
 
+
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myModal').appendTo("body").modal('show');
+  $('#myInput').focus()
+})
+
 $(function () {
   $('.net-vote').tooltip("show")
-})
+});
+

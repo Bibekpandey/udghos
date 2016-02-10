@@ -6,7 +6,6 @@
 a,
 a:focus,
 a:hover {
-  color: #fff;
   text-decoration: none;
 }
 
@@ -58,13 +57,18 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #ffffff;
-  font-family: Josefin Sans;
+  background-color: #fff;
+  font-family: Ubuntu;
   color: #fff;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
   abackground-image: url("../img/nepal.jpg");
   background-size:cover;  
+}
+.image-login{
+  margin-top: -200px;
+  padding: 0px;
+  margin-left: -100px;
+  margin-right: 100px;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -117,15 +121,14 @@ text-align:center;
   font-size: 20px;
 
 
-  color: #fff; /* IE8 proofing */
+  color: #990012; /* IE8 proofing */
   
   border-bottom: 2px solid transparent;
 }
 .navhead-nav > li > a:hover,
 .navhead-nav > li > a:focus {
   background-color: transparent;
-  border-bottom-color: #fff;
-  border-bottom-color: rgba(255,255,255,0.8);
+  border-bottom-color: #990012;
 }
 .navhead-nav > .active > a,
 .navhead-nav > .active > a:hover,
@@ -199,6 +202,7 @@ text-align:center;
 
 #text-login{
   color: #111;
+  margin-top: 150px;
 }
 .form-signin {
   max-width: 330px;
@@ -265,22 +269,24 @@ text-align:center;
 }
 
 #navcolor{
-  background-color:#990012 ;
-  border: none; 
+  background-color:#fff;
+  border-bottom: 1px solid #990012;
 }
 .navbar-default{
   border: none;
 }
-nav >ul>li>a{
-  color: #fff;
+.navbar-header>a{
+  font-weight: bold;
+  text-decoration: none;
 }
+
 
 #navhead{
   font-size: 25px;
-  color: #fff;
+  font-weight: ;
+  color: #990012;
 }
 #navhead:hover{
-  color: #ddd;
+  color: #aa1123;
 }
-
 
