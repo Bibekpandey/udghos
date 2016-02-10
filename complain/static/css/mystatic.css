@@ -237,6 +237,7 @@ h1,h2,h3,h4{
 }
 .heading-post{
   margin-left: -10px;
+  margin-right: 5px;
 }
 
 .inner-addon { 
@@ -285,11 +286,12 @@ padding:0px;
   color:#555;
 }
 .sttime{
-  float: left;
   font-size: 12px;
   color: #777;
   display: inline-block;
+  
   margin-top: 5px;
+  margin-bottom: 15px;
 }
 
 #navhead{

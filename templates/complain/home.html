@@ -159,31 +159,8 @@
                 </div>
               </div>
               </div>
-              
-                   
-          <!--h3 class="post-heading">Share your complain</h3>
-          <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-              <form method="post" action="{% url 'post' 'thread' %}" class="form-horizontal" role="form" enctype="multipart/form-data">
-              {% csrf_token %}
-                <input type="hidden" name="thread_type" value="complaint"/>
-                <div class="form-group" style="padding:14px;">
-                  <textarea name="content" class="form-control" placeholder="Your queries here."></textarea>
-                Image(s):<input type="file" name="images" multiple accept="image/*" />
-                </div>
-                <div id="show-btn">
-                  <button class="btn btn-my" type="submit">Post</button>
-                  <div class="form-group">
-                    <div id="tag-bar" class="inner-addon right-addon">
-                      <i class="glyphicon glyphicon-tags"></i>
-                      <input type="text" placeholder="Add Tag" class="form-tag-control" />
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div-->
         </div>
+
         <div id="tab-stories">
           <div class="box-tabs">
             <ul class="nav nav-tabs" id="navblock" >
@@ -222,7 +199,7 @@
               <div id="textst" class="sttext">
                 <div class="post-body">
                   <a href="/profile/">
-                  <span class="heading-property heading-post">{{thread.thread.account.user}}</span></a><span class="sttime"> &nbsp;{{thread.thread.time}}</span><br>
+                  <span class="heading-property heading-post">{{thread.thread.account.user}}</span></a><span class="sttime">: &nbsp;{{thread.thread.time}}</span><br>
                 </div>
                 <div class="post-content">
                  {{thread.thread.content}}
