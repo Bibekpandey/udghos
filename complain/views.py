@@ -383,4 +383,11 @@ def get_recent_threads(n): # return n threads with number of comments
         num_cmts = Comment.objects.all().filter(thread=thread).count()
         num_comments.append(num_cmts)
 
+    threads = list(map(
+            lambda x: {
+                'thread':x,
+                'images':ThreadImage.objects.filter(thread=x)
+                },
+            threads))
+
     return (threads, num_comments)

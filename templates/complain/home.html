@@ -170,7 +170,7 @@
             Nothing here. May be come back later.
         {% else %}
 
-        {% for x, y in threads|zip:num_comments %}
+        {% for thread, y in threads|zip:num_comments %}
         <div class="box">
           <div class="stbody">
             <div id="recent" class="tab-pane fade in active">
@@ -178,12 +178,12 @@
                 <img class="img-circle" src="{% static 'img/nepal.png' %}" width=50 height=50/>
                 </div>
                 <div class="icons-ld">
-                  <a id="action-element" href="javascript:vote({{x.id}}, 'upvote', 'thread')">
+                  <a id="action-element" href="javascript:vote({{thread.thread.id}}, 'upvote', 'thread')">
                     <span class="glyphicon glyphicon-thumbs-up glyphicon-left" aria-hidden="true"></span>
                   </a>
                   <br>
-                  <span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_{{x.id}}">{{x.votes}}</span><br>
-                  <a id="action-element" href="javascript:vote({{x.id}}, 'downvote', 'thread')">
+                  <span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_{{thread.thread.id}}">{{thread.thread.votes}}</span><br>
+                  <a id="action-element" href="javascript:vote({{thread.thread.id}}, 'downvote', 'thread')">
                     <span class="glyphicon glyphicon-thumbs-down glyphicon-left" aria-hidden="true"></span>
                   </a>    
                 
@@ -194,13 +194,17 @@
               <div id="textst" class="sttext">
                 <div class="post-body">
                   <a href="/profile/">
-                  <h4 class="heading-property heading-post">{{x.account.user}}</h4></a>
+                  <h4 class="heading-property heading-post">{{thread.thread.account.user}}</h4></a>
                 </div>
                 <div class="post-content">
-                 {{x.content}}
+                 {{thread.thread.content}}
                 </div>
+{% for image in thread.images %} 
+                <img src="../media/{{image.name}}" height="300" width="300"></img><br>
+            {% endfor %}
+
                 <div class="sttime">
-                  {{x.time}}
+                  {{thread.thread.time}}
                 </div>
                 <div class="display-tag">
                   <span id="tag-post2" class="glyphicon glyphicon-tags"></span>
@@ -213,9 +217,9 @@
           </div>
           <div class="row">
             <div class="post-action">
-              <a href="javascript:void()" onclick="toggleComments({{x.id}})">
+              <a href="javascript:void()" onclick="toggleComments({{thread.thread.id}})">
                 &nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                <span id="num-comments{{x.id}}">{{y}}</span><span id="comment-text{{x.id}}"> Comment{{y|pluralize}}</span>
+                <span id="num-comments{{thread.thread.id}}">{{y}}</span><span id="comment-text{{thread.thread.id}}"> Comment{{y|pluralize}}</span>
               </a>
               <div class="share">
                 <button class="facebook shadow"></button>
@@ -223,10 +227,10 @@
               </div>
             </div>
           </div>
-          <div id="display-form{{x.id}}" class="comment-form">
-            <div id="thread-comments{{x.id}}"></div>
-            <textarea id="comment-box{{x.id}}" class="form-comment" placeholder="Your comment here."></textarea>
-            <button onclick="postComment({{x.id}}, '{{x.user}}')">Comment</button>
+          <div id="display-form{{thread.thread.id}}" class="comment-form">
+            <div id="thread-comments{{thread.thread.id}}"></div>
+            <textarea id="comment-box{{thread.thread.id}}" class="form-comment" placeholder="Your comment here."></textarea>
+            <button onclick="postComment({{thread.thread.id}}, '{{thread.thread.user}}')">Comment</button>
             
           </div>
         </div>
@@ -254,9 +258,6 @@
       </div>
     </div>  
   </div>
-
-
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
