@@ -194,17 +194,16 @@
               <div id="textst" class="sttext">
                 <div class="post-body">
                   <a href="/profile/">
-                  <h4 class="heading-property heading-post">{{thread.thread.account.user}}</h4></a>
+                  <span class="heading-property heading-post">{{thread.thread.account.user}}</span></a><span class="sttime"> &nbsp;{{thread.thread.time}}</span><br>
                 </div>
                 <div class="post-content">
                  {{thread.thread.content}}
-                </div>
-{% for image in thread.images %} 
+                </div><br>
+            {% for image in thread.images %} 
                 <img src="../media/{{image.name}}" height="300" width="300"></img><br>
             {% endfor %}
 
                 <div class="sttime">
-                  {{thread.thread.time}}
                 </div>
                 <div class="display-tag">
                   <span id="tag-post2" class="glyphicon glyphicon-tags"></span>
