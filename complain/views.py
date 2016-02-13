@@ -34,24 +34,47 @@ class Index(View):
                 # so create a new account
                 #createAccount(request.user)
 
-            self.context['threads'], self.context['num_comments'] = get_recent_threads(20)
+            self.context['threads'], self.context['num_comments'] = get_threads(20)
+            self.context['topthreads'], self.context['num_comments_top'] = get_threads(20, 'top')
+            for x in self.context['topthreads']:
+                print(x['thread'].votes)
             return render(request, "complain/home.html", self.context)
         return redirect('login')
+
 
 def get_comments(request):
     try:
         threadid = int(request.POST.get('threadid'))
-        comments = Comment.objects.filter(thread__id=threadid)
-        templist = []
-        templist = map(lambda x:{'user':x.account.user.username,
-                                'comment':x.text,
-                                'date':x.time.strftime("%I:%M %p, %d %b %Y")
-                                }, comments)
-
-        ret = {"comments":list(templist)}
+        
+        ret = {"comments":get_comments_by_thread_id(threadid)}
         return JsonResponse(ret)
     except Exception as e:
         print(repr(e))
+
+def get_comments_by_thread_id(threadid):
+    comments = Comment.objects.filter(thread__id=threadid)
+    templist = []
+    templist = map(lambda x:{'user':x.account.user.username,
+                                'comment':x.text,
+                                'date':x.time.strftime("%I:%M %p, %d %b %Y")
+                                }, comments)
+    return list(templist)
+        
+
+def delete_comment(request):
+    if request.user.is_authenticated():
+        try:
+            comment_id = int(request.POST.get('commentid'))
+            comment = comment.objects.get(id=comment_id)
+            thrd = comment.thread
+            comment.delete()
+            ret = {"comments": get_comments_by_thread_id(thrd.id)}
+            return JsonResponse(ret)
+        except Exception as e:
+            print(repr(e))
+    else:
+        return HttpResponse('')
+
 
 # CREATE ACCOUNT, takes in user object
 def createAccount(userobj):
@@ -137,6 +160,16 @@ class Post(View):
         account = Account.objects.get(user=request.user)
         thread = Thread(thread_type=th_type, title=title, 
                     content=content, account=account)
+        # now the tags
+        strtagids = request.POST.get('tagids', '')
+        tagids = [] list(map(lambda x: int(x),strtagids.split(',')))
+        for x in strtagids.split(','):
+            try:
+                tagids.append(int(x))
+            except ValueError:
+                pass
+        for tagid in tagids:
+            thread.tags.add(Tag.objects.get(id=tagid))
         thread.save()
 
         images = request.FILES.getlist('images')
@@ -372,11 +405,13 @@ def new_social(request):
 #####       HELPER FUNCTIONS        #####
 #########################################
 
-def get_recent_threads(n): # return n threads with number of comments
+def get_threads(n, sort='recent'): # return n threads with number of comments
+    if sort== 'recent':order='-time'
+    else: order='-votes'
     try:
-        threads = Thread.objects.order_by('-time')[:n]
+        threads = Thread.objects.order_by(order)[:n]
     except: # n greater than total length
-        threads = Thread.objects.order_by('-time')
+        threads = Thread.objects.order_by(order)
 
     num_comments = []    
     for thread in threads:

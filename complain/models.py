@@ -34,8 +34,8 @@ class Thread(models.Model):
     account = models.ForeignKey(Account)
     time = models.DateTimeField(auto_now_add=True)
     votes = models.IntegerField(default=0)
-    #downvotes = models.IntegerField(default=0)
     last_active = models.DateTimeField(auto_now_add=True)
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return self.title + ' [' + self.account.user.username+']'
@@ -93,3 +93,9 @@ class ThreadImage(models.Model):
         super(ThreadImage, self).save(*args, **kwargs)
         self.name = self.image.name
         super(ThreadImage, self).save(*args, **kwargs)
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
