@@ -19,7 +19,7 @@ class Account(models.Model):
         return self.user.username
 
 
-class Tag(models.Model):
+class ThreadTag(models.Model):
     name = models.CharField(max_length=50)  
 
     def __str__(self):
@@ -30,12 +30,11 @@ class Thread(models.Model):
     thread_type = models.IntegerField(default=0) # 0 for complaint, 1 for discussion thread
     title = models.CharField(max_length=100, blank=True, null=True)
     content = models.TextField()
-    tags = models.ManyToManyField(Tag, blank=True, null=True)
+    tags = models.ManyToManyField('ThreadTag', blank=True)
     account = models.ForeignKey(Account)
     time = models.DateTimeField(auto_now_add=True)
     votes = models.IntegerField(default=0)
     last_active = models.DateTimeField(auto_now_add=True)
-    tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return self.title + ' [' + self.account.user.username+']'

@@ -10,6 +10,7 @@ from django.http import JsonResponse
 
 from django.views.generic import View
 from complain.models import *
+import json
 
 import math, traceback
 
@@ -160,9 +161,10 @@ class Post(View):
         account = Account.objects.get(user=request.user)
         thread = Thread(thread_type=th_type, title=title, 
                     content=content, account=account)
+
         # now the tags
         strtagids = request.POST.get('tagids', '')
-        tagids = [] list(map(lambda x: int(x),strtagids.split(',')))
+        tagids = list(map(lambda x: int(x),strtagids.split(',')))
         for x in strtagids.split(','):
             try:
                 tagids.append(int(x))
@@ -399,6 +401,19 @@ def new_social(request):
             except:
                 raise Http404("user not found")
 
+
+# for tags
+def get_tags(request):
+    if request.method=='GET':
+        query = request.GET.get('query','')
+        if query!='':
+            tags = ThreadTag.objects.filter(name__contains=query)
+            d = {}
+            for x in tags:
+                d[x.id] = x.name
+            return JsonResponse(d)
+        else:
+            return JsonResponse({'tags':[]})
 
 
 #########################################

@@ -13,5 +13,6 @@ urlpatterns =  [
         url(r'^reply/', reply, name='reply'),
         url(r'^error/', error, name='error'),
         url(r'^new-social/', new_social, name='new_social'),
-
+        url(r'^comment-delete/', delete_comment, name='delete_comment'),
+        url(r'^tags/', get_tags, name='get_tags'),
 ]
