@@ -120,6 +120,7 @@
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="container">
             <div class="col-md-9 text-center">
@@ -156,16 +157,17 @@
                   </div>
                 </div>
               </div>     
-                </div>
-              </div>
-              </div>
+
+            </div>
+           </div>
+          </div>
         </div>
 
         <div id="tab-stories">
           <div class="box-tabs">
             <ul class="nav nav-tabs" id="navblock" >
-              <li class="active"><a data-toggle="tab" href="#recent">Recent</a></li>
-              <li><a data-toggle="tab" href="#top">Top</a></li>
+              <li class="active"><a data-toggle="tab" href="javascript:void()" onclick="showRecent()">Recent</a></li>
+              <li><a data-toggle="tab" href="javascript:void()" onclick="showTop()">Top</a></li>
               <li><a data-toggle="tab" href="#top">Week</a></li>
               <li><a data-toggle="tab" href="#top">Month</a></li> 
             </ul>
@@ -176,7 +178,7 @@
         {% else %}
 
         {% for thread, y in threads|zip:num_comments %}
-        <div class="box">
+        <div class="box" id="recent-threads">
           <div class="stbody">
             <div id="recent" class="tab-pane fade in active">
               <div class="stimg">
@@ -240,7 +242,79 @@
         </div>
         {% endfor %}
       {% endif %}
-      </div>
+
+    {% if topthreads|length == 0 %}
+        {% else %}
+
+        {% for threadtop, y in topthreads|zip:num_comments_top %}
+        <div class="box" id="top-threads">
+          <div class="stbody">
+            <div id="recent" class="tab-pane fade in active">
+              <div class="stimg">
+                <img class="img-circle" src="{% static 'img/nepal.png' %}" width=50 height=50/>
+        {{ threadtop }} bibek
+                </div>
+                <div class="icons-ld">
+                  <a id="action-element" href="javascript:vote({{threadtop.thread.id}}, 'upvote', 'thread')">
+                    <span class="glyphicon glyphicon-thumbs-up glyphicon-left" aria-hidden="true"></span>
+                  </a>
+                  <br>
+                  <span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_{{threadtop.thread.id}}">{{threadtop.thread.votes}}</span><br>
+                  <a id="action-element" href="javascript:vote({{threadtop.thread.id}}, 'downvote', 'thread')">
+                    <span class="glyphicon glyphicon-thumbs-down glyphicon-left" aria-hidden="true"></span>
+                  </a>    
+                
+                </div>
+              <!--div class="post-actions">
+                      <i class="glyphicon glyphicon-chevron-down"></i>
+              </div--> 
+              <div id="textst" class="sttext">
+                <div class="post-body">
+                  <a href="/profile/">
+                  <span class="heading-property heading-post">{{threadtop.thread.account.user}}</span></a><span class="sttime">: &nbsp;{{threadtop.thread.time}}</span><br>
+                </div>
+                <div class="post-content">
+                 {{threadtop.thread.content}}
+                </div><br>
+            {% for image in threadtop.images %} 
+                <img src="../media/{{image.name}}" height="300" width="300"></img><br>
+            {% endfor %}
+
+                <div class="sttime">
+                </div>
+                <div class="display-tag">
+                  <span id="tag-post2" class="glyphicon glyphicon-tags"></span>
+              
+                  <a class="tagname tagname2" href="#">Blockades</a>
+                  <a class="tagname tagname2" href="#">Nepal</a>                
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="post-action">
+              <a href="javascript:void()" onclick="toggleComments({{threadtop.thread.id}})">
+                &nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                <span id="num-comments{{threadtop.thread.id}}">{{y}}</span><span id="comment-text{{threadtop.thread.id}}"> Comment{{y|pluralize}}</span>
+              </a>
+              <div class="share">
+                <button class="facebook shadow"></button>
+                <button class="twitter shadow"></button>
+              </div>
+            </div>
+          </div>
+          <div id="display-form{{threadtop.thread.id}}" class="comment-form">
+            <div id="thread-comments{{threadtop.thread.id}}"></div>
+            <textarea id="comment-box{{threadtop.thread.id}}" class="form-comment" placeholder="Your comment here."></textarea>
+            <button onclick="postComment({{threadtop.thread.id}}, '{{thread.thread.user}}')">Comment</button>
+            
+          </div>
+        </div>
+        {% endfor %}
+      {% endif %}
+
+      </div>   
+    
       <div id="profile" class="col-md-3">
         <div class="box">
           <img class="img-circle" href="/profile/" src="{% static 'img/nepal.png' %}" width=100 height=100 alt="Generic placeholder image" width="100" height="100">
@@ -279,7 +353,17 @@
     }
   </style>
   <script>
-    window.onload = function()  { $('.comment-form').hide();}
+    window.onload = function()  { $('.comment-form').hide();showRecent(); }
+
+    function showTop() {
+        $('#top-threads').show();
+        $('#recent-threads').hide();
+    }
+
+    function showRecent() {
+        $('#top-threads').hide();
+        $('#recent-threads').show();
+    }
 
     $('.box').mousedown(function() {
       this.style.boxShadow = "1px 1px 2px #666";
