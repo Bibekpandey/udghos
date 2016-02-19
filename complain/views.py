@@ -37,8 +37,6 @@ class Index(View):
 
             self.context['threads'], self.context['num_comments'] = get_threads(20)
             self.context['topthreads'], self.context['num_comments_top'] = get_threads(20, 'top')
-            for x in self.context['topthreads']:
-                print(x['thread'].votes)
             return render(request, "complain/home.html", self.context)
         return redirect('login')
 
@@ -420,13 +418,19 @@ def get_tags(request):
 #####       HELPER FUNCTIONS        #####
 #########################################
 
-def get_threads(n, sort='recent'): # return n threads with number of comments
+def get_threads(n, sort='recent', earlierthan=-1): # return n threads with number of comments
     if sort== 'recent':order='-time'
     else: order='-votes'
     try:
-        threads = Thread.objects.order_by(order)[:n]
+        if earlierthan!=-1:
+            threads = Thread.objects.order_by(order).filter(id__lt=earlierthan)[:n]
+        else:
+            threads = Thread.objects.order_by(order)[:n]
     except: # n greater than total length
-        threads = Thread.objects.order_by(order)
+        if earlierthan!=-1:
+            threads = Thread.objects.order_by(order).filter(id__lt=earlierthan)
+        else:
+            threads = Thread.obejects.order_by(order)
 
     num_comments = []    
     for thread in threads:
