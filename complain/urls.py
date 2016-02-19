@@ -13,5 +13,6 @@ urlpatterns =  [
         url(r'^reply/', reply, name='reply'),
         url(r'^error/', error, name='error'),
         url(r'^new-social/', new_social, name='new_social'),
+        url(r'^profile/', Profile.as_view(), name='profile'),
 
 ]

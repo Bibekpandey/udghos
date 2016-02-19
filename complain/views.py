@@ -391,3 +391,7 @@ def get_recent_threads(n): # return n threads with number of comments
             threads))
 
     return (threads, num_comments)
+
+class Profile(View):
+    def get(self,request):
+        return render(request, "complain/profile.html",{})

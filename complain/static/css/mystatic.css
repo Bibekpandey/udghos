@@ -23,14 +23,21 @@ h1,h2,h3,h4{
   
   -webkit-border-radius: 3;
   -moz-border-radius: 3;
-  border-radius: 3px;
+  border-radius: 2px;
   
   color: #fff;
   font-size: 15px;
-  float: right;
   padding: 5px 10px 5px 10px;
   text-decoration: none;
-  margin-bottom: px;
+}
+.btn-large{
+  font-size: 25px;
+}
+.btn-my:hover,
+.btn-my:focus,
+.btn-my.focus {
+  color: #fff;
+  text-decoration: none;
 }
 
 .btn-my:hover {
@@ -46,6 +53,7 @@ h1,h2,h3,h4{
   min-height: 20px;
   padding: 10px 15px 15px 15px;
   margin: 2px;
+  margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
   border: 1px solid #e4e4e4;
@@ -90,6 +98,43 @@ h1,h2,h3,h4{
   margin-bottom: 10px;
   padding: 10px;
 }
+.box-tag{
+  background-color: #ccc;
+  display: none;
+  position: absolute;
+}
+.box-type-tag{
+  background-color: #ccc;
+  display: none;
+  position: absolute;
+  float: right;
+}
+.tag-list>li{
+  text-align: left;
+  margin-left: -25px;
+  padding: 1px;
+  border: 1px 0px 1px 0px;
+  display: table-cell;
+  display: block;
+}
+.taglist{
+  position: relative;
+  display: inline-block;
+}
+.formtags{
+  background: #ddd;
+  height: 25px;
+  padding: 2px;
+  position: absolute;
+  margin-left: 200px;
+  margin-top: -30px; 
+}
+#close-tag{
+  margin-right: 2px;
+  margin-top: -2px;
+}
+
+
 .tab-content{
   padding: 10px;
 }
@@ -99,8 +144,13 @@ h1,h2,h3,h4{
 }
 .icons-ld{
   display: inline-block;
-  margin-top: 10px;
-  float: right;
+  margin-top: -15px;
+  float: left;
+}
+.comment-section{
+  margin-right: 75px;
+  border-right: 1px solid #999;
+  padding-right: 10px;
 }
 .glyphicon:hover{
   color: #bb2234;
@@ -144,6 +194,7 @@ h1,h2,h3,h4{
 }
 .post-action{
   margin-top: 20px;
+  float: right;
 }
 .post-actions{
   float: right;
@@ -179,8 +230,8 @@ h1,h2,h3,h4{
 .display-tag{
   display: inline-block;
   float: right;
-  margin-top: 20px;
-  margin-right: 0px;
+  margin-top: -35px;
+  margin-right: 15px;
 }
 #tag-post1{
   float: right;
@@ -190,7 +241,7 @@ h1,h2,h3,h4{
 }
 #tag-post2{
   float: right;
-  margin-top: 10px;
+  margin-top: 5px;
   margin-left: 5px;
 }
 #navblock {
@@ -212,7 +263,7 @@ h1,h2,h3,h4{
   border-radius: 2px;
 }
 .tagname2{
-  margin-top: 7px;
+  margin-top: 5px;
 }
 #action-element{
   margin-left: 10px;
@@ -220,7 +271,7 @@ h1,h2,h3,h4{
 }
 #user-name {
   color:#282985;
-  font-weight: ;
+  
 }
 .my-tags{
   margin-top: 10px;
@@ -229,6 +280,22 @@ h1,h2,h3,h4{
 }
 .modal{
     z-index: 10000;
+    height: 90%;
+    width: 90%;
+}
+.my-modal-title{
+  float: right;  
+}
+.my-color{
+  border-radius: px;
+  background: #ccc;
+}
+.my-close{
+  float: left;
+  color: #990012;
+}
+.close-icon{
+  position: absolute;
 }
 .heading-property{
   border-bottom: none;
@@ -307,12 +374,31 @@ padding:0px;
   position: relative;
 }
 .navmob-header{
-  width: 100%;
+  float: right;
 }
+.navmob-header>a{
+  text-decoration: none;
+  color: #990012;
+}
+
+.dropdown-menu{
+  float: right;
+}
+
 .navbar-icon{
   display: block;
   float: right;
   margin-top: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 50px;
+  line-height: 20px;
+  color: #fff;
+}
+.navbar-mobile-icon{
+  display: block;
+  float: left;
+  margin-top: 10px;
   margin-left: 20px;
   margin-right: 20px;
   height: 50px;
@@ -353,6 +439,26 @@ padding:0px;
 .post-content{
   margin-top: -10px;
 }
+.post-image{
+  height: 170%;
+  width: 170%;
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
+.modal-custom{
+  width: 45%;
+}
+.modal-post .close-image {
+  margin-top: -2px;
+  margin-left: 5px;
+  color: reds;
+  font-size: 25px;
+}
+.close-image{
+  z-index: 100;
+  position: absolute;
+}
+
 #logo{
   margin-left: 45px;
 }
@@ -376,6 +482,9 @@ padding:0px;
 }
 .glyphicon-bell:hover{
   color: #bb2234;
+}
+.glyphicon-mobile{
+  margin-bottom: -50px;
 }
 
 #tag-bar{
@@ -470,7 +579,8 @@ div.share> .twitter {
   float: right;
 }
 .net-vote{
-  margin-left: 7px;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 
 .comment-form{
