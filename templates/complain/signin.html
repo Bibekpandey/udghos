@@ -41,15 +41,19 @@
 
           <div class="container">
             <div class="row">
-              <div class="col-md-4 image-login">
-              <img src="{% static 'img/IMG HARI.png' %}" width="110%" height="5%" />
-
+              <div class="col-md-8 image-left">
+              <img class="image-login" src="{% static 'img/IMG HARIsnew.png' %}" />
+                <h1 id="text-login" class="signin-heading">And Raise Your Voice <br> To the top 
+                <ul>
+                  <li></li>
+                </ul>
+                </h1>
               </div>
-              <div class="col-md-4">
-              <h1 id="text-login" class="signin-heading">And Raise Your Voice <br> To the top 
+              <!--div class="col-md-4">
+                <h1 id="text-login" class="signin-heading">And Raise Your Voice <br> To the top 
 
-              </h1>
-              </div>
+                </h1>
+              </div-->
               <div class="col-md-4">
                 <div class="well-signin">
                   <form class="form-signin" method="post" action="{% url 'login' %}">

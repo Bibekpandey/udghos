@@ -61,15 +61,28 @@ body {
   font-family: Ubuntu;
   color: #fff;
   text-align: center;
-  abackground-image: url("../img/nepal.jpg");
-  background-size:cover;  
+
+  background: url("../img/IMG HARInew.png") no-repeat ;
+  font-family: 'Source Sans Pro', sans-serif;
 }
-.image-login{
-  margin-top: -200px;
-  padding: 0px;
-  margin-left: -100px;
-  margin-right: 100px;
+
+@media (min-width: 768px) {
+  body {
+    background-image: none;
+  }
 }
+
+
+/*.image-login{
+    background-image: url("../img/IMG HARI.png");
+    background-repeat: no-repeat;
+    margin-left: -60px;
+    margin-top: -170px;
+    display: block;
+    min-width: 100%;
+    height: auto;
+}*/
+
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
