@@ -61,9 +61,9 @@
                   <div id="signin" class="meta-info" >
                     <h2 class="form-signin-heading">Udghos Login</h2>
                     <div class="social-wrap b">
-                      <button class="facebook" formnovalidate>Facebook</button>
-                      <button class="twitter" formnovalidate>Twitter</button>
-                      <button class="googleplus" formnovalidate>Google Plus</button>
+                      <button class="facebook" type="button" formnovalidate>Facebook</button>
+                      <button class="twitter" type="button" formnovalidate>Twitter</button>
+                      <button class="googleplus" type="button" formnovalidate>Google Plus</button>
                       <script>
                         $('.facebook').click(function() { window.location="{%url 'social:begin' 'facebook' %}"; return false;});
                         $('.twitter').click(function() { location.href="{%url 'social:begin' 'twitter' %}"; return false;});
@@ -78,9 +78,11 @@
                       <label><input type="checkbox" value="remember-me"> Remember me</label>
                     </div>
                     <input type="submit" value="Sign In" class="btn btn btn-my btn-block">
+                    </form>
                     <p class="p-signin">New User? <a href="#" id="click-signup-link">Sign Up</a></p>
                   </div>
                   <div id="signup" class="meta-info" style="display:none">
+                  <form>
                     <h2 class="form-signin-heading">Udghos Signup</h2>
                     <div class="social-wrap b">
                       <button class="facebook shadow">Facebook</button>
