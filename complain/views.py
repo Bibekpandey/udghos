@@ -169,18 +169,19 @@ class Post(View):
         thread = Thread(thread_type=th_type, title=title, 
                     content=content, account=account)
 
+        thread.save()
         # now the tags
-        '''
         strtagids = request.POST.get('tagids', '')
-        tagids = list(map(lambda x: int(x),strtagids.split(',')))
+        #return HttpResponse(strtagids)
+        #tagids = list(map(lambda x: int(x),strtagids.split(',')))
+        tagids = []
         for x in strtagids.split(','):
             try:
                 tagids.append(int(x))
             except ValueError:
                 pass
         for tagid in tagids:
-            thread.tags.add(Tag.objects.get(id=tagid))
-        '''
+            thread.tags.add(ThreadTag.objects.get(pk=tagid))
         thread.save()
 
         images = request.FILES.getlist('images')
@@ -460,11 +461,11 @@ def get_threads(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n t
                             'time':thread.time.strftime("%I:%M %p, %d %b %Y"),
                             'title':thread.title,
                             'content':thread.content,
-                            'tags':['123', 'nation'],#list(map(lambda x: {
-                                            #'name':x.name,
-                                            #'id':x.id }
-                                            #, thread.tags
-                                            #)),
+                            'tags':list(map(lambda x: {
+                                            'name':x.name,
+                                            'id':x.id }
+                                            , thread.tags.all()
+                                            )),
                             'user':{'name':thread.account.user.username,
                                     'id':thread.account.pk,
                                     'image':'media/image.jpg', # need to code this
