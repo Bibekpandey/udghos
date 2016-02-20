@@ -35,7 +35,16 @@ class Index(View):
 
 def get_threads_json(request):
     if request.user.is_authenticated():
-        return JsonResponse({'threads':get_threads(20)})
+        threadtype = request.GET.get('type', '')
+        try:
+            beforeid = int(request.GET.get('earlierthan',''))
+        except:
+            beforeid = -1
+        try:
+            votelt = int(request.GET.get('votelt', ''))
+        except:
+            votelt = -1
+        return JsonResponse({'threads':get_threads(3, threadtype=threadtype, earlierthan=beforeid, votelt=votelt)})
     else:
         return HttpResponse('')
 
@@ -420,19 +429,29 @@ def get_tags(request):
 #####       HELPER FUNCTIONS        #####
 #########################################
 
-def get_threads(n, sort='recent', earlierthan=-1): # return n threads with number of comments
-    if sort== 'recent':order='-time'
-    else: order='-votes'
+def get_threads(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n threads with number of comments
+    if threadtype == 'top':
+        order=['-votes', '-id']
+        kwargs = {
+            'votes__lt':voteslt,
+            'id__lt':earlierthan,
+        }
+        if votelt==-1:
+            del kwargs['votes__lt']
+        if earlierthan==-1:
+            del kwargs['id__lt']
+    else:
+        order=['-time']
+        kwargs = {
+            'id__lt':earlierthan
+        }
+        if earlierthan==-1:
+            del kwargs['id__lt']
+
     try:
-        if earlierthan!=-1:
-            threads = Thread.objects.order_by(order).filter(id__lt=earlierthan)[:n]
-        else:
-            threads = Thread.objects.order_by(order)[:n]
-    except: # n greater than total length
-        if earlierthan!=-1:
-            threads = Thread.objects.order_by(order).filter(id__lt=earlierthan)
-        else:
-            threads = Thread.obejects.order_by(order)
+        threads = Thread.objects.order_by(*order).filter(**kwargs)[:n]
+    except: # most probably n being greater
+        threads = Thread.objects.order_by(*order).filter(**kwargs)
 
     thread_list = []
     for thread in threads:

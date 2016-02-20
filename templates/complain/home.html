@@ -107,7 +107,7 @@
           <div class="row">
             <div class="container">
               <div class="col-md-9 text-center">
-                <h1>The world’s platform for Change</h1>
+                <h1>Nepal’s platform for Change</h1>
                 <h3>Post your Complain/Views</h3>
               </div>
             </div>
@@ -141,18 +141,9 @@
                           
                           <div class="form">
                             <label for="recipient-name" class="control-label">Tags *</label>
-                            <input type="search" class="form-control" placeholder="Include your tags" id="textbox">
+                            <input type="text" class="form-control" placeholder="Include your tags" id="textbox">
                               <span class="btn btn-sm formtags" id="remove-tag">nepal
                               <button type="button" class="close my-close" id="close-tag"><span aria-hidden="true">&times;</span></button></span>
-                            <div class="box-type-tag" id="boxtypetag">
-                              <span class="tag-type" >Type in Tags</span>
-                            </div>
-                            <div class="box-tag" id="boxtag">
-                              <ul class="tag-list">
-                                <li >Nepal </li>
-                                <li >Blockades </li>
-                              </ul>
-                            </div>
                           </div>
                           Image(s):<input type="file" name="images" multiple accept="image/*" />
                         </div>
@@ -165,7 +156,6 @@
                   </div>
                 </div>
               </div>     
-
             </div>
            </div>
           </div>
@@ -176,10 +166,14 @@
             <ul class="nav nav-tabs" id="navblock" >
               <li class="active"><a data-toggle="tab" href="javascript:void()" onclick="showRecent()">Recent</a></li>
               <li><a data-toggle="tab" href="javascript:void()" onclick="showTop()">Top</a></li>
-              <li><a data-toggle="tab" href="#top">Favourites</a></li>
+              <li><a data-toggle="tab" href="javascript:void()" onclick="showFavs()">Favourites</a></li>
             </ul>
           </div>
           <div id="recent-threads">
+          </div>
+          <div id="top-threads">
+          </div>
+          <div id="favourite-threads">
           </div>
         </div>
       </div>   
@@ -207,6 +201,7 @@
     </div>  
   </div>
 
+  </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
@@ -215,59 +210,75 @@
 
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
-  </body>
-  <style>
-    .test {
-      position:fixed;
-      top:50px;
-    }
-  </style>
   <script>
-    window.onload = function()  { $('.comment-form').hide();showRecent(); }
+    window.onload = function()  { 
+            $('.comment-form').hide();
+            //showRecent(); 
+            getAndRenderThreads(); 
+    };
+
+    var g_thread_container = "recent-threads";
+    var g_thread_type = 'recent';
+    var g_earliertop = window.scrollY;  // global to check direction of scroll
+    window.onscroll = function() {
+        // first get direction of scroll
+        var curr = window.scrollY;
+        if (curr <= g_earliertop) {
+            return;
+        }
+        g_earliertop = curr;
+        var elems = document.getElementsByClassName('box thread');
+        var last = elems[elems.length-1];
+        var lastid = last.getAttribute('id').replace('thread-','');
+
+        var lastRect = last.getBoundingClientRect();
+        var windowH = window.innerHeight;
+        console.log(lastRect.top);
+        if(lastRect.top <= 0.85*windowH) {
+            getAndRenderThreads(g_thread_type, lastid);
+        }
+    }
 
     function showTop() {
-        $('#top-threads').show();
-        $('#recent-threads').hide();
+        g_thread_container = "top-threads";
+        g_thread_type = 'top';
+        g_earliertop = 0;
+        $('#recent-threads').empty();
+        $('#favourite-threads').empty();
+        getAndRenderThreads('top');
     }
 
     function showRecent() {
-        $('#top-threads').hide();
-        $('#recent-threads').show();
+        g_thread_container = "recent-threads";
+        g_thread_type = "recent";
+        g_earliertop = 0;
+        $('#top-threads').empty();
+        $('#favourite-threads').empty();
+        getAndRenderThreads('recent');
+    }
+    
+    function showFavs() {
     }
 
-    $('.box').mousedown(function() {
-      this.style.boxShadow = "1px 1px 2px #666";
-      this.style.padding="9px 14px 14px 14px";
-    });
-    $('.box').mouseup(function() {
-      this.style.boxShadow = "1px 1px 3px #777";
-      this.style.padding="10px 15px 15px 15px";
-    });
-  </script>
-  <script>
-  /*
-    var torpe = document.getElementById('top-fixed');
-    var tabstories = document.getElementById('tab-stories');
-    var navHeight = document.getElementById('navcolor').getBoundingClientRect().height;
-    var scrollheight;
-
-    document.onscroll = function()  {
-        scrollheight = tabstories.getBoundingClientRect().top;
-
-        var w = torpe.getBoundingClientRect().width;
-        if(scrollheight <= 50) {
-           torpe.style.width=w.toString()+'px';
+    function getAndRenderThreads(type, id) {
+        // now get threads from server
+        var querystr;
+        if (type==undefined) {
+            querystr = '?type=recent';
         }
-        else if(scrollheight > 50) {
-          $('#top-fixed').toggleClass('test');
-           torpe.style.position="absolute";
-           torpe.style.width = w.toString()+'px';
-           torpe.style.top="auto";
+        else {
+            querystr = '?type='+type;
         }
-    };   
-    */
+        if (id!=undefined)querystr += '&earlierthan='+id;
 
-window.onkeydown= function() {add_item({});};
+        $.get('threads/'+querystr, function(data) {
+            for(var x=0;x<data.threads.length;x++) {
+                add_item(data.threads[x], g_thread_container);
+            }
+        });
+
+    }
 
   </script>
+
   </html>

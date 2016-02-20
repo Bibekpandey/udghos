@@ -106,22 +106,22 @@ function images_html(images) {
 }
 
 function generate_thread(threadobj) {
-    var thread_str = '<div class="box" id="recent-threads">'+
+    var thread_str = '<div class="box thread" id="thread-'+threadobj.id+'">'+
           '<div class="stbody">'+
             '<div id="recent" class="tab-pane fade in active">'+
               '<div class="stimg">'+
-                '<img class="img-circle" src="'+'threadobj.user.image'+'static/img/nepal.png" width=50 height=50/>'+
+                '<img class="img-circle" src="'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
 
               '<div id="textst" class="sttext">'+
                 '<div class="post-body">'+
                   '<a href="/profile">'+
-                  '<span class="heading-property heading-post">'+'threadobj.account.user'+'</span></a><span class="sttime"> &nbsp;'+threadobj.time+'</span><br>'+
+                  '<span class="heading-property heading-post">'+threadobj.user.name+'</span></a><span class="sttime"> &nbsp;'+threadobj.time+'</span><br>'+
                 '</div>'+
                 '<div class="post-content">'+
-                 '{{thread.thread.content}}'+
+                 threadobj.content+
                 '</div><br>'+
-//           images_html(threadobj.images)+
+           images_html(threadobj.images)+
         '<div class="sttime">'+
                 '</div>'+
                 '<div class="row">'+
@@ -137,11 +137,11 @@ function generate_thread(threadobj) {
           '</div>'+
           '<div class="row">'+
             '<div class="icons-ld">'+
-                    '<a id="action-element" href="javascript:vote('+threadobj.id+', \'upvote\', \'thread\')">'+
+                    '<a id="action-element" href="javascript:void()" onclick="vote('+threadobj.id+', \'upvote\', \'thread\')">'+
                       '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'+
                     '</a>'+
                     '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
-                    '<a id="action-element" href="javascript:vote('+threadobj.id+', \'downvote\', \'thread\')">'+
+                    '<a id="action-element" href="javascript:void()" onclick="vote('+threadobj.id+', \'downvote\', \'thread\')">'+
                       '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'+
                     '</a>'+
                   
@@ -149,7 +149,7 @@ function generate_thread(threadobj) {
             '<div class="post-action">'+
               '<div class="comment-section">'+
                 '<a href="javascript:void()" onclick="toggleComments('+threadobj.id+')">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'+
-                  '<span id="num-comments'+threadobj.id+'">'+threadobj.num_comments+'</span><span id="comment-text'+threadobj.id+'"> Comment'+'threadobj.num_comments!=1?\'s\':\'\''+'</span>'+
+                  '<span id="num-comments'+threadobj.id+'">'+threadobj.num_comments+'</span><span id="comment-text'+threadobj.id+'"> Comment'+(threadobj.num_comments!=1?'s':'')+'</span>'+
                 '</a>'+
               '</div>'+
               '<div class="share">'+
@@ -168,7 +168,7 @@ function generate_thread(threadobj) {
     return thread_str;
 }
 
-function add_item(threadobj) {
-    var elem = document.getElementById('recent-threads');
+function add_item(threadobj, divParentId) {
+    var elem = document.getElementById(divParentId);
     elem.innerHTML+=generate_thread(threadobj);
 }

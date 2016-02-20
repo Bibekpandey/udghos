@@ -1,7 +1,6 @@
 /* CSS used here will be applied after bootstrap.css */
 html,
 body {
-  height: 100%;
   background-color: #eaeaea;
 
   font-family: Ubuntu ; 
