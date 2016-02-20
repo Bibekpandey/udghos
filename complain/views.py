@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.urlresolvers import reverse
+from django.core import serializers
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
@@ -23,22 +24,20 @@ def error(request):
 class Index(View):
     def get(self, request):
         self.context = {}
-        extra = request.GET.get('social', '')
         if request.user.is_authenticated():
             self.context['user'] = request.user
             acc = Account.objects.get(user=request.user)
             self.context['address'] = acc.address
 
-            # now, if extra is 1 then we have user from social site
-            if extra=='1':
-                pass
-                # so create a new account
-                #createAccount(request.user)
-
-            self.context['threads'], self.context['num_comments'] = get_threads(20)
-            self.context['topthreads'], self.context['num_comments_top'] = get_threads(20, 'top')
             return render(request, "complain/home.html", self.context)
         return redirect('login')
+
+
+def get_threads_json(request):
+    if request.user.is_authenticated():
+        return JsonResponse({'threads':get_threads(20)})
+    else:
+        return HttpResponse('')
 
 
 def get_comments(request):
@@ -101,8 +100,9 @@ class Login(View):
         if username=='' or password=='':
             return HttpResponse('username/password can\'t be empty')
         user = authenticate(username=username, password=password)
+        print(user)
 
-        if user is None:
+        if user is None or username=="root":
             return HttpResponse('username/password error')
         else:
             login(request, user)
@@ -161,6 +161,7 @@ class Post(View):
                     content=content, account=account)
 
         # now the tags
+        '''
         strtagids = request.POST.get('tagids', '')
         tagids = list(map(lambda x: int(x),strtagids.split(',')))
         for x in strtagids.split(','):
@@ -170,6 +171,7 @@ class Post(View):
                 pass
         for tagid in tagids:
             thread.tags.add(Tag.objects.get(id=tagid))
+        '''
         thread.save()
 
         images = request.FILES.getlist('images')
@@ -432,19 +434,28 @@ def get_threads(n, sort='recent', earlierthan=-1): # return n threads with numbe
         else:
             threads = Thread.obejects.order_by(order)
 
-    num_comments = []    
+    thread_list = []
     for thread in threads:
-        num_cmts = Comment.objects.all().filter(thread=thread).count()
-        num_comments.append(num_cmts)
-
-    threads = list(map(
-            lambda x: {
-                'thread':x,
-                'images':ThreadImage.objects.filter(thread=x)
-                },
-            threads))
-
-    return (threads, num_comments)
+        thread_list.append({'id':thread.id,
+                            'votes':thread.votes,
+                            'time':thread.time.strftime("%I:%M %p, %d %b %Y"),
+                            'title':thread.title,
+                            'content':thread.content,
+                            'tags':['123', 'nation'],#list(map(lambda x: {
+                                            #'name':x.name,
+                                            #'id':x.id }
+                                            #, thread.tags
+                                            #)),
+                            'user':{'name':thread.account.user.username,
+                                    'id':thread.account.pk,
+                                    'image':'media/image.jpg', # need to code this
+                                    },
+                            'num_comments':Comment.objects.all().filter(thread=thread).count(),
+                            'images':list(map(lambda x: x.name,
+                                                ThreadImage.objects.filter(thread=thread))),
+                            })
+    return thread_list
+        
 
 class Profile(View):
     def get(self,request):
