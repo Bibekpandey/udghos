@@ -155,13 +155,21 @@ h1,h2,h3,h4{
 .glyphicon:hover{
   color: #bb2234;
 }
-.glyphicon-thumbs-up{
-  font-size: 15px;
-  color: #777;
-}
+.glyphicon-thumbs-up,
 .glyphicon-thumbs-down{
   font-size: 15px;
   color: #777;
+}
+.glyphicon-thumbs-up:active,
+.glyphicon-thumbs-down:active{
+  color: #990012;
+  font-size: 17px;
+}
+.glyphicon-thumbs-up:visited,
+.glyphicon-thumbs-up:focus,
+.glyphicon-thumbs-down:visited,
+.glyphicon-thumbs-down:focus{
+  color: #990012;
 }
 .glyphicon-search{
   color: #990012;
