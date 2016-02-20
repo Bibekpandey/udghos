@@ -81,3 +81,94 @@ function appendComment(elem, commentobj) {
     temp.appendChild(cmmtdiv);
     elem.append(temp.innerHTML);
 }
+
+function images_html(images) {
+    var html = '';
+    for(var x=0;x<images.length;x++) {
+                html+='<a href="#myModalImage"><img src="../media/'+images[x]+'" height="50%" width="50%" data-toggle="modal" data-target="#myModalImage" data-keyboard="true"></img></a><br>' +
+                '<div class="modal fade" id="myModalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
+                  '<div class="modal-dialog modal-custom" role="document">'+
+                    '<div class="modal-content">'+
+                      '<div class="modal-post">'+
+                        '<button type="button" class="close my-close close-image" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                      '</div>'+
+                      '<div class="row">'+
+                        '<div class="col-md-7">'+
+                          '<img class="post-image" src="../media/'+images[x]+'"></img>'+
+                        '</div>'+
+                        
+                        '</div>'+
+                      '</div>'+
+                    '</div>'+
+                  '</div>';
+    }
+    return html;
+}
+
+function generate_thread(threadobj) {
+    var thread_str = '<div class="box" id="recent-threads">'+
+          '<div class="stbody">'+
+            '<div id="recent" class="tab-pane fade in active">'+
+              '<div class="stimg">'+
+                '<img class="img-circle" src="'+'threadobj.user.image'+'static/img/nepal.png" width=50 height=50/>'+
+                '</div>'+
+
+              '<div id="textst" class="sttext">'+
+                '<div class="post-body">'+
+                  '<a href="/profile">'+
+                  '<span class="heading-property heading-post">'+'threadobj.account.user'+'</span></a><span class="sttime"> &nbsp;'+threadobj.time+'</span><br>'+
+                '</div>'+
+                '<div class="post-content">'+
+                 '{{thread.thread.content}}'+
+                '</div><br>'+
+//           images_html(threadobj.images)+
+        '<div class="sttime">'+
+                '</div>'+
+                '<div class="row">'+
+                  '<div class="display-tag">'+
+                    '<span id="tag-post2" class="glyphicon glyphicon-tags"></span>'+
+                
+                    '<a class="tagname tagname2" href="#">Blockades</a>'+
+                    '<a class="tagname tagname2" href="#">Nepal</a>'+
+                  '</div>'+
+                '</div>'+
+              '</div>'+
+            '</div>'+
+          '</div>'+
+          '<div class="row">'+
+            '<div class="icons-ld">'+
+                    '<a id="action-element" href="javascript:vote('+threadobj.id+', \'upvote\', \'thread\')">'+
+                      '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'+
+                    '</a>'+
+                    '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
+                    '<a id="action-element" href="javascript:vote('+threadobj.id+', \'downvote\', \'thread\')">'+
+                      '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'+
+                    '</a>'+
+                  
+              '</div>'+
+            '<div class="post-action">'+
+              '<div class="comment-section">'+
+                '<a href="javascript:void()" onclick="toggleComments('+threadobj.id+')">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'+
+                  '<span id="num-comments'+threadobj.id+'">'+threadobj.num_comments+'</span><span id="comment-text'+threadobj.id+'"> Comment'+'threadobj.num_comments!=1?\'s\':\'\''+'</span>'+
+                '</a>'+
+              '</div>'+
+              '<div class="share">'+
+                '<button class="facebook shadow"></button>'+
+                '<button class="twitter shadow"></button>'+
+              '</div>'+
+            '</div>'+
+          '</div>'+
+          '<div id="display-form'+threadobj.id+'" class="comment-form">'+
+            '<div id="thread-comments'+threadobj.id+'"></div>'+
+            '<textarea id="comment-box'+threadobj.id+'" class="form-comment" placeholder="Your comment here."></textarea>'+
+            '<button onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>'+
+            
+          '</div>'+
+        '</div>';
+    return thread_str;
+}
+
+function add_item(threadobj) {
+    var elem = document.getElementById('recent-threads');
+    elem.innerHTML+=generate_thread(threadobj);
+}
