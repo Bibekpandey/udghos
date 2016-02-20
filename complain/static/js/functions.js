@@ -126,11 +126,11 @@ function generate_thread(threadobj) {
                 '</div>'+
                 '<div class="row">'+
                   '<div class="display-tag">'+
-                    '<span id="tag-post2" class="glyphicon glyphicon-tags"></span>'+
-                
-                    '<a class="tagname tagname2" href="#">Blockades</a>'+
-                    '<a class="tagname tagname2" href="#">Nepal</a>'+
-                  '</div>'+
+                    '<span id="tag-post2" class="glyphicon glyphicon-tags"></span>';
+                for(var x in threadobj.tags) {
+                    thread_str+= '<a class="tagname tagname2" href="#">'+ threadobj.tags[x].name+'</a>';
+                }
+                thread_str+='</div>'+
                 '</div>'+
               '</div>'+
             '</div>'+
