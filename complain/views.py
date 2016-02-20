@@ -417,10 +417,10 @@ def get_tags(request):
         query = request.GET.get('query','')
         if query!='':
             tags = ThreadTag.objects.filter(name__contains=query)
-            d = {}
+            d = [] 
             for x in tags:
-                d[x.id] = x.name
-            return JsonResponse(d)
+                d.append({'id':x.id,'name':x.name})
+            return JsonResponse({'tags':d})
         else:
             return JsonResponse({'tags':[]})
 
