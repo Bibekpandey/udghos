@@ -649,3 +649,17 @@ div.share> .twitter {
   color: #990012;
 }
 
+#tagbox {
+    width:35%;
+    float:left;
+}
+.selected-tags {
+    background-color:#ddd;
+    border-radius:2px;
+    padding:2px;
+    font-size:0.9em;
+    margin:2px;
+    margin-top:3px;
+    vertical-align:middle;
+
+}
