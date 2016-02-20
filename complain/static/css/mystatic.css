@@ -81,6 +81,7 @@ h1,h2,h3,h4{
 }
 .box-tabs{
   margin-top: 10px;
+  margin-bottom:30px;
   margin-left: -2px;
   padding: 2px;
   min-height: 20px;
@@ -648,3 +649,4 @@ div.share> .twitter {
   font-size: 15px;
   color: #990012;
 }
+

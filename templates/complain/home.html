@@ -22,7 +22,6 @@
 
 <body>
   <nav id="navcolor1" class="navbar navbar-inverse navbar-mathi">
-  {% csrf_token %}
       <div class="container">
         <div class="navbar-header">
           <a id="navhead" class="navbar-brand" href="/">Udghos</a>
@@ -59,7 +58,6 @@
   </nav>
 
   <nav id="navcolor2" class="navbar navbar-inverse navbar-mathi">
-  {% csrf_token %}
     <div class="container">
       <div class="row">
           <div class="col-md-3">
@@ -181,178 +179,9 @@
               <li><a data-toggle="tab" href="#top">Favourites</a></li>
             </ul>
           </div>
-        </div>
-        {% if threads|length == 0 %}
-            Nothing here. May be come back later.
-        {% else %}
-
-        {% for thread, y in threads|zip:num_comments %}
-        <div class="box" id="recent-threads">
-          <div class="stbody">
-            <div id="recent" class="tab-pane fade in active">
-              <div class="stimg">
-                <img class="img-circle" src="{% static 'img/nepal.png' %}" width=50 height=50/>
-                </div>
-                
-              
-              <div id="textst" class="sttext">
-                <div class="post-body">
-                  <a href="{% url 'profile' %}">
-                  <span class="heading-property heading-post">{{thread.thread.account.user}}</span></a><span class="sttime"> &nbsp;{{thread.thread.time}}</span><br>
-                </div>
-                <div class="post-content">
-                 {{thread.thread.content}}
-                </div><br>
-            {% for image in thread.images %} 
-                <a href="#myModalImage"><img src="../media/{{image.name}}" height="50%" width="50%" data-toggle="modal" data-target="#myModalImage" data-keyboard="true"></img></a><br>
-                <div class="modal fade" id="myModalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                  <div class="modal-dialog modal-custom" role="document">
-                    <div class="modal-content">
-                      <div class="modal-post">
-                        <button type="button" class="close my-close close-image" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-7">
-                          <img class="post-image" src="../media/{{image.name}}"></img>
-                        </div>
-                        
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            {% endfor %}
-
-
-
-            <!--button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-              Post a Complain
-              </button>
-              
-              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">Post Your View</h4>
-                    </div>
-                    <div class="modal-body"-->
-
-                <div class="sttime">
-                </div>
-                <div class="row">
-                  <div class="display-tag">
-                    <span id="tag-post2" class="glyphicon glyphicon-tags"></span>
-                
-                    <a class="tagname tagname2" href="#">Blockades</a>
-                    <a class="tagname tagname2" href="#">Nepal</a>                
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="icons-ld">
-                    <a id="action-element" href="javascript:vote({{thread.thread.id}}, 'upvote', 'thread')">
-                      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                    </a>
-                    <span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_{{thread.thread.id}}">{{thread.thread.votes}}</span>
-                    <a id="action-element" href="javascript:vote({{thread.thread.id}}, 'downvote', 'thread')">
-                      <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                    </a>    
-                  
-              </div>
-            <div class="post-action">
-              <div class="comment-section">
-                <a href="javascript:void()" onclick="toggleComments({{thread.thread.id}})">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                  <span id="num-comments{{thread.thread.id}}">{{y}}</span><span id="comment-text{{thread.thread.id}}"> Comment{{y|pluralize}}</span>
-                </a>
-              </div>
-              <div class="share">
-                <button class="facebook shadow"></button>
-                <button class="twitter shadow"></button>
-              </div>
-            </div>
-          </div>
-          <div id="display-form{{thread.thread.id}}" class="comment-form">
-            <div id="thread-comments{{thread.thread.id}}"></div>
-            <textarea id="comment-box{{thread.thread.id}}" class="form-comment" placeholder="Your comment here."></textarea>
-            <button onclick="postComment({{thread.thread.id}}, '{{thread.thread.user}}')">Comment</button>
-            
+          <div id="recent-threads">
           </div>
         </div>
-        {% endfor %}
-      {% endif %}
-
-    {% if topthreads|length == 0 %}
-        {% else %}
-
-        {% for threadtop, y in topthreads|zip:num_comments_top %}
-        <div class="box" id="top-threads">
-          <div class="stbody">
-            <div id="recent" class="tab-pane fade in active">
-              <div class="stimg">
-                <img class="img-circle" src="{% static 'img/nepal.png' %}" width=50 height=50/>
-        {{ threadtop }} bibek
-                </div>
-                <div class="icons-ld">
-                  <a id="action-element" href="javascript:vote({{threadtop.thread.id}}, 'upvote', 'thread')">
-                    <span class="glyphicon glyphicon-thumbs-up glyphicon-left" aria-hidden="true"></span>
-                  </a>
-                  <br>
-                  <span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_{{threadtop.thread.id}}">{{threadtop.thread.votes}}</span><br>
-                  <a id="action-element" href="javascript:vote({{threadtop.thread.id}}, 'downvote', 'thread')">
-                    <span class="glyphicon glyphicon-thumbs-down glyphicon-left" aria-hidden="true"></span>
-                  </a>    
-                
-                </div>
-              <!--div class="post-actions">
-                      <i class="glyphicon glyphicon-chevron-down"></i>
-              </div--> 
-              <div id="textst" class="sttext">
-                <div class="post-body">
-                  <a href="/profile/">
-                  <span class="heading-property heading-post">{{threadtop.thread.account.user}}</span></a><span class="sttime">: &nbsp;{{threadtop.thread.time}}</span><br>
-                </div>
-                <div class="post-content">
-                 {{threadtop.thread.content}}
-                </div><br>
-            {% for image in threadtop.images %} 
-                <img src="../media/{{image.name}}" height="300" width="300"></img><br>
-            {% endfor %}
-
-                <div class="sttime">
-                </div>
-                <div class="display-tag">
-                  <span id="tag-post2" class="glyphicon glyphicon-tags"></span>
-              
-                  <a class="tagname tagname2" href="#">Blockades</a>
-                  <a class="tagname tagname2" href="#">Nepal</a>                
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="post-action">
-              <a href="javascript:void()" onclick="toggleComments({{threadtop.thread.id}})">
-                &nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                <span id="num-comments{{threadtop.thread.id}}">{{y}}</span><span id="comment-text{{threadtop.thread.id}}"> Comment{{y|pluralize}}</span>
-              </a>
-              <div class="share">
-                <button class="facebook shadow"></button>
-                <button class="twitter shadow"></button>
-              </div>
-            </div>
-          </div>
-          <div id="display-form{{threadtop.thread.id}}" class="comment-form">
-            <div id="thread-comments{{threadtop.thread.id}}"></div>
-            <textarea id="comment-box{{threadtop.thread.id}}" class="form-comment" placeholder="Your comment here."></textarea>
-            <button onclick="postComment({{threadtop.thread.id}}, '{{thread.thread.user}}')">Comment</button>
-            
-          </div>
-        </div>
-        {% endfor %}
-      {% endif %}
-
       </div>   
     
       <div id="profile" class="col-md-3">
@@ -416,6 +245,7 @@
     });
   </script>
   <script>
+  /*
     var torpe = document.getElementById('top-fixed');
     var tabstories = document.getElementById('tab-stories');
     var navHeight = document.getElementById('navcolor').getBoundingClientRect().height;
@@ -435,7 +265,9 @@
            torpe.style.top="auto";
         }
     };   
+    */
 
+window.onkeydown= function() {add_item({});};
 
   </script>
   </html>
