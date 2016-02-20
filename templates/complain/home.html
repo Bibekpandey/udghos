@@ -142,8 +142,7 @@
                           <div class="form">
                             <label for="recipient-name" class="control-label">Tags *</label><br>
                             <input type="text" class="form-control" placeholder="Type in tag names (max 3)" id="tagbox"/>
-                            <ul class="nav" id="tags-list" style="z-index:100;position:absolute;">
-                                <li class="" onclick="addTag(this)">a</li>
+                            <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
                               <div id="tags-chosen">
                                 <!--
@@ -151,7 +150,6 @@
                                 <button type="button" class="close my-close" id="close-tag"><span aria-hidden="true">&times;</span></button></span>
                                 -->
 
-                                <span class="btn selected-tags">apple<button type="button" class="close my-close" id="close-tag"><span aria-hidden="true">&times;</span></button></span>
                                 <span class="btn selected-tags">apple<button type="button" class="close my-close" id="close-tag"><span aria-hidden="true">&times;</span></button></span>
 
                               </div>
@@ -283,7 +281,7 @@
         }
         if (id!=undefined)querystr += '&earlierthan='+id;
 
-        $.get('threads/'+querystr, function(data) {
+        $.get('/complain/threads/'+querystr, function(data) {
             for(var x=0;x<data.threads.length;x++) {
                 add_item(data.threads[x], g_thread_container);
             }
@@ -291,7 +289,7 @@
     }
 
     function getTags() {
-        var query = $('#textbox').val();
+        var query = $('#tagbox').val();
         if (query != '') {
             $.get('/complain/tags?query='+query, function(data) {
                 renderTags(data);
@@ -299,14 +297,21 @@
         }
     }
 
-    $('#textbox').on('input', getTags);
+    $('#tagbox').on('input', getTags);
 
     function renderTags(data) {
         var tags = data.tags;
+		var ul = document.getElementById('tags-suggest-list');
+		ul.innerHTML="";
         for(var x in tags) {
-
+			ul.innerHTML += '<li id="tag-'+tags[x].id+'" onclick="addTag(this)">'+tags[x].name+'</li>';
         }
     }
+	
+	function addTag(elem) {
+		var tags_elem = document.getElementById('tags-chosen');	
+		tags_elem.innerHTML+= '<span class="btn selected-tags">' +elem.innerHTML+ '<button type="button" class="close my-close" id="close-tag"><span aria-hidden="true">&times;</span></button></span>';
+	}
 
   </script>
 

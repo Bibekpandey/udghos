@@ -663,3 +663,17 @@ div.share> .twitter {
     vertical-align:middle;
 
 }
+#tags-suggest-list {	
+	background-color:#aaa;
+	width:34%;
+	margin-top:30px;		
+}
+
+#tags-suggest-list > li {
+	background-color:#ccc;
+	margin-top:1px;
+}
+
+#tags-suggest-list > li:hover {
+	background-color:#bbb;
+}

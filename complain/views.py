@@ -433,7 +433,7 @@ def get_threads(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n t
     if threadtype == 'top':
         order=['-votes', '-id']
         kwargs = {
-            'votes__lt':voteslt,
+            'votes__lt':votelt,
             'id__lt':earlierthan,
         }
         if votelt==-1:
