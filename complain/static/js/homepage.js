@@ -18,7 +18,11 @@ var windowWidth = $(window).width();
     else if(windowWidth < 768){
     $( "#navcolor2" ).show("fast");
     $( "#navcolor1" ).hide("fast");
- }
+}
+
+function colorFunction() {
+    document.getElementById("changecolor").style.color = "red";
+}
 
 
 $('#myModal').on('shown.bs.modal', function () {
@@ -59,9 +63,6 @@ $("body").click(function(){
     $('#boxtag').hide();
 });
 
-$("#close-tag").click(function(){
-        $("#remove-tag").remove();
-});
 
 $(function () {
   $('.net-vote').tooltip("show")

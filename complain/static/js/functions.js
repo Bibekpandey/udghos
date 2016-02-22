@@ -138,11 +138,11 @@ function generate_thread(threadobj) {
           '<div class="row">'+
             '<div class="icons-ld">'+
                     '<a id="action-element" href="javascript:void()" onclick="vote('+threadobj.id+', \'upvote\', \'thread\')">'+
-                      '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'+
+                      '<span onclick="colorFunction()" id="changecolor" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'+
                     '</a>'+
                     '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
                     '<a id="action-element" href="javascript:void()" onclick="vote('+threadobj.id+', \'downvote\', \'thread\')">'+
-                      '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'+
+                      '<span onclick="colorFunction()" id="changecolor" class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'+
                     '</a>'+
                   
               '</div>'+

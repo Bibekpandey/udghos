@@ -81,39 +81,55 @@
 
   <div class="container">
     <div class="row">
-			<div class="col-md-9">
+      <div class="col-md-2">
+      
+      </div>
+			<div class="col-md-8">
 				<div class="box-profile">
 				  <img class="img-circle" href="/my-profile/" src="{% static 'img/nepal.png' %}" width=200 height=200 alt="Generic   placeholder image" width="200" height="200">
-	         <div class="media-body">
-	            <h3 id="heading-border" class="heading-property">Mr. Hanumane</h3>
-	            <div class="my-profile">
-	            	<h5 class="heading-property">Bharatpur, Chitwan</h5>
-	            	<div class="profile-pro">
-	            		<span class="label label-info">10 posts</span> 
-	            		<a href="#" class="btn btn-xs btn-default">11 </span>Points</a>
-	            	</div>
-	            </div>
-	            <div class="about-tab">
-	              <h4 class="heading-property">About</h4>
-	              <div class="about-me">
-	            				I am from Nepal.
-	            	</div>
-	            </div> 
-	            <div class="my-tags">
-          		 <h4 class="heading-property">My Tags</h4>
-          		 <div class="tags">
-          				#Government  #Offices  #Colleges  #Blocades  #Road
-          			</div>
-        		  </div>
+          <div class="profileinfo">
+
+            <form>
+              <input type="hidden" name="hiddenField" />
+            </form>
+            <div id="dataprofile" class="my-name">
+              <h3 id="myname" class="datainfo">{{user.username}}</h3>
+            
+              <div class="edit-button">
+                <button id="edit" class="btn btn-sm glyphicon glyphicon-pencil"> Edit</button>
+                <button id="save" class="btn btn-sm glyphicon glyphicon-save"> Save</button>
+              </div>
+            </div>
+            <div class="my-username">
+              <span id="myusername" class="datainfo">@hanumane</span>
+            </div>
+            <div class="profile-activity">
+                <a href="#" class="btn btn btn-info">10 posts</a> 
+                <a href="#" class="btn btn btn-default">11 Points</a>
+              </div>
+              <div class="my-address">
+                <i class="glyphicon glyphicon-map-marker"> </i>
+                <span id="myaddress" class="datainfo"> Bharatpur, Chitwan</span>
+              </div>
+              <div class="about-me">
+                <span id="aboutme" class="datainfo">Student of Engineering</span>
+              </div>
+              <div class="my-tag">
+                <span class="tags-tab">My Tags</span>
+                <span id="mytags" class="datainfo">#Government  #Offices  #Colleges  #Blocades  #Road</span>
+              </div>
 	          </div>
 				</div>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="container">
-      <div class="col-md-9 text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        
+      </div>
+      <div class="col-md-8 text-center">
         <div id="tab-stories">
           <div class="box-tabs">
             <ul class="nav nav-tabs" id="navblock" >
@@ -213,9 +229,6 @@
       </div>
     </div>
   </div>
-
-  
-
 
 
 

@@ -1,3 +1,20 @@
+h3{
+  margin-top: -5px;
+}
+.edit-button>button{
+  float: right;
+}
+textarea{
+  height: 35px;
+  width: 40%;
+  vertical-align: center;
+  border-radius: 2px;  
+}
+textarea:focus{
+  background-color: #ccc; 
+}
+
+
 .box-profile{
 	font-family: Ubuntu;
   	min-height: 20px;
@@ -7,7 +24,7 @@
   	margin-bottom: 5px;
   	background-color: #fff;
   	border: 1px solid #e4e4e4;
-  	border-radius: 1px;
+  	border-radius: 3px;
   	box-shadow: 2px 2px 5px #777;
 }
 #heading-border{
@@ -37,8 +54,43 @@
 	margin-bottom: px;
 }
 
-
-
-
+.edit-button{
+  position: absolute;
+  margin-top: -50px;
+  margin-left: 200px;
+}
+.address-tab,
+.about-tab,
+.tags-tab{
+  font-size: 30px;
+  margin-top: 20px;
+  display: block;
+  position: relative;
+}
+.my-username{
+  color: #777;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.my-address{
+  margin-top: 10px;
+}
+.about-me{
+  margin-top: 20px;
+}
+.glyphicon-map-marker{
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+#save{
+  float: right;
+  position: relative;
+  display: none;
+  margin-left: 110px;
+  margin-top: -10px;
+}
+#nameinfo{
+  display: none;
+}
 
 
