@@ -9,15 +9,24 @@ def create_account(strategy, backend, user, response, details,
         acc = Account.objects.create(user=user)
         acc.save()
         if backend.name == 'facebook':
+            print(str(response))
             url = 'http://graph.facebook.com/{0}/picture'.format(response['id'])
 
             resp = request('GET', url, params={'type': 'large'})
             acc.profile_pic.save(str(acc.user.id)+'.jpg', ContentFile(resp.content))
             acc.save()
 
-        if backend.name == 'twitter':
+        elif backend.name == 'twitter':
+            print(str(response))
             url = response['profile_image_url']
             url = url.replace('_normal','')
+            resp = request('GET', url, params={})
+            acc.profile_pic.save(str(acc.user.id)+'.jpg', ContentFile(resp.content))
+            acc.save()
+
+        elif backend.name == 'google-oauth2':
+            url = response['image']['url']
+            url = url.replace('?sz=50','?sz=250')
             resp = request('GET', url, params={})
             acc.profile_pic.save(str(acc.user.id)+'.jpg', ContentFile(resp.content))
             acc.save()
