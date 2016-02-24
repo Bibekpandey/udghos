@@ -10,7 +10,7 @@
 <br>
 {% endif %}
 <h1>Please select your new username to complete signup:</h1>
-<form method="post" action="new_social">
+<form method="post" action="{% url 'new_social' %}">
  {% csrf_token %}
     Enter your new username:<input type="text" name="username" value="{{request.user}}"> <br>
     <input type="hidden" name="userid" value="{{request.user.id}}">

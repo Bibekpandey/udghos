@@ -28,6 +28,7 @@ class Index(View):
             self.context['user'] = request.user
             acc = Account.objects.get(user=request.user)
             self.context['address'] = acc.address
+            self.context['profile_pic'] = acc.profile_pic
 
             return render(request, "complain/home.html", self.context)
         return redirect('login')
@@ -384,6 +385,7 @@ def reply(request):
 
 def new_social(request):
     if request.method=="GET":
+        print(request.GET['uid'])
         return render(request, "complain/new-social.html", {})
     else:
         uid = request.POST.get("userid", "")

@@ -7,6 +7,11 @@ from datetime import datetime
 
 (COMPLAINT, DISCUSSTION) = (0, 1)
 
+def get_image_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return 'profile_pics/'+str(instance.user.id)+'.'+ext
+
+
 class Account(models.Model):
     user = models.OneToOneField(User, primary_key=True, related_name="Account")
     verification_key = models.CharField(max_length=10)
@@ -14,7 +19,9 @@ class Account(models.Model):
     address = models.CharField(max_length=50)
     email = models.EmailField(blank=True, null=True, max_length=30)
     points = models.IntegerField(default=10)
+    profile_pic = models.ImageField(null=True, upload_to=get_image_path, blank=True)
 
+    
     def __str__(self):
         return self.user.username
 

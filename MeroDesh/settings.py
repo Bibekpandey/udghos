@@ -102,14 +102,15 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
     'social.pipeline.debug.debug',
+    'complain.pipeline.create_account',
 )
 
 
 #login urls
 LOGIN_URL          = '/login/'
-LOGIN_REDIRECT_URL          = '/complain/?social=1'
+LOGIN_REDIRECT_URL          = '/complain/'
 LOGIN_ERROR_URL ='/complain/error/'
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/complain/new-social/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/complain/'
 
 ROOT_URLCONF = 'MeroDesh.urls'
 
