@@ -25,29 +25,34 @@ class Index(View):
     def get(self, request):
         self.context = {}
         if request.user.is_authenticated():
+            self.context['authenticated'] = True
             self.context['user'] = request.user
             acc = Account.objects.get(user=request.user)
             self.context['address'] = acc.address
             self.context['profile_pic'] = acc.profile_pic
+        else:
+            self.context['authenticated'] = False
 
-            return render(request, "complain/home.html", self.context)
-        return redirect('login')
+        return render(request, "complain/home.html", self.context)
+
+        #return redirect('login')
 
 
 def get_threads_json(request):
     if request.user.is_authenticated():
-        threadtype = request.GET.get('type', '')
-        try:
-            beforeid = int(request.GET.get('earlierthan',''))
-        except:
-            beforeid = -1
-        try:
-            votelt = int(request.GET.get('votelt', ''))
-        except:
-            votelt = -1
-        return JsonResponse({'threads':get_threads(3, threadtype=threadtype, earlierthan=beforeid, votelt=votelt)})
-    else:
-        return HttpResponse('')
+        # auth is to check if user has logged in or not and thereby can comment or not
+        auth = True
+    else: auth = False
+    threadtype = request.GET.get('type', '')
+    try:
+        beforeid = int(request.GET.get('earlierthan',''))
+    except:
+        beforeid = -1
+    try:
+        votelt = int(request.GET.get('votelt', ''))
+    except:
+        votelt = -1
+    return JsonResponse({'threads':get_threads(3, threadtype=threadtype, earlierthan=beforeid, votelt=votelt), 'authenticated':auth})
 
 
 def get_comments(request):

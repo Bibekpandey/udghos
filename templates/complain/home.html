@@ -68,6 +68,8 @@
                   <input type="text" placeholder="Search" class="form-control" />
                 </div>
               </div>
+            </form>
+              {% if authenticated %}
               <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /><span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -75,8 +77,11 @@
                 <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
                 <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
               </ul>
-            </form>
+            {% else %}
+            <a class="btn btn-my" type="button" onclick="window.location='/complain/login/'">Login/Signup</a>
+            {% endif %}
             </ul>
+            {% if authenticated %}
             <ul id="gly-bell" class="nav navbar-nav navbar-right">
               <li>
                 <a href="#" title="Header" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Content">
@@ -84,6 +89,7 @@
                 </a>
               </li>
             </ul>
+            {% endif %}
             
           </ul>
         </div> <!--/.nav-collapse -->
@@ -310,7 +316,7 @@
 
         $.get('/complain/threads/'+querystr, function(data) {
             for(var x=0;x<data.threads.length;x++) {
-                add_item(data.threads[x], g_thread_container);
+                add_item(data.threads[x], g_thread_container, data.authenticated);
             }
         });
     }
