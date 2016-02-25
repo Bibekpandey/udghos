@@ -110,7 +110,7 @@ function generate_thread(threadobj) {
           '<div class="stbody">'+
             '<div id="recent" class="tab-pane fade in active">'+
               '<div class="stimg">'+
-                '<img class="img-circle" src="'+threadobj.user.image+'" width=50 height=50/>'+
+                '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
 
               '<div id="textst" class="sttext">'+

@@ -159,11 +159,10 @@ class Post(View):
         File(file=afile, files=test).save()
         '''
                 
-        '''
         if title=='' or content =='':
-            self.context['message'] = 'Title/content can\'t be empty'
-            return self.get(request, thread_type)
-        '''
+            return redirect('index')
+            #self.context['message'] = 'Title/content can\'t be empty'
+            #return self.get(request, thread_type)
 
         # now with storage of the thread
         account = Account.objects.get(user=request.user)
@@ -470,7 +469,7 @@ def get_threads(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n t
                                             )),
                             'user':{'name':thread.account.user.username,
                                     'id':thread.account.pk,
-                                    'image':'media/image.jpg', # need to code this
+                                    'image':thread.account.profile_pic.name, # need to code this
                                     },
                             'num_comments':Comment.objects.all().filter(thread=thread).count(),
                             'images':list(map(lambda x: x.name,
