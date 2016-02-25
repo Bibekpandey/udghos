@@ -105,12 +105,12 @@ function images_html(images) {
     return html;
 }
 
-function generate_thread(threadobj) {
+function generate_thread(threadobj, auth) {
     var thread_str = '<div class="box thread" id="thread-'+threadobj.id+'">'+
           '<div class="stbody">'+
             '<div id="recent" class="tab-pane fade in active">'+
               '<div class="stimg">'+
-                '<img class="img-circle" src="'+threadobj.user.image+'" width=50 height=50/>'+
+                '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
 
               '<div id="textst" class="sttext">'+
@@ -137,11 +137,11 @@ function generate_thread(threadobj) {
           '</div>'+
           '<div class="row">'+
             '<div class="icons-ld">'+
-                    '<a id="action-element" href="javascript:void()" onclick="vote('+threadobj.id+', \'upvote\', \'thread\')">'+
+                    '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
                       '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'+
                     '</a>'+
                     '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
-                    '<a id="action-element" href="javascript:void()" onclick="vote('+threadobj.id+', \'downvote\', \'thread\')">'+
+                    '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
                       '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'+
                     '</a>'+
                   
@@ -160,15 +160,35 @@ function generate_thread(threadobj) {
           '</div>'+
           '<div id="display-form'+threadobj.id+'" class="comment-form">'+
             '<div id="thread-comments'+threadobj.id+'"></div>'+
+            (auth==true?
             '<textarea id="comment-box'+threadobj.id+'" class="form-comment" placeholder="Your comment here."></textarea>'+
-            '<button onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>'+
+            '<button onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
+            +
             
           '</div>'+
         '</div>';
     return thread_str;
 }
 
-function add_item(threadobj, divParentId) {
+function add_item(threadobj, divParentId, authenticated) {
     var elem = document.getElementById(divParentId);
-    elem.innerHTML+=generate_thread(threadobj);
+    elem.innerHTML+=generate_thread(threadobj, authenticated);
+}
+
+function popMessage(elem, msg) {
+    var child = elem.childNodes[0];
+    var newdiv = document.createElement('div');
+    newdiv.style.position="absolute";
+    newdiv.style.color="#e33";
+    newdiv.style.padding="1px";
+    newdiv.style.fontSize="0.9em";
+    newdiv.style.width="175px";
+    newdiv.style.zIndex="100";
+    newdiv.innerHTML = msg;
+    newdiv.style.backgroundColor="#333";
+    newdiv.style.border="solid 2px #555";
+    newdiv.style.borderRadius="3px";
+    child.appendChild(newdiv);
+    setTimeout(function() { $(newdiv).delay(500).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 900);
+    //$(newdiv).hide().delay(1000).fadeOut();
 }
