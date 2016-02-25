@@ -1,7 +1,8 @@
 /* CSS used here will be applied after bootstrap.css */
 html,
 body {
-  background-color: #eaeaea;
+  background-color: #fff;
+  background-color:#fff;
 
   font-family: Ubuntu ; 
   color: #000;
@@ -56,34 +57,43 @@ h1,h2,h3,h4{
   margin-bottom: 10px;
   background-color: #fff;
   border: 1px solid #e4e4e4;
-  border-radius: 1px;
-  box-shadow: 1px 1px 3px #777;
+  border:2px solid #ccc;
+  border-radius: 3px;
+  baox-shadow: 1px 1px 3px #777;
 }
-.box-post{
+.box-profile{
   font-family: Ubuntu;
   position: block;
   min-height: 20px;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #e4e4e4;
-  border-radius: 1px;
-}
-.box-posts{
+  padding: 10px 15px 15px 15px;
+  margin: 2px;
   margin-top: 60px;
-  font-family: Ubuntu;
-  position: block;
-  min-height: 20px;
-  padding: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
   background-color: #fff;
   border: 1px solid #e4e4e4;
-  border-radius: 1px;
+  border:2px solid #ccc;
+  border-radius: 3px;
+  baox-shadow: 1px 1px 3px #777;
+}
+.box-header{
+  background-color: #fff;
+  height: 200px;
+  font-family: Ubuntu;
+  position: block;
+  padding: 10px;
+  color: #000; 
+  border-radius: 3px;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 .box-tabs{
+  
   margin-top: 10px;
   margin-bottom:30px;
   margin-left: -2px;
   padding: 2px;
-  min-height: 20px;
+  min-height: 20px;   
 }
 .box-top{
   font-family: Ubuntu;
@@ -247,7 +257,6 @@ h1,h2,h3,h4{
 #navblock {
   float: right;
   border-bottom: none; 
-  color: #fff;
 
 }
 .tagname{
@@ -516,21 +525,34 @@ padding:0px;
 #show-btn{
   display: none;
 }
-
 .nav-tabs>li>a{
+  color: #000;
   margin-top: -5px;
   background-color: #fff;
-  color: #333;
-  border-top: 4px solid #;
 }
+
 .nav-tabs > li.active > a{
-    color: #fff;
-    background-color: #990012;
+    color: #000;
+    border-top: 3px solid #990012;
+    background-color: #fff;
 }
+.nav-tabs > li.active >a:hover{
+  color: #000;
+  border-top: 2px solid #990012;
+  background-color: #fff;
+}
+.nav-tabs > li.active>a:focus{
+  color: #000;
+  border-top: 3px solid #990012;
+  background-color: #fff;
+}
+
 .nav-tabs>li>a:hover{
-  background-color: #990012;
-  color: #fff;
+  border-top: 2px solid #990012;
+  background-color: #fff;
 }
+
+
 #share-top{
   margin-top: 17px;
   margin-bottom: 2px;
@@ -676,4 +698,46 @@ div.share> .twitter {
 
 #tags-suggest-list > li:hover {
 	background-color:#bbb;
+}
+
+.header-column{
+  position: relative;
+  color: #000;
+  border-right: 3px solid #888;
+}
+.font-header{
+  font-size: 70px;
+}
+
+/*768 header change */
+@media (max-width: 768px) {
+  .box-header {
+    margin-bottom: 330px; 
+    border-right: 0px solid #fff;   
+  }
+  .header-column {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 3px solid #888; 
+    border-right: 0px solid #fff;   
+  }
+  .box-profile {
+    margin-top: 0px;
+  }
+}
+
+/*768 header change */
+@media (max-width: 991px) {
+  .box-header {
+    margin-bottom: 350px; 
+    border-right: 0px solid #fff;   
+  }
+  .header-column,
+  .header-column-last {
+    
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 3px solid #888; 
+    border-right: 1px solid #fff;   
+  }
 }

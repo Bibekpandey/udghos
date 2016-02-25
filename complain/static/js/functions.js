@@ -93,7 +93,7 @@ function images_html(images) {
                         '<button type="button" class="close my-close close-image" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
                       '</div>'+
                       '<div class="row">'+
-                        '<div class="col-md-7">'+
+                        '<div class="col-md-8">'+
                           '<img class="post-image" src="../media/'+images[x]+'"></img>'+
                         '</div>'+
                         

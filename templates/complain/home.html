@@ -90,8 +90,7 @@
                     <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
                   </ul>
             </div>
-            
-          
+          </div>          
     </div>
   </nav>
 
@@ -117,23 +116,31 @@
 
   <div id="content-top" class="container">
     <div class="row">
-      <div class="col-md-9" style="z-index:1">
-        <div class="box-pos">
-          <div class="row">
-            <div class="container">
-              <div class="col-md-9 text-center">
-                <h1>Nepal’s platform for Change</h1>
-                <h3>Post your Complain/Views</h3>
-              </div>
-            </div>
+      <div class="container">
+        <div class="box-header">
+          <div class="col-md-3 text-center header-column ">
+            <h1 class="font-header" >Udghos</h1>
+            <h4>We can change</h4>
+            <button type="button" class="btn btn-sm">
+              Know us more
+            </button>
+          </div>
+          <div class="col-md-6 text-center header-column">
+            <h1>Let's make a change</h1>
+            <h3>Post your Complain/Views</h3>
+            <button type="button" class="btn btn-my btn-large" data-toggle="modal" data-target="#myModal" data-keyboard="true">
+              Post a Complain
+            </button>
+          </div>
+          <div class="col-md-3 text-center header-column-last">
+            <h3>What do you think of Udghos?</h3>
+            <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModalReview" data-keyboard="true">
+              Write a review
+            </button>
           </div>
 
           <div class="row">
             <div class="container">
-            <div class="col-md-9 text-center">
-              <button type="button" class="btn btn-my btn-large" data-toggle="modal" data-target="#myModal" data-keyboard="true">
-              Post a Complain
-              </button>
               <!-- Modal -->
               <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
@@ -177,8 +184,52 @@
             </div>
            </div>
           </div>
-        </div>
 
+          <div class="row">
+            <div class="container">
+              <!-- Modal Review-->
+              <div class="modal fade" id="myModalReview" tabindex="-1" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header my-color">
+                      <button type="button" class="close my-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title my-modal-title" id="myModalLabel">Write A Review</h4><br>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group">
+                          <label for="recipient-name" class="control-label">Do you have anything to share to Udghos. Feel free to Share your Opinion.</label>
+                          <input type="text" class="form-control" id="recipient-name" placeholder="Title relevant to your description">
+                      </div>
+                      <form method="post" id="thread-form" action="{% url 'post' 'thread' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="thread_type" value="complaint"/>
+                        <div class="form-group" style="padding:14px;">
+                          <label for="recipient-name" class="control-label">Description *</label>
+                          <textarea name="content" class="form-control" placeholder="Describe your views on Udghos"></textarea>
+                          
+                          <div class="form">
+                            
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button class="btn btn-my" type="submit">Submit</button>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+              </div>     
+            </div>
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 margin-tab">
         <div id="tab-stories">
           <div class="box-tabs">
             <ul class="nav nav-tabs" id="navblock" >
@@ -186,6 +237,7 @@
               <li><a data-toggle="tab" href="javascript:void()" onclick="showTop()">Top</a></li>
               <li><a data-toggle="tab" href="javascript:void()" onclick="showFavs()">Favourites</a></li>
             </ul>
+
           </div>
           <div id="recent-threads">
           </div>
@@ -197,8 +249,8 @@
       </div>   
     
       <div id="profile" class="col-md-3">
-        <div class="box">
-          <img class="img-circle" href="/profile/" src="/media/{{profile_pic}}" width=100 height=100 alt="Generic placeholder image" width="100" height="100">
+        <div class="box-profile">
+          <img class="img-circle" href="/profile/" src="/media/{{profile_pic}}" width=70 height=70 alt="Generic placeholder image" width="100" height="100">
           <div class="media-body">
             <a href="{% url 'profile' %}">
             <h4>{{user.username}}</h4></a>
@@ -210,12 +262,12 @@
             </p>
           </div>
           <div class="my-tags">
-          <h2 class="heading-property">Top Tags</h2><br>
-          <p>#Government</p><p>#Offices</p><p>#Colleges</p><p>#Blocades</p><p>#Road</p>
+            <h2 class="heading-property">Top Tags</h2><br>
+            <p>#Government</p><p>#Offices</p><p>#Colleges</p><p>#Blocades</p><p>#Road</p>
+          </div>
         </div>
-        </div>   
+      </div>   
         
-      </div>
     </div>  
   </div>
 
