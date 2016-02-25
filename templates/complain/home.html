@@ -19,10 +19,21 @@
     <script src="{% static 'js/functions.js'%}"></script>
     <script>
     function submitPost() {
+        // first collect tags
         var selected = document.getElementsByClassName('selected-tags');
         var tagids =[];
         for(var x=0;x<selected.length;x++) {
             tagids.push(selected[x].getAttribute('id').replace('selected-', ''))
+        }
+        // now check if description is empty
+        var desc = $('textarea[name=content]').val();
+        if (desc.trim() == '') {
+            $('#description-warning').show();
+            return false;
+        }
+        if(tagids.length==0) {
+            $('#tags-warning').show();
+            return false;
         }
         var inputelem = document.createElement('input');
         inputelem.setAttribute("type", "hidden");
@@ -33,6 +44,13 @@
     }
     </script>
 
+    <style>
+        .alert-danger {
+            background-color:none;
+            color:red;
+            font-size:0.9em;
+        }
+    </style>
 </head>
 
 <body>
@@ -151,11 +169,11 @@
                         {% csrf_token %}
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
-                          <label for="recipient-name" class="control-label">Description *</label>
-                          <textarea name="content" class="form-control" placeholder="Your queries here."></textarea>
+                          <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none"> Please provide a description of the issue!! </small></label>
+                          <textarea name="content" class="form-control" placeholder="Your queries here." oninput="$('#description-warning').hide()"></textarea>
                           
                           <div class="form">
-                            <label for="recipient-name" class="control-label">Tags *</label><br>
+                            <label for="recipient-name" class="control-label">Tags * <small id="tags-warning" class="alert-danger" style="display:none">Please provide at least 1 tag(max 4) </small></label><br>
                             <input type="text" class="form-control" placeholder="Type in tag names (max 4)" id="tagbox"/>
                             <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
@@ -319,6 +337,7 @@
     }
 	
 	function addTag(elem) {
+        $('#tags-warning').hide();
         $('#tagbox').val('');
         $('#tags-suggest-list').empty();
         g_tags_selected.push(elem.innerHTML);
