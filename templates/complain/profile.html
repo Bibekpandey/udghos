@@ -1,119 +1,119 @@
 {% load staticfiles %}
 {% load zip %}
 <!DOCTYPE html>
+
 <html>
 <head>
-	<title>My Profile</title>
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
-  	<link href='https://fonts.googleapis.com/css?family=Fjord+One' rel='stylesheet' type='text/css'>
-  	<link href='https://fonts.googleapis.com/css?family=Gentium+Basic|Raleway' rel='stylesheet' type='text/css'>
-  	<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+  <title>My Profile</title>
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+    <link href='https://fonts.googleapis.com/css?family=Fjord+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Gentium+Basic|Raleway' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
-  	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-  	<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 
-  	<link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
- 	<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
+  <link href="{% static 'css/profile.css' %}" rel="stylesheet">
 
 </head>
 <body>
 
-<nav id="navcolor1" class="navbar navbar-inverse navbar-mathi">
-  {% csrf_token %}
+<nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
           <a id="navhead" class="navbar-brand" href="/">Udghos</a>
         </div>
-        <div class="navbar-collapse collapse">
+        
+        {% if authenticated %}
+        
           <ul id="headnav" class="nav navbar-nav navbar-right">
-            <form class="navbar-form navbar-right" role="search">
-              <div class="form-group">
-                <div id="search-bar" class="inner-addon right-addon">
-                  <i class="glyphicon glyphicon-search"></i>
-                  <input type="text" placeholder="Search" class="form-control" />
-                </div>
-              </div>
-              <a href="" class="dropdown-toggle" data-toggle="dropdown">
-              <img class="img-navbar" src="{% static 'img/nepal.png' %}" width=30 height=30 /><span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
+              <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{% url 'profile' %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
                 <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
-              </ul>
-            </form>
             </ul>
+            <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <div id="search-bar" class="inner-addon right-addon nav-search">
+                  <i class="glyphicon glyphicon-search"></i>
+                  <input type="text" placeholder="Search" class="form-control" />
+                </div>
+              </div>
+            </form>
             <ul id="gly-bell" class="nav navbar-nav navbar-right">
               <li>
                 <a href="#" title="Header" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Content">
                 <i class="glyphicon glyphicon-bell"></i>
                 </a>
               </li>
-            </ul>
+            </ul> 
+
+            {% else %}
             
-          </ul>
-        </div> <!--/.nav-collapse -->
+            <ul class="nav navhead-nav nav-unauth">
+              <li class="icon-login"><a href="/complain/login" id="click-signup">LogIn/Sign Up</a></li>
+              <li class="icon-login"><a href="/about/">About</a></li>
+            </ul> 
+            {% endif %}        
       </div>
   </nav>
 
-  <nav id="navcolor2" class="navbar navbar-inverse navbar-mathi">
-  {% csrf_token %}
+  
+  <div class="row">
     <div class="container">
-      <div class="row">
-          <div class="col-md-3">
-            <a id="navhead" class="navbar-brand" href="/">Udghos</a>
-          </div>
-            <div class="navmob-header">
-              <a class="navbar-mobile-icon glyphicon glyphicon-bell" href="#"></a>
-              <a class="navbar-mobile-icon glyphicon glyphicon-search" href="#"></a>
-            
-              <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="navbar-mobile-icon glyphicon glyphicon-triangle-bottom"></i></span></a>
-                  <ul class="dropdown-menu dropdown-mobile" role="menu">
-                    <li><a href="{% url 'profile' %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
-                    <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
-                  </ul>
-            </div>
-            
-         </div> 
-    </div>
-  </nav>
+      <div class="col-md-8">
+        <div class="box-profile">
+          <img class="img-circle" href="/my-profile/" src="{% static 'img/nepal.png' %}" width=200 height=200 alt="Generic   placeholder image" width="200" height="200">
+          <div class="profileinfo">
 
-  <div class="container">
-    <div class="row">
-			<div class="col-md-9">
-				<div class="box-profile">
-				  <img class="img-circle" href="/my-profile/" src="{% static 'img/nepal.png' %}" width=200 height=200 alt="Generic   placeholder image" width="200" height="200">
-	         <div class="media-body">
-	            <h3 id="heading-border" class="heading-property">Mr. Hanumane</h3>
-	            <div class="my-profile">
-	            	<h5 class="heading-property">Bharatpur, Chitwan</h5>
-	            	<div class="profile-pro">
-	            		<span class="label label-info">10 posts</span> 
-	            		<a href="#" class="btn btn-xs btn-default">11 </span>Points</a>
-	            	</div>
-	            </div>
-	            <div class="about-tab">
-	              <h4 class="heading-property">About</h4>
-	              <div class="about-me">
-	            				I am from Nepal.
-	            	</div>
-	            </div> 
-	            <div class="my-tags">
-          		 <h4 class="heading-property">My Tags</h4>
-          		 <div class="tags">
-          				#Government  #Offices  #Colleges  #Blocades  #Road
-          			</div>
-        		  </div>
-	          </div>
-				</div>
+            <form>
+              <input type="hidden" name="hiddenField" />
+            </form>
+            <div id="dataprofile" class="my-name">
+              <h3 id="myname" class="datainfo">{{user.username}}</h3>
+            
+              <div class="edit-button">
+                <button id="edit" class="btn btn-sm glyphicon glyphicon-pencil"> Edit</button>
+                <button id="save" class="btn btn-sm glyphicon glyphicon-save"> Save</button>
+              </div>
+            </div>
+            <div class="my-username">
+              <span id="myusername" class="datainfo">@hanumane</span>
+            </div>
+            <div class="profile-activity">
+                <a href="#" class="btn btn btn-info">10 posts</a> 
+                <a href="#" class="btn btn btn-default">11 Points</a>
+              </div>
+              <div class="my-address">
+                <i class="glyphicon glyphicon-map-marker"> </i>
+                <span id="myaddress" class="datainfo"> Bharatpur, Chitwan</span>
+              </div>
+              <div class="about-me">
+                <span id="aboutme" class="datainfo">Student of Engineering</span>
+              </div>
+              <div class="my-tag">
+                <span class="tags-tab">My Tags</span>
+                <span id="mytags" class="datainfo">#Government  #Offices  #Colleges  #Blocades  #Road</span>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div>
+        
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="container">
-      <div class="col-md-9 text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        
+      </div>
+      <div class="col-md-8 text-center">
         <div id="tab-stories">
           <div class="box-tabs">
             <ul class="nav nav-tabs" id="navblock" >
@@ -214,20 +214,17 @@
     </div>
   </div>
 
-  
-
-
 
 
   
 
 
 
-		        
-		       
+            
+           
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

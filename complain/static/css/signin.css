@@ -122,9 +122,11 @@ body {
 text-align:center;
 }
 
+
+
 .navhead-nav > li {
   display: inline-block;
-  margin-top: 15px;
+  margin-top: 12px;
 }
 .navhead-nav > li + li {
   margin-left: 20px;
@@ -230,6 +232,11 @@ text-align:center;
 .form-signin-heading{
   margin-top:5px;
 }
+.form-signup-heading
+{
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
 .form-signin .checkbox {
   font-weight: normal;
 }
@@ -257,12 +264,19 @@ text-align:center;
 }
 
 .p-signin{
+  margin-top: -10px;
   padding-top: 5px;
 }
 .signin-heading{
   margin-top:25%;
 }
-.well-signin {
+#signup{
+  padding: 0px 15px 0px 15px;
+}
+.login-form{
+  margin: 10px 0px 10px 0px;
+}
+.box-signin {
   overflow: hidden;
   padding-left:1%;
   padding-right:1%;
@@ -272,13 +286,6 @@ text-align:center;
   min-height: 20px;
   background-color: #444;
   border-radius: 2px;
-}
-
-
-@media (max-width: 720px) {
-  .well-signin {
-    margin:0px;
-  }
 }
 
 #navcolor{
@@ -303,3 +310,21 @@ text-align:center;
   color: #aa1123;
 }
 
+.navhead-nav-left{
+  margin-top: 0px;
+  float: left;
+}
+
+@media (max-width: 720px) {
+  .box-signin {
+    margin-top: 300px;
+  }
+}
+@media(max-width: 720px){
+  .navhead-nav{
+    float: right;
+  }
+  .navhead-nav-left{
+    float: left;
+  }
+}

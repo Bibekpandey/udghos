@@ -149,7 +149,7 @@ h1,h2,h3,h4{
   padding: 10px;
 }
 #content-top{
-  margin-top: 60px;
+  margin-top: 55px;
   
 }
 .icons-ld{
@@ -180,11 +180,7 @@ h1,h2,h3,h4{
 .navbar-left{
   margin-top: 7px;
 }
-#navcolor1 {
-  background-color:#fff;
-  border-bottom: 1px solid #990012;
-}
-#navcolor2 {
+#navcolor {
   background-color:#fff;
   border-bottom: 1px solid #990012;
 }
@@ -285,7 +281,9 @@ h1,h2,h3,h4{
 .my-tags{
   margin-top: 10px;
   color: #555;
-  border-top: 1px solid #999;
+}
+.media-body{
+  border-bottom: 1px solid #999;
 }
 .modal{
     z-index: 10000;
@@ -392,6 +390,9 @@ padding:0px;
 
 .dropdown-menu{
   float: right;
+  margin-top: -1px;
+  margin-right: -40px;
+  background-color: #eee;
 }
 
 .navbar-icon{
@@ -656,12 +657,15 @@ div.share> .twitter {
   text-decoration: none;
 }
 .img-navbar{
+  margin-left: 10px;
+  margin-top: 10px;
+  float: right;
   border-radius: 50%;
   background-color: #fff;
 }
 .navbar-name{
   margin-left: 5px;
-  margin-top: 5px;
+  margin-top: 10px;
   text-decoration: none;
   float: right;
   color: #fff;
@@ -740,4 +744,81 @@ div.share> .twitter {
     border-bottom: 3px solid #888; 
     border-right: 1px solid #fff;   
   }
+}
+
+/*navbar design*/
+@media(max-width: 768px){
+  .navbar-form{
+    width: 50%;
+    border: none;
+    float: right;
+    margin-top: -3px;
+  }
+  #gly-bell{
+    margin-top: 4px;
+    float: right;
+    margin-right: 10px;
+  }
+  #headnav{
+    margin-right: 10px;
+    margin-top: -50px;
+    float: right;
+  }
+  .dropdown-menu{
+    background-color: #eee;
+    margin-top: -10px;
+    margin-left: 200px;
+  }
+  
+}
+
+
+/*not-authinticated navbar*/
+.navhead-nav > li {
+  display: inline-block;
+  margin-top: 12px;
+}
+.navhead-nav > li + li {
+  margin-left: 20px;
+}
+.navhead-nav > li > a {
+  padding: 0px;
+  font-size: 20px;
+
+
+  color: #990012; /* IE8 proofing */
+  
+  border-bottom: 2px solid transparent;
+}
+.navhead-nav > li > a:hover,
+.navhead-nav > li > a:focus {
+  background-color: transparent;
+  border-bottom-color: #990012;
+}
+.navhead-nav > .active > a,
+.navhead-nav > .active > a:hover,
+.navhead-nav > .active > a:focus {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .navhead-brand {
+    float: left;
+  }
+  .navhead-nav {
+    float: right;
+  }
+  .nav-unauth{
+    margin-top: -50px;
+  }
+}
+
+.navhead-nav-left{
+  float: left;
+} 
+.icon-login{
+  position: absolute;
+  margin: 0px 10px 0px 10px;
+  float: right;
 }

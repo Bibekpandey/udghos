@@ -485,4 +485,13 @@ def get_threads(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n t
 
 class Profile(View):
     def get(self,request):
-        return render(request, "complain/profile.html",{})
+        self.context = {}
+        if request.user.is_authenticated():
+            self.context['authenticated'] = True
+            self.context['user'] = request.user
+            acc = Account.objects.get(user=request.user)
+            self.context['address'] = acc.address
+            self.context['profile_pic'] = acc.profile_pic
+        else:
+            self.context['authenticated'] = False
+        return render(request, "complain/profile.html",self.context)
