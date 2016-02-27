@@ -10,3 +10,4 @@ requirements.txt
 img/
 *.swp
 *.swo
+*~
