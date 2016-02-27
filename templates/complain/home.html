@@ -17,6 +17,7 @@
 
   <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
     <script src="{% static 'js/functions.js'%}"></script>
+
     <script>
     function submitPost() {
         // first collect tags
@@ -54,7 +55,23 @@
 </head>
 
 <body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1652950188302583',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
 
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
   <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
@@ -62,7 +79,7 @@
         </div>
         
         {% if authenticated %}
-        
+        <div class="fb-share-button">share</div>
           <ul id="headnav" class="nav navbar-nav navbar-right">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
@@ -191,7 +208,7 @@
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Description *</label>
-                          <textarea name="content" class="form-control" placeholder="Describe your views on Udghos"></textarea>
+                          <textarea name="content-udghos" class="form-control" placeholder="Describe your views on Udghos"></textarea>
                           
                           <div class="form">
                             
