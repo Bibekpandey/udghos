@@ -495,3 +495,16 @@ class Profile(View):
         else:
             self.context['authenticated'] = False
         return render(request, "complain/profile.html",self.context)
+
+class Post(View):
+    def get(self,request):
+        self.context = {}
+        if request.user.is_authenticated():
+            self.context['authenticated'] = True
+            self.context['user'] = request.user
+            acc = Account.objects.get(user=request.user)
+            self.context['address'] = acc.address
+            self.context['profile_pic'] = acc.profile_pic
+        else:
+            self.context['authenticated'] = False
+        return render(request, "complain/post.html",self.context)
