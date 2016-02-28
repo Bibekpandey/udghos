@@ -107,72 +107,74 @@ function images_html(images) {
 
 function generate_thread(threadobj, auth) {
     var thread_str = '<div class="box thread" id="thread-'+threadobj.id+'">'+
-          '<div class="stbody">'+
+        '<div class="stbody">'+
             '<div id="recent" class="tab-pane fade in active">'+
-              '<div class="stimg">'+
-                '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
+                '<div class="stimg">'+
+                    '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
 
-              '<div id="textst" class="sttext">'+
-                '<a href="/complain/post">'+
-                '<div class="post-title">'+
-                    threadobj.content+
-                '</div>'+
-                '</a>'+
-                '<div class="post-body">'+
-                    '<span class="sttime"> &nbsp;'+threadobj.time+'</span>'+
-                    '<span>by</span>'+
-                    '<a href="/complain/profile">'+
-                    '<span class="heading-property heading-post">'+threadobj.user.name+'</span></a>'+
-                '</div>'+
-                '<div class="post-content">'+
-                 threadobj.content+
-                '</div><br>'+
-           images_html(threadobj.images)+
-        '<div class="sttime">'+
-                '</div>'+
-                '<div class="row">'+
-                  '<div class="display-tag">'+
-                    '<span id="tag-post2" class="glyphicon glyphicon-tags"></span>';
-                for(var x in threadobj.tags) {
-                    thread_str+= '<a class="tagname tagname2" href="#">'+ threadobj.tags[x].name+'</a>';
-                }
-                thread_str+='</div>'+
-                '</div>'+
-              '</div>'+
-            '</div>'+
-          '</div>'+
-          '<div class="row">'+
-            '<div class="icons-ld">'+
-                    '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'+
+                '<div id="textst" class="sttext">'+
+                    '<a href="/complain/post">'+
+                    '<div class="post-title">'+
+                        threadobj.content+
+                    '</div>'+
                     '</a>'+
-                    '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
-                    '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'+
-                    '</a>'+
-                  
-              '</div>'+
-            '<div class="post-action">'+
-              '<div class="comment-section">'+
-                '<a href="javascript:void()" onclick="toggleComments('+threadobj.id+')">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'+
-                  '<span id="num-comments'+threadobj.id+'">'+threadobj.num_comments+'</span><span id="comment-text'+threadobj.id+'"> Comment'+(threadobj.num_comments!=1?'s':'')+'</span>'+
-                '</a>'+
-              '</div>'+
-              '<div class="share">'+
-                '<button class="facebook shadow"></button>'+
-                '<button class="twitter shadow"></button>'+
-              '</div>'+
+                    '<div class="post-body">'+
+                        '<span class="sttime"> &nbsp;'+threadobj.time+'</span>'+
+                        '<a href="/complain/profile">'+
+                        '<span class="heading-property heading-post">'+threadobj.user.name+'</span></a>'+
+                    '</div>'+
+                    '<div class="post-content">'+
+                        threadobj.content+
+                    '</div><br>'+
+                    images_html(threadobj.images)+
+                    '<div class="sttime">'+
+                    '</div>'+
+                    '<div class="row">'+
+                        '<div class="display-tag">'+
+                            '<span id="tag-post2" class="glyphicon glyphicon-tags"></span>';
+                            for(var x in threadobj.tags) {
+                            thread_str+= '<a class="tagname tagname2" href="#">'+ threadobj.tags[x].name+'</a>';
+                            }
+                            thread_str+=
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
             '</div>'+
-          '</div>'+
-          '<div id="display-form'+threadobj.id+'" class="comment-form">'+
-            '<div id="thread-comments'+threadobj.id+'"></div>'+
-            (auth==true?
-            '<textarea id="comment-box'+threadobj.id+'" class="form-comment" placeholder="Your comment here."></textarea>'+
-            '<button onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
-            +
+        '</div>'+
+            '<div class="row">'+
+                '<div class="box-icons">'+
+                    '<div class="icons-ld">'+
+                        '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
+                          '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'+
+                        '</a>'+
+                        '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
+                        '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
+                          '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'+
+                        '</a>'+
+                      
+                    '</div>'+
+                    '<div class="post-action">'+
+                        '<div class="comment-section">'+
+                            '<a href="javascript:void()" onclick="toggleComments('+threadobj.id+')">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'+
+                                '<span id="num-comments'+threadobj.id+'">'+threadobj.num_comments+'</span><span id="comment-text'+threadobj.id+'"> Comment'+(threadobj.num_comments!=1?'s':'')+'</span>'+
+                            '</a>'+
+                        '</div>'+
+                        '<div class="share">'+
+                            '<button class="facebook shadow"></button>'+
+                            '<button class="twitter shadow"></button>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</div>'+
+            '<div id="display-form'+threadobj.id+'" class="comment-form">'+
+                '<div id="thread-comments'+threadobj.id+'"></div>'+
+                (auth==true?
+                '<textarea id="comment-box'+threadobj.id+'" class="form-comment" placeholder="Your comment here."></textarea>'+
+                '<button onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
+                +
             
-          '</div>'+
+            '</div>'+
         '</div>';
     return thread_str;
 }
