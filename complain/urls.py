@@ -7,7 +7,7 @@ urlpatterns =  [
         url(r'^threads/', get_threads_json, name='threads'),
         url(r'^logout/', logout_user, name='logout'),
         url(r'^vote/', vote, name='vote'),
-        url(r'^post-thread/([a-z]+)/', Post.as_view(), name='post'),
+        url(r'^post-thread/', Post.as_view(), name='post'),
         url(r'^thread/([0-9]+)/', ThreadPage.as_view(), name='thread'),
         url(r'^comment/', comment, name='comment'),
         url(r'^get-comments/', get_comments, name='get_comments'),
@@ -17,7 +17,5 @@ urlpatterns =  [
         url(r'^comment-delete/', delete_comment, name='delete_comment'),
         url(r'^tags/', get_tags, name='get_tags'),
         url(r'^profile/', Profile.as_view(), name='profile'),
-
-        url(r'^post/', Post.as_view(), name='post'),
 
 ]

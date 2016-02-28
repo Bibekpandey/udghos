@@ -127,7 +127,6 @@ class Login(View):
         if username=='' or password=='':
             return HttpResponse('username/password can\'t be empty')
         user = authenticate(username=username, password=password)
-        print(user)
 
         if user is None or username=="root":
             return HttpResponse('username/password error')
@@ -155,7 +154,7 @@ class Post(View):
         self.context['form_heading']  = 'Post a '+thread_type
         return render(request, "complain/post-thread.html", self.context)
     
-    def post(self, request, thread_type):
+    def post(self, request):
         if not request.user.is_authenticated():
             return redirect('login')
 
@@ -166,7 +165,7 @@ class Post(View):
 
         if thread_type=='complaint': th_type = COMPLAINT
         elif thread_type=='discussion': th_type = DISCUSSION
-        else: raise Http404('invalid thread type')
+        else: th_type = COMPLAINT
 
         title = request.POST.get('title', '')
         content = request.POST.get('content', '')
@@ -176,7 +175,7 @@ class Post(View):
         File(file=afile, files=test).save()
         '''
                 
-        if title=='' or content =='':
+        if content =='': # or title==''
             return redirect('index')
             #self.context['message'] = 'Title/content can\'t be empty'
             #return self.get(request, thread_type)
@@ -401,7 +400,6 @@ def reply(request):
 
 def new_social(request):
     if request.method=="GET":
-        print(request.GET['uid'])
         return render(request, "complain/new-social.html", {})
     else:
         uid = request.POST.get("userid", "")
@@ -510,15 +508,4 @@ class Profile(View):
             self.context['authenticated'] = False
         return render(request, "complain/profile.html",self.context)
 
-class Post(View):
-    def get(self,request):
-        self.context = {}
-        if request.user.is_authenticated():
-            self.context['authenticated'] = True
-            self.context['user'] = request.user
-            acc = Account.objects.get(user=request.user)
-            self.context['address'] = acc.address
-            self.context['profile_pic'] = acc.profile_pic
-        else:
-            self.context['authenticated'] = False
-        return render(request, "complain/post.html",self.context)
+

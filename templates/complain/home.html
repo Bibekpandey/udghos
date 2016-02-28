@@ -101,8 +101,6 @@
       </div>
   </nav>
 
-  
-
   <div id="content-top" class="container">
     <div class="row">
       <div class="container">
@@ -143,7 +141,7 @@
                           <label for="recipient-name" class="control-label">Title</label>
                           <input type="text" class="form-control" id="recipient-name" placeholder="Title relevant to the description">
                       </div>
-                      <form method="post" id="thread-form" action="{% url 'post' 'thread' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
+                      <form method="post" id="thread-form" action="{% url 'post' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
@@ -189,11 +187,11 @@
                           <label for="recipient-name" class="control-label">Do you have anything to share to Udghos. Feel free to Share your Opinion.</label>
                           <input type="text" class="form-control" id="recipient-name" placeholder="Title relevant to your description">
                       </div>
-                      <form method="post" id="thread-form" action="{% url 'post' 'thread' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
+                      <form method="post" id="opinion-form" action="{% url 'post' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
-                          <label for="recipient-name" class="control-label">Description *</label>
+                          <label for="recipient-name" class="control-label">Opinion*</label>
                           <textarea name="content-udghos" class="form-control" placeholder="Describe your views on Udghos"></textarea>
                           
                           <div class="form">
