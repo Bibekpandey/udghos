@@ -120,7 +120,6 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
                 '<div class="post-body">'+
                     '<span class="sttime"> &nbsp;'+threadobj.time+'</span>'+
-                    '<span>by</span>'+
                     '<a href="/complain/profile">'+
                     '<span class="heading-property heading-post">'+threadobj.user.name+'</span></a>'+
                 '</div>'+
