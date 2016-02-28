@@ -56,22 +56,9 @@
 
 <body>
 <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1652950188302583',
-      xfbml      : true,
-      version    : 'v2.5'
-    });
-  };
+  function fbs_click() {u="www.udghos.com/haha";t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
+  </script>
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
   <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
@@ -79,7 +66,6 @@
         </div>
         
         {% if authenticated %}
-        <div class="fb-share-button">share</div>
           <ul id="headnav" class="nav navbar-nav navbar-right">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>

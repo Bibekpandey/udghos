@@ -29,7 +29,6 @@ function get_csrf(){
         );
     }
 
-
 function toggleComments(id) {
         $.post("/complain/get-comments/", 
             {"csrfmiddlewaretoken":get_csrf(), "threadid":id},
@@ -114,9 +113,9 @@ function generate_thread(threadobj, auth) {
                 '</div>'+
 
               '<div id="textst" class="sttext">'+
-                '<a href="/complain/post">'+
+                '<a href="/complain/thread/'+threadobj.id.toString()+'">'+
                 '<div class="post-title">'+
-                    threadobj.content+
+                    (threadobj.title||threadobj.content)+
                 '</div>'+
                 '</a>'+
                 '<div class="post-body">'+
@@ -160,7 +159,7 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
               '</div>'+
               '<div class="share">'+
-                '<button class="facebook shadow"></button>'+
+                '<button class="facebook shadow" onclick="return fbs_click()" target="_blank"></button>'+
                 '<button class="twitter shadow"></button>'+
               '</div>'+
             '</div>'+
