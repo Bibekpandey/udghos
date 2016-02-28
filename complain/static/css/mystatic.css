@@ -51,7 +51,7 @@ h1,h2,h3,h4{
   font-family: Ubuntu;
   position: block;
   min-height: 20px;
-  padding: 10px 15px 15px 15px;
+  padding: 10px 15px 5px 15px;
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: ;
@@ -93,6 +93,10 @@ h1,h2,h3,h4{
   margin-left: -2px;
   padding: 2px;
   min-height: 20px;   
+}
+.box-icons{
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 .box-top{
   font-family: Ubuntu;
@@ -152,12 +156,14 @@ h1,h2,h3,h4{
   
 }
 .icons-ld{
+  margin-top: -20px;
+  position: relative;
   display: inline-block;
-  margin-top: -15px;
   float: left;
 }
 .comment-section{
   color: #777;
+  margin-top: -5px;
   margin-right: 75px;
   border-right: 1px solid #999;
   padding-right: 10px;
@@ -212,7 +218,7 @@ h1,h2,h3,h4{
   float: right;
 }
 .post-action{
-  margin-top: 20px;
+  position: relative;
   float: right;
 }
 .post-actions{
@@ -526,18 +532,7 @@ padding:0px;
 #tag-bar{
   width: 35%;
 }
-.form-control{
-  display: block;
-  height: 35px;
-  padding: 6px 5px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #555;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  margin-left: -15px;
-}
+
 .form-tag-control{
   display: block;
   width: 95%;
