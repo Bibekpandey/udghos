@@ -160,7 +160,7 @@ function generate_thread(threadobj, auth) {
               '</div>'+
               '<div class="share">'+
                 '<button class="facebook shadow" onclick="return fbs_click()" target="_blank"></button>'+
-                '<button class="twitter shadow"></button>'+
+                '<button class="twitter shadow" onclick="return twt_click()"></button>'+
               '</div>'+
             '</div>'+
           '</div>'+
@@ -170,7 +170,6 @@ function generate_thread(threadobj, auth) {
             '<textarea id="comment-box'+threadobj.id+'" class="form-comment" placeholder="Your comment here."></textarea>'+
             '<button onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
             +
-            
           '</div>'+
         '</div>';
     return thread_str;
