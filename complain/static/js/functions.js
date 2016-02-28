@@ -137,9 +137,11 @@ function generate_thread(threadobj, auth) {
                 }
                 thread_str+='</div>'+
                 '</div>'+
+                '</div>'+
             '</div>'+
           '</div>'+
           '<div class="row">'+
+          '<div class="box-icons">'+
             '<div class="icons-ld">'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
                       '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'+
@@ -168,6 +170,7 @@ function generate_thread(threadobj, auth) {
             '<textarea id="comment-box'+threadobj.id+'" class="form-comment" placeholder="Your comment here."></textarea>'+
             '<button onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
             +
+          '</div>'+
           '</div>'+
         '</div>';
     return thread_str;
