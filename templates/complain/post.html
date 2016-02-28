@@ -17,12 +17,38 @@
 
 	<body>
 
+<script>
+  function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
+
+  function twt_click() {u=location.href;t=document.title;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(u), 'sharer', 'toolbar=0,status=0,width=626,height=346');return false;}
+
+/*
+window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));
+*/
+  </script>
+
+
+    {% csrf_token %}
   	<nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
           <a id="navhead" class="navbar-brand" href="/">Udghos</a>
         </div>
-        
         {% if authenticated %}
         
           <ul id="headnav" class="nav navbar-nav navbar-right">
@@ -63,84 +89,10 @@
   	<div class="row" id="content-top">
   		<div class="container">
   			<div class="col-md-9">
-  				<div class="box">
-          <div class="stbody">
-            <div id="recent" class="tab-pane fade in active">
-              <div class="stimg">
-                <img class="img-circle" src="{% static 'img/nepal.png' %}" width=50 height=50/>
-                </div>
-                
-              
-              <div id="textst" class="sttext">
-                <div class="post-body">
-                  <a href="{% url 'profile' %}">
-                  <span class="heading-property heading-post">{{thread.thread.account.user}}</span></a><span class="sttime"> &nbsp;{{thread.thread.time}}</span><br>
-                </div>
-                <div class="post-content">
-                 {{thread.thread.content}}
-                </div><br>
-            {% for image in thread.images %} 
-                <a href="#myModalImage"><img src="../media/{{image.name}}" height="50%" width="50%" data-toggle="modal" data-target="#myModalImage" data-keyboard="true"></img></a><br>
-                <div class="modal fade" id="myModalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                  <div class="modal-dialog modal-custom" role="document">
-                    <div class="modal-content">
-                      <div class="modal-post">
-                        <button type="button" class="close my-close close-image" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-7">
-                          <img class="post-image" src="../media/{{image.name}}"></img>
-                        </div>
-                        
-                        </div>
-                      </div>
+                <div class="tab-stories">
+                    <div id="thread-container">
                     </div>
-                  </div>
-            {% endfor %}
-
-                <div class="sttime">
                 </div>
-                <div class="row">
-                  <div class="display-tag">
-                    <span id="tag-post2" class="glyphicon glyphicon-tags"></span>
-                
-                    <a class="tagname tagname2" href="#">Blockades</a>
-                    <a class="tagname tagname2" href="#">Nepal</a>                
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="icons-ld">
-                    <a id="action-element" href="javascript:vote({{thread.thread.id}}, 'upvote', 'thread')">
-                      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                    </a>
-                    <span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_{{thread.thread.id}}">{{thread.thread.votes}}</span>
-                    <a id="action-element" href="javascript:vote({{thread.thread.id}}, 'downvote', 'thread')">
-                      <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                    </a>    
-                  
-              </div>
-            <div class="post-action">
-              <div class="comment-section">
-                <a href="javascript:void()" onclick="toggleComments({{thread.thread.id}})">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                  <span id="num-comments{{thread.thread.id}}">{{y}}</span><span id="comment-text{{thread.thread.id}}"> Comment{{y|pluralize}}</span>
-                </a>
-              </div>
-              <div class="share">
-                <button class="facebook shadow"></button>
-                <button class="twitter shadow"></button>
-              </div>
-            </div>
-          </div>
-          <div id="display-form{{thread.thread.id}}" class="comment-form">
-            <div id="thread-comments{{thread.thread.id}}"></div>
-            <textarea id="comment-box{{thread.thread.id}}" class="form-comment" placeholder="Your comment here."></textarea>
-            <button onclick="postComment({{thread.thread.id}}, '{{thread.thread.user}}')">Comment</button>
-            
-          </div>
-        </div>
   			</div>
   			<div class="col-md-3">
 				<div class="box">
@@ -155,12 +107,29 @@
 
   	</body>
 
-  	<script src="{% static 'js/functions.js' %}"></script>
-  	
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
     <script src="{% static 'js/myjs.js' %}"></script>
     <script src="{% static 'js/homepage.js' %}"></script>
+  	<script src="{% static 'js/functions.js' %}"></script>
+    
+    <script>
+        var g_thread_container = "thread-container";
+        window.onload = function () { 
+            try {
+                // get threadid from url
+                var temp = location.pathname.split('/');
+                var threadid = temp[temp.length-2]; // last one is empty
+            }
+            catch(e){
+                //alert('exception');
+            }
+            $.get('/complain/threads/?id='+threadid, function(data) {
+                //alert(JSON.stringify(data));
+                add_item(data.thread, g_thread_container, data.authenticated)
+            });
+        };
+    </script>
+</html>
 
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>

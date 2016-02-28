@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, Http404
+from django.shortcuts import render, redirect, Http404, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -43,6 +43,18 @@ def get_threads_json(request):
         # auth is to check if user has logged in or not and thereby can comment or not
         auth = True
     else: auth = False
+
+    # first check if only one thread is asked
+    threadid = request.GET.get('id', '')
+    try: 
+        if not threadid=='':
+            threadid = int(threadid)
+            thread = get_object_or_404(Thread, pk=threadid)
+            return JsonResponse({'thread':thread_to_dict(thread), 'authenticated':auth})
+    except:
+        pass
+
+    # list of threads asked 
     threadtype = request.GET.get('type', '')
     try:
         beforeid = int(request.GET.get('earlierthan',''))
@@ -316,15 +328,15 @@ class ThreadPage(View):
         if request.user.is_authenticated():
             self.context['user'] = request.user
 
-        thread = Thread.objects.get(id=thread_id)
-        self.context['thread'] = thread
+        #thread = Thread.objects.get(id=thread_id)
+        #self.context['thread'] = thread
 
-        comments = Comment.objects.filter(thread=thread)
-        self.context['comments']= comments
+        comments =[]# Comment.objects.filter(thread=thread)
+        #self.context['comments']= comments
 
         replies = []
         # images
-        images = ThreadImage.objects.filter(thread=thread)
+        images = []#ThreadImage.objects.filter(thread=thread)
         self.context['images'] = []
         for i in images:
             self.context['images'].append(i.name)
@@ -337,7 +349,7 @@ class ThreadPage(View):
 
         self.context['total_comments'] = len(comments)
 
-        return render(request, "complain/thread.html", self.context)
+        return render(request, "complain/post.html", self.context)
 
 
 def comment(request):
@@ -460,27 +472,29 @@ def get_threads(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n t
     except: # most probably n being greater
         threads = Thread.objects.order_by(*order).filter(**kwargs)
 
-    thread_list = []
-    for thread in threads:
-        thread_list.append({'id':thread.id,
-                            'votes':thread.votes,
-                            'time':thread.time.strftime("%I:%M %p, %d %b %Y"),
-                            'title':thread.title,
-                            'content':thread.content,
-                            'tags':list(map(lambda x: {
-                                            'name':x.name,
-                                            'id':x.id }
-                                            , thread.tags.all()
-                                            )),
-                            'user':{'name':thread.account.user.username,
-                                    'id':thread.account.pk,
-                                    'image':thread.account.profile_pic.name, # need to code this
-                                    },
-                            'num_comments':Comment.objects.all().filter(thread=thread).count(),
-                            'images':list(map(lambda x: x.name,
-                                                ThreadImage.objects.filter(thread=thread))),
-                            })
-    return thread_list
+    
+    return list(map(thread_to_dict, threads))
+
+def thread_to_dict(thread):
+    #thread_list = []
+    return {'id':thread.id,
+            'votes':thread.votes,
+            'time':thread.time.strftime("%I:%M %p, %d %b %Y"),
+            'title':thread.title,
+            'content':thread.content,
+            'tags':list(map(lambda x: {
+                            'name':x.name,
+                            'id':x.id }
+                            , thread.tags.all()
+                            )),
+            'user':{'name':thread.account.user.username,
+                    'id':thread.account.pk,
+                    'image':thread.account.profile_pic.name, # need to code this
+                    },
+            'num_comments':Comment.objects.all().filter(thread=thread).count(),
+            'images':list(map(lambda x: x.name,
+                                ThreadImage.objects.filter(thread=thread))),
+            }
         
 
 class Profile(View):
