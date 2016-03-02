@@ -496,14 +496,24 @@ def thread_to_dict(thread):
         
 
 class Profile(View):
-    def get(self,request):
+    def get(self,request, profileid):
         self.context = {}
         if request.user.is_authenticated():
+            try:
+                profileid = int(profileid)
+            except Exception:
+                raise Http404('user not found')
             self.context['authenticated'] = True
             self.context['user'] = request.user
-            acc = Account.objects.get(user=request.user)
+            acc = Account.objects.get(user_id=profileid)
+            useracc = Account.objects.get(user=request.user)
             self.context['address'] = acc.address
-            self.context['profile_pic'] = acc.profile_pic
+            self.context['profile_pic'] = useracc.profile_pic
+            self.context['user_pic'] = acc.profile_pic
+            self.context['account'] = acc
+            self.context['edit'] = False
+            if request.user.id==profileid:
+                self.context['edit'] = True
         else:
             self.context['authenticated'] = False
         return render(request, "complain/profile.html",self.context)
