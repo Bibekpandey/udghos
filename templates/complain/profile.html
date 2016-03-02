@@ -72,9 +72,9 @@
             <form>
               <input type="hidden" name="hiddenField" />
             </form>
-            <label>Name</label>
             <div id="dataprofile" class="my-name">
-              <h3 id="name" class="datainfo">{{account.user.first_name}} {{account.user.last_name}}</h3>
+              <span id="first-name" class="datainfo post-title">{{account.user.first_name}}</span>
+              <span id="last-name" class="datainfo post-title">{{account.user.last_name}}</span>
             
               {% if edit %}
               {% csrf_token %}
@@ -85,7 +85,8 @@
               {% endif %}
             </div>
             <div class="my-username">
-              <span id="myusername" class="datainfo">{{account.user.username}}</span>
+              <br>
+              <span id="username" class="datainfo">{{account.user.username}}</span>
             </div>
             <div class="profile-activity">
                 <a href="#" class="btn btn btn-info">10 posts</a> 
@@ -93,10 +94,11 @@
               </div>
               <div class="my-address">
                 <i class="glyphicon glyphicon-map-marker"> </i>
-                <span id="myaddress" class="datainfo"> Bharatpur, Chitwan</span>
+                <span id="address" class="datainfo"> Bharatpur, Chitwan</span>
               </div>
               <div class="about-me">
-                <span id="aboutme" class="datainfo">Student of Engineering</span>
+                <div><b>About</b></div>
+                <span id="about" class="dataarea">Student of Engineering</span>
               </div>
               <div class="my-tag">
                 <span class="tags-tab">My Tags</span>

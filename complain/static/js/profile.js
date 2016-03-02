@@ -1,9 +1,14 @@
 $('#edit').click(function(){
   $('#edit').hide();
-  $('.datainfo').each(function(){
+  $('.dataarea').each(function() {
     var content = $(this).html();
     $(this).html('<textarea>' + content + '</textarea>');
   });  
+
+  $('.datainfo').each(function(){
+    var content = $(this).html();
+    $(this).html('<input type="text" placeholder="'+$(this).attr('id')+'" name="'+$(this).attr('id')+'" value="'+content+'"/></input>');
+  });
   
   $('#save').show();
   $('#nameinfo').show();
