@@ -16,6 +16,14 @@ $('#edit').click(function(){
 });
 
 $('#save').click(function(){
+    alert($('#updateform').serialize());
+    $.ajax({   
+        type: 'POST',   
+        url: '/complain/profile-update/',   
+        data: $('#updateform').serialize(),
+        success: function(data) { alert(data); }
+    }); 
+    //$('#updateform').submit();
   $('#save, .info').hide();
   $('textarea').each(function(){
     var content = $(this).val();//.replace(/\n/g,"<br>");

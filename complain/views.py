@@ -518,4 +518,14 @@ class Profile(View):
             self.context['authenticated'] = False
         return render(request, "complain/profile.html",self.context)
 
+def profile_update(request):
+    try:
+        username = request.POST.get('username', '')
+        firstname = request.POST.get('first-name', '')
+        lastname = request.POST.get('last-name', '')
+        address = request.POST.get('address', '')
+        print(username+firstname+lastname+address)
+        return HttpResponse('done')
+    except Exception as e:
+        return HttpResponse(e)
 

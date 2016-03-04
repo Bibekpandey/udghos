@@ -17,5 +17,6 @@ urlpatterns =  [
         url(r'^comment-delete/', delete_comment, name='delete_comment'),
         url(r'^tags/', get_tags, name='get_tags'),
         url(r'^profile/([0-9]+)/', Profile.as_view(), name='profile'),
+        url(r'^profile-update/', profile_update, name='profile_update'),
 
 ]
