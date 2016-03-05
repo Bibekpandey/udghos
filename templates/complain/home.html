@@ -16,6 +16,8 @@
   <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 
   <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
+  <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
+
     <script src="{% static 'js/functions.js'%}"></script>
 
     <script>
@@ -107,7 +109,6 @@
         <div class="box-header">
           <div class="col-md-3 text-center header-column ">
             <h1 class="font-header" >Udghos</h1>
-            <h4>We can change</h4>
             <button type="button" class="btn btn-sm">
               Know us more
             </button>
@@ -116,7 +117,7 @@
             <h1>Let's make a change</h1>
             <h3>Post your Complain/Views</h3>
             <button type="button" class="btn btn-my btn-large" data-toggle="modal" data-target="#myModal" data-keyboard="true">
-              Post a Complain
+              Post a Concern
             </button>
           </div>
           <div class="col-md-3 text-center header-column-last">
@@ -216,7 +217,12 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-9">
+      <!--div class="col-md-2">
+        <div class="box-profile">
+          <h2>Reacted</h2>
+        </div>
+      </div-->
+      <div class="col-md-8">
         <div id="tab-stories">
           <div class="box-tabs">
 
@@ -237,14 +243,14 @@
         <div class="margin-tab">
         </div>
       </div>   
-    
-      <div id="profile" class="col-md-3">
+
+      <div id="profile" class="col-md-4">
         <div class="box-profile">
         {% if authenticated %}
           <img class="img-circle" href="/profile/" src="/media/{{profile_pic}}" width=70 height=70 alt="Generic placeholder image" width="100" height="100">
           <div class="media-body">
             <a href="{% url 'profile' %}">
-            <h4>{{user.username}}</h4></a>
+            <h4 class="heading-property">{{user.username}}</h4></a>
             <p>
               <h5 class="heading-property">{{address}}</h5>
 

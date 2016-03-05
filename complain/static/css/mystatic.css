@@ -51,9 +51,9 @@ h1,h2,h3,h4{
   font-family: Ubuntu;
   position: block;
   min-height: 20px;
-  padding: 10px 15px 5px 15px;
+  padding: 15px 15px 0px 15px;
   margin-left: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   background-color: ;
   border: 1px solid #e4e4e4;
   border:2px solid #ccc;
@@ -182,12 +182,11 @@ h1,h2,h3,h4{
 .glyphicon-thumbs-up,
 .glyphicon-thumbs-down{
   margin-top: 2px;
-  font-size: 17px;
+  font-size: 20px;
   color: #777;
 }
 .glyphicon-thumbs-up:hover,
 .glyphicon-thumbs-down:hover{
-  font-size: 17px;
   color: #333;
 }
 
@@ -254,6 +253,19 @@ h1,h2,h3,h4{
   margin-top: -35px;
   margin-right: 15px;
 }
+.comment-form{
+  background-color: #eee;
+  padding-bottom: 0px;
+}
+.comment-form>textarea{
+  width: 90%;
+}
+.comment-text{
+  border-bottom: 1px solid #fff;
+}
+.comment-button{
+  position: relative;
+}
 #tag-post1{
   float: right;
   margin-top: 5px;
@@ -281,10 +293,12 @@ h1,h2,h3,h4{
   color:#333;
   text-shadows:0px 5px 5px #777;
   border-radius: 2px;
+  font-size: 17px;
 }
-.tagname2{
-  margin-top: 5px;
+.tagname2:hover{
+  text-decoration: none;
 }
+
 #action-element{
   margin-left: 10px;
   margin-right: 10px;
@@ -326,9 +340,14 @@ h1,h2,h3,h4{
 .heading-post{
   position: relative;
   font-size: 15px;
+  font-weight: bold;
   margin-top: -55px;
   margin-left: -5px;
   margin-bottom: 10px;
+  color: #555;
+}
+.heading-post:hover{
+  color: #777;
 }
 
 .inner-addon { 
@@ -364,7 +383,7 @@ padding:0px;
   float:left;
   height:50px;
   width:50px;
-  margin-left: 10px;
+  margin-left: px;
 }
 .sttext
 {
@@ -469,23 +488,26 @@ padding:0px;
   margin-top: -10px;
   margin-left: 2px;
   color: #555;
-  font-size: 15px;
+  font-size: 17px;
 }
 .post-title{
-  color: #000;
+  color: #333;
   font-weight: bold;
   margin-top: -3px;
   margin-left: 2px;
-  font-size: 17px;
+  font-size: 25px;
 }
 .post-title:hover{
-  color: #555;
+  color: #990012;
 }
 .post-image{
   height: 170%;
   width: 170%;
   margin-left: 10px;
   margin-bottom: 0px;
+}
+.post-option{
+  float: right;
 }
 .modal-custom{
   width: 45%;
@@ -754,7 +776,7 @@ div.share> .twitter {
   border-right: 3px solid #888;
 }
 .font-header{
-  font-size: 70px;
+  font-size: 50px;
 }
 
 /*not-authinticated navbar*/
@@ -796,103 +818,3 @@ div.share> .twitter {
 }
 
 
-/*768 header change */
-@media (max-width: 768px) {
-  .box-header {
-    margin-bottom: 330px; 
-    border-right: 0px solid #fff;   
-  }
-  .header-column {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-bottom: 3px solid #888; 
-    border-right: 0px solid #fff;   
-  }
-  .box-profile {
-    margin-top: 0px;
-  }
-}
-
-/*991 header change */
-@media (max-width: 991px) {
-  .box-header {
-    margin-bottom: 350px;
-    border-right: 0px solid #fff;   
-    border-bottom: 0px solid #fff;
-  }
-  .header-column{
-    
-    margin-bottom: 10px;
-    padding: 10px;
-    border-bottom: 3px solid #888; 
-    border-right: 1px solid #fff;   
-  }
-  .header-column-last{
-    padding-bottom: 10px;
-    border-bottom: 2px solid #990012;
-  }
-}
-
-/*navbar design*/
-@media(max-width: 768px){
-  .navbar-form{
-    width: 50%;
-    border: none;
-    float: right;
-    margin-top: -3px;
-  }
-  #gly-bell{
-    margin-right: 20px;
-    margin-top: 4px;
-    float: right;
-  }
-  .glyphicon-search{
-    margin-right: 15px;
-  }
-  #headnav{
-    margin-right: 10px;
-    margin-top: -50px;
-    float: right;
-  }
-  .dropdown-menu{
-    background-color: #eee;
-    margin-top: -10px;
-    margin-left: 200px;
-  } 
-}
-
-
-
-@media (max-width: 768px) {
-  .navhead-brand {
-    float: left;
-  }
-  .navhead-nav {
-    float: right;
-  }
-  .nav-unauth{
-    margin-top: -50px;
-  }
-}
-@media(min-width: 768px){
-  .box-header{
-    margin-left: -50px;
-    margin-right: -50px;
-  }
-}
-
-/*
-@media screen and (min-width: 400px) and (max-width: 991px) {
-  .container{
-    float: left;
-    width: 95%;
-  } 
-  body{
-    zoom: 2;
-  }
-  .modal-dialog {
-  width: 100%;
-  height: 75%;
-  }
-}
-*/

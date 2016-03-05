@@ -111,7 +111,13 @@ function generate_thread(threadobj, auth) {
                 '<div class="stimg">'+
                     '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
-
+                '<div class="post-option">'+
+                    '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>'+
+                '</div>'+
+                '<ul class="dropdown-menu" role="menu">'+
+                    '<li><a href="#">Delete Post</a></li>'+
+                    '<li><a href="#">Mark as Offens</a></li>'+
+                '</ul>'+
               '<div id="textst" class="sttext">'+
                 '<a href="/complain/thread/'+threadobj.id.toString()+'">'+
                 '<div class="post-title">'+
@@ -168,7 +174,7 @@ function generate_thread(threadobj, auth) {
             '<div id="thread-comments'+threadobj.id+'"></div>'+
             (auth==true?
             '<textarea id="comment-box'+threadobj.id+'" class="form-comment" placeholder="Your comment here."></textarea>'+
-            '<button onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
+            '<button class="comment-button" onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
             +
           '</div>'+
           '</div>'+

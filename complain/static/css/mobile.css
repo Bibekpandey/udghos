@@ -1,0 +1,138 @@
+/*768 header change */
+@media (max-width: 768px) {
+  .box-header {
+    margin-bottom: 330px; 
+    border-right: 0px solid #fff;   
+  }
+  .header-column {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 3px solid #888; 
+    border-right: 0px solid #fff;   
+  }
+  .box-profile {
+    margin-top: 0px;
+  }
+}
+
+/*991 header change */
+@media (max-width: 991px) {
+  .box-header {
+    width: 100%;
+    margin-bottom: 350px;
+    border-right: 0px solid #fff;   
+    border-bottom: 0px solid #fff;
+  }
+  .box-header>h1{
+    font-size: 50px;
+  }
+  .container{
+    width: 100%;
+  }
+  .header-column{ 
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 3px solid #888; 
+    border-right: 1px solid #fff;   
+  }
+  .header-column-last{
+    padding-bottom: 10px;
+    border-bottom: 2px solid #990012;
+  }
+  .box-profile{
+    display: none;
+  }
+  .glyphicon{
+    font-size: 25px;
+  }
+  .nav-tabs{
+    font-size: 30px;
+  }
+  .box-tabs{
+    margin-bottom: 75px;
+  }
+  .comment-section{
+    margin-right: 150px;
+    font-size: 25px;
+    border:none;
+  }
+  .net-vote{
+    font-size: 25px;  
+    margin-top: -10px;
+  }
+  #num-comment{
+    font-size: 25px;
+  }
+  .glyphicon-thumbs-up,
+  .glyphicon-thumbs-down{
+    font-size: 35px;
+    margin: 0px 5px 0px 5px;
+  }
+  .glyphicon-comment{
+    font-size: 40px;
+    margin-top: -5px 5px 0px 5px;
+  }
+  .tagname{
+    font-size: 25px;
+  }
+  .comment-form{
+    margin-top: 30px;
+  }
+  div.share button{
+    height: 40px;
+    margin-bottom: 20px;
+    width: 40px;
+  }
+  div.share > .facebook{
+    margin-top: -45px;
+    background-size: 40px 40px;
+  }
+  div.share > .twitter{
+    margin-top: -45px;
+    background-size: 40px 40px;
+  }
+
+
+}
+
+/*navbar design*/
+@media(max-width: 768px){
+  .navbar-form{
+    width: 50%;
+    border: none;
+    float: right;
+    margin-top: -3px;
+  }
+  #gly-bell{
+    margin-right: 20px;
+    margin-top: 4px;
+    float: right;
+  }
+  .glyphicon-search{
+    margin-right: 15px;
+  }
+  #headnav{
+    margin-right: 10px;
+    margin-top: -50px;
+    float: right;
+  }
+  .dropdown-menu{
+    background-color: #eee;
+    margin-top: -10px;
+    margin-left: 200px;
+  } 
+}
+
+
+
+@media (max-width: 768px) {
+  .navhead-brand {
+    float: left;
+  }
+  .navhead-nav {
+    float: right;
+  }
+  .nav-unauth{
+    margin-top: -50px;
+  }
+}
