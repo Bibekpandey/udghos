@@ -126,7 +126,7 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
                 '<div class="post-body">'+
                     '<span class="sttime"> &nbsp;'+threadobj.time+'</span>'+
-                    '<a href="/complain/profile">'+
+                    '<a href="/complain/profile/'+threadobj.user.id+'">'+
                     '<span class="heading-property heading-post">'+threadobj.user.name+'</span></a>'+
                 '</div>'+
                 '<div class="post-content">'+

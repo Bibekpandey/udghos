@@ -32,7 +32,7 @@
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'profile' %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
+                <li><a href="{% url 'profile' user.id %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
                 <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
             </ul>
@@ -66,22 +66,26 @@
     <div class="container">
       <div class="col-md-8">
         <div class="box-profile">
-          <img class="img-circle" href="/my-profile/" src="{% static 'img/nepal.png' %}" width=200 height=200 alt="Generic   placeholder image" width="200" height="200">
+          <img class="img-circle" href="/my-profile/" src="/media/{{user_pic}}" width=200 height=200 alt="Generic   placeholder image" width="200" height="200">
           <div class="profileinfo">
 
             <form>
               <input type="hidden" name="hiddenField" />
             </form>
+            <label>Name</label>
             <div id="dataprofile" class="my-name">
-              <h3 id="myname" class="datainfo">{{user.username}}</h3>
+              <h3 id="name" class="datainfo">{{account.user.first_name}} {{account.user.last_name}}</h3>
             
+              {% if edit %}
+              {% csrf_token %}
               <div class="edit-button">
                 <button id="edit" class="btn btn-sm glyphicon glyphicon-pencil"> Edit</button>
                 <button id="save" class="btn btn-sm glyphicon glyphicon-save"> Save</button>
               </div>
+              {% endif %}
             </div>
             <div class="my-username">
-              <span id="myusername" class="datainfo">@hanumane</span>
+              <span id="myusername" class="datainfo">{{account.user.username}}</span>
             </div>
             <div class="profile-activity">
                 <a href="#" class="btn btn btn-info">10 posts</a> 
@@ -122,105 +126,9 @@
             </ul>
           </div>
         </div>
-        {% if threads|length == 0 %}
-            Nothing here. May be come back later.
-        {% else %}
-
-        {% for thread, y in threads|zip:num_comments %}
-        <div class="box">
-          <div class="stbody">
-            <div id="recent" class="tab-pane fade in active">
-              <div class="stimg">
-                <img class="img-circle" src="{% static 'img/nepal.png' %}" width=50 height=50/>
-                </div>
-                
-              <!--div class="post-actions">
-                      <i class="glyphicon glyphicon-chevron-down"></i>
-              </div--> 
-              <div id="textst" class="sttext">
-                <div class="post-body">
-                  <a href="{% url 'profile' %}">
-                  <span class="heading-property heading-post">{{thread.thread.account.user}}</span></a><span class="sttime"> &nbsp;{{thread.thread.time}}</span><br>
-                </div>
-                <div class="post-content">
-                 {{thread.thread.content}}
-                </div><br>
-            {% for image in thread.images %} 
-                <a href="#myModalImage"><img src="../media/{{image.name}}" height="50%" width="50%" data-toggle="modal" data-target="#myModalImage" data-keyboard="true"></img></a><br>
-                <div class="modal fade" id="myModalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                  <div class="modal-dialog modal-custom" role="document">
-                    <div class="modal-content">
-                      <div class="modal-post">
-                        <button type="button" class="close-image" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-7">
-                          <img class="post-image" src="../media/{{image.name}}"></img>
-                        </div>
-                        
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            {% endfor %}
-
-                <div class="sttime">
-                </div>
-                <div class="row">
-                  <div class="display-tag">
-                    <span id="tag-post2" class="glyphicon glyphicon-tags"></span>
-                
-                    <a class="tagname tagname2" href="#">Blockades</a>
-                    <a class="tagname tagname2" href="#">Nepal</a>                
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="icons-ld">
-                    <a id="action-element" href="javascript:vote({{thread.thread.id}}, 'upvote', 'thread')">
-                      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                    </a>
-                    <span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_{{thread.thread.id}}">{{thread.thread.votes}}</span>
-                    <a id="action-element" href="javascript:vote({{thread.thread.id}}, 'downvote', 'thread')">
-                      <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                    </a>    
-                  
-              </div>
-            <div class="post-action">
-              <div class="comment-section">
-                <a href="javascript:void()" onclick="toggleComments({{thread.thread.id}})">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                  <span id="num-comments{{thread.thread.id}}">{{y}}</span><span id="comment-text{{thread.thread.id}}"> Comment{{y|pluralize}}</span>
-                </a>
-              </div>
-              <div class="share">
-                <button class="facebook shadow"></button>
-                <button class="twitter shadow"></button>
-              </div>
-            </div>
-          </div>
-          <div id="display-form{{thread.thread.id}}" class="comment-form">
-            <div id="thread-comments{{thread.thread.id}}"></div>
-            <textarea id="comment-box{{thread.thread.id}}" class="form-comment" placeholder="Your comment here."></textarea>
-            <button onclick="postComment({{thread.thread.id}}, '{{thread.thread.user}}')">Comment</button>
-            
-          </div>
-        </div>
-        {% endfor %}
-      {% endif %}
       </div>
     </div>
   </div>
-
-
-
-  
-
-
-
-            
-           
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

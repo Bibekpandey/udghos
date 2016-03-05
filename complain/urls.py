@@ -16,6 +16,6 @@ urlpatterns =  [
         url(r'^new-social/', new_social, name='new_social'),
         url(r'^comment-delete/', delete_comment, name='delete_comment'),
         url(r'^tags/', get_tags, name='get_tags'),
-        url(r'^profile/', Profile.as_view(), name='profile'),
+        url(r'^profile/([0-9]+)/', Profile.as_view(), name='profile'),
 
 ]
