@@ -39,6 +39,7 @@ function toggleComments(id) {
                     appendComment($("#thread-comments"+id.toString()), comment);
                 });
         });
+        
         $("#display-form"+id.toString()).toggle("fast", function(){});
 }
 
@@ -166,11 +167,11 @@ function generate_thread(threadobj, auth) {
               '</div>'+
             '</div>'+
           '</div>'+
-          '<div id="display-form'+threadobj.id+'" class="comment-form">'+
+          '<div class="comment-form" id="display-form'+threadobj.id+'">'+
             '<div id="thread-comments'+threadobj.id+'"></div>'+
             (auth==true?
-            '<textarea id="comment-box'+threadobj.id+'" class="form-comment" placeholder="Your comment here."></textarea>'+
-            '<button class="comment-button" onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
+            '<textarea class="form-comment" id="comment-box'+threadobj.id+'" placeholder="Your comment here."></textarea>'+
+            '<button class="btn btn-comment" onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
             +
           '</div>'+
           '</div>'+

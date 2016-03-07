@@ -14,12 +14,13 @@
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 
     <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
-  <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
 
 </head>
 <body>
 
-<nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
+  <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
           <a id="navhead" class="navbar-brand" href="/">Udghos</a>
@@ -27,11 +28,11 @@
         
         {% if authenticated %}
         
-          <ul id="headnav" class="nav navbar-nav navbar-right">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
-              <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
-              <ul class="dropdown-menu" role="menu">
+        <ul id="headnav" class="nav navbar-nav navbar-right">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
+            <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
+            <ul class="dropdown-menu" role="menu">
                 <li><a href="{% url 'profile' user.id %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
                 <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
@@ -50,20 +51,19 @@
                 <i class="glyphicon glyphicon-bell"></i>
                 </a>
               </li>
-            </ul> 
-
+            </ul>
+          </ul>
             {% else %}
-            
             <ul class="nav navhead-nav nav-unauth">
               <li class="icon-login"><a href="/complain/login" id="click-signup">LogIn/Sign Up</a></li>
               <li class="icon-login"><a href="/about/">About</a></li>
-            </ul> 
+            </ul>
             {% endif %}        
       </div>
   </nav>
   
-  <div class="row">
-    <div class="container">
+  <div class="container">
+    <div class="row">
       <div class="col-md-8">
         <div class="box-profile">
           <img class="img-circle" href="/my-profile/" src="/media/{{user_pic}}" width=200 height=200 alt="Generic   placeholder image" width="200" height="200">
@@ -105,28 +105,63 @@
             </div>
         </div>
       </div>
-      <div>
-        
+      <div class="col-md-4">
+        <div class="box">
+          <div class="featured-tab">
+            Featured
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="container">
     <div class="row">
-      <div class="col-md-2">
-        
-      </div>
+
       <div class="col-md-8 text-center">
         <div id="tab-stories">
           <div class="box-tabs">
+
             <ul class="nav nav-tabs" id="navblock" >
-              <li class="active"><a data-toggle="tab" href="#recent">Top</a></li>
-              <li><a data-toggle="tab" href="#top">Recent</a></li>
-              <li><a data-toggle="tab" href="#top">Favourites</a></li> 
+              <li class="active"><a data-toggle="tab" href="javascript:void()" onclick="showRecent()">Recent</a></li>
+              <li><a data-toggle="tab" href="javascript:void()" onclick="showTop()">Top</a></li>
+              <li><a data-toggle="tab" href="javascript:void()" onclick="showFavs()">Favourites</a></li>
             </ul>
+
+          </div>
+          <div id="recent-threads">
+          </div>
+          <div id="top-threads">
+          </div>
+          <div id="favourite-threads">
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+
+  <div class="box-footer">
+    <div class="container" > 
+      <footer>
+        <div class="footer-body">
+          <p class="pull-right">
+            <a href="#">Back to top</a>
+          </p>
+          <p>
+            <a href="#">About</a>&middot;
+            <a href="#">Privacy</a> &middot; 
+            <a href="#">Terms & Conditions</a>
+          </p>
+          <p class="pull-right">
+            <a href="https://facebook.com/udghos">Facebook</a>&middot;
+            <a href="https://twitter.com/udghosnepal">Twitter</a>
+          </p>
+          <p>
+            &copy; 2015 Udghos, Inc.
+          </p>
+        </div>
+      </footer>
     </div>
   </div>
 

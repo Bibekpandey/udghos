@@ -6,8 +6,7 @@
   }
   .header-column {
     margin-bottom: 10px;
-    padding: 10px;
-    border-bottom: 3px solid #888; 
+    padding: 10px; 
     border-right: 0px solid #fff;   
   }
   .box-profile {
@@ -22,9 +21,7 @@
   }
   .box-header {
     width: 100%;
-    margin-bottom: 350px;
-    border-right: 0px solid #fff;   
-    border-bottom: 0px solid #fff;
+    margin-bottom: 10px;
   }
   .container{
     width: 100%;
@@ -32,16 +29,23 @@
   .header-column{ 
     margin-bottom: 10px;
     padding: 10px;
-    border-bottom: 3px solid #888; 
-    border-right: 1px solid #fff;   
+    border-right: 0px solid #fff;   
   }
+  .header-column>h1{
+    font-size: 500%;
+  }
+  .header-column>h3{
+    font-size: 200%;
+  }
+  .header-column-first,
   .header-column-last{
-    padding-bottom: 10px;
-    border-bottom: 2px solid #990012;
+    display: none;
   }
+  /*
   .box-profile{
     display: none;
   }
+  */
   .glyphicon{
     font-size: 25px;
   }
@@ -49,7 +53,7 @@
     font-size: 25px;
   }
   .box-tabs{
-    margin-bottom: 75px;
+    margin-bottom: 50px;
   }
   .box-icons{
     font-size: 20px;
@@ -144,7 +148,7 @@
     margin-right: 60px;
   }
 }
-@media(max-width: 580px){
+@media(max-width: 720px){
   .icons-ld{
     margin: -10px 0px 0px 10px;
     width: 100%;
