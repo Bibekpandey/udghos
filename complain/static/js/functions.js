@@ -114,10 +114,6 @@ function generate_thread(threadobj, auth) {
                 '<div class="post-option">'+
                     '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>'+
                 '</div>'+
-                '<ul class="dropdown-menu" role="menu">'+
-                    '<li><a href="#">Delete Post</a></li>'+
-                    '<li><a href="#">Mark as Offens</a></li>'+
-                '</ul>'+
               '<div id="textst" class="sttext">'+
                 '<a href="/complain/thread/'+threadobj.id.toString()+'">'+
                 '<div class="post-title">'+
@@ -150,18 +146,18 @@ function generate_thread(threadobj, auth) {
           '<div class="box-icons">'+
             '<div class="icons-ld">'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'+
+                      '<button class="btn btn-upvote" aria-hidden="true">upvote</button>'+
                     '</a>'+
                     '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'+
+                      '<span aria-hidden="true">Downvote</span>'+
                     '</a>'+
-                  
+                    '<a href="#" class="report-post">Report</a>'+
               '</div>'+
-            '<div class="post-action">'+
-              '<div class="comment-section">'+
+              '<div class="post-action">'+
+                '<div class="comment-section">'+
                 '<a href="javascript:void()" onclick="toggleComments('+threadobj.id+')">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'+
-                  '<span id="num-comments'+threadobj.id+'">'+threadobj.num_comments+'</span><span id="comment-text'+threadobj.id+'"> Comment'+(threadobj.num_comments!=1?'s':'')+'</span>'+
+                  '<span class="comment-textsize" id="num-comments'+threadobj.id+'">'+threadobj.num_comments+'</span><span class="comment-textsize" id="comment-text'+threadobj.id+'"> Comment'+(threadobj.num_comments!=1?'s':'')+'</span>'+
                 '</a>'+
               '</div>'+
               '<div class="share">'+

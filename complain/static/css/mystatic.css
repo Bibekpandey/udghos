@@ -4,7 +4,7 @@ body {
   background-color: #fff;
   background-color:#fff;
 
-  font-family: Ubuntu ; 
+  font-family: 'Varela Round', sans-serif;
   color: #000;
   background-size:cover;  
 }
@@ -48,7 +48,7 @@ h1,h2,h3,h4{
 
 }
 .box{
-  font-family: Ubuntu;
+  font-family: 'Varela Round', sans-serif;
   position: block;
   min-height: 20px;
   padding: 15px 15px 0px 15px;
@@ -61,7 +61,7 @@ h1,h2,h3,h4{
   baox-shadow: 1px 1px 3px #777;
 }
 .box-profile{
-  font-family: Ubuntu;
+  font-family: 'Varela Round', sans-serif;
   position: block;
   min-height: 20px;
   padding: 10px 15px 15px 15px;
@@ -78,7 +78,7 @@ h1,h2,h3,h4{
 .box-header{
   background-color: #fff;
   height: 200px;
-  font-family: Ubuntu;
+  font-family: 'Varela Round', sans-serif;
   position: block;
   padding: 10px;
   color: #000; 
@@ -96,10 +96,10 @@ h1,h2,h3,h4{
 }
 .box-icons{
   margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .box-top{
-  font-family: Ubuntu;
+  font-family: 'Varela Round', sans-serif;
   font-size: .9em;
   background-color: #fff;
   margin:2px;
@@ -156,10 +156,14 @@ h1,h2,h3,h4{
   
 }
 .icons-ld{
+  margin-left: 5px;
   margin-top: -20px;
   position: relative;
   display: inline-block;
   float: left;
+}
+.icons-ld>a{
+  text-decoration: none;
 }
 .comment-section{
   color: #777;
@@ -392,7 +396,7 @@ padding:0px;
   overflow:hidden;
   padding:5px;
   display:block;
-  font-family:Ubuntu;
+  font-family: 'Varela Round', sans-serif;
   color:#555;
 }
 .sttext>a{
@@ -578,8 +582,17 @@ padding:0px;
   float: right;
   margin-right: 45%;
 }
+.btn-upvote{
+  height: 25px;
+  padding: 2px;
+  border: 1px solid #555;
+}
 #show-btn{
   display: none;
+}
+.report-post{
+  margin-bottom: 5px;
+  color: #777;
 }
 
 #navblocks{
@@ -637,7 +650,6 @@ div.share button {
     background-repeat: no-repeat;
     border-radius: 2px;
     color: white;
-    font-family: Ubuntu;
     font-size: 14px;
     border-bottom: 2px solid transparent;
     border-left: 1px solid transparent;

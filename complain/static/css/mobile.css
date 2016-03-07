@@ -17,14 +17,14 @@
 
 /*991 header change */
 @media (max-width: 991px) {
+  #navhead{
+    font-size: 30px;
+  }
   .box-header {
     width: 100%;
     margin-bottom: 350px;
     border-right: 0px solid #fff;   
     border-bottom: 0px solid #fff;
-  }
-  .box-header>h1{
-    font-size: 50px;
   }
   .container{
     width: 100%;
@@ -46,10 +46,18 @@
     font-size: 25px;
   }
   .nav-tabs{
-    font-size: 30px;
+    font-size: 25px;
   }
   .box-tabs{
     margin-bottom: 75px;
+  }
+  .box-icons{
+    font-size: 20px;
+  }
+  .btn-upvote{
+    font-size: 20px;
+    height: 35px;
+    width: 75px;
   }
   .comment-section{
     margin-right: 150px;
@@ -60,7 +68,8 @@
     font-size: 25px;  
     margin-top: -10px;
   }
-  #num-comment{
+  .comment-textsize{
+    margin-top: -15px;
     font-size: 25px;
   }
   .glyphicon-thumbs-up,
@@ -75,6 +84,9 @@
   .tagname{
     font-size: 25px;
   }
+  .display-tag{
+    margin-right: 40px;
+  }
   .comment-form{
     margin-top: 30px;
   }
@@ -84,6 +96,7 @@
     width: 40px;
   }
   div.share > .facebook{
+    margin-right: 20px;
     margin-top: -45px;
     background-size: 40px 40px;
   }
@@ -104,7 +117,7 @@
     margin-top: -3px;
   }
   #gly-bell{
-    margin-right: 20px;
+    margin-right: 5px;
     margin-top: 4px;
     float: right;
   }
@@ -122,7 +135,36 @@
     margin-left: 200px;
   } 
 }
-
+@media(max-width: 440px){
+  .form-control-navbar{
+    display: none;
+  }
+  #gly-bell{
+    margin-top: -22px;
+    margin-right: 60px;
+  }
+}
+@media(max-width: 580px){
+  .icons-ld{
+    margin: -10px 0px 0px 10px;
+    width: 100%;
+  }
+  .report-post{
+    margin-top: 10px;
+    float: right;
+    margin-right: 35px;
+  }
+  .post-action{
+    margin: -10px 0px 5px 0px;
+    padding-left: 20px;
+    margin-top: 25px;
+    width: 100%;
+    border-bottom: 2px solid #fff;
+  }
+  div.share > .facebook{
+    margin-right: 20px;
+  }
+}
 
 
 @media (max-width: 768px) {
