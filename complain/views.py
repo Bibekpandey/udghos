@@ -529,3 +529,7 @@ def profile_update(request):
     except Exception as e:
         return HttpResponse(e)
 
+class Concern(View):
+    def get(self,request):
+        self.context = {}
+        return render(request, "complain/post-concern.html",self.context)

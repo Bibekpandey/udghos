@@ -1,0 +1,287 @@
+
+/*///////////////////////////////////////////////////////////////////////////////*/
+                   /*navbar design size less than 991px*/
+/*///////////////////////////////////////////////////////////////////////////////*/
+
+@media (max-width: 991px) {
+  #navhead{
+    margin-top: 10px;
+    margin-left: 45px;
+    font-size: 50px;
+  }
+  #headnav{
+    margin-right: 45px;
+  }
+  #navcolor{
+    height: 70px;
+  }
+  .img-navbar{
+    margin-left: 15px;
+    margin-top: 9px;
+    width: 50px;
+    height: 50px;
+  }
+  .form-control-navbar{
+    margin-top: 5px;
+    height: 45px;
+  }
+  .form-control-footer{
+    width: 100%;
+  }
+
+  .box-header {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .container{
+    width: 100%;
+  }
+  .header-column{ 
+    margin-bottom: 10px;
+    padding: 10px;
+    border-right: 0px solid #fff;   
+  }
+  .header-column>h1{
+    font-size: 500%;
+  }
+  .header-column>h3{
+    font-size: 200%;
+  }
+  .header-column-first,
+  .header-column-last{
+    display: none;
+  }
+  /*
+  .box-profile{
+    display: none;
+  }
+  */
+  .glyphicon{
+    margin-top: 5px;
+    font-size: 35px;
+  }
+  .glyphicon-tags,
+  .glyphicon-close{
+    font-size: 20px;
+  }
+  .notification-count{
+    margin-top: -40px;
+    margin-left: 20px;
+  }
+
+  .nav-tabs{
+    font-size: 25px;
+  }
+  .box-tabs{
+    margin-bottom: 50px;
+  }
+  .box-icons{
+    font-size: 25px;
+  }
+  .btn-upvote{
+    font-size: 25px;
+    height: 40px;
+    width: 100px;
+  }
+  .comment-section{
+    margin-right: 150px;
+    font-size: 25px;
+    border:none;
+  }
+  .net-vote{
+    font-size: 25px;  
+    margin-top: -10px;
+  }
+  .comment-textsize{
+    margin-top: -15px;
+    font-size: 25px;
+  }
+  .glyphicon-thumbs-up,
+  .glyphicon-thumbs-down{
+    font-size: 35px;
+    margin: 0px 5px 0px 5px;
+  }
+  .glyphicon-comment{
+    font-size: 40px;
+    margin-top: -5px 5px 0px 5px;
+  }
+  .glyphicon-footer{
+    margin-top: 1px;
+    font-size: 20px;
+    color: #555;
+  }
+  .tagname{
+    font-size: 20px;
+  }
+  .display-tag{
+    font-size: 20px;
+    margin-right: 40px;
+  }
+  .comment-form{
+    margin-top: 30px;
+  }
+  div.share button{
+    height: 40px;
+    margin-bottom: 20px;
+    width: 40px;
+  }
+  div.share > .facebook{
+    margin-right: 20px;
+    margin-top: -45px;
+    background-size: 40px 40px;
+  }
+  div.share > .twitter{
+    margin-top: -45px;
+    background-size: 40px 40px;
+  }
+  
+  /*footer*/
+  .copyright{
+    font-size: 25px;
+  }
+  .footer-body{
+    margin: 25px 25px 25px 25px;
+  }
+  .glyphicon-footer{
+    margin-right: 0%;
+  }
+  p>a{
+    font-size: 25px;
+    margin: 5px;
+    text-decoration: none;
+    color: #fff;
+  }
+  p>a:hover{
+    color: #fff;
+  }
+  .nav-unauth>li>a{
+    font-size: 30px;
+  }
+
+  .icons-ld{
+    margin: -10px 0px 0px 10px;
+    width: 100%;
+  }
+  .report-post{
+    margin-top: 0px;
+    float: right;
+    margin-right: 35px;
+  }
+  .post-action{
+    margin: -10px 0px 5px 0px;
+    padding-left: 20px;
+    margin-top: 15px;
+    width: 100%;
+    border-bottom: 2px solid #fff;
+  }
+
+  .post-title{
+    font-size: 27px;
+  }
+  .post-content{
+    margin-top: 3px;
+    font-size: 25px;
+  }
+
+  /*/////////////////Modal////////////////*/
+  .btn-post-desktop{
+    display: none;
+  }
+  .btn-post-mobile{
+    display: block;
+  }
+}
+
+/*///////////////////////////////////////////////////////////////////////////////*/
+                   /*navbar design size less than 767px*/
+/*///////////////////////////////////////////////////////////////////////////////*/
+@media(max-width: 767px){
+  .header-column {
+    margin-bottom: 10px;
+    padding: 10px; 
+    border-right: 0px solid #fff;   
+  }
+  .box-profile {
+    margin-top: 0px;
+  }
+
+  #navhead{
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 30px;
+  }
+  #headnav{
+    margin-right: -10px;
+  }
+  .nav-unauth>li>a{
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  .navbar-form{
+    width: 0%;
+    border: none;
+    float: right;
+    margin-top: -3px;
+  }
+  .navbar-form{
+    border: 0px solid #fff;
+  }
+  #headnav{
+    margin-right: 10px;
+    margin-top: -50px;
+    float: right;
+  }
+  .dropdown-menu{
+    background-color: #eee;
+    margin-top: -10px;
+    margin-left: 200px;
+  } 
+  .form-control-navbar{
+    display: none;
+  }
+  .notification-count{
+    margin-top: -33px;
+    margin-left: 17px;
+  }
+  .glyphicon{
+    font-size: 30px;
+    margin-top: -2px;
+  }
+  .img-navbar{
+    margin-top: -1px;
+  }
+  #gly-bell{
+    margin-top: 2px;
+    margin-right: 70px;
+    float: right;
+  }
+  .glyphicon-search{
+    color: #fff;
+    margin-right: 15px;
+  }
+  .glyphicon-footer{
+    margin-top: 1px;
+    font-size: 20px;
+    color: #555;
+  }
+  .footer-form{
+    width: 100%;
+  }
+
+
+  div.share > .facebook{
+    margin-right: 20px;
+  }
+
+  .navhead-brand {
+    float: left;
+  }
+  .navhead-nav {
+    float: right;
+  }
+  .nav-unauth{
+    margin-top: -60px;
+  }
+  
+  
+}

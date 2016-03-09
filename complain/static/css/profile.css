@@ -23,9 +23,8 @@ textarea:focus{
     margin-top: 67px;
     margin-bottom: 5px;
     background-color: #fff;
-    border: 1px solid #e4e4e4;
+    border: 2px solid #ccc;
     border-radius: 3px;
-    box-shadow: 2px 2px 5px #777;
 }
 #heading-border{
   border-bottom: 1px solid #ddd;

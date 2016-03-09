@@ -19,4 +19,6 @@ urlpatterns =  [
         url(r'^profile/([0-9]+)/', Profile.as_view(), name='profile'),
         url(r'^profile-update/', profile_update, name='profile_update'),
 
+        url(r'^post-concern/', Concern.as_view(), name='concern'),
+
 ]

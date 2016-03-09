@@ -39,6 +39,7 @@ function toggleComments(id) {
                     appendComment($("#thread-comments"+id.toString()), comment);
                 });
         });
+        
         $("#display-form"+id.toString()).toggle("fast", function(){});
 }
 
@@ -111,7 +112,9 @@ function generate_thread(threadobj, auth) {
                 '<div class="stimg">'+
                     '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
-
+                '<div class="post-option">'+
+                    '<span class="glyphicon glyphicon-remove glyphicon-remove-post" aria-hidden="true"></span>'+
+                '</div>'+
               '<div id="textst" class="sttext">'+
                 '<a href="/complain/thread/'+threadobj.id.toString()+'">'+
                 '<div class="post-title">'+
@@ -144,18 +147,18 @@ function generate_thread(threadobj, auth) {
           '<div class="box-icons">'+
             '<div class="icons-ld">'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>'+
+                      '<button class="btn btn-upvote" aria-hidden="true">Support</button>'+
                     '</a>'+
                     '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>'+
+                      '<span aria-hidden="true">Downvote</span>'+
                     '</a>'+
-                  
+                    '<a href="#" class="report-post">Report</a>'+
               '</div>'+
-            '<div class="post-action">'+
-              '<div class="comment-section">'+
+              '<div class="post-action">'+
+                '<div class="comment-section">'+
                 '<a href="javascript:void()" onclick="toggleComments('+threadobj.id+')">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'+
-                  '<span id="num-comments'+threadobj.id+'">'+threadobj.num_comments+'</span><span id="comment-text'+threadobj.id+'"> Comment'+(threadobj.num_comments!=1?'s':'')+'</span>'+
+                  '<span class="comment-textsize" id="num-comments'+threadobj.id+'">'+threadobj.num_comments+'</span><span class="comment-textsize" id="comment-text'+threadobj.id+'"> Comment'+(threadobj.num_comments!=1?'s':'')+'</span>'+
                 '</a>'+
               '</div>'+
               '<div class="share">'+
@@ -164,11 +167,11 @@ function generate_thread(threadobj, auth) {
               '</div>'+
             '</div>'+
           '</div>'+
-          '<div id="display-form'+threadobj.id+'" class="comment-form">'+
+          '<div class="comment-form" id="display-form'+threadobj.id+'">'+
             '<div id="thread-comments'+threadobj.id+'"></div>'+
             (auth==true?
-            '<textarea id="comment-box'+threadobj.id+'" class="form-comment" placeholder="Your comment here."></textarea>'+
-            '<button onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
+            '<textarea class="form-comment" id="comment-box'+threadobj.id+'" placeholder="Your comment here."></textarea>'+
+            '<button class="btn btn-comment" onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
             +
           '</div>'+
           '</div>'+
