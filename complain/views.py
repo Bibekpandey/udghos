@@ -518,4 +518,7 @@ class Profile(View):
             self.context['authenticated'] = False
         return render(request, "complain/profile.html",self.context)
 
-
+class concern(View):
+    def get(self,request):
+        self.context = {}
+        return render(request, "complain/post-concern.html",self.context)

@@ -91,6 +91,9 @@
               <li>
                 <a href="#" title="Header" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Content">
                 <i class="glyphicon glyphicon-bell"></i>
+                <div class="notification-count">
+                  
+                </div>
                 </a>
               </li>
             </ul> 
@@ -106,8 +109,8 @@
   </nav>
 
   <div id="content-top" >
-    <div class="row">
-      <div class="container-fluid">
+    <div class="container-fluid">
+      <div class="row">
         <div class="box-header">
           <div class="col-md-3 text-center header-column header-column-first">
             <h1 class="font-header" >Udghos</h1><br>
@@ -118,9 +121,14 @@
           <div class="col-md-6 text-center header-column">
             <h1>Let's make a change</h1>
             <h3>Post your Complain/Views</h3>
-            <button type="button" class="btn btn-my btn-large" data-toggle="modal" data-target="#myModal" data-keyboard="true">
+            <button type="button" class="btn btn-my btn-large btn-post-desktop" data-toggle="modal" data-target="#myModal" data-keyboard="true">
               Post a Concern
             </button>
+            <a href="/complain/post-concern/">
+              <button type="button" class="btn btn-my btn-large btn-post-mobile" >
+                Post a Concern
+              </button>
+            </a>
           </div>
           <div class="col-md-3 text-center header-column-last">
             <h3>What do you think of Udghos?</h3>
@@ -129,8 +137,8 @@
             </button>
           </div>
 
-          <div class="row">
-            <div class="container">
+          <div class="container">
+            <div class="row">
               <!-- Modal -->
               <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
@@ -175,8 +183,8 @@
            </div>
           </div>
 
-          <div class="row">
-            <div class="container">
+          <div class="container">
+            <div class="row">
               <!-- Modal Review-->
               <div class="modal fade" id="myModalReview" tabindex="-1" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
@@ -284,10 +292,20 @@
             <a href="#">Terms & Conditions</a>
           </p>
           <p class="pull-right">
+            <form class="footer-form" role="search">
+              <div class="form-group">
+                <div id="search-bar" class="inner-addon right-addon nav-search">
+                  <i class="glyphicon glyphicon-footer glyphicon-search"></i>
+                  <input type="text" placeholder="Search" class="form-control form-control-footer" />
+                </div>
+              </div>
+            </form>
+          </p>
+          <p class="pull-right">
             <a href="https://facebook.com/udghos">Facebook</a>&middot;
             <a href="https://twitter.com/udghosnepal">Twitter</a>
           </p>
-          <p>
+          <p class="copyright">
             &copy; 2015 Udghos, Inc.
           </p>
         </div>

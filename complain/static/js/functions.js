@@ -113,7 +113,7 @@ function generate_thread(threadobj, auth) {
                     '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
                 '<div class="post-option">'+
-                    '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>'+
+                    '<span class="glyphicon glyphicon-remove glyphicon-remove-post" aria-hidden="true"></span>'+
                 '</div>'+
               '<div id="textst" class="sttext">'+
                 '<a href="/complain/thread/'+threadobj.id.toString()+'">'+
@@ -147,7 +147,7 @@ function generate_thread(threadobj, auth) {
           '<div class="box-icons">'+
             '<div class="icons-ld">'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<button class="btn btn-upvote" aria-hidden="true">upvote</button>'+
+                      '<button class="btn btn-upvote" aria-hidden="true">Support</button>'+
                     '</a>'+
                     '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote('+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+

@@ -18,4 +18,6 @@ urlpatterns =  [
         url(r'^tags/', get_tags, name='get_tags'),
         url(r'^profile/([0-9]+)/', Profile.as_view(), name='profile'),
 
+        url(r'^post-concern/', concern.as_view(), name='concern'),
+
 ]
