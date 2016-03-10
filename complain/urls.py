@@ -4,6 +4,7 @@ from complain.views import *
 urlpatterns =  [
         url(r'^$', Index.as_view(), name='index'),
         url(r'^login/', Login.as_view(), name='login'),
+        url(r'^signup/', Signup.as_view(), name='signup'),
         url(r'^threads/', get_threads_json, name='threads'),
         url(r'^logout/', logout_user, name='logout'),
         url(r'^vote/', vote, name='vote'),

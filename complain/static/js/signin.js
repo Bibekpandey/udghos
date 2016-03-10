@@ -35,3 +35,18 @@ else {
 
 }
 
+function signUp() {
+    $('#message').text("Signing up.. Please Wait..");
+
+    $.post('/complain/signup/', $('#signup-form').serialize(), function(data) {
+        $('#message').text(data.message);
+        if(data.success) {
+            window.location='/';
+        }
+        else {
+            document.getElementById('signup-form').reset();  
+            return false;
+        }
+    });
+}
+
