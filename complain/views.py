@@ -137,8 +137,52 @@ class Login(View):
 
 def logout_user(request):
     logout(request)
-    return redirect('index')
+    return redirect('login')
 
+
+class Signup(View):
+    context = {}
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        ret = {}
+        print('...')
+        try:
+            firstName = request.POST['firstname'].strip()
+            lastName = request.POST['lastname'].strip()
+            email = request.POST['email'].strip()
+            password = request.POST['password'].strip()
+            username = request.POST['username'].strip()
+
+            user = User.objects.filter(username=username)
+            if len(user)>0:
+                ret['success'] = False
+                ret['message'] = "username already exists"
+                return JsonResponse(ret)
+
+            newUser = User(username=username,
+                            first_name=firstName,
+                            last_name=lastName,
+                            email=email)
+            newUser.set_password(password)
+            newUser.save()
+            account = Account(user=newUser)
+            account.save()
+            user = authenticate(username=username, password=password)
+            ret['success'] = True
+            ret['message'] = "successfully signed up"
+            login(request, user)
+            return JsonResponse(ret)
+        except Exception as e:
+            u = User.objects.filter(username=username)
+            if len(u)==1:
+                a = Account.objects.filter(user=u)
+                a.delete()
+                u.delete()
+            ret['success'] = False
+            ret['message'] = repr(e)
+            return JsonResponse(ret)
 
 class Post(View):
     context = {}
@@ -518,7 +562,18 @@ class Profile(View):
             self.context['authenticated'] = False
         return render(request, "complain/profile.html",self.context)
 
-class concern(View):
+def profile_update(request):
+    try:
+        username = request.POST.get('username', '')
+        firstname = request.POST.get('first-name', '')
+        lastname = request.POST.get('last-name', '')
+        address = request.POST.get('address', '')
+        print(username+firstname+lastname+address)
+        return HttpResponse('done')
+    except Exception as e:
+        return HttpResponse(e)
+
+class Concern(View):
     def get(self,request):
         self.context = {}
         return render(request, "complain/post-concern.html",self.context)
