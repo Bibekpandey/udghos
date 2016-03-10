@@ -274,7 +274,7 @@ text-align:center;
   padding: 0px 15px 0px 15px;
 }
 .login-form{
-  margin: 10px 0px 10px 0px;
+  margin: 5px 0px 5px 0px;
 }
 .box-signin {
   overflow: hidden;
@@ -288,12 +288,30 @@ text-align:center;
   border-radius: 2px;
 }
 .box-footer{
-  background-color: #333;
+  margin-left: -110px;
+  margin-bottom: -10px;
+  width: 200%;
+  background: #333;
+  opacity: 0.8;
+  color: #111;
+}
+.footer-body{
+  margin: 10px 50px 0px 10px;
+}
+.copyright{
+  color: #fff;
+}
+p>a{
+  font-size: 15px;
+  margin: 5px;
+  color: #fff;
+}
+p>a:hover{
   color: #fff;
 }
 
 #navcolor{
-  background: linear-gradient(#777, #333);
+  background-color: #333;
   border-bottom: 1px solid #fff;
 }
 .navbar-default{
