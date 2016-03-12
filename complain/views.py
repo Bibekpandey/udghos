@@ -9,6 +9,8 @@ from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from django.views.generic import View
 from complain.models import *
 import json
@@ -564,14 +566,49 @@ class Profile(View):
 
 def profile_update(request):
     try:
+        ret = {}
         username = request.POST.get('username', '')
         firstname = request.POST.get('first-name', '')
         lastname = request.POST.get('last-name', '')
         address = request.POST.get('address', '')
-        print(username+firstname+lastname+address)
-        return HttpResponse('done')
+        uid = request.POST.get('userid', '')
+        try:
+            uid = int(uid)
+        except:
+            ret['success'] = False
+            ret['error'] = "Can't update profile. Try later."
+            return JsonResponse(ret)
+
+        # get account
+        acc = Account.objects.get(pk=uid)
+        usr = acc.user
+        # check username exists or not
+        usrs = User.objects.filter(username=username)
+
+        if len(usrs)!=0 and usrs[0].pk != usr.pk:
+            ret['success'] = False
+            ret['error'] = "Username exists. Try next one"
+            return JsonResponse(ret)
+
+        usr.first_name = firstname
+        usr.last_name = lastname
+        usr.username=username
+        acc.address = address
+        usr.save()
+        acc.save()
+
+        ret['success'] = True
+        ret['error'] = "Changed profile"
+        return(JsonResponse(ret))
+
+    except ObjectDoesNotExist:
+        ret['success'] = False
+        ret['error'] = "No user found. Please refresh and try later"
+        return JsonResponse(ret)
     except Exception as e:
-        return HttpResponse(e)
+        ret['success'] = False
+        ret['error'] = repr(e)
+        return(JsonResponse(ret))
 
 class Concern(View):
     def get(self,request):
