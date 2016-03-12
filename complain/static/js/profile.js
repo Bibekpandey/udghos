@@ -16,20 +16,26 @@ $('#edit').click(function(){
 });
 
 $('#save').click(function(){
-    alert($('#updateform').serialize());
+    $('#error').text('Changing profile...');
     $.ajax({   
         type: 'POST',   
         url: '/complain/profile-update/',   
         data: $('#updateform').serialize(),
-        success: function(data) { alert(data); }
-    }); 
-    //$('#updateform').submit();
-  $('#save, .info').hide();
-  $('textarea').each(function(){
-    var content = $(this).val();//.replace(/\n/g,"<br>");
-    $(this).html(content);
-    $(this).contents().unwrap();    
+        success: function(data) { 
+            $('#error').text(data.error);
+            if(data.success==true) {
+                window.location="";
+                $('#save, .info').hide();
+                $('textarea').each(function(){
+                var content = $(this).val();//.replace(/\n/g,"<br>");
+                $(this).html(content);
+                $(this).contents().unwrap();    
   }); 
+                $('#edit').show(); 
 
-  $('#edit').show(); 
+            }
+            else {
+            }
+        }
+    }); 
 });

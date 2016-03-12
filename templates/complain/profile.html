@@ -66,11 +66,12 @@
     <div class="row">
       <div class="col-md-8">
         <div class="box-profile">
+        <b class="text-center text-danger" id="error"></b>
           <img class="img-circle" href="/my-profile/" src="/media/{{user_pic}}" width=200 height=200 alt="Generic   placeholder image" width="200" height="200">
           <div class="profileinfo">
 
             <form id="updateform" method="post" action="{% url 'profile_update' %}">
-              <input type="hidden" name="hiddenField" />
+              <input type="hidden" name="userid" value="{{request.user.id}}" />
             <div id="dataprofile" class="my-name">
               <span id="first-name" class="datainfo post-title">{{account.user.first_name}}</span>
               <span id="last-name" class="datainfo post-title">{{account.user.last_name}}</span>
@@ -93,7 +94,7 @@
               </div>
               <div class="my-address">
                 <i class="glyphicon glyphicon-map-marker"> </i>
-                <span id="address" class="datainfo"> Bharatpur, Chitwan</span>
+                <span id="address" class="datainfo"> {{account.address}}</span>
               </div>
               <div class="about-me">
                 <div><b>About</b></div>
