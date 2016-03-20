@@ -116,10 +116,11 @@
         </div>
                     <div class="modal-body">
                       <div class="form-group">
-                          <label for="recipient-name" class="control-label">Title</label>
-                          <input type="text" class="form-control" id="recipient-name" placeholder="Title relevant to the description">
-                      </div>
+                                            </div>
                       <form method="post" id="thread-form" action="{% url 'post' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
+    <label for="recipient-name" class="control-label">Title</label>
+                          <input type="text" name="title" class="form-control" id="recipient-name" placeholder="Title relevant to the description">
+
                         {% csrf_token %}
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
@@ -189,7 +190,45 @@
     <script src="{% static 'js/scripts.js' %}"></script>
     <script src="{% static 'js/myjs.js' %}"></script>
     <script src="{% static 'js/homepage.js' %}"></script>
+    <script>
+        var g_tags_selected = [];
+    function getTags() {
+        var query = $('#tagbox').val();
+        if (query != '') {
+            $.get('/complain/tags?query='+query, function(data) {
+                renderTags(data);
+            });
+        }
+    }
 
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    $('#tagbox').on('input', getTags);
+
+    function renderTags(data) {
+        var tags = data.tags;
+		var ul = document.getElementById('tags-suggest-list');
+		ul.innerHTML="";
+        for(var x in tags) {
+            if (g_tags_selected.indexOf(tags[x].name) < 0 && g_tags_selected.length<4)
+			    ul.innerHTML += '<li id="tag-'+tags[x].id+'" onclick="addTag(this)">'+tags[x].name+'</li>';
+        }
+    }
+	
+	function addTag(elem) {
+        $('#tags-warning').hide();
+        $('#tagbox').val('');
+        $('#tags-suggest-list').empty();
+        g_tags_selected.push(elem.innerHTML);
+        var id = elem.getAttribute('id').replace('tag-', '');
+		var tags_elem = document.getElementById('tags-chosen');	
+		tags_elem.innerHTML+= '<span id="selected-'+id+'"class="btn selected-tags">' +elem.innerHTML+ '<button type="button" class="close my-close" id="close-tag"><span onclick="removeTag(\''+id+'\''+',\''+elem.innerHTML+'\')" aria-hidden="true">&times;</span></button></span>';
+	}
+
+    function removeTag(id, tagname) {
+        var index = g_tags_selected.indexOf(tagname);
+        g_tags_selected.splice(index, 1);
+        $('#selected-'+id).remove();
+    } 
+    </script>
+
 
 </html>

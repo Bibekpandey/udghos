@@ -205,6 +205,7 @@ class Post(View):
             return redirect('login')
 
         thread_type= request.POST.get('thread_type', '')
+        thread_type='complaint'
 
         if thread_type=='' or thread_type not in ['complaint', 'discussion']:
             raise Http404('invalid thread type')
