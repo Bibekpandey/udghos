@@ -267,6 +267,17 @@ p>a:hover{
 .post-actions{
   float: right;
 }
+.post-concern{
+  width: 100%;
+  font-size: 40px;
+}
+.title-concern{
+  width: 100%;
+  font-size: 50px;
+}
+.form-group>input{
+  height: 500px;
+}
 
 #tag-position{
   position: relative;
