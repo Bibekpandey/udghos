@@ -149,10 +149,13 @@
                     </div>
                     <div class="modal-body">
                       <div class="form-group">
-                          <label for="recipient-name" class="control-label">Title</label>
-                          <input type="text" class="form-control" id="recipient-name" placeholder="Title relevant to the description">
                       </div>
                       <form method="post" id="thread-form" action="{% url 'post' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
+
+                          <label for="recipient-name" class="control-label">Title</label>
+                          <input type="text" name="title" class="form-control" id="recipient-name" placeholder="Title relevant to the description">
+                      
+                      
                         {% csrf_token %}
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
