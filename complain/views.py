@@ -1,40 +1,107 @@
-from django.shortcuts import render, redirect, Http404
+from django.shortcuts import render, redirect, Http404, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.urlresolvers import reverse
+from django.core import serializers
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import JsonResponse
+
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.views.generic import View
 from complain.models import *
+import json
 
 import math, traceback
 
 COMPLAINT, DISCUSSION = 0, 1
 
+#error message
 def error(request):
     return HttpResponse('Login error')
 
 class Index(View):
     def get(self, request):
         self.context = {}
-        extra = request.GET.get('social', '')
         if request.user.is_authenticated():
+            self.context['authenticated'] = True
             self.context['user'] = request.user
             acc = Account.objects.get(user=request.user)
             self.context['address'] = acc.address
+            self.context['profile_pic'] = acc.profile_pic
+        else:
+            self.context['authenticated'] = False
 
-            # now, if extra is 1 then we have user from social site
-            if extra=='1':
-                pass
-                # so create a new account
-                #createAccount(request.user)
+        return render(request, "complain/home.html", self.context)
 
-            self.context['threads'], self.context['num_comments'] = get_recent_threads(20)
-            return render(request, "complain/home.html", self.context)
-        return redirect('login')
+        #return redirect('login')
+
+
+def get_threads_json(request):
+    if request.user.is_authenticated():
+        # auth is to check if user has logged in or not and thereby can comment or not
+        auth = True
+    else: auth = False
+
+    # first check if only one thread is asked
+    threadid = request.GET.get('id', '')
+    try: 
+        if not threadid=='':
+            threadid = int(threadid)
+            thread = get_object_or_404(Thread, pk=threadid)
+            return JsonResponse({'thread':thread_to_dict(thread), 'authenticated':auth})
+    except:
+        pass
+
+    # list of threads asked 
+    threadtype = request.GET.get('type', '')
+    try:
+        beforeid = int(request.GET.get('earlierthan',''))
+    except:
+        beforeid = -1
+    try:
+        votelt = int(request.GET.get('votelt', ''))
+    except:
+        votelt = -1
+    return JsonResponse({'threads':get_threads(3, threadtype=threadtype, earlierthan=beforeid, votelt=votelt), 'authenticated':auth})
+
+
+def get_comments(request):
+    try:
+        threadid = int(request.POST.get('threadid'))
+        
+        ret = {"comments":get_comments_by_thread_id(threadid)}
+        return JsonResponse(ret)
+    except Exception as e:
+        print(repr(e))
+
+def get_comments_by_thread_id(threadid):
+    comments = Comment.objects.filter(thread__id=threadid)
+    templist = []
+    templist = map(lambda x:{'user':x.account.user.username,
+                                'comment':x.text,
+                                'date':x.time.strftime("%I:%M %p, %d %b %Y")
+                                }, comments)
+    return list(templist)
+        
+
+def delete_comment(request):
+    if request.user.is_authenticated():
+        try:
+            comment_id = int(request.POST.get('commentid'))
+            comment = comment.objects.get(id=comment_id)
+            thrd = comment.thread
+            comment.delete()
+            ret = {"comments": get_comments_by_thread_id(thrd.id)}
+            return JsonResponse(ret)
+        except Exception as e:
+            print(repr(e))
+    else:
+        return HttpResponse('')
+
 
 # CREATE ACCOUNT, takes in user object
 def createAccount(userobj):
@@ -63,7 +130,7 @@ class Login(View):
             return HttpResponse('username/password can\'t be empty')
         user = authenticate(username=username, password=password)
 
-        if user is None:
+        if user is None or username=="root":
             return HttpResponse('username/password error')
         else:
             login(request, user)
@@ -72,8 +139,52 @@ class Login(View):
 
 def logout_user(request):
     logout(request)
-    return redirect('index')
+    return redirect('login')
 
+
+class Signup(View):
+    context = {}
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        ret = {}
+        print('...')
+        try:
+            firstName = request.POST['firstname'].strip()
+            lastName = request.POST['lastname'].strip()
+            email = request.POST['email'].strip()
+            password = request.POST['password'].strip()
+            username = request.POST['username'].strip()
+
+            user = User.objects.filter(username=username)
+            if len(user)>0:
+                ret['success'] = False
+                ret['message'] = "username already exists"
+                return JsonResponse(ret)
+
+            newUser = User(username=username,
+                            first_name=firstName,
+                            last_name=lastName,
+                            email=email)
+            newUser.set_password(password)
+            newUser.save()
+            account = Account(user=newUser)
+            account.save()
+            user = authenticate(username=username, password=password)
+            ret['success'] = True
+            ret['message'] = "successfully signed up"
+            login(request, user)
+            return JsonResponse(ret)
+        except Exception as e:
+            u = User.objects.filter(username=username)
+            if len(u)==1:
+                a = Account.objects.filter(user=u)
+                a.delete()
+                u.delete()
+            ret['success'] = False
+            ret['message'] = repr(e)
+            return JsonResponse(ret)
 
 class Post(View):
     context = {}
@@ -89,18 +200,19 @@ class Post(View):
         self.context['form_heading']  = 'Post a '+thread_type
         return render(request, "complain/post-thread.html", self.context)
     
-    def post(self, request, thread_type):
+    def post(self, request):
         if not request.user.is_authenticated():
             return redirect('login')
 
         thread_type= request.POST.get('thread_type', '')
+        thread_type='complaint'
 
         if thread_type=='' or thread_type not in ['complaint', 'discussion']:
             raise Http404('invalid thread type')
 
         if thread_type=='complaint': th_type = COMPLAINT
         elif thread_type=='discussion': th_type = DISCUSSION
-        else: raise Http404('invalid thread type')
+        else: th_type = COMPLAINT
 
         title = request.POST.get('title', '')
         content = request.POST.get('content', '')
@@ -110,16 +222,29 @@ class Post(View):
         File(file=afile, files=test).save()
         '''
                 
-        '''
-        if title=='' or content =='':
-            self.context['message'] = 'Title/content can\'t be empty'
-            return self.get(request, thread_type)
-        '''
+        if content =='': # or title==''
+            return redirect('index')
+            #self.context['message'] = 'Title/content can\'t be empty'
+            #return self.get(request, thread_type)
 
         # now with storage of the thread
         account = Account.objects.get(user=request.user)
         thread = Thread(thread_type=th_type, title=title, 
                     content=content, account=account)
+
+        thread.save()
+        # now the tags
+        strtagids = request.POST.get('tagids', '')
+        #return HttpResponse(strtagids)
+        #tagids = list(map(lambda x: int(x),strtagids.split(',')))
+        tagids = []
+        for x in strtagids.split(','):
+            try:
+                tagids.append(int(x))
+            except ValueError:
+                pass
+        for tagid in tagids:
+            thread.tags.add(ThreadTag.objects.get(pk=tagid))
         thread.save()
 
         images = request.FILES.getlist('images')
@@ -129,7 +254,7 @@ class Post(View):
             img.image = image # to get pk of image object
             img.save()
 
-        return HttpResponse('Thread posted.<br>Go to <a href="/complain/">Home</a> page')
+        return redirect('index')
 
 
 def calculate_delta_vote(action, upvotes, downvotes): 
@@ -249,15 +374,15 @@ class ThreadPage(View):
         if request.user.is_authenticated():
             self.context['user'] = request.user
 
-        thread = Thread.objects.get(id=thread_id)
-        self.context['thread'] = thread
+        #thread = Thread.objects.get(id=thread_id)
+        #self.context['thread'] = thread
 
-        comments = Comment.objects.filter(thread=thread)
-        self.context['comments']= comments
+        comments =[]# Comment.objects.filter(thread=thread)
+        #self.context['comments']= comments
 
         replies = []
         # images
-        images = ThreadImage.objects.filter(thread=thread)
+        images = []#ThreadImage.objects.filter(thread=thread)
         self.context['images'] = []
         for i in images:
             self.context['images'].append(i.name)
@@ -270,7 +395,7 @@ class ThreadPage(View):
 
         self.context['total_comments'] = len(comments)
 
-        return render(request, "complain/thread.html", self.context)
+        return render(request, "complain/post.html", self.context)
 
 
 def comment(request):
@@ -285,12 +410,19 @@ def comment(request):
                 comment = Comment(account=account, 
                             thread=thread, text=content)
                 comment.save()
-                return redirect(reverse('thread', args=[str(thread_id)]))
+                ret = {}
+                ret['comment'] = {"comment":comment.text,
+                                'date':comment.time.strftime("%I:%M %p, %d %b %Y"),
+                                "user":comment.account.user.username
+                }
+                return JsonResponse(ret)
+                #return redirect(reverse('thread', args=[str(thread_id)]))
         except TypeError:
             return HttpResponse('Invalid thread id')
         except Exception as e:
             return HttpResponse(e.args)
-    return redirect('index')
+    return HttpResponse('nope')
+    #return redirect('index')
 
 
 def reply(request):
@@ -343,20 +475,143 @@ def new_social(request):
                 raise Http404("user not found")
 
 
+# for tags
+def get_tags(request):
+    if request.method=='GET':
+        query = request.GET.get('query','')
+        if query!='':
+            tags = ThreadTag.objects.filter(name__contains=query)
+            d = [] 
+            for x in tags:
+                d.append({'id':x.id,'name':x.name})
+            return JsonResponse({'tags':d})
+        else:
+            return JsonResponse({'tags':[]})
+
 
 #########################################
 #####       HELPER FUNCTIONS        #####
 #########################################
 
-def get_recent_threads(n): # return n threads with number of comments
+def get_threads(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n threads with number of comments
+    if threadtype == 'top':
+        order=['-votes', '-id']
+        kwargs = {
+            'votes__lt':votelt,
+            'id__lt':earlierthan,
+        }
+        if votelt==-1:
+            del kwargs['votes__lt']
+        if earlierthan==-1:
+            del kwargs['id__lt']
+    else:
+        order=['-time']
+        kwargs = {
+            'id__lt':earlierthan
+        }
+        if earlierthan==-1:
+            del kwargs['id__lt']
+
     try:
-        threads = Thread.objects.order_by('-time')[:n]
-    except: # n greater than total length
-        threads = Thread.objects.order_by('-time')
+        threads = Thread.objects.order_by(*order).filter(**kwargs)[:n]
+    except: # most probably n being greater
+        threads = Thread.objects.order_by(*order).filter(**kwargs)
 
-    num_comments = []    
-    for thread in threads:
-        num_cmts = Comment.objects.all().filter(thread=thread).count()
-        num_comments.append(num_cmts)
+    
+    return list(map(thread_to_dict, threads))
 
-    return (threads, num_comments)
+def thread_to_dict(thread):
+    #thread_list = []
+    return {'id':thread.id,
+            'votes':thread.votes,
+            'time':thread.time.strftime("%I:%M %p, %d %b %Y"),
+            'title':thread.title,
+            'content':thread.content,
+            'tags':list(map(lambda x: {
+                            'name':x.name,
+                            'id':x.id }
+                            , thread.tags.all()
+                            )),
+            'user':{'name':thread.account.user.username,
+                    'id':thread.account.pk,
+                    'image':thread.account.profile_pic.name, # need to code this
+                    },
+            'num_comments':Comment.objects.all().filter(thread=thread).count(),
+            'images':list(map(lambda x: x.name,
+                                ThreadImage.objects.filter(thread=thread))),
+            }
+        
+
+class Profile(View):
+    def get(self,request, profileid):
+        self.context = {}
+        if request.user.is_authenticated():
+            try:
+                profileid = int(profileid)
+            except Exception:
+                raise Http404('user not found')
+            self.context['authenticated'] = True
+            self.context['user'] = request.user
+            acc = Account.objects.get(user_id=profileid)
+            useracc = Account.objects.get(user=request.user)
+            self.context['address'] = acc.address
+            self.context['profile_pic'] = useracc.profile_pic
+            self.context['user_pic'] = acc.profile_pic
+            self.context['account'] = acc
+            self.context['edit'] = False
+            if request.user.id==profileid:
+                self.context['edit'] = True
+        else:
+            self.context['authenticated'] = False
+        return render(request, "complain/profile.html",self.context)
+
+def profile_update(request):
+    try:
+        ret = {}
+        username = request.POST.get('username', '')
+        firstname = request.POST.get('first-name', '')
+        lastname = request.POST.get('last-name', '')
+        address = request.POST.get('address', '')
+        uid = request.POST.get('userid', '')
+        try:
+            uid = int(uid)
+        except:
+            ret['success'] = False
+            ret['error'] = "Can't update profile. Try later."
+            return JsonResponse(ret)
+
+        # get account
+        acc = Account.objects.get(pk=uid)
+        usr = acc.user
+        # check username exists or not
+        usrs = User.objects.filter(username=username)
+
+        if len(usrs)!=0 and usrs[0].pk != usr.pk:
+            ret['success'] = False
+            ret['error'] = "Username exists. Try next one"
+            return JsonResponse(ret)
+
+        usr.first_name = firstname
+        usr.last_name = lastname
+        usr.username=username
+        acc.address = address
+        usr.save()
+        acc.save()
+
+        ret['success'] = True
+        ret['error'] = "Changed profile"
+        return(JsonResponse(ret))
+
+    except ObjectDoesNotExist:
+        ret['success'] = False
+        ret['error'] = "No user found. Please refresh and try later"
+        return JsonResponse(ret)
+    except Exception as e:
+        ret['success'] = False
+        ret['error'] = repr(e)
+        return(JsonResponse(ret))
+
+class Concern(View):
+    def get(self,request):
+        self.context = {}
+        return render(request, "complain/post-concern.html",self.context)

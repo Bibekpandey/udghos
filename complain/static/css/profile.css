@@ -1,0 +1,93 @@
+h1,h2,h3,h4,h5{
+  margin-top: -5px;
+}
+.edit-button>button{
+  float: right;
+}
+textarea{
+  height: 35px;
+  width: 40%;
+  vertical-align: center;
+  border-radius: 2px;  
+}
+textarea:focus{
+  background-color: #ccc; 
+}
+
+
+.box-profile{
+  font-family: Ubuntu;
+    min-height: 20px;
+    padding: 20px;
+    margin: 2px;
+    margin-top: 67px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+}
+#heading-border{
+  border-bottom: 1px solid #ddd;
+}
+#content-top{
+  margin-top: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.profile-pro{
+  border-bottom: 1px solid #ddd;
+}
+.my-tags{
+  margin-top: 15px;
+  border: none;
+}
+.about-tab{
+  margin-top: 15px;
+}
+.about-me{
+  margin-top: -20px;
+  margin-bottom: 10px;
+}
+.tags{
+  margin-top: -20px;
+  margin-bottom: px;
+}
+
+.edit-button{
+  position: absolute;
+  margin-top: -50px;
+  margin-left: 200px;
+}
+.address-tab,
+.about-tab,
+.tags-tab{
+  font-size: 30px;
+  margin-top: 20px;
+  display: block;
+  position: relative;
+}
+.my-username{
+  color: #777;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.my-address{
+  margin-top: 10px;
+}
+.about-me{
+  margin-top: 20px;
+}
+.glyphicon-map-marker{
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+#save{
+  float: right;
+  position: relative;
+  display: none;
+  margin-left: 110px;
+  margin-top: -10px;
+}
+#nameinfo{
+  display: none;
+}

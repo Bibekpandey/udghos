@@ -1,11 +1,20 @@
+{% load staticfiles %}
+<html>
+<head>
+<title>new user</title>
+<link rel="stylesheet" type="text/stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
 {% if message %}
 {{message}}
 <br>
 {% endif %}
 <h1>Please select your new username to complete signup:</h1>
-<form method="post" action="new_social">
+<form method="post" action="{% url 'new_social' %}">
  {% csrf_token %}
     Enter your new username:<input type="text" name="username" value="{{request.user}}"> <br>
     <input type="hidden" name="userid" value="{{request.user.id}}">
     <input type="submit" value="Change Username">
 </form>
+</body>
+</html>

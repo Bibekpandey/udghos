@@ -4,7 +4,13 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from datetime import datetime
 
+
 (COMPLAINT, DISCUSSTION) = (0, 1)
+
+def get_image_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return 'profile_pics/'+str(instance.user.id)+'.'+ext
+
 
 class Account(models.Model):
     user = models.OneToOneField(User, primary_key=True, related_name="Account")
@@ -13,12 +19,13 @@ class Account(models.Model):
     address = models.CharField(max_length=50)
     email = models.EmailField(blank=True, null=True, max_length=30)
     points = models.IntegerField(default=10)
+    profile_pic = models.ImageField(null=True, upload_to=get_image_path, blank=True)
 
     def __str__(self):
         return self.user.username
 
 
-class Tag(models.Model):
+class ThreadTag(models.Model):
     name = models.CharField(max_length=50)  
 
     def __str__(self):
@@ -29,11 +36,10 @@ class Thread(models.Model):
     thread_type = models.IntegerField(default=0) # 0 for complaint, 1 for discussion thread
     title = models.CharField(max_length=100, blank=True, null=True)
     content = models.TextField()
-    tags = models.ManyToManyField(Tag, blank=True, null=True)
+    tags = models.ManyToManyField('ThreadTag', blank=True)
     account = models.ForeignKey(Account)
     time = models.DateTimeField(auto_now_add=True)
     votes = models.IntegerField(default=0)
-    #downvotes = models.IntegerField(default=0)
     last_active = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -92,3 +98,9 @@ class ThreadImage(models.Model):
         super(ThreadImage, self).save(*args, **kwargs)
         self.name = self.image.name
         super(ThreadImage, self).save(*args, **kwargs)
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name

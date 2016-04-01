@@ -6,7 +6,6 @@
 a,
 a:focus,
 a:hover {
-  color: #fff;
   text-decoration: none;
 }
 
@@ -58,14 +57,32 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #ffffff;
-  font-family: Josefin Sans;
+  background-color: #fff;
+  font-family: Ubuntu;
   color: #fff;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  abackground-image: url("../img/nepal.jpg");
-  background-size:cover;  
+
+  background: url("../img/IMG HARInew.png") no-repeat ;
+  font-family: 'Source Sans Pro', sans-serif;
 }
+
+@media (min-width: 768px) {
+  body {
+    background-image: none;
+  }
+}
+
+
+/*.image-login{
+    background-image: url("../img/IMG HARI.png");
+    background-repeat: no-repeat;
+    margin-left: -60px;
+    margin-top: -170px;
+    display: block;
+    min-width: 100%;
+    height: auto;
+}*/
+
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
@@ -105,9 +122,11 @@ body {
 text-align:center;
 }
 
+
+
 .navhead-nav > li {
   display: inline-block;
-  margin-top: 15px;
+  margin-top: 12px;
 }
 .navhead-nav > li + li {
   margin-left: 20px;
@@ -125,7 +144,6 @@ text-align:center;
 .navhead-nav > li > a:focus {
   background-color: transparent;
   border-bottom-color: #fff;
-  border-bottom-color: rgba(255,255,255,0.8);
 }
 .navhead-nav > .active > a,
 .navhead-nav > .active > a:hover,
@@ -152,53 +170,13 @@ text-align:center;
   float:right;
 }
  
-/*
- * Footer
- */
-
-.mastfoot {
-  color: #999; /* IE8 proofing */
-  color: rgba(255,255,255,.5);
-}
 
 
 
-/*
- * Affix and center
- */
-
-@media (min-width: 768px) {
-  /* Pull out the header and footer */
-  .navhead {
-    position: fixed;
-    top: 0;
-  }
-  .mastfoot {
-    position: fixed;
-    bottom: 0;
-  }
-  /* Start the vertical centering */
-  .site-wrapper-inner {
-    vertical-align: middle ;
-  }
-  /* Handle the widths */
-  .navhead,
-  .mastfoot,
-  .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
-  }
-}
-
-@media (min-width: 992px) {
-  .navhead,
-  .mastfoot,
-  .cover-container {
-    width: 700px;
-  }
-}
 
 #text-login{
   color: #111;
+  margin-top: 150px;
 }
 .form-signin {
   max-width: 330px;
@@ -213,10 +191,15 @@ text-align:center;
 .form-signin-heading{
   margin-top:5px;
 }
+.form-signup-heading
+{
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
 .form-signin .checkbox {
   font-weight: normal;
 }
-.form-signin .form-control {
+.form-signin .form-control{
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
@@ -225,27 +208,38 @@ text-align:center;
   padding: 10px;
   font-size: 16px;
 }
-.form-signin .form-control:focus {
+.form-signin .form-control:focus,
+.form-signup .form-control:focus {
   z-index: 2;
 }
-.form-signin input[type="email"] {
+.form-signin input[type="email"],
+.form-signup input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.form-signin input[type="password"] {
+.form-signin input[type="password"],
+.form-signup input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
 .p-signin{
+  margin-top: -10px;
   padding-top: 5px;
 }
 .signin-heading{
   margin-top:25%;
 }
-.well-signin {
+#signup{
+  padding: 25px 15px 0px 15px;
+}
+
+.login-form{
+  margin: 5px 0px 5px 0px;
+}
+.box-signin {
   overflow: hidden;
   padding-left:1%;
   padding-right:1%;
@@ -257,30 +251,108 @@ text-align:center;
   border-radius: 2px;
 }
 
-
-@media (max-width: 720px) {
-  .well-signin {
-    margin:0px;
-  }
+.box-footer{
+  width: 100%;
+  position: fixed;
+  height: 50px;
+  z-index: 1;
+  bottom:0;
+  left: 0;
+  background: #333;
+  opacity: 0.8;
+  color: #111;
+}
+.footer-body{
+  margin: 10px 50px 0px 10px;
+}
+.copyright{
+  color: #fff;
+}
+p>a{
+  font-size: 15px;
+  margin: 5px;
+  color: #fff;
+}
+p>a:hover{
+  color: #fff;
 }
 
 #navcolor{
-  background-color:#990012 ;
-  border: none; 
+  background-color: #333;
+  border-bottom: 1px solid #fff;
 }
 .navbar-default{
   border: none;
 }
-nav >ul>li>a{
-  color: #fff;
+.navbar-header>a{
+  font-weight: bold;
+  text-decoration: none;
 }
+
 
 #navhead{
   font-size: 25px;
+  font-weight: ;
   color: #fff;
 }
 #navhead:hover{
-  color: #ddd;
+  color: #aa1123;
+}
+
+.navhead-nav-left{
+  margin-top: 0px;
+  float: left;
+}
+.footer-menu{
+  position: relative;
+}
+
+@media(max-width: 640px){
+  .box-footer{
+    height: 100px;
+  }
+}
+@media (max-width: 767px) {
+  .box-signin {
+    margin-top: 335px;
+  }
+  .navhead-nav{
+    float: right;
+  }
+  .container{
+    width: 100%;
+  }
+  .navhead-nav-left{
+    float: left;
+  }
+  .form-signup {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+  }
 }
 
 
+@media (max-width: 991px) {
+  .box-footer{
+    width: 100%;
+    position: relative;
+  }
+  .form-signup {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+  }
+  .container-box{
+    width: 100%; 
+  }
+  .box-signin{
+    margin: 325px 0px 0px 0px;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+  .footer-body{
+    margin: 10px 10px 10px 10px;
+  }
+}
