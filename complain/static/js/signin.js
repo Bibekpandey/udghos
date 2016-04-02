@@ -41,6 +41,7 @@ else {
 
 function signUp() {
     $('#message').text("Signing up.. Please Wait..");
+    alert($('#signup-form').serialize());
 
     $.post('/complain/signup/', $('#signup-form').serialize(), function(data) {
         $('#message').text(data.message);
