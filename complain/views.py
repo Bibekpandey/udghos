@@ -18,6 +18,7 @@ import json
 import math, traceback
 
 COMPLAINT, DISCUSSION = 0, 1
+NEW_THREADS = 3 # new number of threads when scrolled in browser
 
 #error message
 def error(request):
@@ -37,8 +38,45 @@ class Index(View):
 
         return render(request, "complain/home.html", self.context)
 
-        #return redirect('login')
 
+def get_recent_threads(request):
+    # auth is to check user login which lets like/comment
+    if request.user.is_authenticated():auth=True
+    else:auth=False
+    orderby = ['-time']
+    try:
+        earlier = request.GET['earlierthan']
+    except KeyError:
+        pass
+
+    try:
+        earlier = int(request.GET['earlierthan'])
+        filterby = {'id__lt':earlier}
+        result = get_threads(NEW_THREADS, orderby, filterby)
+        return JsonResponse({'threads':result[1], 'end':result[0], 'authenticated':auth}) 
+    except ValueError: # invalid get parameter
+        return JsonResponse({'status':False, 
+                        'message':'Invalid request parameter'},
+                        status=404)
+    except KeyError:# earlierthan is not specified
+        result = get_threads(5, [], {}) # initial display threads=5
+        return JsonResponse({'threads':result[1], 'end':result[0], 'authenticated':auth})
+
+def get_top_threads(request):
+    earlier = request.GET.get('earlierthan','') 
+    try:
+        earlier = int(earlier)
+        orderby = ['-time']
+        filterby = {}
+        threads = get_threads(NEW_THREADS, orderby, filterby)
+    except: # invalid get parameter
+        return JsonResponse({'status':False, 
+                        'message':'Invalid request parameter'},
+                        status=404)
+
+    pass
+def get_favourite_threads(request):
+    pass
 
 def get_threads_json(request):
     if request.user.is_authenticated():
@@ -66,7 +104,8 @@ def get_threads_json(request):
         votelt = int(request.GET.get('votelt', ''))
     except:
         votelt = -1
-    return JsonResponse({'threads':get_threads(3, threadtype=threadtype, earlierthan=beforeid, votelt=votelt), 'authenticated':auth})
+    temp = get_threads(3, threadtype=threadtype, earlierthan=beforeid, votelt=votelt)
+    return JsonResponse({'threads':temp[1], 'end':temp[0], 'authenticated':auth})
 
 
 def get_comments(request):
@@ -493,7 +532,20 @@ def get_tags(request):
 #####       HELPER FUNCTIONS        #####
 #########################################
 
-def get_threads(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n threads with number of comments
+def get_threads(n, orderby, filterby): 
+    end = False
+    try:
+        threads = Thread.objects.order_by(*orderby).filter(**filterby)[:n]
+        print('in try')
+    except: # most probably n being greater
+        threads = Thread.objects.order_by(*orderby).filter(**filterby)
+        end = True
+
+    
+    return (end, list(map(thread_to_dict, threads)))
+
+def get_threads1(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n threads with number of comments
+    end = False
     if threadtype == 'top':
         order=['-votes', '-id']
         kwargs = {
@@ -514,11 +566,13 @@ def get_threads(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n t
 
     try:
         threads = Thread.objects.order_by(*order).filter(**kwargs)[:n]
+        print('in try')
     except: # most probably n being greater
         threads = Thread.objects.order_by(*order).filter(**kwargs)
+        end = True
 
     
-    return list(map(thread_to_dict, threads))
+    return (end, list(map(thread_to_dict, threads)))
 
 def thread_to_dict(thread):
     #thread_list = []
