@@ -30,6 +30,12 @@
         for(var x=0;x<selected.length;x++) {
             tagids.push(selected[x].getAttribute('id').replace('selected-', ''))
         }
+        // check if title is empty
+        var tit = $('input[name=title]').val();
+        if(tit.trim() =='') {
+            $('#title-warning').show();
+            return false;
+        }
         // now check if description is empty
         var desc = $('textarea[name=content]').val();
         if (desc.trim() == '') {
@@ -149,10 +155,11 @@
                     </div>
                     <div class="modal-body">
                       <div class="form-group">
-                          <label for="recipient-name" class="control-label">Title</label>
-                          <input type="text" class="form-control" id="recipient-name" placeholder="Title relevant to the description">
-                      </div>
+                                                </div>
                       <form method="post" id="thread-form" action="{% url 'post' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
+                          <label for="recipient-name" class="control-label">Title * <small id="title-warning" class="alert-danger" style="display:none"> Please provide a title for the issue!!</small></label>
+                          <input name="title" type="text" class="form-control" id="recipient-name" placeholder="Title relevant to the description" oninput="$('#title-warning').hide()">
+
                         {% csrf_token %}
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
@@ -323,16 +330,19 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
   <script>
+    var g_end_of_posts = false;
     window.onload = function()  { 
             $('.comment-form').hide();
-            //showRecent(); 
-            getAndRenderThreads(); 
+            showRecent(); 
     };
 
     var g_thread_container = "recent-threads";
     var g_thread_type = 'recent';
     var g_earliertop = window.scrollY;  // global to check direction of scroll
+    var g_lastId;
+    var g_lastVote;
     var g_tags_selected = [];
+
     window.onscroll = function() {
         // first get direction of scroll
         var curr = window.scrollY;
@@ -342,13 +352,14 @@
         g_earliertop = curr;
         var elems = document.getElementsByClassName('box thread');
         var last = elems[elems.length-1];
-        var lastid = last.getAttribute('id').replace('thread-','');
 
         var lastRect = last.getBoundingClientRect();
         var windowH = window.innerHeight;
-        console.log(lastRect.top);
         if(lastRect.top <= 0.85*windowH) {
-            getAndRenderThreads(g_thread_type, lastid);
+            if(g_lastId==null) return;
+            var data = {earlierthan:g_lastId.toString()};
+            g_lastId = null;
+            getAndRenderThreads(g_thread_type, data);
         }
     }
 
@@ -358,7 +369,7 @@
         g_earliertop = 0;
         $('#recent-threads').empty();
         $('#favourite-threads').empty();
-        getAndRenderThreads('top');
+        getAndRenderThreads('top', {});
     }
 
     function showRecent() {
@@ -367,24 +378,33 @@
         g_earliertop = 0;
         $('#top-threads').empty();
         $('#favourite-threads').empty();
-        getAndRenderThreads('recent');
+        var query='';
+        if (g_lastId != undefined)
+            query = 'earlierthan='+g_lastId.toString();
+        else query = '';
+        getAndRenderThreads('recent', query);
     }
     
     function showFavs() {
     }
 
-    function getAndRenderThreads(type, id) {
+    function getAndRenderThreads(type, data) {
         // now get threads from server
-        var querystr;
-        if (type==undefined) {
-            querystr = '?type=recent';
+        console.log("in get and render")
+        if (g_end_of_posts) {
+            console.log('not calling server');
+            return;
         }
-        else {
-            querystr = '?type='+type;
-        }
-        if (id!=undefined)querystr += '&earlierthan='+id;
+        console.log('calling server');
 
-        $.get('/complain/threads/'+querystr, function(data) {
+        $.get('/complain/threads/'+type, data, function(data) {
+            g_lastId = data.lastid;
+            if(g_lastId==null) g_end_of_posts = true;
+            g_lastVote = data.lastvote;
+            //alert(data.end);
+            if(data.end==true) {
+                g_end_of_posts=true;
+            }
             for(var x=0;x<data.threads.length;x++) {
                 add_item(data.threads[x], g_thread_container, data.authenticated);
             }
