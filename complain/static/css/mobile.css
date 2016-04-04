@@ -60,6 +60,9 @@
     margin-top: 5px;
     font-size: 35px;
   }
+  .glyphicon-remove{
+    position: relative;
+  }
   .glyphicon-tags,
   .glyphicon-close{
     font-size: 20px;

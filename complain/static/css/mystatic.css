@@ -267,6 +267,14 @@ p>a:hover{
 .post-actions{
   float: right;
 }
+.post-concern{
+  width: 100%;
+  font-size: 40px;
+}
+.title-concern{
+  width: 100%;
+  font-size: 50px;
+}
 
 #tag-position{
   position: relative;
@@ -335,7 +343,7 @@ p>a:hover{
   float: right;
   display: inline-block;
   margin-left: 2.5px;
-  margin-right: 2.5px;
+  margin-right: px;
   text-decoration: none; 
   padding: 0px 2px 0px 2px;
   background-color:#ddd ;
@@ -344,6 +352,7 @@ p>a:hover{
   border-radius: 2px;
   font-size: 17px;
 }
+
 .tagname2:hover{
   text-decoration: none;
 }
@@ -591,15 +600,21 @@ padding:0px;
 
 .glyphicon-remove{
   display: none;
+  float: right;
   position: relative;
-  margin-top: 0px;
+  margin-top: ;
+  margin-left: -5px;
 }
 .box:hover .glyphicon-remove{
   color: #777;
   display: block;
+  margin-top: -5px;
+  margin-right: -5px;
+  margin-bottom: -30px;
 }
 .box:hover .display-tag{
   position: relative;
+  margin-right: ;
 }
 
 #tag-bar{
