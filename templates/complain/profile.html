@@ -73,32 +73,35 @@
 
             <form id="updateform" method="post" action="{% url 'profile_update' %}" enctype="multipart/form-data" >
           <img class="img-circle" src="/media/{{user_pic}}" width=200 height=200 alt="Generic placeholder image" width="200" height="200" />
+          <div class="edit-text">
+            <h2 class="hidden-text"><b>Edit your Profile</b></h2>
+            <button id="save" class="btn btn-sm" type="button"> Save Info</button>
+          </div>
               <input type="hidden" name="userid" value="{{request.user.id}}" />
             <div id="dataprofile" class="my-name">
+              <div class="hidden-text"><b>First Name</b></div>
               <span id="first-name" class="datainfo post-title">{{account.user.first_name}}</span>
+              <div class="hidden-text"><b>Last Name</b></div>
               <span id="last-name" class="datainfo post-title">{{account.user.last_name}}</span>
             
               {% if edit %}
               {% csrf_token %}
               <div class="edit-button">
-                <button id="edit" class="btn btn-sm glyphicon glyphicon-pencil" type="button"> Edit</button>
-                <button id="save" class="btn btn-sm glyphicon glyphicon-save" type="button"> Save</button>
+                <button id="edit" class="btn btn-sm" type="button"> Edit Info</button>
               </div>
               {% endif %}
             </div>
             <div class="my-username">
               <br>
+              <div class="hidden-text"><b>Username</b></div>
               <span id="username" class="datainfo">{{account.user.username}}</span>
             </div>
-            <div class="profile-activity">
-                <a href="#" class="btn btn btn-info">10 posts</a> 
-              </div>
               <div class="my-address">
-                <i class="glyphicon glyphicon-map-marker"> </i>
-                <span id="address" class="datainfo"> {{account.address}}</span>
+                <div class="hidden-text"><b>Address</b></div>
+                <span id="address" class="datainfo">{{account.address}}</span>
               </div>
               <div class="about-me">
-                <div><b>About</b></div>
+                <div class="hidden-text"><b>About</b></div>
                 <span id="about" class="dataarea">Student of Engineering</span>
               </div>
               <div class="my-tag">
@@ -114,7 +117,9 @@
                     <label>Choose Profile image </label>
                     <input type="file" name="image" multiple accept="image/*" />
                 </div>
-                <button type="submit">Update pic</button>
+                <div class="btn-update">
+                  <button type="submit">Update pic</button>
+                </div>
             </form>
 
         </div>
@@ -162,16 +167,27 @@
             <a href="#">Terms & Conditions</a>
           </p>
           <p class="pull-right">
+            <form class="footer-form" role="search">
+              <div class="form-group">
+                <div id="search-bar" class="inner-addon right-addon nav-search">
+                  <i class="glyphicon glyphicon-footer glyphicon-search"></i>
+                  <input type="text" placeholder="Search" class="form-control form-control-footer" />
+                </div>
+              </div>
+            </form>
+          </p>
+          <p class="pull-right">
             <a href="https://facebook.com/udghos">Facebook</a>&middot;
             <a href="https://twitter.com/udghosnepal">Twitter</a>
           </p>
-          <p>
-            &copy; 2015 Udghos, Inc.
+          <p class="copyright">
+            &copy; 2016 Udghos, Inc.
           </p>
         </div>
       </footer>
     </div>
   </div>
+
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

@@ -1,12 +1,27 @@
 h1,h2,h3,h4,h5{
   margin-top: -5px;
 }
+.edit-button{
+  margin-top: -60px;
+}
 .edit-button>button{
   float: right;
+  margin-top: 2px;
+  margin-left: -50px;
+}
+#edit{
+  margin-right: 35%;
+}
+#save{
+  margin-top: -50px;
+  margin-right: 35%;
+}
+.edit-text>button{
+  margin-top: -100px;
 }
 textarea{
   height: 35px;
-  width: 40%;
+  width: 35%;
   vertical-align: center;
   border-radius: 2px;  
 }
@@ -50,13 +65,6 @@ textarea:focus{
 }
 .tags{
   margin-top: -20px;
-  margin-bottom: px;
-}
-
-.edit-button{
-  position: absolute;
-  margin-top: -50px;
-  margin-left: 200px;
 }
 .address-tab,
 .about-tab,
@@ -68,11 +76,11 @@ textarea:focus{
 }
 .my-username{
   color: #777;
-  margin-top: -20px;
+  margin-top: 50px;
   margin-bottom: 20px;
 }
 .my-address{
-  margin-top: 10px;
+  margin-top: 5px;
 }
 .about-me{
   margin-top: 20px;
@@ -89,5 +97,19 @@ textarea:focus{
   margin-top: -10px;
 }
 #nameinfo{
+  display: none;
+}
+#profile-image-form{
+  float: right;
+  margin-right: -70px;
+  margin-top: -200px;
+}
+.btn-update{
+  float: right;
+  margin-top: -25px;
+  display: none;
+}
+.hidden-text{
+  color: #333;
   display: none;
 }
