@@ -11,7 +11,7 @@ def get_recent_threads(request):
     try:
         earlier = int(request.GET['earlierthan'])
         filterby = {'id__lt':earlier}
-        result = get_threads(NEW_THREADS, orderby, filterby)
+        result = get_threads(request.user, NEW_THREADS, orderby, filterby)
         return JsonResponse({'threads':result['threads'], 
             'end':result['end'], 'authenticated':auth, 
             'lastid':result['lastid'],
@@ -24,7 +24,7 @@ def get_recent_threads(request):
                         status=404)
     except KeyError:# earlierthan is not specified
         print('earlierthan not specified');
-        result = get_threads(5, orderby, {}) # initial display threads=5
+        result = get_threads(request.user, 5, orderby, {}) # initial display threads=5
         return JsonResponse({'threads':result['threads'], 
             'end':result['end'], 'authenticated':auth,
             'lastid':result['lastid'],
@@ -43,9 +43,9 @@ def get_user_threads(request, userid):
         try:
             earlier = int(request.GET['earlierthan'])
             filterby['id__lt'] = earlier
-            result = get_threads(NEW_THREADS, orderby, filterby)
+            result = get_threads(request.user, NEW_THREADS, orderby, filterby)
         except KeyError: # means no earlierthan
-            result = get_threads(5, orderby, filterby)
+            result = get_threads(request.user, 5, orderby, filterby)
         finally:
             return JsonResponse({'threads':result['threads'], 
                 'end':result['end'], 'authenticated':auth,
@@ -62,7 +62,7 @@ def get_top_threads(request):
         earlier = int(earlier)
         orderby = ['-time']
         filterby = {}
-        threads = get_threads(NEW_THREADS, orderby, filterby)
+        threads = get_threads(request.user, NEW_THREADS, orderby, filterby)
     except: # invalid get parameter
         return JsonResponse({'status':False, 
                         'message':'Invalid request parameter'},
@@ -99,14 +99,14 @@ def get_threads_json(request):
         votelt = int(request.GET.get('votelt', ''))
     except:
         votelt = -1
-    temp = get_threads(3, threadtype=threadtype, earlierthan=beforeid, votelt=votelt)
+    temp = get_threads(request.user, 3, threadtype=threadtype, earlierthan=beforeid, votelt=votelt)
     return JsonResponse({'threads':temp[1], 'end':temp[0], 'authenticated':auth})
 
 #########################################
 #####       HELPER FUNCTIONS        #####
 #########################################
 
-def get_threads(n, orderby, filterby): 
+def get_threads(user, n, orderby, filterby): 
     end = False
     try:
         lastid = None
@@ -124,7 +124,7 @@ def get_threads(n, orderby, filterby):
         end = True
 
     data = {'end':end,
-        'threads':list(map(thread_to_dict, threads)),
+        'threads':[thread_to_dict(user, x) for x in threads],
     }
     data['lastid'] = lastid
     data['lastvote'] = lastvote
@@ -167,7 +167,7 @@ def get_threads1(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n 
     
     return (end, list(map(thread_to_dict, threads)))
 
-def thread_to_dict(thread):
+def thread_to_dict(user, thread):
     #thread_list = []
     return {'id':thread.id,
             'votes':thread.votes,
@@ -184,6 +184,7 @@ def thread_to_dict(thread):
                     'image':thread.account.profile_pic.name, # need to code this
                     },
             'num_comments':Comment.objects.all().filter(thread=thread).count(),
+            'can_edit':True if thread.account.user == user else False,
             'images':list(map(lambda x: x.name,
                                 ThreadImage.objects.filter(thread=thread))),
             }

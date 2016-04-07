@@ -105,6 +105,42 @@ function images_html(images) {
     return html;
 }
 
+function showDeleteWarning(threadid) {
+    $('#mask').css({
+        "width":$(document).width(),
+        "height":$(document).height(),
+        "z-index":3,
+        "background-color":'#000',
+        "opacity":0.5
+    }).show();
+    var x = $(window).width(), 
+        y = $(window).height();
+    var w = 400
+        h = 100; 
+    var left = Math.round(x/2-w/2);
+    // create the dialog box
+    var html = '<b>Warning</b><br>'+
+            '<div class="warning-text">'+
+                'Are you Sure you want to delete the thread? '+
+                'It cannot be undone.'+
+            '</div>'+
+            '<button class="btn btn-my" type="button">Sure</button>'+
+            '<button class="btn btn-my" type="button">Cancel</button>';
+    var box = $('<div>').attr('class','warning-box')
+                .html(html);
+    $('#warning-box').append(box);
+
+    var tp = window.scrollY + Math.round(y/2-h/2);
+    var styles = {"top":tp,
+                "left":left,
+                "z-index":5,
+                "height":h,
+                "width":w};
+
+    $('#warning-box').css(styles).show();
+    //$('body').append($('<div style="position:relative;top:300px;background-color:blue;height:300px;"></div>'));
+}
+
 function generate_thread(threadobj, auth) {
     var thread_str = '<div class="box thread" id="thread-'+threadobj.id+'">'+
         '<div class="stbody">'+
@@ -113,7 +149,10 @@ function generate_thread(threadobj, auth) {
                     '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
                 '<div class="post-option">'+
-                    '<span class="glyphicon glyphicon-remove glyphicon-remove-post" aria-hidden="true"></span>'+
+                    (threadobj.can_edit?'<a href="javascript:void()" onclick="showDeleteWarning('+threadobj.id+')">'+
+                        '<span class="glyphicon glyphicon-remove glyphicon-remove-post" aria-hidden="true"></span>':''+
+                        '</a>'
+                    ) +
                 '</div>'+
               '<div id="textst" class="sttext">'+
                 '<a href="/complain/thread/'+threadobj.id.toString()+'">'+

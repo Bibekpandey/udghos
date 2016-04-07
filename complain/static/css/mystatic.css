@@ -908,4 +908,19 @@ div.share> .twitter {
   float: right;
 }
 
+.warning-box {
+    font-family: 'Varela Round', sans-serif;
+    position: block;
+    padding:10px;
+    background-color:#fff;
+    border-radius: 2px;
+}
 
+.warning-box > button {
+    margin-right:20px;
+}
+
+.warning-text {
+    border-top:solid 1px #888;
+    font-family: Helvetica;
+}
