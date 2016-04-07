@@ -42,6 +42,8 @@ window.twttr = (function(d, s, id) {
 */
   </script>
 
+<div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
+  <div id="mask" style="position:absolute;display:none"></div>
 
     {% csrf_token %}
   	<nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
@@ -144,15 +146,20 @@ window.twttr = (function(d, s, id) {
         window.onload = function () { 
             try {
                 // get threadid from url
+                //$('#error').text(window.localStorage.getItem("message"));
+                //window.localStorage.setItem("message","");
                 var temp = location.pathname.split('/');
                 var threadid = temp[temp.length-2]; // last one is empty
             }
             catch(e){
                 //alert('exception');
             }
-            $.get('/complain/threads/?id='+threadid, function(data) {
-                //alert(JSON.stringify(data));
-                add_item(data.thread, g_thread_container, data.authenticated)
+            $.ajax({
+                url:'/complain/thread/?id='+threadid, 
+                success:function(data) {
+                    add_item(data.thread, g_thread_container, data.authenticated)
+                },
+                error:function(data) { window.location="/";}
             });
         };
     </script>
