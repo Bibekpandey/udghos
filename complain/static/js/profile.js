@@ -10,12 +10,14 @@ $('#edit').click(function(){
     $(this).html('<input type="text" placeholder="'+$(this).attr('id')+'" name="'+$(this).attr('id')+'" value="'+content+'"/></input>');
   });
   
+  $('#profile-image-form').show();
   $('#save').show();
   $('#nameinfo').show();
   $('.info').fadeIn('fast');
 });
 
 $('#save').click(function(){
+    $('#profile-image-form').hide();
     $('#error').text('Changing profile...');
     $.ajax({   
         type: 'POST',   
@@ -36,6 +38,7 @@ $('#save').click(function(){
             }
             else {
             }
-        }
+        },
+        error: function(data) { alert(JSON.stringify(data));}
     }); 
 });

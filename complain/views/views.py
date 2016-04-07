@@ -486,14 +486,30 @@ class Profile(View):
             self.context['authenticated'] = False
         return render(request, "complain/profile.html",self.context)
 
+def image_update(request):
+    if request.user.is_authenticated():
+        try:
+            uid = int(request.POST['userid'])
+            account = Account.objects.get(pk=uid)
+            image = request.FILES.get('image')
+            account.profile_pic = image
+            account.save()
+            return redirect('profile', uid)
+        except:
+            pass
+
 def profile_update(request):
     try:
         ret = {}
-        username = request.POST.get('username', '')
-        firstname = request.POST.get('first-name', '')
-        lastname = request.POST.get('last-name', '')
-        address = request.POST.get('address', '')
-        uid = request.POST.get('userid', '')
+        username = request.POST['username']
+        firstname = request.POST['first-name']
+        lastname = request.POST['last-name']
+        address = request.POST['address']
+        uid = request.POST['userid']
+        try:
+            image = request.FILES['image']
+        except:
+            pass
         try:
             uid = int(uid)
         except:
@@ -512,6 +528,11 @@ def profile_update(request):
             ret['error'] = "Username exists. Try next one"
             return JsonResponse(ret)
 
+        '''
+        if not image is None:
+            print(type(image))
+            pass
+        '''
         usr.first_name = firstname
         usr.last_name = lastname
         usr.username=username
@@ -526,6 +547,10 @@ def profile_update(request):
     except ObjectDoesNotExist:
         ret['success'] = False
         ret['error'] = "No user found. Please refresh and try later"
+        return JsonResponse(ret)
+    except KeyError:
+        ret['success'] = False
+        ret['error'] = "Can't update profile. Try later."
         return JsonResponse(ret)
     except Exception as e:
         ret['success'] = False
