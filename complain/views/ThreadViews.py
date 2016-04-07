@@ -1,4 +1,5 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, Http404
+from django.shortcuts import get_object_or_404
 from complain.models import *
 NEW_THREADS = 3 # new number of threads when scrolled in browser
 
@@ -102,6 +103,21 @@ def get_threads_json(request):
     temp = get_threads(request.user, 3, threadtype=threadtype, earlierthan=beforeid, votelt=votelt)
     return JsonResponse({'threads':temp[1], 'end':temp[0], 'authenticated':auth})
 
+def delete_thread(request, threadid):
+    if request.user.is_authenticated():
+        try:
+            threadid = int(threadid)
+            thread = get_object_or_404(Thread, pk=threadid)
+            if thread.account.user == request.user:
+                thread.delete()
+                return JsonResponse({"success":True,"message":"Thread Deleted"}, status=200)
+            else:
+                return JsonResponse({"success":False, "message":"Unauthorized Access"}, status=403)
+        except ValueError:
+            return JsonResponse({"success":False,"message":"Bad Request"}, status=400)
+        except Http404:
+            return JsonResponse({"success":False, "message":"Thread not Found"}, status=404)
+
 #########################################
 #####       HELPER FUNCTIONS        #####
 #########################################
@@ -131,41 +147,6 @@ def get_threads(user, n, orderby, filterby):
 
     return data
 
-
-def get_threads1(n, threadtype='recent', earlierthan=-1, votelt=-1): # return n threads with number of comments
-    end = False
-    if threadtype == 'top':
-        order=['-votes', '-id']
-        kwargs = {
-            'votes__lt':votelt,
-            'id__lt':earlierthan,
-        }
-        if votelt==-1:
-            del kwargs['votes__lt']
-        if earlierthan==-1:
-            del kwargs['id__lt']
-    else:
-        order=['-time']
-        kwargs = {
-            'id__lt':earlierthan
-        }
-        if earlierthan==-1:
-            del kwargs['id__lt']
-
-    try:
-        threads = list(Thread.objects.order_by(*order).filter(**kwargs)[:n])
-        print('in try')
-    except: # most probably n being greater
-        threads = list(Thread.objects.order_by(*order).filter(**kwargs))
-        end = True
-    return {'end':end,
-        'threads':list(map(thread_to_dict, threads)),
-        'lastid':threads[:-1].id,
-        'lastvote':threads[:-1].votes
-    }
-
-    
-    return (end, list(map(thread_to_dict, threads)))
 
 def thread_to_dict(user, thread):
     #thread_list = []
