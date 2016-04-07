@@ -126,17 +126,11 @@
           <div class="box-tabs">
 
             <ul class="nav nav-tabs" id="navblock" >
-              <li class="active"><a data-toggle="tab" href="javascript:void()" onclick="showRecent()">Recent</a></li>
-              <li><a data-toggle="tab" href="javascript:void()" onclick="showTop()">Top</a></li>
-              <li><a data-toggle="tab" href="javascript:void()" onclick="showFavs()">Favourites</a></li>
+              <li class="active"><a data-toggle="tab" href="javascript:void()" >My Posts</a></li>
             </ul>
 
           </div>
           <div id="recent-threads">
-          </div>
-          <div id="top-threads">
-          </div>
-          <div id="favourite-threads">
           </div>
         </div>
       </div>
@@ -179,6 +173,45 @@
     <script src="{% static 'js/functions.js' %}"></script>
 
     <script src="{% static 'js/profile.js' %}"></script>
+
+    <script>
+        var g_lastId;
+        var g_earliertop = window.scrollY;
+        function getUserThreads(querydata) {
+            var temp = location.href.split('/');
+            var id = temp[temp.length-2];
+            $.get('/complain/threads/user/'+id+'/', querydata, function(data) {
+                g_lastId = data.lastid;
+                for(var x = 0;x<data.threads.length;x++) {
+                    add_item(data.threads[x], "recent-threads", data.authenticated);
+                }
+            });
+        }
+        window.onload = function() {
+            $('html,body').animate({scrollTop:0}, 500);
+            getUserThreads({});
+        }
+
+        window.onscroll = function() {
+            // first get direction of scroll
+            var curr = window.scrollY;
+            if (curr <= g_earliertop) {
+                return;
+            }
+            g_earliertop = curr;
+            var elems = document.getElementsByClassName('box thread');
+            var last = elems[elems.length-1];
+
+            var lastRect = last.getBoundingClientRect();
+            var windowH = window.innerHeight;
+            if(lastRect.top <= 0.85*windowH) {
+                if(g_lastId==null) return;
+                var data = {earlierthan:g_lastId.toString()};
+                g_lastId = null;
+                getUserThreads(data);
+            }
+        }
+    </script>
 
 </body>
 </html>

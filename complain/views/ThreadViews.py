@@ -4,6 +4,7 @@ NEW_THREADS = 3 # new number of threads when scrolled in browser
 
 def get_recent_threads(request):
     # auth is to check user login which lets like/comment
+    print('get recent threads')
     if request.user.is_authenticated():auth=True
     else:auth=False
     orderby = ['-time']
@@ -29,6 +30,31 @@ def get_recent_threads(request):
             'lastid':result['lastid'],
             'lastvote':result['lastvote']
         })
+
+def get_user_threads(request, userid):
+    if request.user.is_authenticated():
+        auth = True
+        try:
+            userid = int(userid)
+        except:
+            pass
+        orderby = ['-time']
+        filterby = {'account__pk':int(userid)}
+        try:
+            earlier = int(request.GET['earlierthan'])
+            filterby['id__lt'] = earlier
+            result = get_threads(NEW_THREADS, orderby, filterby)
+        except KeyError: # means no earlierthan
+            result = get_threads(5, orderby, filterby)
+        finally:
+            return JsonResponse({'threads':result['threads'], 
+                'end':result['end'], 'authenticated':auth,
+                'lastid':result['lastid'],
+                'lastvote':result['lastvote']
+            })
+
+    else:
+        return redirect('signin')
 
 def get_top_threads(request):
     earlier = request.GET.get('earlierthan','') 
