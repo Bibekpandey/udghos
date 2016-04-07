@@ -1,7 +1,20 @@
 from django.http import JsonResponse, HttpResponse, Http404
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from complain.models import *
 NEW_THREADS = 3 # new number of threads when scrolled in browser
+
+def get_thread_json(request):
+    if request.user.is_authenticated():auth=True
+    else: auth=False
+    try:
+        threadid = int(request.GET['id'])
+        thread = Thread.objects.get(pk=threadid)
+        return JsonResponse({"thread":thread_to_dict(request.user, thread),"authenticated":auth})
+    except (ValueError, KeyError):
+        return JsonResponse({"success":False, "message":"Invalid request"}, status=400)
+    except ObjectDoesNotExist:
+        return JsonResponse({"success":False, "message":"Thread doesnot exist"}, status=404)
 
 def get_recent_threads(request):
     # auth is to check user login which lets like/comment
