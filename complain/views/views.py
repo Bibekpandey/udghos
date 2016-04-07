@@ -345,6 +345,8 @@ class ThreadPage(View):
     def get(self, request, thread_id):
         if request.user.is_authenticated():
             self.context['user'] = request.user
+            self.context['authenticated'] = True
+            self.context['profile_pic'] = Account.objects.get(user=request.user).profile_pic
 
         #thread = Thread.objects.get(id=thread_id)
         #self.context['thread'] = thread
