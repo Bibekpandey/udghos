@@ -10,7 +10,7 @@ def get_thread_json(request):
     try:
         threadid = int(request.GET['id'])
         thread = Thread.objects.get(pk=threadid)
-        return JsonResponse({"thread":thread_to_dict(request.user, thread),"authenticated":auth})
+        return JsonResponse({"thread":thread_to_dict(request.user, thread, less=False),"authenticated":auth})
     except (ValueError, KeyError):
         return JsonResponse({"success":False, "message":"Invalid request"}, status=400)
     except ObjectDoesNotExist:
@@ -161,13 +161,18 @@ def get_threads(user, n, orderby, filterby):
     return data
 
 
-def thread_to_dict(user, thread):
+def thread_to_dict(user, thread, less=True):
     #thread_list = []
+    if len(thread.content)< 140 or less==False:
+        content = thread.content
+    else:
+        print('here')
+        content = thread.content[:140] + ' <a href="/complain/thread/'+str(thread.pk)+'"> More . . .</a>'
     return {'id':thread.id,
             'votes':thread.votes,
             'time':thread.time.strftime("%I:%M %p, %d %b %Y"),
             'title':thread.title,
-            'content':thread.content,
+            'content':content,
             'tags':list(map(lambda x: {
                             'name':x.name,
                             'id':x.id }
