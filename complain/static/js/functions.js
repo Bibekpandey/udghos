@@ -105,6 +105,26 @@ function images_html(images) {
     return html;
 }
 
+function removeWarning() {
+    $('#warning-box').empty();
+    $('#mask').hide();
+}
+
+// need to verify if thread deleted or not and show corresponding message, not imp though
+function deleteThread(threadid) {
+    $.get('/complain/thread/delete/'+threadid+'/', function(data) {
+        if(data.success) {
+            var loc = window.location;
+            window.localStorage.setItem("message", data.message);
+            window.location = loc;
+        }
+        else {
+            removeWarning();
+            $('#error').text(data.message);
+        }
+    });
+}
+
 function showDeleteWarning(threadid) {
     $('#mask').css({
         "width":$(document).width(),
@@ -124,8 +144,8 @@ function showDeleteWarning(threadid) {
                 'Are you Sure you want to delete the thread? '+
                 'It cannot be undone.'+
             '</div>'+
-            '<button class="btn btn-my" type="button">Sure</button>'+
-            '<button class="btn btn-my" type="button">Cancel</button>';
+            '<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Sure</button>'+
+            '<button class="btn btn-my" type="button" onclick="removeWarning()">Cancel</button>';
     var box = $('<div>').attr('class','warning-box')
                 .html(html);
     $('#warning-box').append(box);

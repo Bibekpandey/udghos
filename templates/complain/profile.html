@@ -191,6 +191,8 @@
         }
         window.onload = function() {
             $('html,body').animate({scrollTop:0}, 500);
+            $('#error').text(window.localStorage.getItem("message"));
+            window.localStorage.setItem("message", "");
             getUserThreads({});
         }
 

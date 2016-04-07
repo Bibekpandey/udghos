@@ -68,6 +68,8 @@
 <script>
   function fbs_click() {u="www.udghos.com/haha";t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
   </script>
+<div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
+  <div id="mask" style="position:absolute;display:none"></div>
 
   <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
@@ -243,6 +245,7 @@
         <div id="tab-stories">
           <div class="box-tabs">
 
+            <div id="error" class="text-center text-danger" style="float:left">bibek</div>
             <ul class="nav nav-tabs" id="navblock" >
               <li class="active"><a data-toggle="tab" href="javascript:void()" onclick="showRecent()">Recent</a></li>
               <li><a data-toggle="tab" href="javascript:void()" onclick="showTop()">Top</a></li>
@@ -334,6 +337,8 @@
     window.onload = function()  { 
         $('html,body').animate({scrollTop:0}, 500);
         $('.comment-form').hide();
+        $('#error').text(window.localStorage.getItem("message"));
+        window.localStorage.setItem("message","");
         showRecent(); 
     };
 

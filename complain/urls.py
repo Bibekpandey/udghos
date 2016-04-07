@@ -15,6 +15,7 @@ urlpatterns =  [
         url(r'^vote/', vote, name='vote'),
         url(r'^post-thread/', Post.as_view(), name='post'),
         url(r'^thread/([0-9]+)/', ThreadPage.as_view(), name='thread'),
+        url(r'^thread/delete/([0-9]+)/', delete_thread, name='delete-thread'),
         url(r'^comment/', comment, name='comment'),
         url(r'^get-comments/', get_comments, name='get_comments'),
         url(r'^reply/', reply, name='reply'),
