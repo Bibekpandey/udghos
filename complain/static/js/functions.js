@@ -107,6 +107,8 @@ function images_html(images) {
 
 function removeWarning() {
     $('#warning-box').empty();
+    $('#warning-box').hide();
+    $('#mask').css({"z-index":1});
     $('#mask').hide();
 }
 
