@@ -1,5 +1,7 @@
 $('#edit').click(function(){
   $('#edit').hide();
+  $('#save').show();
+  $('.hidden-text').show();
   $('.dataarea').each(function() {
     var content = $(this).html();
     $(this).html('<textarea>' + content + '</textarea>');
@@ -11,7 +13,6 @@ $('#edit').click(function(){
   });
   
   $('#profile-image-form').show();
-  $('#save').show();
   $('#nameinfo').show();
   $('.info').fadeIn('fast');
 });
