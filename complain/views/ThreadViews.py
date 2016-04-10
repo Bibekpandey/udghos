@@ -166,8 +166,14 @@ def thread_to_dict(user, thread, less=True):
     if len(thread.content)< 140 or less==False:
         content = thread.content
     else:
-        print('here')
         content = thread.content[:140] + ' <a href="/complain/thread/'+str(thread.pk)+'"> More . . .</a>'
+    
+    downvotes = []
+    upvotes = ThreadUpvote.objects.filter(account__user=user, 
+                        thread=thread)
+    if len(upvotes) == 0:
+        downvotes = ThreadDownvote.objects.filter(account__user=user,
+                        thread=thread)
     return {'id':thread.id,
             'votes':thread.votes,
             'time':thread.time.strftime("%I:%M %p, %d %b %Y"),
@@ -184,7 +190,10 @@ def thread_to_dict(user, thread, less=True):
                     },
             'num_comments':Comment.objects.all().filter(thread=thread).count(),
             'can_edit':True if thread.account.user == user else False,
+            'supported':True if len(upvotes)>0 else False,
+            'thumbed_down':True if len(downvotes)>0 else False,
             'images':list(map(lambda x: x.name,
                                 ThreadImage.objects.filter(thread=thread))),
             }
+    
 

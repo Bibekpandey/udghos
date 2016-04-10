@@ -924,3 +924,7 @@ div.share> .twitter {
     border-top:solid 1px #888;
     font-family: Helvetica;
 }
+.text-bold {
+    font-weight:bold;
+}
+}

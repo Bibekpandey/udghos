@@ -38,6 +38,7 @@ $('#save').click(function(){
             }
             else {
             }
+            $('#picture_update').submit();
         },
         error: function(data) { alert(JSON.stringify(data));}
     }); 

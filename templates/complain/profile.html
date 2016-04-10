@@ -71,7 +71,7 @@
         <b class="text-center text-danger" id="error"></b>
           <div class="profileinfo">
 
-            <form id="updateform" method="post" action="{% url 'profile_update' %}" enctype="multipart/form-data" >
+            <form id="updateform" method="post" action="{% url 'profile_update' %}" >
           <img class="img-circle" src="/media/{{user_pic}}" width=200 height=200 alt="Generic placeholder image" width="200" height="200" />
               <input type="hidden" name="userid" value="{{request.user.id}}" />
             <div id="dataprofile" class="my-name">
@@ -107,7 +107,7 @@
               </div>
             </div>
             </form>
-            <form method="post" enctype="multipart/form-data" action="/complain/image-update/">
+            <form id="picture_update" method="post" enctype="multipart/form-data" action="/complain/image-update/">
             {% csrf_token %}
                 <input type="hidden" name="userid" value="{{request.user.id}}" />
                 <div id="profile-image-form">
