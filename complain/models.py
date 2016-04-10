@@ -20,7 +20,7 @@ class Account(models.Model):
     email = models.EmailField(blank=True, null=True, max_length=30)
     points = models.IntegerField(default=10)
     profile_pic = models.ImageField(null=True, upload_to=get_image_path, blank=True)
-
+    tags_followed = models.ManyToManyField('ThreadTag', blank=True)
     def __str__(self):
         return self.user.username
 

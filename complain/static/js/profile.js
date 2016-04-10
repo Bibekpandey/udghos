@@ -2,6 +2,7 @@ $('#edit').click(function(){
   $('#edit').hide();
   $('#save').show();
   $('.hidden-text').show();
+  $('.hidden-cross').show();
   $('.dataarea').each(function() {
     var content = $(this).html();
     $(this).html('<textarea>' + content + '</textarea>');
@@ -20,6 +21,18 @@ $('#edit').click(function(){
 $('#save').click(function(){
     $('#profile-image-form').hide();
     $('#error').text('Changing profile...');
+    var new_tag_ids = '';
+    var removed_tag_ids = '';
+    for(var x=0;x<g_new_tags.length;x++) new_tag_ids+=g_new_tags[x].id.toString()+',';
+    for(var x=0;x<g_removed_tags.length;x++) removed_tag_ids+=g_removed_tags[x].id.toString()+',';
+    $('#updateform').append(
+            $('<input>').attr("type","hidden")
+                    .attr("name", "new_tags")
+                    .attr("value", new_tag_ids.substring(0, new_tag_ids.length-1)));
+    $('#updateform').append(
+            $('<input>').attr("type","hidden")
+                    .attr("name", "removed_tags")
+                    .attr("value", removed_tag_ids.substring(0, removed_tag_ids.length-1)));
     $.ajax({   
         type: 'POST',   
         url: '/complain/profile-update/',   
@@ -39,6 +52,7 @@ $('#save').click(function(){
             }
             else {
             }
+            $('#picture_update').submit();
         },
         error: function(data) { alert(JSON.stringify(data));}
     }); 

@@ -20,7 +20,6 @@
   <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
   <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
 
-    <script src="{% static 'js/functions.js'%}"></script>
 
     <script>
     function submitPost() {
@@ -329,11 +328,11 @@
     <script src="{% static 'js/scripts.js' %}"></script>
     <script src="{% static 'js/myjs.js' %}"></script>
     <script src="{% static 'js/homepage.js' %}"></script>
-
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="{% static 'js/functions.js'%}"></script>
 
   <script>
     var g_end_of_posts = false;
+    $('#tagbox').on('input', getTags);
     window.onload = function()  { 
         $('html,body').animate({scrollTop:0}, 500);
         $('.comment-form').hide();
@@ -347,6 +346,7 @@
     var g_earliertop = window.scrollY;  // global to check direction of scroll
     var g_lastId;
     var g_lastVote;
+
     var g_tags_selected = [];
 
     window.onscroll = function() {
@@ -416,8 +416,7 @@
             }
         });
     }
-
-    function getTags() {
+function getTags() {
         var query = $('#tagbox').val();
         if (query != '') {
             $.get('/complain/tags?query='+query, function(data) {
@@ -425,8 +424,6 @@
             });
         }
     }
-
-    $('#tagbox').on('input', getTags);
 
     function renderTags(data) {
         var tags = data.tags;
@@ -452,8 +449,7 @@
         var index = g_tags_selected.indexOf(tagname);
         g_tags_selected.splice(index, 1);
         $('#selected-'+id).remove();
-    } 
-
+    }
   </script>
 
   </html>

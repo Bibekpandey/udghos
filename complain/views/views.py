@@ -14,6 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import View
 from complain.models import *
 import json
+import os
 
 # view modules
 from .ThreadViews import *
@@ -241,27 +242,34 @@ def vote_thread(thread_id, account, action): # action is 1 for upvote and -1 for
     downvotes = ThreadDownvote.objects.filter(account=account, thread=thread)
     n_downs = len(downvotes)
 
+    useraction = ""
+
     if n_ups==1 and action==1:
+        useraction='undo'
         upvotes[0].delete()
     elif n_ups==0 and action==1:
+        useraction="support" # support = upvote
         upvote = ThreadUpvote.objects.create(account=account, thread=thread)
         upvote.save()
         # delete existing downvote
         if n_downs==1:downvotes[0].delete()
     elif n_downs==1 and action==-1:
+        useraction='undo'
         downvotes[0].delete()
     elif n_downs==0 and action==-1:
+        useraction="thumb down"
         downvote = ThreadDownvote.objects.create(account=account, thread=thread)
         downvote.save()
         # delete existing upvote
-        if n_ups==1: upvotes[0].delete()
+        if n_ups==1: 
+            upvotes[0].delete()
     elif n_ups==0 and n_downs==0:pass
     else: raise Exception('error in vote evaluation')
 
     delta_vote = int(calculate_delta_vote(action, n_ups, n_downs))
     thread.votes+=delta_vote
     thread.save()
-    return delta_vote
+    return {"action":useraction, "increment":delta_vote}
 
 def vote_comment(comment_id, account, action):
     comment = Comment.objects.get(id=comment_id)
@@ -332,8 +340,8 @@ def vote(request):
                 else:
                     itm = Thread.objects.get(id=object_id)
                     owner = itm.account
-                    delta = vote_thread(object_id, account, val[vote_type])
-                    return HttpResponse(delta)
+                    vote_dict = vote_thread(object_id, account, val[vote_type])
+                    return JsonResponse(vote_dict)
                 update_user_points(owner, voter, item, delta)
         except Exception as e:
             return HttpResponse(traceback.format_exc())
@@ -477,11 +485,13 @@ class Profile(View):
             self.context['user'] = request.user
             acc = Account.objects.get(user_id=profileid)
             useracc = Account.objects.get(user=request.user)
+            tags = useracc.tags_followed.all()
             self.context['address'] = acc.address
             self.context['profile_pic'] = useracc.profile_pic
             self.context['user_pic'] = acc.profile_pic
             self.context['account'] = acc
             self.context['edit'] = False
+            self.context['tags'] = tags
             if request.user.id==profileid:
                 self.context['edit'] = True
         else:
@@ -490,15 +500,15 @@ class Profile(View):
 
 def image_update(request):
     if request.user.is_authenticated():
-        try:
             uid = int(request.POST['userid'])
             account = Account.objects.get(pk=uid)
+            curr_img = account.profile_pic.path
+            os.system('rm '+curr_img)
             image = request.FILES.get('image')
-            account.profile_pic = image
-            account.save()
+            if image is not None:
+                account.profile_pic = image
+                account.save()
             return redirect('profile', uid)
-        except:
-            pass
 
 def profile_update(request):
     try:
@@ -530,17 +540,32 @@ def profile_update(request):
             ret['error'] = "Username exists. Try next one"
             return JsonResponse(ret)
 
-        '''
-        if not image is None:
-            print(type(image))
-            pass
-        '''
         usr.first_name = firstname
         usr.last_name = lastname
         usr.username=username
         acc.address = address
         usr.save()
         acc.save()
+
+        new_tags = request.POST.get('new_tags','')
+        removed_tags = request.POST.get('removed_tags','')
+
+        try:
+            if new_tags!='':
+                tags_new = list(map(lambda x: int(x), new_tags.split(',')))
+                for x in tags_new:
+                    tag = ThreadTag.objects.get(id=x)
+                    acc.tags_followed.add(tag)
+                acc.save()
+
+            if removed_tags!='':
+                tags_removed = list(map(lambda x:int(x),removed_tags.split(',')))
+                for x in tags_removed:
+                    tag = ThreadTag.objects.get(id=x)
+                    acc.tags_followed.remove(tag)
+                acc.save()
+        except Exception as e:
+            print(repr(e))  
 
         ret['success'] = True
         ret['error'] = "Changed profile"
