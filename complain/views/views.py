@@ -14,6 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import View
 from complain.models import *
 import json
+import os
 
 # view modules
 from .ThreadViews import *
@@ -484,11 +485,13 @@ class Profile(View):
             self.context['user'] = request.user
             acc = Account.objects.get(user_id=profileid)
             useracc = Account.objects.get(user=request.user)
+            tags = useracc.tags_followed.all()
             self.context['address'] = acc.address
             self.context['profile_pic'] = useracc.profile_pic
             self.context['user_pic'] = acc.profile_pic
             self.context['account'] = acc
             self.context['edit'] = False
+            self.context['tags'] = tags
             if request.user.id==profileid:
                 self.context['edit'] = True
         else:
@@ -497,16 +500,15 @@ class Profile(View):
 
 def image_update(request):
     if request.user.is_authenticated():
-        try:
             uid = int(request.POST['userid'])
             account = Account.objects.get(pk=uid)
+            curr_img = account.profile_pic.path
+            os.system('rm '+curr_img)
             image = request.FILES.get('image')
             if image is not None:
                 account.profile_pic = image
                 account.save()
             return redirect('profile', uid)
-        except:
-            pass
 
 def profile_update(request):
     try:
@@ -544,6 +546,26 @@ def profile_update(request):
         acc.address = address
         usr.save()
         acc.save()
+
+        new_tags = request.POST.get('new_tags','')
+        removed_tags = request.POST.get('removed_tags','')
+
+        try:
+            if new_tags!='':
+                tags_new = list(map(lambda x: int(x), new_tags.split(',')))
+                for x in tags_new:
+                    tag = ThreadTag.objects.get(id=x)
+                    acc.tags_followed.add(tag)
+                acc.save()
+
+            if removed_tags!='':
+                tags_removed = list(map(lambda x:int(x),removed_tags.split(',')))
+                for x in tags_removed:
+                    tag = ThreadTag.objects.get(id=x)
+                    acc.tags_followed.remove(tag)
+                acc.save()
+        except Exception as e:
+            print(repr(e))  
 
         ret['success'] = True
         ret['error'] = "Changed profile"

@@ -42,17 +42,17 @@ function get_csrf(){
                         elem.children[0].innerHTML="Support";
                     }
                     else {
-                        elem.children[0].innerHTML="Thumbs Down";
+                        elem.children[0].innerHTML="Downvote";
                     }
                 }
                 else {
                     elem.children[0].className="text-bold";
                     if(txt=="Support") {
                         elem.children[0].innerHTML="Supported";
-                        next_elem.children[0].innerHTML="Thumbs Down";
+                        next_elem.children[0].innerHTML="Downvote";
                     }
                     else {
-                        elem.children[0].innerHTML="Thumbed Down";
+                        elem.children[0].innerHTML="Downvoted";
                         next_elem.children[0].innerHTML="Support";
                     }
                     next_elem.children[0].className ="";
@@ -247,7 +247,7 @@ function generate_thread(threadobj, auth) {
                     '</a>'+
                     '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote(this, '+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<span class="'+(down?'text-bold':'')+'" aria-hidden="true">Thumb'+(down?'ed':'s')+' Down</span>'+
+                      '<span class="'+(down?'text-bold':'')+'" aria-hidden="true">Downvote'+(down?'d':'')+'</span>'+
                     '</a>'+
                     '<a href="#" class="report-post">Report</a>'+
               '</div>'+
@@ -297,3 +297,7 @@ function popMessage(elem, msg) {
     setTimeout(function() { $(newdiv).delay(500).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 900);
     //$(newdiv).hide().delay(1000).fadeOut();
 }
+
+// for TAGS
+
+

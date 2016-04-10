@@ -106,10 +106,17 @@
               </div>
               <div class="my-tag">
                 <span class="tags-tab">My Tags</span>
-                <span id="mytags" class="datainfo">#Government  #Offices  #Colleges  #Blocades  #Road</span>
+                <div id="tags-chosen">
+                </div>
+
               </div>
             </div>
             </form>
+
+            {% for tag in tags %}
+            <input type="hidden" class="taginfo" value="{{tag.name}},{{tag.id}}"/>
+            {% endfor %}
+
             <form id="picture_update" method="post" enctype="multipart/form-data" action="/complain/image-update/">
             {% csrf_token %}
                 <input type="hidden" name="userid" value="{{request.user.id}}" />
@@ -121,6 +128,12 @@
                   <button type="submit">Update pic</button>
                 </div>
             </form>
+            <div class="form">
+            <label style="float:left" class="hidden-text"> Add tags</label>
+                <input type="text" class="form-control hidden-text" placeholder="Type in tag names " id="tagbox"/>
+                <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">
+                </ul>
+            </div>
 
         </div>
       </div>
@@ -189,7 +202,6 @@
   </div>
 
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -201,8 +213,23 @@
     <script src="{% static 'js/profile.js' %}"></script>
 
     <script>
+        $('#tagbox').on('input', getTags);
+
         var g_lastId;
+        var g_tagedit =false;
+        var g_tags_selected = [];
+        var g_current_tags = [];
+        var g_new_tags = [];
+        var g_removed_tags = [];
         var g_earliertop = window.scrollY;
+
+        $('.taginfo').each(function(index, element) {
+            var parts = $(element).val().split(',');
+            g_current_tags.push({name:parts[0], id:parseInt(parts[1])});
+
+        });
+        drawTagBoxes(g_current_tags);
+
         function getUserThreads(querydata) {
             var temp = location.href.split('/');
             var id = temp[temp.length-2];
@@ -215,6 +242,7 @@
         }
         window.onload = function() {
             $('html,body').animate({scrollTop:0}, 500);
+            $('.hidden-cross').hide();
             $('#error').text(window.localStorage.getItem("message"));
             window.localStorage.setItem("message", "");
             $('#profile-image-form').hide();
@@ -240,6 +268,85 @@
                 getUserThreads(data);
             }
         }
+
+function getTags() {
+        var query = $('#tagbox').val();
+        if (query != '') {
+            $.get('/complain/tags?query='+query, function(data) {
+                renderTags(data);
+            });
+        }
+    }
+
+    function renderTags(data) {
+        var tags = data.tags;
+		var ul = document.getElementById('tags-suggest-list');
+		ul.innerHTML="";
+        for(var x in tags) {
+            if (!tagInArr(tags[x], g_current_tags) && !tagInArr(tags[x], g_new_tags) || tagInArr(tags[x], g_removed_tags)) {
+			    ul.innerHTML += '<li id="tag-'+tags[x].id+'" onclick="selectTag(this)">'+tags[x].name+'</li>';
+            }
+        }
+    }
+	
+    function drawTagBoxes(tags) {
+        $(tags).each(function(index, element) {
+            drawTabBox(element.id, element.name);
+        });
+    }
+    function drawTabBox(id, txt) {
+        var tags_elem = document.getElementById('tags-chosen');	
+		tags_elem.innerHTML+= '<span id="selected-'+id+'"class="btn selected-tags">' +txt+ '<button type="button" class="close my-close" id="close-tag"><span class="hidden-cross" onclick="removeTag(\''+id+'\''+',\''+txt+'\')" aria-hidden="true">&times;</span></button></span>';
+
+    }
+	function selectTag(elem) {
+        $('#tags-warning').hide();
+        $('#tagbox').val('');
+        $('#tags-suggest-list').empty();
+        var tag = {name:elem.innerHTML, id:parseInt(elem.id.split('-')[1])};
+
+        // first remove if it is in removed array
+        if(tagInArr(tag, g_removed_tags)) {
+            removeTagFromArr(tag, g_removed_tags);
+        }
+
+        if(!tagInArr(tag, g_new_tags) && !tagInArr(tag, g_current_tags)) {
+            g_new_tags.push(tag);
+        }
+        var id = elem.getAttribute('id').replace('tag-', '');
+        drawTabBox(id, elem.innerHTML);
+	}
+
+    function tagInArr(tag, arr) {
+        for(var x=0;x<arr.length;x++) {
+            if(tag.name==arr[x].name && tag.id==arr[x].id)
+                return true;
+        }
+        return false;
+    }
+
+    function removeTagFromArr(tag, arr) {
+        for(var x=0;x<arr.length;x++) {
+            if(tag.name==arr[x].name && tag.id==arr[x].id) {
+                arr.splice(x, 1);
+                return;
+            }
+        }
+    }
+    function removeTag(id, tagname) {
+        var tag = {id:parseInt(id), name:tagname};
+        if(tagInArr(tag, g_new_tags)) {
+            removeTagFromArr(tag, g_new_tags);
+            $('#selected-'+id).remove();
+        }
+        //var index = g_tags_selected.indexOf(tagname);
+        //g_tags_selected.splice(index, 1);
+        // check if it is in current or not
+        if(tagInArr(tag, g_current_tags)) {
+            g_removed_tags.push(tag);
+            $('#selected-'+id).remove();
+        }
+    }
     </script>
 
 </body>
