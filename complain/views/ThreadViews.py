@@ -1,6 +1,7 @@
 from django.http import JsonResponse, HttpResponse, Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 from complain.models import *
 NEW_THREADS = 3 # new number of threads when scrolled in browser
 
@@ -16,9 +17,48 @@ def get_thread_json(request):
     except ObjectDoesNotExist:
         return JsonResponse({"success":False, "message":"Thread doesnot exist"}, status=404)
 
+
+def get_threads_json(request):
+    print('in get - threads json')
+    # first check if its search query 
+    auth=True if request.user.is_authenticated() else False
+    query = request.GET.get('query', '')
+    earlierthan = request.GET.get('earlierthan', '')
+    kwargs = {}
+    orderby = ['-time']
+    if earlierthan.strip()!='':
+        try:
+            earlierthan = int(earlierthan)
+            kwargs['id__lt'] = earlierthan
+        except:
+            return JsonResponse({'threads':[]})
+    if query.strip()!='':
+        words = list(map(lambda x: x.strip(),query.split(' ')))
+        full = ' '.join(words)
+        q = Q()
+        q |= Q(title__icontains=full)
+        for word in words:
+            q |= Q(title__icontains=word)
+
+        result = get_threads(request.user, NEW_THREADS, orderby, kwargs, [q])
+        return JsonResponse({'threads':result['threads'], 
+            'end':result['end'], 'authenticated':auth, 
+            'lastid':result['lastid'],
+            'lastvote':result['lastvote']
+        }) 
+
+    # if not search, check tag query
+    tagname = request.GET.get('tagname', '')
+    if tagname.strip()!='':
+        pass
+    return JsonResponse({'threads':[]})
+
+def get_tagged_threads(request):
+    pass
+
 def get_recent_threads(request):
+    print('in get recent ')
     # auth is to check user login which lets like/comment
-    print('get recent threads')
     if request.user.is_authenticated():auth=True
     else:auth=False
     orderby = ['-time']
@@ -86,7 +126,7 @@ def get_top_threads(request):
 def get_favourite_threads(request):
     pass
 
-def get_threads_json(request):
+def iget_threads_json(request):
     return get_recent_threads(request)
     if request.user.is_authenticated():
         # auth is to check if user has logged in or not and thereby can comment or not
@@ -135,12 +175,12 @@ def delete_thread(request, threadid):
 #####       HELPER FUNCTIONS        #####
 #########################################
 
-def get_threads(user, n, orderby, filterby): 
+def get_threads(user, n, orderby, filterby, args=()): # args is for Q objects and the like
     end = False
     try:
         lastid = None
         lastvote = None
-        threads = list(Thread.objects.order_by(*orderby).filter(**filterby))
+        threads = list(Thread.objects.order_by(*orderby).filter(*args, **filterby))
         if len(threads)<= n:
             end = True
         else:
@@ -149,7 +189,7 @@ def get_threads(user, n, orderby, filterby):
             lastvote = threads[-1].votes
 
     except: # most probably n being greater
-        threads = list(Thread.objects.order_by(*orderby).filter(**filterby))
+        threads = list(Thread.objects.order_by(*orderby).filter(*args, **filterby))
         end = True
 
     data = {'end':end,

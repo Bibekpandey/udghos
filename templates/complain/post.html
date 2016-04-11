@@ -91,6 +91,9 @@ window.twttr = (function(d, s, id) {
   	<div class="container" id="content-top">
   		<div class="row">
   			<div class="col-md-9">
+            {% if results or 1 %}
+                <h2 style="margin-left:10px;background-color:#bbb">Results for <span id="result-for"></span></h2>
+            {% endif %}
                 <div class="tab-stories">
                     <div id="thread-container">
                     </div>
@@ -156,22 +159,58 @@ window.twttr = (function(d, s, id) {
         var g_thread_container = "thread-container";
         window.onload = function () { 
             try {
-                // get threadid from url
+
                 //$('#error').text(window.localStorage.getItem("message"));
                 //window.localStorage.setItem("message","");
+
+                // get threadid from url
                 var temp = location.pathname.split('/');
-                var threadid = temp[temp.length-2]; // last one is empty
+
+                // but this page is for tags and search results too
+                if(temp.indexOf('thread') >= 0) {// means this page is for thread
+                    var threadid = temp[temp.length-2]; // last one is empty
+                    $.ajax({
+                        url:'/complain/thread/?id='+threadid, 
+                        success:function(data) {
+                            add_item(data.thread, g_thread_container, data.authenticated)
+                        },
+                        error:function(data) { window.location="/";}
+                    });
+                }
+                else if (temp.indexOf('search') >= 0) { // this is result for search
+                    var query;
+                    var search = location.search.substring(1).split('&');
+                    for(var x=0;x<search.length;x++) {
+                        var temp = search[x].split('=');
+                        if(temp[0]=='query') {
+                            query = decodeURI(temp[1]);
+                            break;
+                        }
+                    }
+                    $.ajax({
+                        url:'/complain/threads/?query='+query, 
+                        success:function(data) {
+                            add_item(data.thread, g_thread_container, data.authenticated)
+                        },
+                        error:function(data) { window.location="/";}
+                    });
+                }
+                else if (temp.indexOf('tags') >= 0) { // this is result for tags
+                    var tagname;
+                    var url = location.pathname.split('/');
+                    $.ajax({
+                        url:'/complain/threads/?tagname='+tagname+'/',
+                        success:function(data) {
+                            add_item(data.thread, g_thread_container, data.authenticated)
+                        },
+                        error:function(data) { window.location="/";}
+                    });
+                }
+
             }
             catch(e){
                 //alert('exception');
             }
-            $.ajax({
-                url:'/complain/thread/?id='+threadid, 
-                success:function(data) {
-                    add_item(data.thread, g_thread_container, data.authenticated)
-                },
-                error:function(data) { window.location="/";}
-            });
         };
     </script>
 </html>

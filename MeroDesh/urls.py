@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', include('complain.urls')),
+    url(r'^', include('complain.urls')),
     url(r'^complain/', include('complain.urls')),
     
     #url(r'', include('social_auth.urls')),
