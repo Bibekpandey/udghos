@@ -246,9 +246,9 @@
 
             <div id="error" class="text-center text-danger" style="float:left">bibek</div>
             <ul class="nav nav-tabs" id="navblock" >
-              <li class="active"><a data-toggle="tab" href="javascript:void()" onclick="showRecent()">Recent</a></li>
-              <li><a data-toggle="tab" href="javascript:void()" onclick="showTop()">Top</a></li>
-              <li><a data-toggle="tab" href="javascript:void()" onclick="showFavs()">Favourites</a></li>
+              <li class="active"><a data-toggle="tab" href="javascript:void()" onclick="g_lastId=undefined;showRecent()">Recent</a></li>
+              <li><a data-toggle="tab" href="javascript:void()" onclick="g_lastId=undefined;showTop()">Top</a></li>
+              <li><a data-toggle="tab" href="javascript:void()" onclick="g_lastId=undefined;showFavs()">Favourites</a></li>
             </ul>
 
           </div>
@@ -392,6 +392,17 @@
     }
     
     function showFavs() {
+        g_thread_container = "favourite-threads";
+        g_thread_type = "favourite";
+        g_earliertop = 0;
+        $('#top-threads').empty();
+        $('#recent-threads').empty();
+        var query='';
+        if (g_lastId != undefined)
+            query = 'earlierthan='+g_lastId.toString();
+        else query = '';
+        getAndRenderThreads('favourite', query);
+
     }
 
     function getAndRenderThreads(type, data) {

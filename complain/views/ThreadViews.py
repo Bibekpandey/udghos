@@ -59,11 +59,9 @@ def get_threads_json(request):
         })
     return JsonResponse({'threads':[]})
 
-def get_tagged_threads(request):
-    pass
 
 def get_recent_threads(request):
-    print('in get recent ')
+    #print('in get recent ')
     # auth is to check user login which lets like/comment
     if request.user.is_authenticated():auth=True
     else:auth=False
@@ -78,12 +76,12 @@ def get_recent_threads(request):
             'lastvote':result['lastvote']
         }) 
     except ValueError: # invalid get parameter
-        print('invalid')
+        #print('invalid')
         return JsonResponse({'status':False, 
                         'message':'Invalid request parameter'},
                         status=404)
     except KeyError:# earlierthan is not specified
-        print('earlierthan not specified');
+        #print('earlierthan not specified');
         result = get_threads(request.user, 5, orderby, {}) # initial display threads=5
         return JsonResponse({'threads':result['threads'], 
             'end':result['end'], 'authenticated':auth,
@@ -116,6 +114,7 @@ def get_user_threads(request, userid):
     else:
         return redirect('signin')
 
+
 def get_top_threads(request):
     earlier = request.GET.get('earlierthan','') 
     try:
@@ -129,8 +128,35 @@ def get_top_threads(request):
                         status=404)
 
     pass
+
+
 def get_favourite_threads(request):
-    pass
+    if request.user.is_authenticated():
+        acc = Account.objects.get(user=request.user)
+        tags = acc.tags_followed.all()
+        orderby = ['-time']
+        earlierthan = request.GET.get('earlierthan', '').strip()
+        kwargs = {}
+        if earlierthan!='':
+            try:
+                earlierthan = int(earlierthan)
+            except:
+                return JsonResponse({'threads':[], 'authenticated':True})
+            kwargs['id__lt'] = earlierthan
+
+        q = Q()
+        for tag in tags:
+            q |= Q(tags__name=tag.name)
+
+        result = get_threads(request.user, NEW_THREADS, orderby, kwargs, [q])
+        return JsonResponse({'threads':result['threads'], 
+            'end':result['end'], 'authenticated':True, 
+            'lastid':result['lastid'],
+            'lastvote':result['lastvote']
+        }) 
+
+    else:
+        return JsonResponse({'threads':[], 'authenticated':False})
 
 def iget_threads_json(request):
     return get_recent_threads(request)
