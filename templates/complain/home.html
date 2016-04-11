@@ -86,11 +86,11 @@
                 <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
                 <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
             </ul>
-            <form class="navbar-form navbar-right" role="search">
+            <form class="navbar-form navbar-right" role="search" onsubmit="return search()">
               <div class="form-group">
                 <div id="search-bar" class="inner-addon right-addon nav-search">
                   <i class="glyphicon glyphicon-search"></i>
-                  <input type="text" placeholder="Search" class="form-control form-control-navbar" />
+                  <input type="text" id="searchquery" placeholder="Search" class="form-control form-control-navbar" />
                 </div>
               </div>
             </form>

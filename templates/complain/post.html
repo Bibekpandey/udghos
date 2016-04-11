@@ -62,11 +62,11 @@ window.twttr = (function(d, s, id) {
                 <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
                 <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
             </ul>
-            <form class="navbar-form navbar-right" role="search">
+            <form class="navbar-form navbar-right" role="search" onsubmit="return search();">
               <div class="form-group">
                 <div id="search-bar" class="inner-addon right-addon nav-search">
                   <i class="glyphicon glyphicon-search"></i>
-                  <input type="text" placeholder="Search" class="form-control" />
+                  <input type="text"  id="searchquery" placeholder="Search" class="form-control" />
                 </div>
               </div>
             </form>
@@ -93,6 +93,7 @@ window.twttr = (function(d, s, id) {
   			<div class="col-md-9">
             {% if results or 1 %}
                 <h2 style="margin-left:10px;background-color:#bbb">Results for <span id="result-for"></span></h2>
+                <h3 id="not-found" style="margin:10px;display:none"> Nothing Found</h3>
             {% endif %}
                 <div class="tab-stories">
                     <div id="thread-container">
@@ -124,7 +125,7 @@ window.twttr = (function(d, s, id) {
             <a href="#">Terms & Conditions</a>
           </p>
           <p class="pull-right">
-            <form class="footer-form" role="search">
+            <form class="footer-form" role="search"> 
               <div class="form-group">
                 <div id="search-bar" class="inner-addon right-addon nav-search">
                   <i class="glyphicon glyphicon-footer glyphicon-search"></i>
@@ -190,7 +191,11 @@ window.twttr = (function(d, s, id) {
                     $.ajax({
                         url:'/complain/threads/?query='+query, 
                         success:function(data) {
-                            add_item(data.thread, g_thread_container, data.authenticated)
+                            $('#result-for').text('"'+query+'"');
+                            if(data.threads.length==0) $('#not-found').show();
+                            for(var x=0;x<data.threads.length;x++) {
+                                add_item(data.threads[x], g_thread_container, data.authenticated)
+                            }
                         },
                         error:function(data) { window.location="/";}
                     });

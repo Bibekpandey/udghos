@@ -350,7 +350,7 @@ def vote(request):
 class ThreadPage(View):
     context = {}
 
-    def get(self, request, thread_id):
+    def get(self, request, thread_id=None):
         if request.user.is_authenticated():
             self.context['user'] = request.user
             self.context['authenticated'] = True

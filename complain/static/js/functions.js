@@ -298,6 +298,11 @@ function popMessage(elem, msg) {
     //$(newdiv).hide().delay(1000).fadeOut();
 }
 
-// for TAGS
 
+function search() {
+    var url = '/threads/search/?query=';
+    url+=$('#searchquery').val();
+    location.href = url;
+    return false;
+}
 

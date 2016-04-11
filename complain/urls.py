@@ -16,6 +16,7 @@ urlpatterns =  [
         url(r'^logout/', logout_user, name='logout'),
         url(r'^vote/', vote, name='vote'),
         url(r'^post-thread/', Post.as_view(), name='post'),
+        url(r'^threads/search/$', ThreadPage.as_view(), name='search'),
         url(r'^thread/([0-9]+)/', ThreadPage.as_view(), name='get-thread'),
         url(r'^thread/delete/([0-9]+)/', delete_thread, name='delete-thread'),
         url(r'^comment/', comment, name='comment'),
