@@ -4,8 +4,8 @@ from complain.views.ThreadViews import *
 
 urlpatterns =  [
         url(r'^$', Index.as_view(), name='index'),
-        url(r'^login/', Login.as_view(), name='login'),
-        url(r'^signup/', Signup.as_view(), name='signup'),
+        url(r'^login/$', Login.as_view(), name='login'),
+        url(r'^signup/$', Signup.as_view(), name='signup'),
         url(r'^thread/$', get_thread_json, name='thread'),
         url(r'^threads/$', get_threads_json, name='threads'),
         url(r'^threads/tagged/([a-zA-Z0-9]+)/', ThreadPage.as_view(), name='tagged-threads'),
@@ -13,7 +13,7 @@ urlpatterns =  [
         url(r'^threads/top/', get_top_threads, name='top-threads'),
         url(r'^threads/favourite/', get_favourite_threads, name='favourite-threads'),
         url(r'^threads/user/([0-9]+)/', get_user_threads, name='user-threads'),
-        url(r'^logout/', logout_user, name='logout'),
+        url(r'^logout/$', logout_user, name='logout'),
         url(r'^vote/', vote, name='vote'),
         url(r'^post-thread/', Post.as_view(), name='post'),
         url(r'^threads/search/$', ThreadPage.as_view(), name='search'),
