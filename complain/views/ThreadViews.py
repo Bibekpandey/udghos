@@ -19,7 +19,6 @@ def get_thread_json(request):
 
 
 def get_threads_json(request):
-    print('in get - threads json')
     # first check if its search query 
     auth=True if request.user.is_authenticated() else False
     query = request.GET.get('query', '')
@@ -49,8 +48,15 @@ def get_threads_json(request):
 
     # if not search, check tag query
     tagname = request.GET.get('tagname', '')
-    if tagname.strip()!='':
-        pass
+    tagname = tagname.strip()
+    if tagname!='':
+        q = Q(tags__name__icontains=tagname)
+        result = get_threads(request.user, NEW_THREADS, orderby, kwargs, [q])
+        return JsonResponse({'threads':result['threads'], 
+            'end':result['end'], 'authenticated':auth, 
+            'lastid':result['lastid'],
+            'lastvote':result['lastvote']
+        })
     return JsonResponse({'threads':[]})
 
 def get_tagged_threads(request):

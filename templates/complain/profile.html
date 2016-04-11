@@ -296,7 +296,7 @@ function getTags() {
     }
     function drawTabBox(id, txt) {
         var tags_elem = document.getElementById('tags-chosen');	
-		tags_elem.innerHTML+= '<span id="selected-'+id+'"class="btn selected-tags">' +txt+ '<button type="button" class="close my-close" id="close-tag"><span class="hidden-cross" onclick="removeTag(\''+id+'\''+',\''+txt+'\')" aria-hidden="true">&times;</span></button></span>';
+		tags_elem.innerHTML+= '<span id="selected-'+id+'"class="btn selected-tags" onclick="location=\'/threads/tagged/'+txt+'/\'">' +txt+ '<button type="button" class="close my-close" id="close-tag"><span class="hidden-cross" onclick="removeTag(\''+id+'\''+',\''+txt+'\')" aria-hidden="true">&times;</span></button></span>';
 
     }
 	function selectTag(elem) {

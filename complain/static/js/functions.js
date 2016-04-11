@@ -232,7 +232,7 @@ function generate_thread(threadobj, auth) {
                   '<div class="display-tag">'+
                     '<span id="tag-post2" class="glyphicon glyphicon-tags"></span>';
                 for(var x in threadobj.tags) {
-                    thread_str+= '<a class="tagname tagname2" href="#">'+ threadobj.tags[x].name+'</a>';
+                    thread_str+= '<a class="tagname tagname2" href="/threads/tagged/'+threadobj.tags[x].name+'/">'+ threadobj.tags[x].name+'</a>';
                 }
                 thread_str+='</div>'+
                 '</div>'+

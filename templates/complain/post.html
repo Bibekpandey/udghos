@@ -181,6 +181,8 @@ window.twttr = (function(d, s, id) {
                     g_lastId = null;
                     if(g_type=='search')
                         getSearch(g_query, data);
+                    else if (g_type=='tag')
+                        getTagged(g_tagname, data);
                  }
             }   
 
@@ -215,11 +217,13 @@ window.twttr = (function(d, s, id) {
                     $('#searchquery').val(query);
                     getSearch(query, {});
                 }
-                else if (temp.indexOf('tags') >= 0) { // this is result for tags
-                    g_type='tags';
+                else if (temp.indexOf('tagged') >= 0) { // this is result for tags
+                    g_type='tag';
                     var tagname;
-                    var url = location.pathname.split('/');
-                    // to be coded
+                    var parts = location.pathname.split('/');
+                    tagname = parts[parts.length-2];
+                    g_tagname = tagname;
+                    getTagged(tagname, {});
                 }
                     
             }
@@ -247,11 +251,17 @@ window.twttr = (function(d, s, id) {
         }
 
 
-        function getTagged(tagname) {
+        function getTagged(tagname, data) {
             $.ajax({
-                url:'/complain/threads/?tagname='+tagname+'/',
+                url:'/complain/threads/?tagname='+tagname,
+                data:data,
                 success:function(data) {
-                    add_item(data.thread, g_thread_container, data.authenticated)
+                    $('#result-for').text('tag "'+tagname+'"');
+                    if(data.threads.length==0)$('#not-found').show();
+                    g_lastId = data.lastid;
+                    for(var x=0;x<data.threads.length;x++) {
+                    add_item(data.threads[x], g_thread_container, data.authenticated)
+                    }
                 },
                 error:function(data) { window.location="/";}
             });
