@@ -503,12 +503,18 @@ def image_update(request):
             uid = int(request.POST['userid'])
             account = Account.objects.get(pk=uid)
             image = request.FILES.get('image')
+            if image is None:
+                return redirect('profile', uid)
             if image is not None:
-                curr_img = account.profile_pic.path
-                os.system('rm '+curr_img)
-                account.profile_pic = image
-                account.save()
-            return redirect('profile', uid)
+                try:
+                    curr_img = account.profile_pic.path
+                    os.system('rm '+curr_img)
+                except:
+                    pass
+                finally:
+                    account.profile_pic = image
+                    account.save()
+                    return redirect('profile', uid)
 
 def profile_update(request):
     try:
