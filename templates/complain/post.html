@@ -145,9 +145,7 @@ window.twttr = (function(d, s, id) {
       </footer>
     </div>
   </div>
-
-
-  	</body>
+</body>
 
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -158,17 +156,41 @@ window.twttr = (function(d, s, id) {
     
     <script>
         var g_thread_container = "thread-container";
+        var g_type;
+        var g_query, g_tagname;
+        var g_lastId;
+        var g_earliertop;
         window.onload = function () { 
+            window.onscroll = function() {
+
+                // first get direction of scroll
+                var curr = window.scrollY;
+                if (curr <= g_earliertop) {
+                    return;
+                }
+                g_earliertop = curr;
+                var elems = document.getElementsByClassName('box thread');
+                var last = elems[elems.length-1];
+
+                var lastRect = last.getBoundingClientRect();
+                var windowH = window.innerHeight;
+                if(lastRect.top <= 0.85*windowH) {
+                    if(g_lastId==null) return;
+                    console.log('here');
+                    var data = {earlierthan:g_lastId.toString()};
+                    g_lastId = null;
+                    if(g_type=='search')
+                        getSearch(g_query, data);
+                 }
+            }   
+
             try {
-
-                //$('#error').text(window.localStorage.getItem("message"));
-                //window.localStorage.setItem("message","");
-
                 // get threadid from url
                 var temp = location.pathname.split('/');
 
                 // but this page is for tags and search results too
                 if(temp.indexOf('thread') >= 0) {// means this page is for thread
+                    g_type='thread';
                     var threadid = temp[temp.length-2]; // last one is empty
                     $.ajax({
                         url:'/complain/thread/?id='+threadid, 
@@ -179,6 +201,7 @@ window.twttr = (function(d, s, id) {
                     });
                 }
                 else if (temp.indexOf('search') >= 0) { // this is result for search
+                    g_type='search';
                     var query;
                     var search = location.search.substring(1).split('&');
                     for(var x=0;x<search.length;x++) {
@@ -188,35 +211,51 @@ window.twttr = (function(d, s, id) {
                             break;
                         }
                     }
-                    $.ajax({
-                        url:'/complain/threads/?query='+query, 
-                        success:function(data) {
-                            $('#result-for').text('"'+query+'"');
-                            if(data.threads.length==0) $('#not-found').show();
-                            for(var x=0;x<data.threads.length;x++) {
-                                add_item(data.threads[x], g_thread_container, data.authenticated)
-                            }
-                        },
-                        error:function(data) { window.location="/";}
-                    });
+                    g_query = query;
+                    $('#searchquery').val(query);
+                    getSearch(query, {});
                 }
                 else if (temp.indexOf('tags') >= 0) { // this is result for tags
+                    g_type='tags';
                     var tagname;
                     var url = location.pathname.split('/');
-                    $.ajax({
-                        url:'/complain/threads/?tagname='+tagname+'/',
-                        success:function(data) {
-                            add_item(data.thread, g_thread_container, data.authenticated)
-                        },
-                        error:function(data) { window.location="/";}
-                    });
+                    // to be coded
                 }
-
+                    
             }
             catch(e){
                 //alert('exception');
             }
         };
+
+        function getSearch(query, data) {
+            $.ajax({
+                url:'/complain/threads/?query='+query, 
+                data:data,
+
+                success:function(data) {
+                    $('#result-for').text('"'+query+'"');
+                    if(data.threads.length==0) $('#not-found').show();
+                    g_lastId = data.lastid;
+                    for(var x=0;x<data.threads.length;x++) {
+                        add_item(data.threads[x], g_thread_container, data.authenticated)
+                    }
+                },
+
+                error:function(data) { window.location="/";}
+            });
+        }
+
+
+        function getTagged(tagname) {
+            $.ajax({
+                url:'/complain/threads/?tagname='+tagname+'/',
+                success:function(data) {
+                    add_item(data.thread, g_thread_container, data.authenticated)
+                },
+                error:function(data) { window.location="/";}
+            });
+        }
     </script>
 </html>
 
