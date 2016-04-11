@@ -74,8 +74,7 @@
             <form id="updateform" method="post" action="{% url 'profile_update' %}" >
           <img class="img-circle" src="/media/{{user_pic}}" width=200 height=200 alt="Generic placeholder image" width="200" height="200" />
           <div class="edit-text">
-            <h2 class="hidden-text"><b>Edit your Profile</b></h2>
-            <button id="save" class="btn btn-sm" type="button"> Save Info</button>
+            <button id="save" class="btn btn-sm" type="button"> Save Info</button><span class="hidden-text hidden-text-font"><b>Edit your Profile</b></span>
           </div>
               <input type="hidden" name="userid" value="{{request.user.id}}" />
             <div id="dataprofile" class="my-name">

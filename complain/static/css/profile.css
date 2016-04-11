@@ -9,15 +9,17 @@ h1,h2,h3,h4,h5{
   margin-top: 2px;
   margin-left: -50px;
 }
+.edit-text>button{
+  margin-left: -20px;
+}
 #edit{
   margin-right: 35%;
 }
 #save{
-  margin-top: -50px;
-  margin-right: 35%;
-}
-.edit-text>button{
-  margin-top: -100px;
+  position: absolute;
+  margin-left: -20px;
+  margin-bottom: 20px;
+  margin-right: 20%;
 }
 textarea{
   height: 35px;
@@ -112,4 +114,9 @@ textarea:focus{
 .hidden-text{
   color: #333;
   display: none;
+}
+.hidden-text-font{
+  margin-right: -10px;
+  font-size: 25px;
+  margin-bottom: -20px;
 }
