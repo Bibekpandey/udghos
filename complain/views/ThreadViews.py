@@ -116,18 +116,31 @@ def get_user_threads(request, userid):
 
 
 def get_top_threads(request):
-    earlier = request.GET.get('earlierthan','') 
+    earlier = request.GET.get('earlierthan','').strip()
+    lessthan = request.GET.get('lessthan', '').strip()
+    filterby={}
+    if earlier!='' and lessthan!='':
+        try:
+            earlier = int(earlier)
+            lessthan = int(lessthan)
+            filterby['votes__lt'] = lessthan+1
+            filterby['id__lt'] = earlier
+        except:
+            return JsonResponse({'threads':[], 'authenticated':True})
     try:
-        earlier = int(earlier)
-        orderby = ['-time']
-        filterby = {}
-        threads = get_threads(request.user, NEW_THREADS, orderby, filterby)
-    except: # invalid get parameter
+        orderby = ['-votes', '-time']
+        result = get_threads(request.user, NEW_THREADS, orderby, filterby)
+        return JsonResponse({'threads':result['threads'], 
+            'end':result['end'], 'authenticated':request.user.is_authenticated(),
+            'lastid':result['lastid'],
+            'lastvote':result['lastvote']
+        })
+
+    except Exception as e: # invalid get parameter
         return JsonResponse({'status':False, 
-                        'message':'Invalid request parameter'},
+                        'message':repr(e)+'Invalid request parameter'},
                         status=404)
 
-    pass
 
 
 def get_favourite_threads(request):

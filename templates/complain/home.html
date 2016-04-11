@@ -363,7 +363,8 @@
         var windowH = window.innerHeight;
         if(lastRect.top <= 0.85*windowH) {
             if(g_lastId==null) return;
-            var data = {earlierthan:g_lastId.toString()};
+            var data = {earlierthan:g_lastId.toString(),
+                lessthan:g_lastVote.toString()};
             g_lastId = null;
             getAndRenderThreads(g_thread_type, data);
         }
@@ -375,7 +376,12 @@
         g_earliertop = 0;
         $('#recent-threads').empty();
         $('#favourite-threads').empty();
-        getAndRenderThreads('top', {});
+        var query='';
+        if (g_lastId != undefined && g_lastVote != undefined) {
+            query = 'earlierthan='+g_lastId.toString()+'&';
+            query += 'lessthan='+g_lastVote.toString();
+        }
+        getAndRenderThreads('top', query);
     }
 
     function showRecent() {
@@ -407,18 +413,14 @@
 
     function getAndRenderThreads(type, data) {
         // now get threads from server
-        console.log("in get and render")
         if (g_end_of_posts) {
-            console.log('not calling server');
             return;
         }
-        console.log('calling server');
 
         $.get('/complain/threads/'+type, data, function(data) {
             g_lastId = data.lastid;
             if(g_lastId==null) g_end_of_posts = true;
             g_lastVote = data.lastvote;
-            //alert(data.end);
             if(data.end==true) {
                 g_end_of_posts=true;
             }
