@@ -21,6 +21,8 @@ $('#myModal').on('shown.bs.modal', function () {
 $('#myModalImage').on('shown.bs.modal', function () {
   $('#myModalImage').appendTo("body").modal('show');
   $('#myInput').focus()
+    $('#myModalImage').modal({keyboard: false})
+
 })
 
 $('#textbox').click(function() {

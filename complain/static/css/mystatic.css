@@ -6,6 +6,7 @@ body {
 
   font-family: 'Varela Round', sans-serif;
   color: #000;
+  min-height: 700px;
   background-size:cover;  
 }
 h1,h2,h3,h4{
@@ -18,7 +19,7 @@ h1,h2,h3,h4{
 }
 
 .btn-my {
-  font-family: Ubuntu;
+  font-family: 'Varela Round', sans-serif;
   background: linear-gradient(#cc4457, #990012);
   
   -webkit-border-radius: 3;
@@ -60,7 +61,7 @@ h1,h2,h3,h4{
   
 }
 .box-profile{
-  font-family: Ubuntu;
+  font-family: 'Varela Round', sans-serif;
   position: block;
   min-height: 20px;
   padding: 10px 15px 15px 15px;
@@ -121,6 +122,7 @@ h1,h2,h3,h4{
   background: #333;
   margin-bottom: 0px;
   color: #fff;
+  margin-top: 200px;
 }
 .footer-body{
   margin: 10px 10px 0px 10px;
@@ -233,14 +235,15 @@ p>a:hover{
 }
 .notification-count{
   border-radius: 70px;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   padding: 2px;
   position: absolute;
   font-size: 15px;
-  margin-top: -25px;
+  margin-top: -27px;
   margin-left: 12px;
   color: #fff;
+  border: #333 2px solid;
   background: linear-gradient(#dd4456, #bb2234);
 }
 
@@ -372,6 +375,10 @@ p>a:hover{
 }
 .media-body{
   border-bottom: 1px solid #999;
+  font-family: 'Varela Round', sans-serif;
+}
+.media-body>a{
+  text-decoration: none;
 }
 .modal{
     z-index: 10000;
@@ -394,6 +401,7 @@ p>a:hover{
   position: absolute;
 }
 .heading-property{
+  text-decoration: none;
   border-bottom: none;
 }
 .heading-post{
@@ -407,6 +415,9 @@ p>a:hover{
 }
 .heading-post:hover{
   color: #777;
+}
+.user-heading{
+  margin-top: 5px;
 }
 
 .inner-addon { 
@@ -432,6 +443,10 @@ ol
 list-style:none;
 margin:0px;
 padding:0px;
+}
+ul{
+  font-family: 'Varela Round', sans-serif;
+
 }
 .stbody {
   min-height:70px;
@@ -484,6 +499,7 @@ padding:0px;
   margin-top: -1px;
   margin-right: -40px;
   background-color: #eee;
+  font-family: 'Varela Round', sans-serif;
 }
 
 .navbar-icon{
@@ -934,12 +950,14 @@ div.share> .twitter {
 .hovertext {
     position: relative;
     display: inline-block;
+    font-family: 'Varela Round', sans-serif;
 }
 
 .hovertext .hovertext-display {
     visibility: hidden;
     width: 120px;
-    margin-top: 17px;
+    margin-top: 20px;
+    margin-left: -25px;
     background-color: black;
     color: #fff;
     text-align: center;
@@ -949,8 +967,19 @@ div.share> .twitter {
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
+    font-family: 'Varela Round', sans-serif;
 }
 
 .hovertext:hover .hovertext-display {
     visibility: visible;
+}
+
+
+.address-tab,
+.about-tab,
+.tags-tab{
+  font-size: 25px;
+  margin-top: 20px;
+  display: block;
+  position: relative;
 }

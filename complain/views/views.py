@@ -593,4 +593,6 @@ def profile_update(request):
 class Concern(View):
     def get(self,request):
         self.context = {}
+        if request.user.is_authenticated():
+            self.context['authenticated'] = True
         return render(request, "complain/post-concern.html",self.context)
