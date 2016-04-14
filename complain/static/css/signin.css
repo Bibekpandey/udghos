@@ -58,12 +58,11 @@ html,
 body {
   height: 100%;
   background-color: #fff;
-  font-family: Ubuntu;
+  font-family: 'Varela Round', sans-serif;
   color: #fff;
   text-align: center;
 
   background: url("../img/IMG HARInew.png") no-repeat ;
-  font-family: 'Source Sans Pro', sans-serif;
 }
 
 @media (min-width: 768px) {

@@ -10,8 +10,6 @@
   <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
-  <link href='https://fonts.googleapis.com/css?family=Fjord+One' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Gentium+Basic|Raleway' rel='stylesheet' type='text/css'>
   <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -55,6 +53,14 @@
             color:red;
             font-size:0.9em;
         }
+        body{
+        font-family: 'Varela Round', sans-serif;
+        padding:0;
+        margin:0;
+        width:100%;
+        min-height:500px;
+        }
+
     </style>
 </head>
 
@@ -79,11 +85,11 @@
                 <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
                 <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
             </ul>
-            <form class="navbar-form navbar-right" role="search">
-              <div class="form-group">
+            <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
+              <div class="form-group ">
                 <div id="search-bar" class="inner-addon right-addon nav-search">
                   <i class="glyphicon glyphicon-search"></i>
-                  <input type="text" placeholder="Search" class="form-control form-control-navbar" />
+                  <input type="text" id="searchquery" placeholder="Search" class="form-control form-control-navbar" />
                 </div>
               </div>
             </form>
@@ -92,12 +98,12 @@
                 <a href="#" title="Header" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Content">
                 <i class="glyphicon glyphicon-bell"></i>
                 <div class="notification-count">
-                  5
+                  
                 </div>
                 </a>
               </li>
             </ul> 
-
+          </ul>
             {% else %}
             
             <ul class="nav navhead-nav nav-unauth">
@@ -108,46 +114,52 @@
       </div>
   </nav>
 
+
   <div class="container">
     <div class="row">
-      <div class="post-concern">
-        <div class="modal-header my-color">
-          <h4 class="modal-title title-concern" id="myModalLabel">Post Your View</h4><br>
-        </div>
-                    <div class="modal-body">
-                      <div class="form-group">
-                                            </div>
-                      <form method="post" id="thread-form" action="{% url 'post' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
-                          <label for="recipient-name" class="control-label">Title</label>
-                          <input type="text" name="title" class="form-control" id="recipient-name" placeholder="Title relevant to the description">
-
-                        {% csrf_token %}
-                        <input type="hidden" name="thread_type" value="complaint"/>
-                        <div class="form-group" style="padding:14px;">
-                          <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none"> Please provide a description of the issue!! </small></label>
-                          <textarea name="content" class="form-control" placeholder="Your queries here." oninput="$('#description-warning').hide()"></textarea>
-                          
-                          <div class="form">
-                            <label for="recipient-name" class="control-label">Tags * <small id="tags-warning" class="alert-danger" style="display:none">Please provide at least 1 tag(max 4) </small></label><br>
-                            <input type="text" class="form-control" placeholder="Type in tag names (max 4)" id="tagbox"/>
-                            <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">
-                            </ul>
-                              <div id="tags-chosen">
-                              </div>
-                          </div><br><br>
-                            <label for="recipient-name" class="control-label">Image(s)</label>
-                          <input type="file" name="images" multiple accept="image/*" />
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button class="btn btn-my" type="submit">Post</button>
-                    </div>
-                    </form>
-                  </div>
-                  </div>
+      <div class="col-md-2">
+      
+      </div>
+      <div class="col-md-8">
+        <div class="post-concern">
+          <div class="modal-header my-color">
+            <h4 class="modal-title title-concern" id="myModalLabel">Post Your View</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
             </div>
+            <form method="post" id="thread-form" action="{% url 'post' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
+              <label for="recipient-name" class="control-label">Title</label>
+              <input type="text" name="title" class="form-control" id="recipient-name" placeholder="Title relevant to the description">
+
+              {% csrf_token %}
+              <input type="hidden" name="thread_type" value="complaint"/>
+              <div class="form-group" style="padding:14px;">
+                <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none"> Please provide a description of the issue!! </small></label>
+                <textarea name="content" class="form-control" placeholder="Your queries here." oninput="$('#description-warning').hide()"></textarea>
+                          
+                <div class="form">
+                  <label for="recipient-name" class="control-label">Tags * <small id="tags-warning" class="alert-danger" style="display:none">Please provide at least 1 tag(max 4) </small></label><br>
+                  <input type="text" class="form-control" placeholder="Type in tag names (max 4)" id="tagbox"/>
+                  <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">
+                  </ul>
+                  <div id="tags-chosen">
+                  </div>
+                </div><br>
+                <label for="recipient-name" class="control-label">Image(s)</label>
+                <input type="file" name="images" multiple accept="image/*" />
+              </div>
+            
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-my" type="submit">Post</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
 
 <div class="box-footer">
