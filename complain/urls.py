@@ -5,6 +5,10 @@ from complain.views.ThreadViews import *
 urlpatterns =  [
         url(r'^$', Index.as_view(), name='index'),
         url(r'^login/$', Login.as_view(), name='login'),
+        url(r'^delete/$', delete, name='delete'),
+        url(r'^edit/$', edit, name='edit'),
+        url(r'^okay/$', okay, name='okay'),
+        url(r'^staffpage/$', staff_page, name="staffpage"),
         url(r'^signup/$', Signup.as_view(), name='signup'),
         url(r'^thread/$', get_thread_json, name='thread'),
         url(r'^threads/$', get_threads_json, name='threads'),
