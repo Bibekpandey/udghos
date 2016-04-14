@@ -222,12 +222,13 @@
   }
   .navbar-form{
     width: 0%;
-    border: none;
+    border: 0px solid #fff;
     float: right;
     margin-top: -3px;
   }
-  .navbar-form{
+  .form-group-navbar{
     border: 0px solid #fff;
+    display: none;
   }
   #headnav{
     margin-right: 10px;
@@ -236,8 +237,8 @@
   }
   .dropdown-menu{
     background-color: #eee;
-    margin-top: -10px;
-    margin-left: 200px;
+    margin-top: -5px;
+    margin-left: 20px;
   } 
   .form-control-navbar{
     display: none;
@@ -255,7 +256,7 @@
   }
   #gly-bell{
     margin-top: 2px;
-    margin-right: 70px;
+    margin-right: 25px;
     float: right;
   }
   .glyphicon-search{

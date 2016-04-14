@@ -244,11 +244,17 @@ function generate_thread(threadobj, auth) {
           '<div class="box-icons">'+
             '<div class="icons-ld">'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote(this, '+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<span class="vote-status '+(up?'text-bold':'')+'" aria-hidden="true">Support'+(up?'ed':'')+'</span>'+
+                      '<div class="hovertext">'+
+                        '<span class="vote-status '+(up?'text-bold':'')+'" aria-hidden="true">Support'+(up?'ed':'')+'</span>'+
+                        '<span class="hovertext-display">10 Supporter</span>'+
+                      '</div>'+
                     '</a>'+
                     '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote(this, '+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<span class="vote-status '+(down?'text-bold':'')+'" aria-hidden="true">Downvote'+(down?'d':'')+'</span>'+
+                      '<div class="hovertext">'+
+                        '<span class="vote-status '+(down?'text-bold':'')+'" aria-hidden="true">Downvote'+(down?'d':'')+'</span>'+
+                        '<span class="hovertext-display">10 Downvotes</span>'+
+                      '</div>'+
                     '</a>'+
                     '<a href="#" class="report-post">Report</a>'+
               '</div>'+

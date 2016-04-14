@@ -10,8 +10,7 @@
   <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
-  <link href='https://fonts.googleapis.com/css?family=Fjord+One' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Gentium+Basic|Raleway' rel='stylesheet' type='text/css'>
+  
   <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -82,12 +81,12 @@
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'profile' user.id %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
-                <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
+                <li><a href="{% url 'profile' user.id %}">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
-            <form class="navbar-form navbar-right" role="search" onsubmit="return search()">
-              <div class="form-group">
+            <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
+              <div class="form-group ">
                 <div id="search-bar" class="inner-addon right-addon nav-search">
                   <i class="glyphicon glyphicon-search"></i>
                   <input type="text" id="searchquery" placeholder="Search" class="form-control form-control-navbar" />
@@ -104,7 +103,7 @@
                 </a>
               </li>
             </ul> 
-
+          </ul>
             {% else %}
             
             <ul class="nav navhead-nav nav-unauth">
@@ -269,8 +268,7 @@
           <img class="img-circle" href="{% url 'profile' user.id %}" src="/media/{{profile_pic}}" width=70 height=70 alt="Generic placeholder image" width="100" height="100">
           <div class="media-body">
             <a href="{% url 'profile' user.id %}">
-            <h4>{{user.username}}</h4></a>
-            <p>
+            <h3 class="heading-property user-heading">{{user.username}}</h3></a>
               <h5 class="heading-property">{{address}}</h5>
 
               <span class="label label-info">{{threads|length}} Posts</span> 
@@ -278,10 +276,12 @@
             </p>
           </div>
           {% endif %}
-          <div class="my-tags">
-            <h2 class="heading-property">Top Tags</h2><br>
-            <p>#Government</p><p>#Offices</p><p>#Colleges</p><p>#Blocades</p><p>#Road</p>
-          </div>
+          <div class="my-tag">
+                <span class="tags-tab">My Tags</span>
+                
+
+              </div>
+
         </div>
       </div>   
         
@@ -463,6 +463,8 @@ function getTags() {
         g_tags_selected.splice(index, 1);
         $('#selected-'+id).remove();
     }
+
+
   </script>
 
   </html>

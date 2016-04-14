@@ -6,8 +6,9 @@
 <head>
   <title>My Profile</title>
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
-    <link href='https://fonts.googleapis.com/css?family=Fjord+One' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Gentium+Basic|Raleway' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'>
+
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -22,6 +23,7 @@
 
   <div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
   <div id="mask" style="position:absolute;display:none"></div>
+
   <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
@@ -29,21 +31,20 @@
         </div>
         
         {% if authenticated %}
-        
-        <ul id="headnav" class="nav navbar-nav navbar-right">
-          <a href="" class="dropdown-toggle" data-toggle="dropdown">
-            <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
-            <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'profile' user.id %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
-                <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
+          <ul id="headnav" class="nav navbar-nav navbar-right">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
+              <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{% url 'profile' user.id %}">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
-            <form class="navbar-form navbar-right" role="search" onsubmit="return search()">
-              <div class="form-group">
+            <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
+              <div class="form-group ">
                 <div id="search-bar" class="inner-addon right-addon nav-search">
                   <i class="glyphicon glyphicon-search"></i>
-                  <input type="text" id="searchquery" placeholder="Search" class="form-control" />
+                  <input type="text" id="searchquery" placeholder="Search" class="form-control form-control-navbar" />
                 </div>
               </div>
             </form>
@@ -51,105 +52,109 @@
               <li>
                 <a href="#" title="Header" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Content">
                 <i class="glyphicon glyphicon-bell"></i>
+                <div class="notification-count">
+                  
+                </div>
                 </a>
               </li>
-            </ul>
+            </ul> 
           </ul>
             {% else %}
+            
             <ul class="nav navhead-nav nav-unauth">
               <li class="icon-login"><a href="/complain/login" id="click-signup">LogIn/Sign Up</a></li>
               <li class="icon-login"><a href="/about/">About</a></li>
-            </ul>
+            </ul> 
             {% endif %}        
       </div>
   </nav>
+
   
   <div class="container">
     <div class="row">
+      <div class="col-md-2">
+      </div>
       <div class="col-md-8">
         <div class="box-profile">
-        <b class="text-center text-danger" id="error"></b>
+          <b class="text-center text-danger" id="error"></b>
           <div class="profileinfo">
 
-            <form id="updateform" method="post" action="{% url 'profile_update' %}" >
-          <img class="img-circle" src="/media/{{user_pic}}" width=200 height=200 alt="Generic placeholder image" width="200" height="200" />
-          <div class="edit-text">
-            <button id="save" class="btn btn-sm" type="button"> Save Info</button><span class="hidden-text hidden-text-font"><b>Edit your Profile</b></span>
-          </div>
-              <input type="hidden" name="userid" value="{{request.user.id}}" />
+          <form id="updateform" method="post" action="{% url 'profile_update' %}" >
+            <img class="img-circle" src="/media/{{user_pic}}" width=200 height=200 data-toggle="modal" data-target="#myModalImage" data-keyboard="true" alt="Generic placeholder image" width="200" height="200" />
+            <div class="edit-text">
+              <button id="save" class="btn btn-sm" type="button"> Save Info</button><span class="hidden-text hidden-text-font"><b>Edit your Profile</b></span>
+            </div>
+            <input type="hidden" name="userid" value="{{request.user.id}}" />
             <div id="dataprofile" class="my-name">
-              <div class="hidden-text"><b>First Name</b></div>
+              <div class="hidden-text">
+                <b>First Name</b>
+              </div>
               <span id="first-name" class="datainfo post-title">{{account.user.first_name}}</span>
-              <div class="hidden-text"><b>Last Name</b></div>
+              <div class="hidden-text">
+                <b>Last Name</b>
+              </div>
               <span id="last-name" class="datainfo post-title">{{account.user.last_name}}</span>
-            
+  
               {% if edit %}
               {% csrf_token %}
               <div class="edit-button">
                 <button id="edit" class="btn btn-sm" type="button"> Edit Info</button>
               </div>
-              {% endif %}
+                {% endif %}
             </div>
             <div class="my-username">
               <br>
               <div class="hidden-text"><b>Username</b></div>
-              <span id="username" class="datainfo">{{account.user.username}}</span>
+                <span id="username" class="datainfo">{{account.user.username}}</span>
             </div>
-              <div class="my-address">
-                <div class="hidden-text"><b>Address</b></div>
+            <div class="my-address">
+              <div class="hidden-text"><b>Address</b></div>
                 <span id="address" class="datainfo">{{account.address}}</span>
-              </div>
-              <div class="about-me">
-                <div class="hidden-text"><b>About</b></div>
+            </div>
+            <div class="about-me">
+              <div class="hidden-text"><b>About</b></div>
                 <span id="about" class="dataarea">Student of Engineering</span>
-              </div>
-              <div class="my-tag">
-                <span class="tags-tab">My Tags</span>
-                <div id="tags-chosen">
-                </div>
-
+            </div>
+            <div class="my-tag">
+              <span class="tags-tab">My Tags</span>
+              <div id="tags-chosen">
               </div>
             </div>
-            </form>
+          </form>
 
-            {% for tag in tags %}
-            <input type="hidden" class="taginfo" value="{{tag.name}},{{tag.id}}"/>
+          {% for tag in tags %}
+          <input type="hidden" class="taginfo" value="{{tag.name}},{{tag.id}}"/>
             {% endfor %}
 
-            <form id="picture_update" method="post" enctype="multipart/form-data" action="/complain/image-update/">
+          <form id="picture_update" method="post" enctype="multipart/form-data" action="/complain/image-update/">
             {% csrf_token %}
-                <input type="hidden" name="userid" value="{{request.user.id}}" />
-                <div id="profile-image-form">
-                    <label>Choose Profile image </label>
-                    <input type="file" name="image" multiple accept="image/*" />
-                </div>
-                <div class="btn-update">
-                  <button type="submit">Update pic</button>
-                </div>
-            </form>
-            <div class="form">
-            <label style="float:left" class="hidden-text"> Add tags</label>
-                <input type="text" class="form-control hidden-text" placeholder="Type in tag names " id="tagbox"/>
-                <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">
-                </ul>
+            <input type="hidden" name="userid" value="{{request.user.id}}" />
+            <div id="profile-image-form">
+              <label>Choose Profile image </label>
+              <input type="file" name="image" multiple accept="image/*" />
             </div>
+            <div class="btn-update">
+              <button type="submit">Update pic</button>
+            </div>
+          </form>
+          <div class="form">
+            <label style="float:left" class="add-tags hidden-text"> Add tags: </label>
+            <input type="text" class="form-control hidden-text" placeholder="Type in tag names " id="tagbox"/>
+            <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">
+            </ul><br>
+          </div>
 
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="box">
-          <div class="featured-tab">
-            Featured
-          </div>
-        </div>
       </div>
     </div>
   </div>
 
   <div class="container">
     <div class="row">
-
-      <div class="col-md-8 text-center">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
         <div id="tab-stories">
           <div class="box-tabs">
 
@@ -158,8 +163,9 @@
             </ul>
 
           </div>
-          <div id="recent-threads">
-          </div>
+            <div id="recent-threads">
+            </div>
+
         </div>
       </div>
     </div>

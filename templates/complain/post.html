@@ -7,10 +7,13 @@
  	<title>Udghos</title>
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'>
 
-  	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-  	<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
-	<link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
+  	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+  <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
+  <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
 
 
 </head>
@@ -41,32 +44,46 @@ window.twttr = (function(d, s, id) {
 }(document, "script", "twitter-wjs"));
 */
   </script>
+<style>
+  body {
+    padding:0;
+    margin:0;
+    width:100%;
+    min-height:500px;
+  }
+  #footer {
+   position:relative;
+   margin-top: 200px;
+   bottom:0px;
+   width: 100%;
+  }
 
+</style>
 <div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
   <div id="mask" style="position:absolute;display:none"></div>
 
     {% csrf_token %}
-  	<nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
+  <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
           <a id="navhead" class="navbar-brand" href="/">Udghos</a>
         </div>
-        {% if authenticated %}
         
+        {% if authenticated %}
           <ul id="headnav" class="nav navbar-nav navbar-right">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'profile' user.id %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
-                <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
+                <li><a href="{% url 'profile' user.id %}">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
-            <form class="navbar-form navbar-right" role="search" onsubmit="return search();">
-              <div class="form-group">
+            <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
+              <div class="form-group ">
                 <div id="search-bar" class="inner-addon right-addon nav-search">
                   <i class="glyphicon glyphicon-search"></i>
-                  <input type="text"  id="searchquery" placeholder="Search" class="form-control" />
+                  <input type="text" id="searchquery" placeholder="Search" class="form-control form-control-navbar" />
                 </div>
               </div>
             </form>
@@ -74,10 +91,13 @@ window.twttr = (function(d, s, id) {
               <li>
                 <a href="#" title="Header" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Content">
                 <i class="glyphicon glyphicon-bell"></i>
+                <div class="notification-count">
+                  
+                </div>
                 </a>
               </li>
             </ul> 
-
+          </ul>
             {% else %}
             
             <ul class="nav navhead-nav nav-unauth">
@@ -86,11 +106,12 @@ window.twttr = (function(d, s, id) {
             </ul> 
             {% endif %}        
       </div>
-  	</nav>
+  </nav>
 
+  
   	<div class="container" id="content-top">
   		<div class="row">
-  			<div class="col-md-9">
+  			<div class="col-md-12">
             {% if results or 1 %}
                 <h2 style="margin-left:10px;background-color:#bbb">Results for <span id="result-for"></span></h2>
                 <h3 id="not-found" style="margin:10px;display:none"> Nothing Found</h3>
@@ -100,19 +121,10 @@ window.twttr = (function(d, s, id) {
                     </div>
                 </div>
   			</div>
-  			<div class="col-md-3">
-				<div class="box">
-	  				<div class="my-tags">
-	            		<h2 class="heading-property">Top Tags</h2><br>
-	            		<p>#Government</p><p>#Offices</p><p>#Colleges</p><p>#Blocades</p><p>#Road</p>
-	          		</div>
-	          	</div>
-  			</div>
   		</div>
   	</div>
-  </div>
 
-    <div class="box-footer">
+  <div id="footer" class="box-footer">
     <div class="container" > 
       <footer>
         <div class="footer-body">
@@ -125,7 +137,7 @@ window.twttr = (function(d, s, id) {
             <a href="#">Terms & Conditions</a>
           </p>
           <p class="pull-right">
-            <form class="footer-form" role="search"> 
+            <form class="footer-form" role="search">
               <div class="form-group">
                 <div id="search-bar" class="inner-addon right-addon nav-search">
                   <i class="glyphicon glyphicon-footer glyphicon-search"></i>
@@ -145,6 +157,7 @@ window.twttr = (function(d, s, id) {
       </footer>
     </div>
   </div>
+
 </body>
 
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

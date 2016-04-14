@@ -1,3 +1,11 @@
+body{
+  font-family: 'Varela Round', sans-serif;
+    padding:0;
+    margin:0;
+    width:100%;
+    min-height:500px;
+}
+
 h1,h2,h3,h4,h5{
   margin-top: -5px;
 }
@@ -10,7 +18,10 @@ h1,h2,h3,h4,h5{
   margin-left: -50px;
 }
 .edit-text>button{
-  margin-left: -20px;
+  font-size: 15px;
+  margin-left: 0px;
+  margin-top: 20px;
+  height: 50px;
 }
 #edit{
   margin-right: 35%;
@@ -33,7 +44,7 @@ textarea:focus{
 
 
 .box-profile{
-  font-family: Ubuntu;
+  font-family: 'Varela Round', sans-serif;
     min-height: 20px;
     padding: 20px;
     margin: 2px;
@@ -117,6 +128,27 @@ textarea:focus{
 }
 .hidden-text-font{
   margin-right: -10px;
-  font-size: 25px;
+  font-size: 20px;
+  color: #990012;
   margin-bottom: -20px;
+}
+
+.add-tags{
+  margin-top: 5px;
+  margin-right: 5px;
+}
+.media-body{
+  float: left;
+}
+
+@media (max-width: 991px) {
+  .box-profile{
+    margin-top: 75px;
+  }
+}
+
+@media (max-width: 767px) {
+  .box-profile{
+    margin-top: 75px;
+  }
 }
