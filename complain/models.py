@@ -50,10 +50,7 @@ class Thread(models.Model):
     votes = models.IntegerField(default=0)
     last_active = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(default=0) # 0 for not verified, 1 for verified, 2 for updated by admin
-<<<<<<< HEAD
-=======
     anonymous = models.BooleanField(default=False)
->>>>>>> 5d0145616ce92232418172bd6ed32d17ea1c7127
 
     def __str__(self):
         return self.title + ' [' + self.account.user.username+']'
