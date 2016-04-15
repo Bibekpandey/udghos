@@ -52,9 +52,10 @@
               <li>
                 <a href='#' class='notifications' data-placement="bottom" title="Notifications" >
                 <i class="glyphicon glyphicon-bell"></i>
+                {% if notifications %}
                 <div class="notification-count">
-                  
                 </div>
+                {% endif %}
                 </a>
               </li>
             </ul> 
@@ -68,25 +69,6 @@
             {% endif %}        
       </div>
   </nav>
-
-  <div class="container">
-    <div id="popover_notification_content" style="display: none">
-      <div class="notification-body">
-        <div class="single-notification">
-          <a href="#">Sujan Neupane supported to your Concern
-            <div class="stimg-notification">
-                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
-            </div>
-          </a>
-        </div>
-        <div class="single-notification">
-          <a href="#">Bibek Pandey commented on your Concern
-            <div class="stimg-notification">
-                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
-            </div>
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -229,6 +211,13 @@
 <div class="container">
     <div id="popover_notification_content" style="display: none">
       <div class="notification-body">
+    {% if notifications %}
+      {% else %}
+      <div class="single-notification">
+        &nbsp; No new notifications
+      </div>
+      {% endif %}
+
       {% for notif in notifications %}
         <div class="single-notification">
           <a href="/thread/{{notif.thread}}/">{% ifequal notif.type "comment" %}

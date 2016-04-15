@@ -121,6 +121,12 @@
         <a href="javascript:void()" onclick="mark_read()"> Mark as Read</a>
       </div>
       <div class="notification-body">
+      {% if notifications %}
+      {% else %}
+      <div class="single-notification">
+        &nbsp; No new notifications
+      </div>
+      {% endif %}
       {% for notif in notifications %}
         <div class="single-notification">
           <a href="/thread/{{notif.thread}}/">
