@@ -37,7 +37,7 @@
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{% url 'profile' user.id %}">Profile</a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="javascript:void()">Settings</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
             <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
@@ -50,7 +50,7 @@
             </form>
             <ul id="gly-bell" class="nav navbar-nav navbar-right">
               <li>
-                <a href='#' class='notifications' data-placement="bottom" title="Notifications" >
+                <a href='javascript:void()' class='notifications' data-placement="bottom" title="Notifications" >
                 <i class="glyphicon glyphicon-bell"></i>
                 {% if notifications %}
                 <div class="notification-count">
@@ -244,7 +244,6 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
     <script src="{% static 'js/myjs.js' %}"></script>
-    <script src="{% static 'js/homepage.js' %}"></script>
     <script src="{% static 'js/functions.js' %}"></script>
 
     <script src="{% static 'js/profile.js' %}"></script>
@@ -265,7 +264,6 @@
             g_current_tags.push({name:parts[0], id:parseInt(parts[1])});
 
         });
-        drawTagBoxes(g_current_tags);
 
         function getUserThreads(querydata) {
             var temp = location.href.split('/');
@@ -279,10 +277,11 @@
         }
         window.onload = function() {
             $('html,body').animate({scrollTop:0}, 500);
-            $('.hidden-cross').hide();
             $('#error').text(window.localStorage.getItem("message"));
             window.localStorage.setItem("message", "");
             $('#profile-image-form').hide();
+            drawTagBoxes(g_current_tags);
+            $('.hidden-cross').hide();
             getUserThreads({});
         }
 
@@ -333,7 +332,7 @@ function getTags() {
     }
     function drawTabBox(id, txt) {
         var tags_elem = document.getElementById('tags-chosen');	
-		tags_elem.innerHTML+= '<span id="selected-'+id+'"class="btn selected-tags" onclick="location=\'/threads/tagged/'+txt+'/\'">' +txt+ '<button type="button" class="close my-close" id="close-tag"><span class="hidden-cross" onclick="removeTag(\''+id+'\''+',\''+txt+'\')" aria-hidden="true">&times;</span></button></span>';
+		tags_elem.innerHTML+= '<span id="selected-'+id+'"class="btn selected-tags"> <span onclick="location=\'/threads/tagged/'+txt+'\'">'+txt+ '</span><button type="button" class="close my-close" id="close-tag"><span class="hidden-cross" onclick="removeTag(\''+id+'\''+',\''+txt+'\')" aria-hidden="true">&times;</span></button></span>';
 
     }
 	function selectTag(elem) {
