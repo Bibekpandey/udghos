@@ -408,10 +408,10 @@ p>a:hover{
   position: relative;
   font-size: 15px;
   font-weight: bold;
-  margin-top: -55px;
-  margin-left: -5px;
+  margin-top: -45px;
+  margin-left: 2px;
   margin-bottom: 10px;
-  color: #555;
+  color: #990012;
 }
 .heading-post:hover{
   color: #777;
@@ -983,3 +983,4 @@ div.share> .twitter {
   display: block;
   position: relative;
 }
+

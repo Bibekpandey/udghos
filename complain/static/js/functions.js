@@ -218,9 +218,10 @@ function generate_thread(threadobj, auth) {
                 '</div>'+
                 '</a>'+
                 '<div class="post-body">'+
-                    '<span class="sttime"> &nbsp;'+threadobj.time+'</span>'+
                     '<a href="/complain/profile/'+threadobj.user.id+'">'+
                     '<span class="heading-property heading-post">'+threadobj.user.name+'</span></a>'+
+                    '<span class="sttime"> &nbsp;'+threadobj.time+'</span>'+
+
                 '</div>'+
                 '<div class="post-content">'+
                  threadobj.content+
