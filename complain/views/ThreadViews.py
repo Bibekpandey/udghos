@@ -258,10 +258,18 @@ def thread_to_dict(user, thread, less=True):
 
     downvotes = []
     upvotes = ThreadUpvote.objects.filter(account__user=user, 
-                        thread=thread)
+                        thread=thread) if user.is_authenticated() else []
     if len(upvotes) == 0:
         downvotes = ThreadDownvote.objects.filter(account__user=user,
-                        thread=thread)
+                        thread=thread) if user.is_authenticated() else []
+    if thread.anonymous:
+        name = 'Anonymous'
+        image = 'anonymous.jpg'
+        uid = 0
+    else:
+        name = thread.account.user.username
+        image = thread.account.profile_pic.name
+        uid = thread.account.pk
     return {'id':thread.id,
             'votes':thread.votes,
             'time':thread.time.strftime("%I:%M %p, %d %b %Y"),
@@ -272,9 +280,9 @@ def thread_to_dict(user, thread, less=True):
                             'id':x.id }
                             , thread.tags.all()
                             )),
-            'user':{'name':thread.account.user.username,
-                    'id':thread.account.pk,
-                    'image':thread.account.profile_pic.name, # need to code this
+            'user':{'name':name,
+                    'id':uid,
+                    'image':image
                     },
             'num_comments':Comment.objects.all().filter(thread=thread).count(),
             'can_edit':True if thread.account.user == user else False,

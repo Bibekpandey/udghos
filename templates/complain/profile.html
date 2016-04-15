@@ -36,9 +36,9 @@
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'profile' user.id %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
-                <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
+                <li><a href="{% url 'profile' user.id %}">Profile</a></li>
+                <li><a href="javascript:void()">Settings</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
             <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
               <div class="form-group ">
@@ -50,11 +50,12 @@
             </form>
             <ul id="gly-bell" class="nav navbar-nav navbar-right">
               <li>
-                <a href="#" title="Header" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Content">
+                <a href='javascript:void()' class='notifications' data-placement="bottom" title="Notifications" >
                 <i class="glyphicon glyphicon-bell"></i>
+                {% if notifications %}
                 <div class="notification-count">
-                  
                 </div>
+                {% endif %}
                 </a>
               </li>
             </ul> 
@@ -68,6 +69,8 @@
             {% endif %}        
       </div>
   </nav>
+    </div>
+  </div>
 
   
   <div class="container">
@@ -205,6 +208,35 @@
       </footer>
     </div>
   </div>
+<div class="container">
+    <div id="popover_notification_content" style="display: none">
+      <div class="notification-body">
+    {% if notifications %}
+      {% else %}
+      <div class="single-notification">
+        &nbsp; No new notifications
+      </div>
+      {% endif %}
+
+      {% for notif in notifications %}
+        <div class="single-notification">
+          <a href="/thread/{{notif.thread}}/">{% ifequal notif.type "comment" %}
+          Comment on your thread by {{notif.by}}
+          {% endifequal %}
+          {% ifequal notif.type "support" %}
+            Support on your thread by {{notif.by}}
+          {% endifequal %}
+          {% ifequal notif.type "downvote" %}
+            Downvote on your thread by {{notif.by}}
+          {% endifequal %}
+
+            <div class="stimg-notification">
+                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
+            </div>
+          </a>
+        </div>
+    {% endfor %}
+    </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -212,7 +244,6 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
     <script src="{% static 'js/myjs.js' %}"></script>
-    <script src="{% static 'js/homepage.js' %}"></script>
     <script src="{% static 'js/functions.js' %}"></script>
 
     <script src="{% static 'js/profile.js' %}"></script>
@@ -233,7 +264,6 @@
             g_current_tags.push({name:parts[0], id:parseInt(parts[1])});
 
         });
-        drawTagBoxes(g_current_tags);
 
         function getUserThreads(querydata) {
             var temp = location.href.split('/');
@@ -247,10 +277,11 @@
         }
         window.onload = function() {
             $('html,body').animate({scrollTop:0}, 500);
-            $('.hidden-cross').hide();
             $('#error').text(window.localStorage.getItem("message"));
             window.localStorage.setItem("message", "");
             $('#profile-image-form').hide();
+            drawTagBoxes(g_current_tags);
+            $('.hidden-cross').hide();
             getUserThreads({});
         }
 
@@ -301,7 +332,7 @@ function getTags() {
     }
     function drawTabBox(id, txt) {
         var tags_elem = document.getElementById('tags-chosen');	
-		tags_elem.innerHTML+= '<span id="selected-'+id+'"class="btn selected-tags" onclick="location=\'/threads/tagged/'+txt+'/\'">' +txt+ '<button type="button" class="close my-close" id="close-tag"><span class="hidden-cross" onclick="removeTag(\''+id+'\''+',\''+txt+'\')" aria-hidden="true">&times;</span></button></span>';
+		tags_elem.innerHTML+= '<span id="selected-'+id+'"class="btn selected-tags"> <span onclick="location=\'/threads/tagged/'+txt+'\'">'+txt+ '</span><button type="button" class="close my-close" id="close-tag"><span class="hidden-cross" onclick="removeTag(\''+id+'\''+',\''+txt+'\')" aria-hidden="true">&times;</span></button></span>';
 
     }
 	function selectTag(elem) {

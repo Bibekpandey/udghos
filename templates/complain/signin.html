@@ -54,9 +54,9 @@
       </div>
       <div class="col-md-4">
         <div class="box-signin">
-          <b><span id="message" class="text-bold text-center text-danger"></span></b>
+          <b><span id="signin-message" class="text-bold text-center text-danger"></span></b>
           <div id="signin" class="meta-info" >
-            <form class="form-signin" method="post" action="{% url 'login' %}">
+            <form id="signin-form" class="form-signin" method="post" onsubmit="return signin()">
               {% csrf_token %}
               <h2 class="form-signin-heading">Udghos Login</h2>
               <div class="social-wrap b">
@@ -82,6 +82,7 @@
           </div>
 
           <div id="signup" class="meta-info" style="display:none">
+          <b><span id="signup-message" class="text-bold text-center text-danger"></span></b>
             <form id="signup-form" class="form-signup" method="post" action="{% url 'signup' %}">
               <h2 class="form-signup-heading">Udghos Signup</h2>
               <div class="social-wrap b">

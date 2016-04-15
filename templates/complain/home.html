@@ -81,9 +81,9 @@
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'profile' user.id %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
-                <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
+                <li><a href="{% url 'profile' user.id %}">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
             <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
               <div class="form-group ">
@@ -95,11 +95,12 @@
             </form>
             <ul id="gly-bell" class="nav navbar-nav navbar-right">
               <li>
-                <a href="#" title="Header" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Content">
+                <a href='#' class='notifications' data-placement="bottom" title="Notifications" >
                 <i class="glyphicon glyphicon-bell"></i>
+                {% if notifications %}
                 <div class="notification-count">
-                  
                 </div>
+                {% endif %}
                 </a>
               </li>
             </ul> 
@@ -113,6 +114,40 @@
             {% endif %}        
       </div>
   </nav>
+
+  <div class="container">
+    <div id="popover_notification_content" style="display: none">
+      <div class="mark-read">
+        <a href="javascript:void()" onclick="mark_read()"> Mark as Read</a>
+      </div>
+      <div class="notification-body">
+      {% if notifications %}
+      {% else %}
+      <div class="single-notification">
+        &nbsp; No new notifications
+      </div>
+      {% endif %}
+      {% for notif in notifications %}
+        <div class="single-notification">
+          <a href="/thread/{{notif.thread}}/">
+          <div class="stimg-notification">
+                <img class="img-circle" src="/media/{{notif.by_image}}" width=25 height=25/>
+          </div>
+          {% ifequal notif.type "comment" %}
+          Comment on your thread by {{notif.by}}
+          {% endifequal %}
+          {% ifequal notif.type "support" %}
+            Support on your thread by {{notif.by}}
+          {% endifequal %}
+          {% ifequal notif.type "downvote" %}
+            Downvote on your thread by {{notif.by}}
+          {% endifequal %}
+          </a>
+        </div>
+    {% endfor %}
+      </div>
+    </div>
+  </div>
 
   <div id="content-top" >
     <div class="container-fluid">
@@ -175,7 +210,8 @@
                               </div>
                           </div><br><br>
                             <label for="recipient-name" class="control-label">Image(s)</label>
-                          <input type="file" name="images" multiple accept="image/*" />
+                          <input type="file" name="images" multiple accept="image/*" /><br>
+                            <input type="checkbox" name="anonymous" value="yes"/><b>Make me Anonymous</b>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -278,8 +314,7 @@
           {% endif %}
           <div class="my-tag">
                 <span class="tags-tab">My Tags</span>
-                <div id="tags-chosen">
-                </div>
+                
 
               </div>
 

@@ -122,7 +122,7 @@ h1,h2,h3,h4{
   background: #333;
   margin-bottom: 0px;
   color: #fff;
-  margin-top: 200px;
+  margin-top: 250px;
 }
 .footer-body{
   margin: 10px 10px 0px 10px;
@@ -408,10 +408,10 @@ p>a:hover{
   position: relative;
   font-size: 15px;
   font-weight: bold;
-  margin-top: -55px;
-  margin-left: -5px;
+  margin-top: -45px;
+  margin-left: 2px;
   margin-bottom: 10px;
-  color: #555;
+  color: #990012;
 }
 .heading-post:hover{
   color: #777;
@@ -458,6 +458,13 @@ ul{
   height:50px;
   width:50px;
   margin-left: px;
+}
+.stimg-notification{
+  float: left;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 10px;
+  margin-top: 7px;
 }
 .sttext
 {
@@ -982,4 +989,47 @@ div.share> .twitter {
   margin-top: 20px;
   display: block;
   position: relative;
+}
+
+.popover{
+  width: 250px;
+  border-radius: 0px;
+  padding-top: -5px;
+  font-family: 'Varela Round', sans-serif;
+  box-shadow: 0px 2px 5px 2px #aaa;
+}
+.popover-title{
+  background: #fff;
+  border-radius: 0px;
+  color: #333;
+  font-weight: bold;
+  border: 1px solid #777;
+}
+.notification-body{
+  margin-right: 5px;
+}
+.arrow{
+  color: #aaa;
+  border: 1px solid #990012;
+}
+.single-notification{
+  width: 100%;
+  background: #eee;
+  border-bottom: 1px solid #aaa;
+}
+.single-notification:hover{
+  background: #ddd;
+}
+.notification-text>a{
+  color: #555;
+  text-decoration:none;
+}
+.notification-text>a:hover{
+  color: #990012; 
+}
+
+.mark-read{
+  margin-top: -35px;
+  margin-right: 5px;
+  float: right;
 }

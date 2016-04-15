@@ -81,9 +81,9 @@
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'profile' user.id %}"><i class="glyphicon glyphicon-user">Profile</i></a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-wrench">Settings</i></a></li>
-                <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-erase">Logout</i></a></li>
+                <li><a href="{% url 'profile' user.id %}">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="{% url 'logout' %}">Logout</i></a></li>
             </ul>
             <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
               <div class="form-group ">
@@ -95,11 +95,11 @@
             </form>
             <ul id="gly-bell" class="nav navbar-nav navbar-right">
               <li>
-                <a href="#" title="Header" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Content">
-                <i class="glyphicon glyphicon-bell"></i>
-                <div class="notification-count">
+                <a href='#' class='notifications' data-placement="bottom" title="Notifications" >
+                  <i class="glyphicon glyphicon-bell"></i>
+                  <div class="notification-count">
                   
-                </div>
+                  </div>
                 </a>
               </li>
             </ul> 
@@ -114,6 +114,27 @@
       </div>
   </nav>
 
+  <div class="container">
+    <div id="popover_notification_content" style="display: none">
+      <div class="notification-body">
+        <div class="single-notification">
+          <a href="#">Sujan Neupane supported to your Concern
+            <div class="stimg-notification">
+                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
+            </div>
+          </a>
+        </div>
+        <div class="single-notification">
+          <a href="#">Bibek Pandey commented on your Concern
+            <div class="stimg-notification">
+                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
   <div class="container">
     <div class="row">

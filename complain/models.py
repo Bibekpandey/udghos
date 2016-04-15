@@ -10,6 +10,11 @@ VERIFIED = 1
 EDITED = 2
 NOTVERIFIED = 0
 
+COMMENTED=1
+SUPPORTED=2
+MESSAGGED=3
+DOWNVOTED=4
+
 def get_image_path(instance, filename):
     ext = filename.split('.')[-1]
     return 'profile_pics/'+str(instance.user.id)+'.'+ext
@@ -45,6 +50,10 @@ class Thread(models.Model):
     votes = models.IntegerField(default=0)
     last_active = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(default=0) # 0 for not verified, 1 for verified, 2 for updated by admin
+<<<<<<< HEAD
+=======
+    anonymous = models.BooleanField(default=False)
+>>>>>>> 5d0145616ce92232418172bd6ed32d17ea1c7127
 
     def __str__(self):
         return self.title + ' [' + self.account.user.username+']'
@@ -103,8 +112,13 @@ class ThreadImage(models.Model):
         self.name = self.image.name
         super(ThreadImage, self).save(*args, **kwargs)
 
-class Tag(models.Model):
-    name = models.CharField(max_length=50)
 
-    def __str__(self):
-        return self.name
+class Notification(models.Model):
+    fromuser = models.ForeignKey('Account', related_name="fromuser")
+    touser = models.ForeignKey('Account', related_name="touser")
+    event = models.IntegerField(default=0)
+    time = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(blank=True)
+    thread = models.ForeignKey('Thread', null=True)
+    read = models.BooleanField(default=False)
+

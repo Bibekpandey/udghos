@@ -55,9 +55,3 @@ $("#close-tag").click(function(){
         $("#remove-tag").remove();
 });
 
-$(function () {
-  $('.net-vote').tooltip("show")
-});
-
-
-

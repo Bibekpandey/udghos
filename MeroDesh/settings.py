@@ -117,7 +117,7 @@ ROOT_URLCONF = 'MeroDesh.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['templates', '/home/udghos/MeroDesh/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,7 +139,7 @@ WSGI_APPLICATION = 'MeroDesh.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME':os.path.join(BASE_DIR, 'udghos.sqlite3'), 
     }
 }
 
@@ -164,4 +164,5 @@ MEDIA_URL = '/media/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = '/var/www/udghos.com/static/'
 STATIC_URL = '/static/'

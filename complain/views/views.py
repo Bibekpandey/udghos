@@ -36,6 +36,7 @@ class Index(View):
             acc = Account.objects.get(user=request.user)
             self.context['address'] = acc.address
             self.context['profile_pic'] = acc.profile_pic
+            self.context['notifications'] = get_notifications(request)
         else:
             self.context['authenticated'] = False
 
@@ -100,14 +101,14 @@ class Login(View):
         username = request.POST.get('username', '').strip()
         password = request.POST.get('password', '')
         if username=='' or password=='':
-            return HttpResponse('username/password can\'t be empty')
+            return JsonResponse({'success':False, 'message':'Empty username/password'})
         user = authenticate(username=username, password=password)
 
         if user is None or username=="root":
-            return HttpResponse('username/password error')
+            return JsonResponse({'success':False, 'message':'Wrong username/password'})
         else:
             login(request, user)
-            return redirect('index') 
+            return JsonResponse({'success':True, 'message':'Login Successful'})
 
 
 def logout_user(request):
@@ -177,6 +178,9 @@ class Post(View):
         if not request.user.is_authenticated():
             return redirect('login')
 
+        # check if anonymous
+        anonymous = request.POST.get('anonymous', '')
+
         thread_type= request.POST.get('thread_type', '')
         thread_type='complaint'
 
@@ -204,6 +208,9 @@ class Post(View):
         account = Account.objects.get(user=request.user)
         thread = Thread(thread_type=th_type, title=title, 
                     content=content, account=account)
+        if anonymous=="yes":
+            thread.anonymous = True
+        else: thread.anonymous = False
 
         thread.save()
         # now the tags
@@ -235,7 +242,7 @@ def calculate_delta_vote(action, upvotes, downvotes):
                 + (1-action)/2 *(2*downvotes - upvotes - 1)
 
 
-def vote_thread(thread_id, account, action): # action is 1 for upvote and -1 for downvote
+def vote_thread(request, thread_id, account, action): # action is 1 for upvote and -1 for downvote
     thread = Thread.objects.get(id=thread_id)
     upvotes = ThreadUpvote.objects.filter(account=account, thread=thread)
     n_ups = len(upvotes)
@@ -249,6 +256,7 @@ def vote_thread(thread_id, account, action): # action is 1 for upvote and -1 for
         upvotes[0].delete()
     elif n_ups==0 and action==1:
         useraction="support" # support = upvote
+        event=SUPPORTED
         upvote = ThreadUpvote.objects.create(account=account, thread=thread)
         upvote.save()
         # delete existing downvote
@@ -257,6 +265,7 @@ def vote_thread(thread_id, account, action): # action is 1 for upvote and -1 for
         useraction='undo'
         downvotes[0].delete()
     elif n_downs==0 and action==-1:
+        event=DOWNVOTED
         useraction="thumb down"
         downvote = ThreadDownvote.objects.create(account=account, thread=thread)
         downvote.save()
@@ -269,6 +278,10 @@ def vote_thread(thread_id, account, action): # action is 1 for upvote and -1 for
     delta_vote = int(calculate_delta_vote(action, n_ups, n_downs))
     thread.votes+=delta_vote
     thread.save()
+    acc = Account.objects.get(user=request.user)
+    notif = Notification.objects.create(fromuser=acc,
+                touser=thread.account, thread=thread, event=event)
+    notif.save()
     return {"action":useraction, "increment":delta_vote}
 
 def vote_comment(comment_id, account, action):
@@ -340,7 +353,7 @@ def vote(request):
                 else:
                     itm = Thread.objects.get(id=object_id)
                     owner = itm.account
-                    vote_dict = vote_thread(object_id, account, val[vote_type])
+                    vote_dict = vote_thread(request, object_id, account, val[vote_type])
                     return JsonResponse(vote_dict)
                 update_user_points(owner, voter, item, delta)
         except Exception as e:
@@ -354,6 +367,7 @@ class ThreadPage(View):
         if request.user.is_authenticated():
             self.context['user'] = request.user
             self.context['authenticated'] = True
+            self.context['notifications'] = get_notifications(request)
             self.context['profile_pic'] = Account.objects.get(user=request.user).profile_pic
 
         #thread = Thread.objects.get(id=thread_id)
@@ -388,6 +402,8 @@ def comment(request):
                 thread_id = int(request.POST['thread_id'])
                 account = Account.objects.get(user=request.user)
                 thread = Thread.objects.get(id=thread_id)
+                notif = Notification.create(fromuser=account, touser=thread.account,event=COMMENTED)
+                notif.save()
 
                 comment = Comment(account=account, 
                             thread=thread, text=content)
@@ -489,6 +505,7 @@ class Profile(View):
             self.context['address'] = acc.address
             self.context['profile_pic'] = useracc.profile_pic
             self.context['user_pic'] = acc.profile_pic
+            self.context['notifications'] = get_notifications(request)
             self.context['account'] = acc
             self.context['edit'] = False
             self.context['tags'] = tags
@@ -639,3 +656,41 @@ class Concern(View):
         if request.user.is_authenticated():
             self.context['authenticated'] = True
         return render(request, "complain/post-concern.html",self.context)
+
+
+def mark_read_notifications(request):
+    if request.user.is_authenticated():
+        notifs = Notification.objects.filter(read=False)
+        for x in notifs:
+            x.read=True
+            x.save()
+        return JsonResponse({'success':True})
+    else:
+        return JsonResponse({'success':False})
+
+def get_notifications(request):
+    if request.user.is_authenticated():
+        acc = Account.objects.get(user=request.user)
+        notifs = Notification.objects.filter(read=False, touser=acc)
+        dicts = list(map(get_notification_dict, list(notifs)))
+        return dicts
+        #return JsonResponse({'notifications':dicts, 'success':True})
+    else:
+        return []
+        #return JsonResponse({'notifications':[], 'success':False})
+
+def get_notification_dict(notification):
+    ret={}
+    ret['thread'] = notification.thread.pk
+    ret['by'] = notification.fromuser.user.username
+    ret['by_image'] = notification.fromuser.profile_pic
+    ret['message'] = -1
+    if notification.event==COMMENTED:
+        ret['type']='comment'
+    elif notification.event==SUPPORTED:
+        ret['type']='support'
+    elif notification.event==DOWNVOTED:
+        ret['type']='downvote'
+    else:
+        ret['type']='message'
+    return ret
