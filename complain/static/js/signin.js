@@ -18,8 +18,8 @@ $( "#click-signup-link" ).click(function() {
   $( "#signin" ).hide( "fast");
   $(".box-signin").css( "margin-top", "20%" );
   $( "#signup" ).show("fast");
-
 });
+
 $( "#click-signin-link" ).click(function() {
   $(".box-signin").css( "margin-top", "30%" );
 	$( "#signup" ).hide("fast");
@@ -27,6 +27,19 @@ $( "#click-signin-link" ).click(function() {
 	$( "#signin" ).show("fast");
 
 });
+
+
+function signin() {
+    $.post('/login/', $('#signin-form').serialize(), function(data) {
+        if(data.success) {
+            window.location = "/";
+        }
+        else {
+            $('#signin-message').text(data.message);
+        }
+    });
+    return false;
+}
 
 
 var mq = window.matchMedia( "(min-width: 5000px)" );
@@ -40,8 +53,7 @@ else {
 }
 
 function signUp() {
-    $('#message').text("Signing up.. Please Wait..");
-    alert($('#signup-form').serialize());
+    $('#signup-message').text("Signing up.. Please Wait..");
 
     $.post('/complain/signup/', $('#signup-form').serialize(), function(data) {
         $('#message').text(data.message);

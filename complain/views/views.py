@@ -101,14 +101,14 @@ class Login(View):
         username = request.POST.get('username', '').strip()
         password = request.POST.get('password', '')
         if username=='' or password=='':
-            return HttpResponse('username/password can\'t be empty')
+            return JsonResponse({'success':False, 'message':'Empty username/password'})
         user = authenticate(username=username, password=password)
 
         if user is None or username=="root":
-            return HttpResponse('username/password error')
+            return JsonResponse({'success':False, 'message':'Wrong username/password'})
         else:
             login(request, user)
-            return redirect('index') 
+            return JsonResponse({'success':True, 'message':'Login Successful'})
 
 
 def logout_user(request):
