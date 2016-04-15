@@ -177,6 +177,9 @@ class Post(View):
         if not request.user.is_authenticated():
             return redirect('login')
 
+        # check if anonymous
+        anonymous = request.POST.get('anonymous', '')
+
         thread_type= request.POST.get('thread_type', '')
         thread_type='complaint'
 
@@ -204,6 +207,9 @@ class Post(View):
         account = Account.objects.get(user=request.user)
         thread = Thread(thread_type=th_type, title=title, 
                     content=content, account=account)
+        if anonymous=="yes":
+            thread.anonymous = True
+        else: thread.anonymous = False
 
         thread.save()
         # now the tags
