@@ -10,6 +10,14 @@ $("#comment-click").click(function(){
 	$("#display-form").show("fast");
 });
 
+$(document).ready(function(){
+  $('.notifications').popover({ 
+    html : true,
+    content: function() {
+      return $('#popover_notification_content').html();
+    }
+  });
+});
 
 $('#myModal').on('shown.bs.modal', function () {
   $('#myModal').appendTo("body").modal('show');
@@ -55,9 +63,6 @@ $("#close-tag").click(function(){
         $("#remove-tag").remove();
 });
 
-$(function () {
-  $('.net-vote').tooltip("show")
-});
 
 
 
