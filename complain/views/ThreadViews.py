@@ -253,6 +253,9 @@ def thread_to_dict(user, thread, less=True):
     else:
         content = thread.content[:140] + ' <a href="/complain/thread/'+str(thread.pk)+'"> More . . .</a>'
     
+    numupvotes = len(ThreadUpvote.objects.filter(thread=thread))
+    numdownvotes = len(ThreadDownvote.objects.filter(thread=thread))
+
     downvotes = []
     upvotes = ThreadUpvote.objects.filter(account__user=user, 
                         thread=thread)
@@ -275,6 +278,8 @@ def thread_to_dict(user, thread, less=True):
                     },
             'num_comments':Comment.objects.all().filter(thread=thread).count(),
             'can_edit':True if thread.account.user == user else False,
+            'supports':numupvotes,
+            'downvotes':numdownvotes,
             'supported':True if len(upvotes)>0 else False,
             'thumbed_down':True if len(downvotes)>0 else False,
             'images':list(map(lambda x: x.name,

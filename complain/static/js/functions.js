@@ -10,7 +10,7 @@ function get_csrf(){
         }
     }
 
-    function vote(elem, id, vote_type, item) // elem is the container of text for support/downvote
+function vote(elem, id, vote_type, item) // elem is the container of text for support/downvote
     {
         var inc;
         $.post("/complain/vote/",
@@ -19,7 +19,7 @@ function get_csrf(){
                 csrfmiddlewaretoken:get_csrf(),
                 type:vote_type,
                 vote_item:item
-            }, function(data, status) { 
+            }, function(data, stat) { 
                 inc = data.increment;
                 var votes = parseInt($("#vote_"+item+"_"+id).text());
                 votes+=inc;
@@ -30,32 +30,33 @@ function get_csrf(){
                 var parentelem = elem.parentElement;
                 var childs = parentelem.children;
                 var next_elem;
-                for(var x=0;x<childs.length;x++) {
-                    if(childs[x]!=elem && childs[x].tagName.toUpperCase()!='SPAN') {
-                        next_elem = childs[x];
-                        break;
+                $(parentelem).find('.vote-status').each(function(i, e) {
+                    if(txt!=e.innerHTML) {
+                        next_elem = e;
                     }
-                }
+                });
+
                 if(data.action=='undo') {
-                    elem.children[0].className = "";
                     if(txt=="Supported") {
                         elem.children[0].innerHTML="Support";
                     }
                     else {
                         elem.children[0].innerHTML="Downvote";
                     }
+                    elem.children[0].className="vote-status";
                 }
                 else {
-                    elem.children[0].className="text-bold";
+                    elem.children[0].className="text-bold vote-status";
                     if(txt=="Support") {
                         elem.children[0].innerHTML="Supported";
-                        next_elem.children[0].innerHTML="Downvote";
+                        next_elem.innerHTML="Downvote";
+                        next_elem.className="vote-status";
                     }
                     else {
                         elem.children[0].innerHTML="Downvoted";
-                        next_elem.children[0].innerHTML="Support";
+                        next_elem.innerHTML="Support";
+                        next_elem.className="vote-status";
                     }
-                    next_elem.children[0].className ="";
                 }
             }
         );
@@ -244,17 +245,11 @@ function generate_thread(threadobj, auth) {
           '<div class="box-icons">'+
             '<div class="icons-ld">'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote(this, '+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<div class="hovertext">'+
-                        '<span class="'+(up?'text-bold':'')+'" aria-hidden="true">Support'+(up?'ed':'')+'</span>'+
-                        '<span class="hovertext-display">10 Supporter</span>'+
-                      '</div>'+
+                      '<span class="vote-status '+(up?'text-bold':'')+'" aria-hidden="true">Support'+(up?'ed':'')+'</span>'+
                     '</a>'+
                     '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote(this, '+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
-                      '<div class="hovertext">'+
-                        '<span class="'+(down?'text-bold':'')+'" aria-hidden="true">Downvote'+(down?'d':'')+'</span>'+
-                        '<span class="hovertext-display">10 Downvotes</span>'+
-                      '</div>'+
+                      '<span class="vote-status '+(down?'text-bold':'')+'" aria-hidden="true">Downvote'+(down?'d':'')+'</span>'+
                     '</a>'+
                     '<a href="#" class="report-post">Report</a>'+
               '</div>'+

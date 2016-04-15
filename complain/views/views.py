@@ -590,6 +590,49 @@ def profile_update(request):
         ret['error'] = repr(e)
         return(JsonResponse(ret))
 
+def staff_page(request):
+    if request.method=="GET" and request.user.is_staff:
+        threads = Thread.objects.filter(status=0)
+        return render(request, "complain/staff-login.html", {'threads':threads})
+    else :
+        raise Http404
+
+def okay(request):
+    if request.user.is_staff and request.method=="POST":
+        try:
+            pk = request.POST['id']
+            thrd = Thread.objects.get(id=int(pk))
+            thrd.status = VERIFIED
+            thrd.save()
+            return JsonResponse({'success':True})
+        except Exception as e:
+            return JsonResponse({'success':False, 'error':'something wrong' + repr(e)})
+    else:
+        return JsonResponse({'success':False,'error':'Invalid request or user'})
+def edit(request):
+    if request.user.is_staff and request.method=="POST":
+        try:
+            pk = request.POST['id']
+            title = request.POST['title']
+            content = request.POST['content']
+            thrd = Thread.objects.get(id=int(pk))
+            thrd.title = title
+            thrd.content = content
+            thrd.status=VERIFIED
+            thrd.save()
+            return JsonResponse({'success':True})
+        except Exception as e:
+            return JsonResponse({'success':False, 'error':repr(e)})
+    else:
+        return JsonResponse({'success':False, 'error':'something wrong'})
+
+def delete(request):
+    if request.user.is_staff:
+        pk = int(request.GET['id'])
+        thread = Thread.objects.filter(id=int(request.GET['id']))
+        thread[0].delete()
+        return redirect('staffpage')
+
 class Concern(View):
     def get(self,request):
         self.context = {}

@@ -6,6 +6,9 @@ from datetime import datetime
 
 
 (COMPLAINT, DISCUSSTION) = (0, 1)
+VERIFIED = 1
+EDITED = 2
+NOTVERIFIED = 0
 
 def get_image_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -41,6 +44,7 @@ class Thread(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     votes = models.IntegerField(default=0)
     last_active = models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(default=0) # 0 for not verified, 1 for verified, 2 for updated by admin
 
     def __str__(self):
         return self.title + ' [' + self.account.user.username+']'
