@@ -63,6 +63,3 @@ $("#close-tag").click(function(){
         $("#remove-tag").remove();
 });
 
-
-
-

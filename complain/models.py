@@ -10,6 +10,11 @@ VERIFIED = 1
 EDITED = 2
 NOTVERIFIED = 0
 
+COMMENTED=1
+SUPPORTED=2
+MESSAGGED=3
+DOWNVOTED=4
+
 def get_image_path(instance, filename):
     ext = filename.split('.')[-1]
     return 'profile_pics/'+str(instance.user.id)+'.'+ext
@@ -104,8 +109,13 @@ class ThreadImage(models.Model):
         self.name = self.image.name
         super(ThreadImage, self).save(*args, **kwargs)
 
-class Tag(models.Model):
-    name = models.CharField(max_length=50)
 
-    def __str__(self):
-        return self.name
+class Notification(models.Model):
+    fromuser = models.ForeignKey('Account', related_name="fromuser")
+    touser = models.ForeignKey('Account', related_name="touser")
+    event = models.IntegerField(default=0)
+    time = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(blank=True)
+    thread = models.ForeignKey('Thread', null=True)
+    read = models.BooleanField(default=False)
+

@@ -11,6 +11,7 @@ urlpatterns =  [
         url(r'^staffpage/$', staff_page, name="staffpage"),
         url(r'^signup/$', Signup.as_view(), name='signup'),
         url(r'^thread/$', get_thread_json, name='thread'),
+        url(r'^notifications/$', get_notifications, name='notifications'),
         url(r'^threads/$', get_threads_json, name='threads'),
         url(r'^threads/tagged/([a-zA-Z0-9]+)/', ThreadPage.as_view(), name='tagged-threads'),
         url(r'^threads/recent/', get_recent_threads, name='recent-threads'),

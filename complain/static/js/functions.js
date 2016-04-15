@@ -22,6 +22,7 @@ function vote(elem, id, vote_type, item) // elem is the container of text for su
             }, function(data, stat) { 
                 inc = data.increment;
                 var votes = parseInt($("#vote_"+item+"_"+id).text());
+                alert(JSON.stringify(data));
                 votes+=inc;
                 $("#vote_"+item+"_"+id.toString()).text(votes.toString());
 
