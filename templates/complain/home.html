@@ -117,26 +117,24 @@
   <div class="container">
     <div id="popover_notification_content" style="display: none">
       <div class="notification-body">
+      {% for notif in notifications %}
         <div class="single-notification">
-          <div class="notification-text">
-            <a href="#">
-              <div class="stimg-notification">
-                  <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
-              </div>
-              Sujan Neupane supported to your Concern
-            </a>
-          </div>
+          <a href="/thread/{{notif.thread}}/">{% ifequal notif.type "comment" %}
+          Comment on your thread by {{notif.by}}
+          {% endifequal %}
+          {% ifequal notif.type "support" %}
+            Support on your thread by {{notif.by}}
+          {% endifequal %}
+          {% ifequal notif.type "downvote" %}
+            Downvote on your thread by {{notif.by}}
+          {% endifequal %}
+
+            <div class="stimg-notification">
+                <img class="img-circle" src="/media/{{notif.by_image}}" width=25 height=25/>
+            </div>
+          </a>
         </div>
-        <div class="single-notification">
-          <div class="notification-text">
-            <a href="#">
-              <div class="stimg-notification">
-                  <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
-              </div>
-              Bibek Pandey commented on your Concern
-            </a>
-          </div>
-        </div>
+    {% endfor %}
       </div>
     </div>
   </div>
