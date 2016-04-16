@@ -53,7 +53,7 @@ window.twttr = (function(d, s, id) {
   }
   #footer {
    position:relative;
-   margin-top: 200px;
+   margin-top: 270px;
    bottom:0px;
    width: 100%;
   }
@@ -89,7 +89,7 @@ window.twttr = (function(d, s, id) {
             </form>
             <ul id="gly-bell" class="nav navbar-nav navbar-right">
               <li>
-                <a href="#" title="Header" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Content">
+                <a href='#' class='notifications' data-placement="bottom" title="Notifications" >
                 <i class="glyphicon glyphicon-bell"></i>
                 <div class="notification-count">
                   
@@ -108,7 +108,27 @@ window.twttr = (function(d, s, id) {
       </div>
   </nav>
 
-  
+    <div class="container">
+    <div id="popover_notification_content" style="display: none">
+      <div class="notification-body">
+        <div class="single-notification">
+          <a href="#">Sujan Neupane supported to your Concern
+            <div class="stimg-notification">
+                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
+            </div>
+          </a>
+        </div>
+        <div class="single-notification">
+          <a href="#">Bibek Pandey commented on your Concern
+            <div class="stimg-notification">
+                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   	<div class="container" id="content-top">
   		<div class="row">
   			<div class="col-md-12">
