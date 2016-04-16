@@ -115,8 +115,8 @@ window.twttr = (function(d, s, id) {
   	<div class="container" id="content-top">
   		<div class="row">
   			<div class="col-md-12">
-            {% if results or 1 %}
-                <h2 style="margin-left:10px;background-color:#bbb">Results for <span id="result-for"></span></h2>
+            {% if results  or 1 %}
+                <h2 style="margin-left:10px;background-color:#bbb"><span id="result" style="display:none">Results for </span><span id="result-for"></span></h2>
                 <h3 id="not-found" style="margin:10px;display:none"> Nothing Found</h3>
             {% endif %}
                 <div class="tab-stories">
@@ -312,6 +312,7 @@ window.twttr = (function(d, s, id) {
                 data:data,
 
                 success:function(data) {
+					$('#result').show();
                     $('#result-for').text('"'+query+'"');
                     if(data.threads.length==0) $('#not-found').show();
                     g_lastId = data.lastid;
@@ -330,6 +331,7 @@ window.twttr = (function(d, s, id) {
                 url:'/complain/threads/?tagname='+tagname,
                 data:data,
                 success:function(data) {
+					$('#result').show();
                     $('#result-for').text('tag "'+tagname+'"');
                     if(data.threads.length==0)$('#not-found').show();
                     g_lastId = data.lastid;
