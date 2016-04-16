@@ -11,3 +11,5 @@ img/
 *.swp
 *.swo
 *~
+settings.py
+udghos.sqlite3
