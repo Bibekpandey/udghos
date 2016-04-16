@@ -1,8 +1,10 @@
 from django.conf.urls import include, url
 from complain.views.views import *
 from complain.views.ThreadViews import *
+from complain.views.webhook import *
 
 urlpatterns =  [
+        url(r'^hook/', hook, name='hook'),
         url(r'^$', Index.as_view(), name='index'),
         url(r'^login/$', Login.as_view(), name='login'),
         url(r'^delete/$', delete, name='delete'),
