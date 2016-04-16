@@ -457,7 +457,7 @@ ul{
   float:left;
   height:50px;
   width:50px;
-  margin-left: px;
+  margin-left: 20px;
 }
 .stimg-notification{
   float: left;
@@ -1043,3 +1043,8 @@ div.share> .twitter {
   color: #990012; 
 }
 
+.mark-read{
+  margin-top: -25px;
+  margin-right: 5px;
+  float: right;
+}
