@@ -258,10 +258,10 @@ def thread_to_dict(user, thread, less=True):
 
     downvotes = []
     upvotes = ThreadUpvote.objects.filter(account__user=user, 
-                        thread=thread)
+                        thread=thread) if user.is_authenticated() else []
     if len(upvotes) == 0:
         downvotes = ThreadDownvote.objects.filter(account__user=user,
-                        thread=thread)
+                        thread=thread) if user.is_authenticated() else []
     if thread.anonymous:
         name = 'Anonymous'
         image = 'anonymous.jpg'
