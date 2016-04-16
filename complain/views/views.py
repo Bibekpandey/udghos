@@ -657,6 +657,16 @@ class Concern(View):
         return render(request, "complain/post-concern.html",self.context)
 
 
+def mark_read_notifications(request):
+    if request.user.is_authenticated():
+        notifs = Notification.objects.filter(read=False)
+        for x in notifs:
+            x.read=True
+            x.save()
+        return JsonResponse({'success':True})
+    else:
+        return JsonResponse({'success':False})
+
 def get_notifications(request):
     if request.user.is_authenticated():
         acc = Account.objects.get(user=request.user)

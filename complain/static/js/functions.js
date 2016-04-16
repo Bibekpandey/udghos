@@ -300,7 +300,6 @@ function popMessage(elem, msg) {
     //$(newdiv).hide().delay(1000).fadeOut();
 }
 
-
 function search() {
     var url = '/threads/search/?query=';
     url+=$('#searchquery').val();
@@ -308,3 +307,10 @@ function search() {
     return false;
 }
 
+function mark_read() {
+    $.get('/mark-read/', {}, function(data) {
+        if(data.success) {
+            $('.notification-count').hide();
+        }
+    });
+}
