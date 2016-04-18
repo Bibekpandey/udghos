@@ -1,3 +1,12 @@
+$(document).ready(function(){
+  $('.notifications').popover({ 
+    html : true,
+    content: function() {
+      return $('#popover_notification_content').html();
+    }
+  });
+});
+
 function get_csrf(){
         var a = document.getElementsByTagName("input");
         for(x in a)

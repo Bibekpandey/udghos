@@ -367,6 +367,7 @@ class ThreadPage(View):
         if request.user.is_authenticated():
             self.context['user'] = request.user
             self.context['authenticated'] = True
+            self.context['notifications'] = get_notifications(request)
             self.context['profile_pic'] = Account.objects.get(user=request.user).profile_pic
 
         #thread = Thread.objects.get(id=thread_id)
