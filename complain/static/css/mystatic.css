@@ -20,7 +20,7 @@ h1,h2,h3,h4{
 
 .btn-my {
   font-family: 'Varela Round', sans-serif;
-  background: linear-gradient(#cc4457, #990012);
+  background: #d61010;
   
   -webkit-border-radius: 3;
   -moz-border-radius: 3;
@@ -42,17 +42,20 @@ h1,h2,h3,h4{
 }
 
 .btn-my:hover {
-  background: #aa1123;
+  background: #c50000;
 
   text-decoration: none;
   color: white;
 
 }
+.no-margin{
+  margin-top: -50px;
+}
 .box{
   font-family: 'Varela Round', sans-serif;
   position: block;
   min-height: 20px;
-  padding: 15px 15px 0px 15px;
+  padding: 10px 10px 0px 10px;
   margin-left: 10px;
   margin-bottom: 15px;
   border:2px solid #ccc;
@@ -66,22 +69,26 @@ h1,h2,h3,h4{
   min-height: 20px;
   padding: 10px 15px 15px 15px;
   margin: 2px;
-  margin-top: 60px;
+  margin-top: 65px;
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
   border:2px solid #ccc;
   border-radius: 3px;
-  baox-shadow: 1px 1px 3px #777;
 }
+.box-image{
+  margin-top: 10px;
+}
+
 .box-header{
-  background: linear-gradient(#fff, #eee);
+  background: linear-gradient(#fff, #eee); */
   font-family: 'Varela Round', sans-serif;
   position: block;
   padding: 10px;
   color: #000; 
   border-radius: 3px;
   margin-top: -10px;
+  opacity: 1;
 }
 .box-tabs{
   margin-top: 15px;
@@ -106,6 +113,20 @@ h1,h2,h3,h4{
   margin:2px;
   margin-bottom: 10px;
   padding: 10px;
+}
+.box-tags{
+  font-family: 'Varela Round', sans-serif;
+  position: block;
+  min-height: 20px;
+  padding: 10px 15px 15px 15px;
+  margin: 2px;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border:0px solid #ccc;
+  border-radius: 3px;
+  font-size: 15px;
 }
 .box-tag{
   background-color: #ccc;
@@ -224,7 +245,7 @@ p>a:hover{
 }
 #navcolor {
   background-color: #333;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #555;
 }
 
 
@@ -244,7 +265,7 @@ p>a:hover{
   margin-left: 12px;
   color: #fff;
   border: #333 2px solid;
-  background: linear-gradient(#dd4456, #bb2234);
+  background: #d71010;
 }
 
 #geoicon{
@@ -395,7 +416,7 @@ p>a:hover{
 }
 .my-close{
   float: left;
-  color: #990012;
+  color: #d71010;
 }
 .close-icon{
   position: absolute;
@@ -408,16 +429,19 @@ p>a:hover{
   position: relative;
   font-size: 15px;
   font-weight: bold;
-  margin-top: -45px;
+  margin-top: -47px;
   margin-left: 2px;
   margin-bottom: 10px;
-  color: #990012;
+  color: #d71010;
 }
 .heading-post:hover{
   color: #777;
 }
 .user-heading{
   margin-top: 5px;
+}
+.tag-heading{
+  font-size: 25px;
 }
 
 .inner-addon { 
@@ -490,6 +514,7 @@ ul{
 
 #navhead{
   color: #fff;
+  margin-top: px;
   font-size: 25px;
   display: inline-block;
   position: relative;
@@ -553,6 +578,10 @@ ul{
   padding: 5px;
   background-color: #555;
 }
+.top-tags{
+  position: relative;
+  display: block;
+}
 .post-heading {
   margin-top: 0px;
   margin-bottom: -10px;
@@ -568,12 +597,13 @@ ul{
 .post-title{
   color: #333;
   font-weight: bold;
-  margin-top: -3px;
+  margin-top: -7px;
+  margin-bottom: -5px;
   margin-left: 2px;
   font-size: 25px;
 }
 .post-title:hover{
-  color: #990012;
+  color: #d71010;
 }
 .post-image{
   height: 170%;
@@ -687,7 +717,7 @@ ul{
 }
 
 #navblocks{
-  border-bottom: 1px solid #990012;
+  border-bottom: 1px solid #d71010;
   margin-right: -2px;
   width: 100%;
 }
@@ -699,22 +729,22 @@ ul{
 
 .nav-tabs > li.active > a{
     color: #000;
-    border-top: 3px solid #990012;
+    border-top: 3px solid #d71010;
     background-color: #fff;
 }
 .nav-tabs > li.active >a:hover{
   color: #000;
-  border-top: 2px solid #990012;
+  border-top: 2px solid #d71010;
   background-color: #fff;
 }
 .nav-tabs > li.active>a:focus{
   color: #000;
-  border-top: 3px solid #990012;
+  border-top: 3px solid #d71010;
   background-color: #fff;
 }
 
 .nav-tabs>li>a:hover{
-  border-top: 2px solid #990012;
+  border-top: 2px solid #d71010;
   background-color: #fff;
 }
 
@@ -722,7 +752,7 @@ ul{
   float: left;
   font-size: 25px;
   margin-left: 10px;
-  border-top: 2px solid #990012;
+  border-top: 2px solid #d71010;
 }
 #share-top{
   margin-top: 17px;
@@ -832,6 +862,9 @@ div.share> .twitter {
   border-radius: 50%;
   background-color: #fff;
 }
+.img-homepage{
+  margin-right: 35px;
+}
 .navbar-name{
   margin-left: 5px;
   margin-top: 10px;
@@ -895,7 +928,7 @@ div.share> .twitter {
   font-size: 20px;
 
 
-  color: #990012; /* IE8 proofing */
+  color: #d71010; /* IE8 proofing */
   
   border-bottom: 2px solid transparent;
 }
@@ -1010,7 +1043,7 @@ div.share> .twitter {
 }
 .arrow{
   color: #aaa;
-  border: 1px solid #990012;
+  border: 1px solid #d71010;
 }
 .single-notification{
   width: 100%;
@@ -1025,7 +1058,7 @@ div.share> .twitter {
   text-decoration:none;
 }
 .notification-text>a:hover{
-  color: #990012; 
+  color: #d71010; 
 }
 
 .mark-read{
