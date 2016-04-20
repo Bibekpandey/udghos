@@ -279,9 +279,10 @@ def vote_thread(request, thread_id, account, action): # action is 1 for upvote a
     thread.votes+=delta_vote
     thread.save()
     acc = Account.objects.get(user=request.user)
-    notif = Notification.objects.create(fromuser=acc,
+    if acc != thread.account:
+        notif = Notification.objects.create(fromuser=acc,
                 touser=thread.account, thread=thread, event=event)
-    notif.save()
+        notif.save()
     return {"action":useraction, "increment":delta_vote}
 
 def vote_comment(comment_id, account, action):
@@ -402,8 +403,9 @@ def comment(request):
                 thread_id = int(request.POST['thread_id'])
                 account = Account.objects.get(user=request.user)
                 thread = Thread.objects.get(id=thread_id)
-                notif = Notification.objects.create(fromuser=account, touser=thread.account,event=COMMENTED)
-                notif.save()
+                if account != thread.account:
+                    notif = Notification.objects.create(fromuser=account, touser=thread.account,event=COMMENTED,thread=thread)
+                    notif.save()
 
                 comment = Comment(account=account, 
                             thread=thread, text=content)
@@ -681,7 +683,9 @@ def get_notifications(request):
 
 def get_notification_dict(notification):
     ret={}
-    ret['thread'] = notification.thread.pk
+    if notification.thread is not None:
+        ret['thread'] = notification.thread.id
+    else:ret['thread'] = None
     ret['by'] = notification.fromuser.user.username
     ret['by_image'] = notification.fromuser.profile_pic
     ret['message'] = -1
