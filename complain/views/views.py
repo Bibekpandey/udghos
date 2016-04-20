@@ -727,6 +727,7 @@ def verify(request, code):
             return HttpResponse('Invalid code. Go to <a href="/">Home</a>')
         acc = accs[0]
         if acc.verified:
+            acc.user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, acc.user)
             return HttpResponse('Already Verified. Go to <a href="/">Home</a>')
         acc.verified = True
