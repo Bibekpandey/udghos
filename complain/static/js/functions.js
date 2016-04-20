@@ -188,7 +188,7 @@ function showDeleteWarning(threadid) {
                 'Are you Sure you want to delete the thread? '+
                 'It cannot be undone.'+
             '</div>'+
-            '<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Sure</button>'+
+            '<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Ok</button>'+
             '<button class="btn btn-my" type="button" onclick="removeWarning()">Cancel</button>';
     var box = $('<div>').attr('class','warning-box')
                 .html(html);

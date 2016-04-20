@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.views.decorators.csrf import csrf_exempt
 from complain.views.views import *
 from complain.views.ThreadViews import *
 
