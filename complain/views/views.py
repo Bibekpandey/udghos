@@ -403,9 +403,15 @@ def comment(request):
                 thread_id = int(request.POST['thread_id'])
                 account = Account.objects.get(user=request.user)
                 thread = Thread.objects.get(id=thread_id)
-                if account != thread.account:
-                    notif = Notification.objects.create(fromuser=account, touser=thread.account,event=COMMENTED,thread=thread)
-                    notif.save()
+                # get comments, so that the commenting users could be notified
+                comments = Comment.objects.filter(thread=thread)
+                notified_users = []
+                for comment in comments:
+                    if comment.account not in notified_users:
+                        if account != comment.account:
+                            notif = Notification.objects.create(fromuser=account, touser=comment.account,event=COMMENTED,thread=thread)
+                            notif.save()
+
 
                 comment = Comment(account=account, 
                             thread=thread, text=content)
