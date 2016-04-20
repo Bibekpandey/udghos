@@ -7,6 +7,7 @@ def create_account(strategy, backend, user, response, details,
         is_new=False, *args, **kwargs):
     if is_new:
         acc = Account.objects.create(user=user)
+        acc.verified = True
         acc.save()
         if backend.name == 'facebook':
             print(str(response))
