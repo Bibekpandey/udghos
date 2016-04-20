@@ -402,7 +402,7 @@ def comment(request):
                 thread_id = int(request.POST['thread_id'])
                 account = Account.objects.get(user=request.user)
                 thread = Thread.objects.get(id=thread_id)
-                notif = Notification.create(fromuser=account, touser=thread.account,event=COMMENTED)
+                notif = Notification.objects.create(fromuser=account, touser=thread.account,event=COMMENTED)
                 notif.save()
 
                 comment = Comment(account=account, 
