@@ -514,10 +514,20 @@ ul{
 
 #navhead{
   color: #fff;
-  margin-top: px;
   font-size: 25px;
   display: inline-block;
   position: relative;
+  background: fff;
+  margin-top: -2px;
+}
+.udghos-logo{
+  width: 35px;
+  height: 35px;
+  margin-top: -5px;
+  margin-left: -10px;
+  border: 2px solid #fff;
+  border-radius: 3px; 
+  background-color: #fff;
 }
 .navbar-body{
   display: inline-block;

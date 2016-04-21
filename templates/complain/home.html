@@ -5,7 +5,8 @@
 <html lang="en">
 <head>
   <title>Udghos</title>
-  <link rel="icon" type="image/png" src="/static/img/Udghos-logo.png">
+
+  <link rel="icon" type="image/ico" src="/static/img/udghos.ico">
   <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'>
 
   <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
@@ -73,8 +74,8 @@
   <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
-          <a id="navhead" class="navbar-brand" href="/">Udghos
-            <!--img src="/media/images/Udghos-logo.png" width="35" height="35"-->
+          <a id="navhead" class="navbar-brand" href="/">
+            <img class="udghos-logo" src="/static/img/Udghos-logo.png" width="30" height="30">
           </a>
         </div>
         
@@ -157,8 +158,8 @@
       <div class="row">
         <div class="box-header">
         <div class="box-image">
-          <div class="col-md-3 text-center header-column header-column-first">
-            <img src="/static/img/Udghos.png" width="175" height="175">
+          <div class="col-md-3 text-center header-column-first">
+            <img src="/static/img/Udghos.png" width="550" height="175">
             <!--button type="button" class="btn btn-sm">
               
             </button><br> <br> <br-->
@@ -302,7 +303,7 @@
 
       <div id="profile" class="col-md-2">
         {% if authenticated %}
-        <!--div class="box-profile">
+        <div class="box-profile">
           <img class="img-circle img-homepage" href="{% url 'profile' user.id %}" src="/media/{{profile_pic}}" width=70 height=70 alt="Generic placeholder image" width="100" height="100">
           <div class="media-body">
             <a href="{% url 'profile' user.id %}">
@@ -313,7 +314,7 @@
               
             </p>
           </div>
-        </div-->
+        </div>
         {% endif %}
         <div class="box-tags">
           <span class="heading-property tag-heading">Top Tags</span>
