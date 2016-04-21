@@ -1,3 +1,7 @@
+$('input').on('input', function() {
+    $('#signup-message').text('');
+    $('#signin-message').text('');
+})
 
 $( "#signup" ).hide("fast");
 $( "#click-signup" ).click(function() {
@@ -35,6 +39,9 @@ function signin() {
             window.location = "/";
         }
         else {
+            if(data.message=="NOT VERIFIED") {
+                window.location = "/not-verified/";
+            }
             $('#signin-message').text(data.message);
         }
     });
@@ -58,10 +65,11 @@ function signUp() {
     $.post('/complain/signup/', $('#signup-form').serialize(), function(data) {
         $('#message').text(data.message);
         if(data.success) {
-            window.location='/';
+            window.location='/not-verified/';
         }
         else {
             document.getElementById('signup-form').reset();  
+            $('#signup-message').text(data.message);
             return false;
         }
     });

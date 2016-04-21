@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.core import serializers
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
@@ -14,6 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import View
 from complain.models import *
 import json
+import random
 import os
 
 # view modules
@@ -104,11 +106,15 @@ class Login(View):
             return JsonResponse({'success':False, 'message':'Empty username/password'})
         user = authenticate(username=username, password=password)
 
-        if user is None or username=="root":
+        if user is None or username=="udghos":
             return JsonResponse({'success':False, 'message':'Wrong username/password'})
         else:
-            login(request, user)
-            return JsonResponse({'success':True, 'message':'Login Successful'})
+            acc = Account.objects.get(user=user)
+            if acc.verified:
+                login(request, user)
+                return JsonResponse({'success':True, 'message':'Login Successful'})
+            else:
+                return JsonResponse({'success':False, 'message':'NOT VERIFIED'})
 
 
 def logout_user(request):
@@ -131,10 +137,10 @@ class Signup(View):
             password = request.POST['password'].strip()
             username = request.POST['username'].strip()
 
-            user = User.objects.filter(username=username)
+            user = User.objects.filter(Q(username=username)| Q(email=email))
             if len(user)>0:
                 ret['success'] = False
-                ret['message'] = "username already exists"
+                ret['message'] = "username/email already taken"
                 return JsonResponse(ret)
 
             newUser = User(username=username,
@@ -148,7 +154,11 @@ class Signup(View):
             user = authenticate(username=username, password=password)
             ret['success'] = True
             ret['message'] = "successfully signed up"
-            login(request, user)
+            code = generate_code()
+            account.verification_key = code
+            account.save()
+            mail_send(code, email)
+            #login(request, user)
             return JsonResponse(ret)
         except Exception as e:
             u = User.objects.filter(username=username)
@@ -279,9 +289,10 @@ def vote_thread(request, thread_id, account, action): # action is 1 for upvote a
     thread.votes+=delta_vote
     thread.save()
     acc = Account.objects.get(user=request.user)
-    notif = Notification.objects.create(fromuser=acc,
+    if acc != thread.account:
+        notif = Notification.objects.create(fromuser=acc,
                 touser=thread.account, thread=thread, event=event)
-    notif.save()
+        notif.save()
     return {"action":useraction, "increment":delta_vote}
 
 def vote_comment(comment_id, account, action):
@@ -402,8 +413,15 @@ def comment(request):
                 thread_id = int(request.POST['thread_id'])
                 account = Account.objects.get(user=request.user)
                 thread = Thread.objects.get(id=thread_id)
-                notif = Notification.create(fromuser=account, touser=thread.account,event=COMMENTED)
-                notif.save()
+                # get comments, so that the commenting users could be notified
+                comments = Comment.objects.filter(thread=thread)
+                notified_users = []
+                for comment in comments:
+                    if comment.account not in notified_users:
+                        if account != comment.account:
+                            notif = Notification.objects.create(fromuser=account, touser=comment.account,event=COMMENTED,thread=thread)
+                            notif.save()
+
 
                 comment = Comment(account=account, 
                             thread=thread, text=content)
@@ -681,7 +699,9 @@ def get_notifications(request):
 
 def get_notification_dict(notification):
     ret={}
-    ret['thread'] = notification.thread.pk
+    if notification.thread is not None:
+        ret['thread'] = notification.thread.id
+    else:ret['thread'] = None
     ret['by'] = notification.fromuser.user.username
     ret['by_image'] = notification.fromuser.profile_pic
     ret['message'] = -1
@@ -694,3 +714,41 @@ def get_notification_dict(notification):
     else:
         ret['type']='message'
     return ret
+
+def verify_page(request):
+    return render(request, "complain/verify.html")
+
+def verify(request, code):
+    if request.user.is_authenticated():
+        return redirect('index')
+    else:
+        accs = Account.objects.filter(verification_key=code)
+        if len(accs)==0:
+            return HttpResponse('Invalid code. Go to <a href="/">Home</a>')
+        acc = accs[0]
+        if acc.verified:
+            login(request, acc.user)
+            return HttpResponse('Already Verified. Go to <a href="/">Home</a>')
+        acc.verified = True
+        acc.save()
+        acc.user.backend = 'django.contrib.auth.backends.ModelBackend'
+        login(request, acc.user)
+        return HttpResponse('Congratulations!! You are Verified. Go to <a href="/">Home</a>')
+
+def mail_send(code, email):
+    subject, from_email, to = 'account verification', 'noreply@udghos.com', email
+    text = "Welcome to udghos.com. This is the email that lets you verify your account in udghos.com. The following is the link to verify:"
+    html = '<a href="http://localhost.com/verify/'+str(code)+'">udghos.com/verify/'+str(code)+'</a>'
+    msg = EmailMultiAlternatives(subject, "", from_email, [to])
+    msg.attach_alternative(html, "text/html")
+    msg.send()
+
+keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+def generate_code(n=10):
+    s = ''
+    l = len(keys)
+    for x in range(n):
+        s+= keys[random.randrange(0,l)]
+    return s
+

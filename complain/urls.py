@@ -2,12 +2,12 @@ from django.conf.urls import include, url
 from django.views.decorators.csrf import csrf_exempt
 from complain.views.views import *
 from complain.views.ThreadViews import *
-from complain.views.webhook import *
 
 urlpatterns =  [
-        url(r'^githook/', csrf_exempt(hook), name='hook'),
         url(r'^$', Index.as_view(), name='index'),
         url(r'^login/$', Login.as_view(), name='login'),
+        url(r'^verify/([a-zA-Z0-9!@#$^*()]+)/$', verify, name='verify'),
+        url(r'^not-verified/$', verify_page, name='verify-page'),
         url(r'^delete/$', delete, name='delete'),
         url(r'^edit/$', edit, name='edit'),
         url(r'^okay/$', okay, name='okay'),
