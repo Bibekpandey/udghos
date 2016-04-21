@@ -4,7 +4,7 @@ body {
   background-color: #fff;
   background-color:#fff;
 
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Varela Round', sans-serif; 
   color: #000;
   min-height: 700px;
   background-size:cover;  
@@ -304,13 +304,6 @@ p>a:hover{
 #tag-position{
   position: relative;
 }
-#profile{
-  -webkit-column-rule: 1px solid;
-  -moz-column-rule: 1px solid;
-    column-count: 3;
-    column-rule: 1px solid;
-}
-
 #tab-stories{
   display: inline-block;
   padding: 0px;
@@ -368,18 +361,18 @@ p>a:hover{
   float: right;
   display: inline-block;
   margin-left: 2.5px;
-  margin-right: px;
   text-decoration: none; 
   padding: 0px 2px 0px 2px;
-  background-color:#ddd ;
-  color:#333;
-  text-shadows:0px 5px 5px #777;
-  border-radius: 2px;
+  background-color:#ddd;
+  color:#d71010;
+  border-radius: 3px;
   font-size: 17px;
 }
 
 .tagname2:hover{
   text-decoration: none;
+  color: #d71010;
+  background-color: #eee;
 }
 
 #action-element{
@@ -395,7 +388,7 @@ p>a:hover{
   color: #555;
 }
 .media-body{
-  border-bottom: 1px solid #999;
+  border-bottom: 0px solid #999;
   font-family: 'Varela Round', sans-serif;
 }
 .media-body>a{
@@ -420,6 +413,9 @@ p>a:hover{
 }
 .close-icon{
   position: absolute;
+}
+.modal-edit{
+  margin: -10px -10px 5px -10px; 
 }
 .heading-property{
   text-decoration: none;
@@ -514,10 +510,27 @@ ul{
 
 #navhead{
   color: #fff;
-  margin-top: px;
   font-size: 25px;
   display: inline-block;
   position: relative;
+  background: fff;
+  margin-top: -2px;
+}
+.udghos-logo{
+  width: 35px;
+  height: 35px;
+  margin-top: -5px;
+  margin-left: -10px;
+  border: 2px solid #fff;
+  border-radius: 3px; 
+  background-color: #fff;
+  opacity: 0.8;
+}
+.img-udghos{
+  position: absolute;
+  margin-left: -150px;
+  opacity: 0.9;
+  margin-top: 40px;
 }
 .navbar-body{
   display: inline-block;
@@ -579,8 +592,12 @@ ul{
   background-color: #555;
 }
 .top-tags{
+  color: #d71010;
   position: relative;
   display: block;
+}
+.top-tags:hover{
+  color: #e82121;
 }
 .post-heading {
   margin-top: 0px;
@@ -662,8 +679,19 @@ ul{
 .box:hover .glyphicon-remove{
   color: #777;
   display: block;
-  margin-top: -5px;
-  margin-right: -5px;
+  margin-bottom: -30px;
+}
+.glyphicon-edit{
+  display: none;
+  float: right;
+  position: relative;
+  margin-top: ;
+  margin-left: -5px;
+}
+.box:hover .glyphicon-edit{
+  color: #777;
+  display: block;
+  margin-right: 20px;
   margin-bottom: -30px;
 }
 .box:hover .display-tag{
@@ -863,7 +891,7 @@ div.share> .twitter {
   background-color: #fff;
 }
 .img-homepage{
-  margin-right: 35px;
+  margin-right: 5px;
 }
 .navbar-name{
   margin-left: 5px;
@@ -910,6 +938,11 @@ div.share> .twitter {
   position: relative;
   color: #000;
   border-right: 3px solid #888;
+  margin-bottom: 25px;
+}
+.header-column-first{
+  border-right: 3px solid #888;
+  height: 190px;
 }
 .font-header{
   font-size: 50px;
@@ -978,7 +1011,6 @@ div.share> .twitter {
 }
 
 .warning-text {
-    border-top:solid 1px #888;
     font-family: Helvetica;
 }
 .text-bold {
