@@ -184,6 +184,7 @@ function showDeleteWarning(threadid) {
     var left = Math.round(x/2-w/2);
     // create the dialog box
     var html = '<div class="modal-header my-color modal-edit">'+
+                '<button onclick="removeWarning()" type="button" class="close my-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
                 '<h4 class="modal-title my-modal-title" id="myModalLabel">Warning</h4><br>'+
             '</div>'+
             '<div class="warning-text">'+
@@ -192,7 +193,7 @@ function showDeleteWarning(threadid) {
             '</div>'+
             '<div class="modal-footer">'+
                 '<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Ok</button>'+
-                '<button class="btn btn-my" type="button" onclick="removeWarning()">Cancel</button>'+
+                '<button class="btn btn-default" type="button" onclick="removeWarning()">Cancel</button>'+
             '</div>';
     var box = $('<div>').attr('class','warning-box')
                 .html(html);
@@ -225,7 +226,7 @@ function editPost(threadid) {
     // create the dialog box
     var html = 
             '<div class="modal-header my-color modal-edit">'+
-                '<button type="button" class="close my-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                '<button onclick="removeWarning()" type="button" class="close my-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
                 '<h4 class="modal-title my-modal-title" id="myModalLabel">Edit Your View</h4><br>'+
             '</div>'+
             '<b>Title</b><br>'+
@@ -244,7 +245,7 @@ function editPost(threadid) {
             
             '<div class="modal-footer">'+
                 '<button class="btn btn-my" type="button" onclick="updateThread('+threadid+')">Ok</button>'+
-                '<button class="btn btn-my" type="button" onclick="removeWarning()">Cancel</button>'+
+                '<button class="btn btn-default" type="button" onclick="removeWarning()">Cancel</button>'+
             '</div>';
     var box = $('<div>').attr('class','warning-box')
                 .html(html);
@@ -271,10 +272,10 @@ function generate_thread(threadobj, auth) {
                     '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
                 '<div class="post-option">'+
-                    '<a href="javascript:void()" onclick="editPost('+threadobj.id+')">'+
+                    (threadobj.can_edit?'<a href="javascript:void()" onclick="editPost('+threadobj.id+')">'+
                     '<span class="glyphicon glyphicon-edit"></span>'+
                     '</a>'+
-                    (threadobj.can_edit?'<a href="javascript:void()" onclick="showDeleteWarning('+threadobj.id+')">'+
+                    '<a href="javascript:void()" onclick="showDeleteWarning('+threadobj.id+')">'+
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
                     ) +
