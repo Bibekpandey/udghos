@@ -361,18 +361,18 @@ p>a:hover{
   float: right;
   display: inline-block;
   margin-left: 2.5px;
-  margin-right: px;
   text-decoration: none; 
   padding: 0px 2px 0px 2px;
-  background-color:#ddd ;
-  color:#333;
-  text-shadows:0px 5px 5px #777;
-  border-radius: 2px;
+  background-color:#ddd;
+  color:#d71010;
+  border-radius: 3px;
   font-size: 17px;
 }
 
 .tagname2:hover{
   text-decoration: none;
+  color: #d71010;
+  background-color: #eee;
 }
 
 #action-element{
@@ -413,6 +413,9 @@ p>a:hover{
 }
 .close-icon{
   position: absolute;
+}
+.modal-edit{
+  margin: -10px -10px 5px -10px; 
 }
 .heading-property{
   text-decoration: none;
@@ -526,8 +529,8 @@ ul{
 .img-udghos{
   position: absolute;
   margin-left: -150px;
-  opacity: 0.7;
-  margin-top: 20px;
+  opacity: 0.9;
+  margin-top: 40px;
 }
 .navbar-body{
   display: inline-block;
@@ -594,7 +597,7 @@ ul{
   display: block;
 }
 .top-tags:hover{
-  color: #;
+  color: #e82121;
 }
 .post-heading {
   margin-top: 0px;
@@ -676,8 +679,19 @@ ul{
 .box:hover .glyphicon-remove{
   color: #777;
   display: block;
-  margin-top: -5px;
-  margin-right: -5px;
+  margin-bottom: -30px;
+}
+.glyphicon-edit{
+  display: none;
+  float: right;
+  position: relative;
+  margin-top: ;
+  margin-left: -5px;
+}
+.box:hover .glyphicon-edit{
+  color: #777;
+  display: block;
+  margin-right: 20px;
   margin-bottom: -30px;
 }
 .box:hover .display-tag{
@@ -877,7 +891,7 @@ div.share> .twitter {
   background-color: #fff;
 }
 .img-homepage{
-  margin-right: 35px;
+  margin-right: 5px;
 }
 .navbar-name{
   margin-left: 5px;
@@ -925,6 +939,10 @@ div.share> .twitter {
   color: #000;
   border-right: 3px solid #888;
   margin-bottom: 25px;
+}
+.header-column-first{
+  border-right: 3px solid #888;
+  height: 190px;
 }
 .font-header{
   font-size: 50px;
@@ -993,7 +1011,6 @@ div.share> .twitter {
 }
 
 .warning-text {
-    border-top:solid 1px #888;
     font-family: Helvetica;
 }
 .text-bold {

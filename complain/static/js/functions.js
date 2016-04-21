@@ -180,16 +180,20 @@ function showDeleteWarning(threadid) {
     var x = $(window).width(), 
         y = $(window).height();
     var w = 400
-        h = 100; 
+        h = 200; 
     var left = Math.round(x/2-w/2);
     // create the dialog box
-    var html = '<b>Warning</b><br>'+
+    var html = '<div class="modal-header my-color modal-edit">'+
+                '<h4 class="modal-title my-modal-title" id="myModalLabel">Warning</h4><br>'+
+            '</div>'+
             '<div class="warning-text">'+
                 'Are you Sure you want to delete the thread? '+
                 'It cannot be undone.'+
             '</div>'+
-            '<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Ok</button>'+
-            '<button class="btn btn-my" type="button" onclick="removeWarning()">Cancel</button>';
+            '<div class="modal-footer">'+
+                '<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Ok</button>'+
+                '<button class="btn btn-my" type="button" onclick="removeWarning()">Cancel</button>'+
+            '</div>';
     var box = $('<div>').attr('class','warning-box')
                 .html(html);
     $('#warning-box').append(box);
@@ -205,6 +209,57 @@ function showDeleteWarning(threadid) {
     //$('body').append($('<div style="position:relative;top:300px;background-color:blue;height:300px;"></div>'));
 }
 
+function editPost(threadid) {
+    $('#mask').css({
+        "width":$(document).width(),
+        "height":$(document).height(),
+        "z-index":3,
+        "background-color":'#000',
+        "opacity":0.5
+    }).show();
+    var x = $(window).width(), 
+        y = $(window).height();
+    var w = 500
+        h = 500; 
+    var left = Math.round(x/2-w/2);
+    // create the dialog box
+    var html = 
+            '<div class="modal-header my-color modal-edit">'+
+                '<button type="button" class="close my-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                '<h4 class="modal-title my-modal-title" id="myModalLabel">Edit Your View</h4><br>'+
+            '</div>'+
+            '<b>Title</b><br>'+
+            '<textarea>Yo title ho</textarea><br>'+
+            '<b>Content</b><br>'+
+            '<textarea>Yo content ho</textarea>'+
+            
+            '<div class="form">'+
+                '<label for="recipient-name" class="control-label">Tags * <small id="tags-warning" class="alert-danger" style="display:none">Please provide at least 1 tag(max 4) </small></label><br>'+
+                '<input type="text" class="form-control" placeholder="Type in tag names (max 4)" id="tagbox"/>'+
+                '<ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">'+
+                '</ul>'+
+                '<div id="tags-chosen">'+
+                '</div>'+
+            '</div><br><br>'+
+            
+            '<div class="modal-footer">'+
+                '<button class="btn btn-my" type="button" onclick="updateThread('+threadid+')">Ok</button>'+
+                '<button class="btn btn-my" type="button" onclick="removeWarning()">Cancel</button>'+
+            '</div>';
+    var box = $('<div>').attr('class','warning-box')
+                .html(html);
+    $('#warning-box').append(box);
+
+    var tp = window.scrollY + Math.round(y/2-h/2);
+    var styles = {"top":tp,
+                "left":left,
+                "z-index":5,
+                "height":h,
+                "width":w};
+
+    $('#warning-box').css(styles).show();
+}
+
 function generate_thread(threadobj, auth) {
     var up = threadobj.supported;
     var down = threadobj.thumbed_down;
@@ -216,6 +271,9 @@ function generate_thread(threadobj, auth) {
                     '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
                 '<div class="post-option">'+
+                    '<a href="javascript:void()" onclick="editPost('+threadobj.id+')">'+
+                    '<span class="glyphicon glyphicon-edit"></span>'+
+                    '</a>'+
                     (threadobj.can_edit?'<a href="javascript:void()" onclick="showDeleteWarning('+threadobj.id+')">'+
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
