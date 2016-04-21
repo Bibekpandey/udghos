@@ -304,13 +304,6 @@ p>a:hover{
 #tag-position{
   position: relative;
 }
-#profile{
-  -webkit-column-rule: 1px solid;
-  -moz-column-rule: 1px solid;
-    column-count: 3;
-    column-rule: 1px solid;
-}
-
 #tab-stories{
   display: inline-block;
   padding: 0px;
@@ -395,7 +388,7 @@ p>a:hover{
   color: #555;
 }
 .media-body{
-  border-bottom: 1px solid #999;
+  border-bottom: 0px solid #999;
   font-family: 'Varela Round', sans-serif;
 }
 .media-body>a{
@@ -528,6 +521,13 @@ ul{
   border: 2px solid #fff;
   border-radius: 3px; 
   background-color: #fff;
+  opacity: 0.8;
+}
+.img-udghos{
+  position: absolute;
+  margin-left: -150px;
+  opacity: 0.7;
+  margin-top: 20px;
 }
 .navbar-body{
   display: inline-block;
@@ -589,8 +589,12 @@ ul{
   background-color: #555;
 }
 .top-tags{
+  color: #d71010;
   position: relative;
   display: block;
+}
+.top-tags:hover{
+  color: #;
 }
 .post-heading {
   margin-top: 0px;
@@ -920,6 +924,7 @@ div.share> .twitter {
   position: relative;
   color: #000;
   border-right: 3px solid #888;
+  margin-bottom: 25px;
 }
 .font-header{
   font-size: 50px;
