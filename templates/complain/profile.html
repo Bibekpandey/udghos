@@ -48,17 +48,61 @@
                 </div>
               </div>
             </form>
-            <ul id="gly-bell" class="nav navbar-nav navbar-right">
-              <li>
-                <a href='javascript:void()' class='notifications' data-placement="bottom" title="Notifications" >
-                <i class="glyphicon glyphicon-bell"></i>
+            <div class="dropdown">
+                <ul class="gly-bell nav navbar-nav" id="dNotifications" role="button" data-toggle="dropdown">
+                <li><i class="glyphicon glyphicon-bell"></i>
                 {% if notifications %}
                 <div class="notification-count">
                 </div>
                 {% endif %}
-                </a>
-              </li>
-            </ul> 
+              </a>
+              </li></ul>
+              <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dNotifications">
+                <div class="notification-heading"><h5 class="notification-title">Notifications</h5>
+                  <div class="mark-read">
+                    <a class="notification-title pull-right" href="javascript:void()" onclick="mark_read()">Mark as Read</a>
+                  </div>
+                </div>
+                <li class="divider"></li>
+                <div class="notifications-wrapper">
+                  {% if notifications %}
+                  {% else %}
+                  <a class="content" href="#">
+                    <div class="single-notification">
+                    &nbsp; No new notifications
+                    </div>
+                  </a>
+                  {% endif %}
+                  {% for notif in notifications %}
+                  <a class="content" href="/thread/{{notif.thread}}/">
+                    <div class="single-notification">
+                      <div class="stimg-notification">
+                            <img class="img-circle" src="/media/{{notif.by_image}}" width=50 height=50/>
+                      </div>
+                      <p class="notification-title">
+                        {% ifequal notif.type "comment" %}
+                        Comment on your thread by {{notif.by}}
+                        {% endifequal %}
+                        {% ifequal notif.type "support" %}
+                          Support on your thread by {{notif.by}}
+                        {% endifequal %}
+                        {% ifequal notif.type "downvote" %}
+                          Downvote on your thread by {{notif.by}}
+                        {% endifequal %}
+                      </p>
+                      <div class="notification-info">
+                        About
+                      </div>
+                    </div>
+                  </a>
+                  {% endfor %}
+                </div>
+                <!--li class="divider"></li>
+                <div class="notification-footer">
+                  <a href="#" class="notification-title">View all</a>
+                </div-->
+              </ul>
+            </div>
           </ul>
             {% else %}
             
@@ -69,8 +113,6 @@
             {% endif %}        
       </div>
   </nav>
-    </div>
-  </div>
 
   
   <div class="container">

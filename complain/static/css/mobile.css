@@ -15,6 +15,11 @@
   #navcolor{
     height: 70px;
   }
+  .udghos-logo{
+    margin-top: -19px;
+    width: 57px;
+    height: 57px;
+  }
   .img-navbar{
     margin-left: 15px;
     margin-top: 9px;
@@ -34,6 +39,7 @@
     margin-bottom: 10px;
   }
   .container{
+    margin-left: -8px;
     width: 100%;
   }
   .header-column{ 
@@ -51,11 +57,15 @@
   .header-column-last{
     display: none;
   }
-  /*
-  .box-profile{
+  .box-profile,
+  .box-tags{
     display: none;
   }
-  */
+  .btn-post-mobile{
+    font-size: 50px;
+    text-align: center;
+    padding: 1px;
+  }
   .glyphicon{
     margin-top: 5px;
     font-size: 35px;
@@ -70,6 +80,18 @@
   .notification-count{
     margin-top: -40px;
     margin-left: 20px;
+  }
+  
+  /*********POST CONTENT *****************/
+  .stimg{
+    margin-left: 50px;
+  }
+  .img-circle{
+    width: 100px;
+    height: 100px;
+  }
+  .post-title{
+    font-size: 100px;
   }
 
   .nav-tabs{
@@ -117,7 +139,7 @@
     font-size: 20px;
   }
   .display-tag{
-    font-size: 20px;
+    font-size: 25px;
     margin-right: 40px;
   }
   .comment-form{
@@ -193,6 +215,7 @@
   .btn-post-mobile{
     display: block;
   }
+
 }
 
 /*///////////////////////////////////////////////////////////////////////////////*/
