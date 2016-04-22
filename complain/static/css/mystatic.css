@@ -124,7 +124,7 @@ h1,h2,h3,h4{
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
-  border:0px solid #ccc;
+  border:2px solid #ccc;
   border-radius: 3px;
   font-size: 15px;
 }
@@ -261,7 +261,7 @@ p>a:hover{
   padding: 2px;
   position: absolute;
   font-size: 15px;
-  margin-top: -27px;
+  margin-top: -30px;
   margin-left: 12px;
   color: #fff;
   border: #333 2px solid;
@@ -322,6 +322,7 @@ p>a:hover{
   float: right;
   margin-top: -35px;
   margin-right: 15px;
+  margin-bottom: -50px;
 }
 .comment-form{
   background-color: #eee;
@@ -663,6 +664,7 @@ ul{
   color: #fff;
 }
 .glyphicon-bell{
+  margin-top: 5px;
   color: #fff;
 }
 .glyphicon-bell:hover{
@@ -1056,31 +1058,21 @@ div.share> .twitter {
   position: relative;
 }
 
-.popover{
-  width: 250px;
-  border-radius: 0px;
-  padding-top: -5px;
-  font-family: 'Varela Round', sans-serif;
-  box-shadow: 0px 2px 5px 2px #aaa;
-}
-.popover-title{
-  background: #fff;
-  border-radius: 0px;
-  color: #333;
-  font-weight: bold;
-  border: 1px solid #777;
-}
-.notification-body{
-  margin-right: 5px;
-}
+/********NOTIFICATIONS *******/
+.notification-title {
+  color:#ff7788;
+  font-size:1rem;
+  display:inline-block;
+} 
 .arrow{
   color: #aaa;
   border: 1px solid #d71010;
 }
 .single-notification{
-  width: 100%;
-  background: #eee;
-  border-bottom: 1px solid #aaa;
+  padding:10px;
+  margin:5px;
+  background:#ccc;
+  border-radius:1px;
 }
 .single-notification:hover{
   background: #ddd;
@@ -1092,9 +1084,41 @@ div.share> .twitter {
 .notification-text>a:hover{
   color: #d71010; 
 }
-
 .mark-read{
-  margin-top: -35px;
+  margin-top: 7px;
   margin-right: 5px;
   float: right;
 }
+.notifications-wrapper {
+     overflow:auto;
+      max-height:250px;
+} 
+.dropdown{
+    display:inline-block;
+    margin-left:20px;
+    padding:10px;
+}
+.notifications {
+   min-width:420px; 
+}
+.notification-heading, .notification-footer  {
+  padding:2px 10px;
+ }        
+.dropdown-menu.divider {
+  margin:0px;          
+}
+.notification-title { 
+ font-size:1rem;
+ color:#333;
+}
+.notifications a.content {
+ text-decoration:none;
+}
+div.popover.fade.bottom.in{
+  width: 500px;
+  top: 40px;
+}
+
+
+
+
