@@ -31,8 +31,12 @@
   }
   .dropdown-menu>li>a{
     font-size: 50px;
+    width: 100%;
   }
-
+  .dropdown-menu .notifications{
+    width: 700px;
+    margin-left: 100px;
+  }
   .single-notification{
     height: 125px;
   }
@@ -124,9 +128,14 @@
   input#searchquery{
     font-size: 20px;
   }
+  .btn-comment{
+    width: 250px;
+    font-size: 40px;
+    height: 60px;
+  }
 
   .nav-tabs{
-    font-size: 35px;
+    font-size: 30px;
   }
   .box{
     margin-bottom: 25px;
@@ -147,6 +156,21 @@
     font-size: 40px;
     border:none;
   }
+  .comment-user{
+    font-size: 35px;
+  }
+  .comment-date{
+    font-size: 25px;
+  }
+  .comment-text{
+    margin-top: 15px;
+    font-size: 40px;
+  }
+  .form-comment{
+    font-size: 40px;
+    height: 100px;
+  }
+
   .net-vote{
     font-size: 50px;  
     margin: -10px 5px 0px 5px;

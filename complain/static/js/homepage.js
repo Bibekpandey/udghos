@@ -10,19 +10,21 @@ $("#comment-click").click(function(){
 	$("#display-form").show("fast");
 });
 
-
 $('#myModal').on('shown.bs.modal', function () {
   $('#myModal').appendTo("body").modal('show');
   $('#myInput').focus()
   $('#myModal').modal({keyboard: true})
 
 })
+$(document).on("hidden.bs.modal", function (e) {
+    $(e.target).removeData("bs.modal").find(".modal-content").empty();
+});
 
 $('#myModalImage').on('shown.bs.modal', function () {
   $('#myModalImage').appendTo("body").modal('show');
   $('#myInput').focus()
-    $('#myModalImage').modal({keyboard: false})
-
+  $('#myModalImage').modal({keyboard: true})
+  $
 })
 
 $('#textbox').click(function() {

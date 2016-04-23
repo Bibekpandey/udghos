@@ -127,7 +127,8 @@ function appendComment(elem, commentobj) {
 function images_html(images) {
     var html = '';
     for(var x=0;x<images.length;x++) {
-                html+='<a href="#myModalImage"><img src="/media/'+images[x]+'" height="50%" width="50%" data-toggle="modal" data-target="#myModalImage" data-keyboard="true"></img></a><br>' +
+                html+=
+                '<a href="#myModalImage"><img src="/media/'+images[x]+'" height="50%" width="50%" data-toggle="modal" data-target="#myModalImage" data-keyboard="true"></img></a><br>' +
                 '<div class="modal fade" id="myModalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
                   '<div class="modal-dialog modal-custom" role="document">'+
                     '<div class="modal-content">'+
@@ -136,7 +137,7 @@ function images_html(images) {
                       '</div>'+
                       '<div class="row">'+
                         '<div class="col-md-8">'+
-                          '<img class="post-image" src="/media/'+images[x]+'"></img>'+
+                          '<img class="post-image" id="img-post" src="/media/'+images[x]+'"></img>'+
                         '</div>'+
                         
                         '</div>'+
@@ -299,8 +300,8 @@ function generate_thread(threadobj, auth) {
                 '<div class="post-content">'+
                  threadobj.content+
                 '</div><br>'+
-           images_html(threadobj.images)+
-        '<div class="sttime">'+
+                    images_html(threadobj.images)+
+                '<div class="sttime">'+
                 '</div>'+
                 '<div class="row">'+
                   '<div class="display-tag">'+

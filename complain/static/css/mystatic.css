@@ -14,6 +14,9 @@ h1,h2,h3,h4{
   border: 0px solid #000;
 
 }
+img:hover{
+  opacity: 0.9;
+}
 .topic{
   text-align: center;
 }
@@ -633,6 +636,10 @@ ul.dropdown-settings{
   margin-left: 10px;
   margin-bottom: 0px;
 }
+.img-post{
+  width: 200px;
+  height: 300px;
+}
 .post-option{
   float: right;
 }
@@ -1141,6 +1148,5 @@ div.share> .twitter {
   right: 40px;
 }
 
-
-
+/****************  IMAGE*************/
 
