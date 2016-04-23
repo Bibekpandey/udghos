@@ -16,9 +16,6 @@ $('#myModal').on('shown.bs.modal', function () {
   $('#myModal').modal({keyboard: true})
 
 })
-$(document).on("hidden.bs.modal", function (e) {
-    $(e.target).removeData("bs.modal").find(".modal-content").empty();
-});
 
 $('#myModalImage').on('shown.bs.modal', function () {
   $('#myModalImage').appendTo("body").modal('show');
