@@ -55,3 +55,11 @@ $("#close-tag").click(function(){
         $("#remove-tag").remove();
 });
 
+$(document).keyup(function(e) { 
+    if (e.keyCode == 27) { 
+        $('#warning-box').empty();
+    $('#warning-box').hide();
+    $('#mask').css({"z-index":1});
+    $('#mask').hide();
+    } 
+});

@@ -13,28 +13,44 @@
     margin-right: 45px;
   }
   #navcolor{
-    height: 70px;
+    height: 100px;
   }
   .udghos-logo{
     margin-top: -19px;
-    width: 57px;
-    height: 57px;
+    width: 90px;
+    height: 90px;
   }
   .img-navbar{
     margin-left: 15px;
     margin-top: 9px;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
+  }
+  .dropdown{
+    margin-top: 5px;
+  }
+  .dropdown-menu>li>a{
+    font-size: 50px;
+  }
+
+  .single-notification{
+    height: 125px;
   }
   .form-control-navbar{
     margin-top: 5px;
-    height: 45px;
+    height: 75px;
+  }
+  .input.form-control{
+    font-size: 50px;
   }
   .form-control-footer{
     width: 100%;
   }
-
+  .box{
+    font-size: 25px !important;
+  }
   .box-header {
+    margin-top: 30px;
     width: 100%;
     margin-bottom: 10px;
   }
@@ -68,7 +84,7 @@
   }
   .glyphicon{
     margin-top: 5px;
-    font-size: 35px;
+    font-size: 70px;
   }
   .glyphicon-remove{
     position: relative;
@@ -78,8 +94,10 @@
     font-size: 20px;
   }
   .notification-count{
-    margin-top: -40px;
-    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+    margin-top: -85px;
+    margin-left: 40px;
   }
   
   /*********POST CONTENT *****************/
@@ -91,11 +109,27 @@
     height: 100px;
   }
   .post-title{
-    font-size: 100px;
+    font-size: 50px;
+  }
+  .post-content{
+    margin-top: 3px;
+    font-size: 40px;
+  }
+  .post-body>span{
+    font-size: 25px;
+  }
+  .heading-property{
+    font-size: 30px;
+  }
+  input#searchquery{
+    font-size: 20px;
   }
 
   .nav-tabs{
-    font-size: 25px;
+    font-size: 35px;
+  }
+  .box{
+    margin-bottom: 25px;
   }
   .box-tabs{
     margin-bottom: 50px;
@@ -110,54 +144,50 @@
   }
   .comment-section{
     margin-right: 150px;
-    font-size: 25px;
+    font-size: 40px;
     border:none;
   }
   .net-vote{
-    font-size: 25px;  
-    margin-top: -10px;
+    font-size: 50px;  
+    margin: -10px 5px 0px 5px;
   }
   .comment-textsize{
     margin-top: -15px;
-    font-size: 25px;
-  }
-  .glyphicon-thumbs-up,
-  .glyphicon-thumbs-down{
-    font-size: 35px;
-    margin: 0px 5px 0px 5px;
+    font-size: 45px;
   }
   .glyphicon-comment{
-    font-size: 40px;
+    font-size: 50px;
     margin-top: -5px 5px 0px 5px;
   }
   .glyphicon-footer{
     margin-top: 1px;
-    font-size: 20px;
+    font-size: 35px;
     color: #555;
   }
   .tagname{
-    font-size: 20px;
+    margin-top: -25px;
+    margin-left: 10px;
+    font-size: 40px;
   }
   .display-tag{
-    font-size: 25px;
     margin-right: 40px;
   }
   .comment-form{
-    margin-top: 30px;
+    margin-top: 40px;
   }
   div.share button{
-    height: 40px;
+    height: 80px;
     margin-bottom: 20px;
-    width: 40px;
+    width: 80px;
   }
   div.share > .facebook{
     margin-right: 20px;
-    margin-top: -45px;
-    background-size: 40px 40px;
+    margin-top: -70px;
+    background-size: 80px 80px;
   }
   div.share > .twitter{
-    margin-top: -45px;
-    background-size: 40px 40px;
+    margin-top: -70px;
+    background-size: 80px 80px;
   }
   
   /*footer*/
@@ -180,12 +210,17 @@
     color: #fff;
   }
   .nav-unauth>li>a{
-    font-size: 30px;
+    font-size: 50px;
   }
-
   .icons-ld{
     margin: -10px 0px 0px 10px;
     width: 100%;
+    font-size: 50px;
+  }
+  .background-icons{
+    margin-top: -20px;
+    padding: 5px;
+    background-color: #eee;
   }
   .report-post{
     margin-top: 0px;
@@ -199,15 +234,6 @@
     width: 100%;
     border-bottom: 2px solid #fff;
   }
-
-  .post-title{
-    font-size: 27px;
-  }
-  .post-content{
-    margin-top: 3px;
-    font-size: 25px;
-  }
-
   /*/////////////////Modal////////////////*/
   .btn-post-desktop{
     display: none;
