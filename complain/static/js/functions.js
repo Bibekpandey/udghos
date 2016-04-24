@@ -329,8 +329,8 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
               '</div>'+
               '<div class="share">'+
-                '<button class="facebook shadow" onclick="return fbs_click()" target="_blank"></button>'+
-                '<button class="twitter shadow" onclick="return twt_click()"></button>'+
+                '<button class="facebook shadow" onclick="return fbs_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')" target="_blank"></button>'+
+                '<button class="twitter shadow" onclick="return twt_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')"></button>'+
               '</div>'+
             '</div>'+
           '</div>'+
@@ -383,3 +383,17 @@ function mark_read() {
         }
     });
 }
+
+// TWITTER AND FACEBOOK SHARE
+function fbs_click(u, t) {
+      u = 'www.udghos.com'+u;
+      window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');
+      return false;
+}
+
+  function twt_click(u, t) {
+      u = 'www.udghos.com'+u;
+      window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(u), 'sharer', 'toolbar=0,status=0,width=626,height=346');
+      return false;
+    }
+

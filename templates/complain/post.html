@@ -20,30 +20,6 @@
 
 	<body>
 
-<script>
-  function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
-
-  function twt_click() {u=location.href;t=document.title;window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(u), 'sharer', 'toolbar=0,status=0,width=626,height=346');return false;}
-
-/*
-window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
- 
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
- 
-  return t;
-}(document, "script", "twitter-wjs"));
-*/
-  </script>
 <style>
   body {
     padding:0;
@@ -150,55 +126,6 @@ window.twttr = (function(d, s, id) {
             {% endif %}        
       </div>
   </nav>
-
-<!--div class="dropdown">
-  <a id="dNotifications" role="button" data-placement="bottom" data-toggle="dropdown">
-    <br><br><br>haha<i class="glyphicon glyphicon-bell" color="red"></i>
-  </a>
-  <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dNotifications">
-    <div class="notification-heading"><h5 class="notification-title">Notifications</h5>
-      <div class="mark-read">
-        <a class="notification-title pull-right" href="javascript:void()" onclick="mark_read()">Mark as Read</a>
-      </div>
-    </div>
-    <li class="divider"></li>
-    <div class="notifications-wrapper">
-      {% if notifications %}
-      {% else %}
-      <a class="content" href="#">
-        <div class="single-notification">
-        &nbsp; No new notifications
-        </div>
-      </a>
-      {% endif %}
-      {% for notif in notifications %}
-      <a class="content" href="/thread/{{notif.thread}}/">
-        <div class="single-notification">
-          <div class="stimg-notification">
-                <img class="img-circle" src="/media/{{notif.by_image}}" width=50 height=50/>
-          </div>
-          <p class="notification-title">
-            {% ifequal notif.type "comment" %}
-            Comment on your thread by {{notif.by}}
-            {% endifequal %}
-            {% ifequal notif.type "support" %}
-              Support on your thread by {{notif.by}}
-            {% endifequal %}
-            {% ifequal notif.type "downvote" %}
-              Downvote on your thread by {{notif.by}}
-            {% endifequal %}
-          </p>
-          <div class="notification-info">
-            About
-          </div>
-        </div>
-      </a>
-      {% endfor %}
-    </div>
-    <li class="divider"></li>
-    <div class="notification-footer"><h4 class="notification-title">View all</h4></div>
-  </ul>
-</div-->
 
   	<div class="container" id="content-top">
   		<div class="row">
