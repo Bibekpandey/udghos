@@ -10,7 +10,6 @@ $("#comment-click").click(function(){
 	$("#display-form").show("fast");
 });
 
-
 $('#myModal').on('shown.bs.modal', function () {
   $('#myModal').appendTo("body").modal('show');
   $('#myInput').focus()
@@ -21,8 +20,8 @@ $('#myModal').on('shown.bs.modal', function () {
 $('#myModalImage').on('shown.bs.modal', function () {
   $('#myModalImage').appendTo("body").modal('show');
   $('#myInput').focus()
-    $('#myModalImage').modal({keyboard: false})
-
+  $('#myModalImage').modal({keyboard: true})
+  $
 })
 
 $('#textbox').click(function() {
@@ -55,3 +54,11 @@ $("#close-tag").click(function(){
         $("#remove-tag").remove();
 });
 
+$(document).keyup(function(e) { 
+    if (e.keyCode == 27) { 
+        $('#warning-box').empty();
+    $('#warning-box').hide();
+    $('#mask').css({"z-index":1});
+    $('#mask').hide();
+    } 
+});

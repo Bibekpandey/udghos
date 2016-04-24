@@ -14,3 +14,6 @@ img/
 *.sqlite3
 settings.py
 udghos.sqlite3
+*.ico
+*.png
+*.jpg

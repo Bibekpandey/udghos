@@ -10,11 +10,3 @@ $('#btnToggle').click(function(){
     $(this).addClass('on');
   }
 });
-
-$("#st-body").hover(function(){
-    $( "#post-icon-top" ).show("fast");
-
-    }, function(){
-	$( "#post-icon-top" ).hide("fast");
-});
-});
