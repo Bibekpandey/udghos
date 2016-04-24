@@ -40,4 +40,5 @@ urlpatterns =  [
         url(r'^image-update/', image_update, name='image_update'),
         url(r'^post-concern/', Concern.as_view(), name='concern'),
 
+
 ]

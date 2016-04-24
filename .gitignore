@@ -15,3 +15,6 @@ img/
 settings.py
 udghos.sqlite3
 webhook.py
+*.ico
+*.png
+*.jpg

@@ -261,6 +261,7 @@ def vote_thread(request, thread_id, account, action): # action is 1 for upvote a
 
     useraction = ""
 
+    event = None
     if n_ups==1 and action==1:
         useraction='undo'
         upvotes[0].delete()
@@ -289,7 +290,7 @@ def vote_thread(request, thread_id, account, action): # action is 1 for upvote a
     thread.votes+=delta_vote
     thread.save()
     acc = Account.objects.get(user=request.user)
-    if acc != thread.account:
+    if acc != thread.account and event!=None:
         notif = Notification.objects.create(fromuser=acc,
                 touser=thread.account, thread=thread, event=event)
         notif.save()
@@ -727,6 +728,7 @@ def verify(request, code):
             return HttpResponse('Invalid code. Go to <a href="/">Home</a>')
         acc = accs[0]
         if acc.verified:
+            acc.user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, acc.user)
             return HttpResponse('Already Verified. Go to <a href="/">Home</a>')
         acc.verified = True
@@ -752,3 +754,6 @@ def generate_code(n=10):
         s+= keys[random.randrange(0,l)]
     return s
 
+
+def stay_tuned(request):
+    return render(request, 'complain/stay-tuned.html', {}) 

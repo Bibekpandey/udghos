@@ -29,6 +29,7 @@ function vote(elem, id, vote_type, item) // elem is the container of text for su
                 type:vote_type,
                 vote_item:item
             }, function(data, stat) { 
+                alert(JSON.stringify(data));
                 inc = data.increment;
                 var votes = parseInt($("#vote_"+item+"_"+id).text());
                 votes+=inc;
@@ -127,7 +128,8 @@ function appendComment(elem, commentobj) {
 function images_html(images) {
     var html = '';
     for(var x=0;x<images.length;x++) {
-                html+='<a href="#myModalImage"><img src="/media/'+images[x]+'" height="50%" width="50%" data-toggle="modal" data-target="#myModalImage" data-keyboard="true"></img></a><br>' +
+                html+=
+                '<a class="img-post" href="#myModalImage"><img src="/media/'+images[x]+'" height="50%" width="50%" data-toggle="modal" data-target="#myModalImage" data-keyboard="true"></img></a>' +
                 '<div class="modal fade" id="myModalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
                   '<div class="modal-dialog modal-custom" role="document">'+
                     '<div class="modal-content">'+
@@ -135,7 +137,7 @@ function images_html(images) {
                         '<button type="button" class="close my-close close-image" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
                       '</div>'+
                       '<div class="row">'+
-                        '<div class="col-md-8">'+
+                        '<div class="col-md-6">'+
                           '<img class="post-image" src="/media/'+images[x]+'"></img>'+
                         '</div>'+
                         
@@ -183,8 +185,9 @@ function showDeleteWarning(threadid) {
         h = 200; 
     var left = Math.round(x/2-w/2);
     // create the dialog box
-    var html = '<div class="modal-header my-color modal-edit">'+
-                '<button onclick="removeWarning()" type="button" class="close my-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+    var html =  '<div class="modal-delete">'+
+                '<div class="modal-header my-color modal-edit">'+
+                '<button onclick="removeWarning()" type="button" class="close my-close" data-dismiss="modal" data-keyboard="true" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
                 '<h4 class="modal-title my-modal-title" id="myModalLabel">Warning</h4><br>'+
             '</div>'+
             '<div class="warning-text">'+
@@ -194,6 +197,7 @@ function showDeleteWarning(threadid) {
             '<div class="modal-footer">'+
                 '<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Ok</button>'+
                 '<button class="btn btn-default" type="button" onclick="removeWarning()">Cancel</button>'+
+            '</div>'+
             '</div>';
     var box = $('<div>').attr('class','warning-box')
                 .html(html);
@@ -224,7 +228,7 @@ function editPost(threadid) {
         h = 500; 
     var left = Math.round(x/2-w/2);
     // create the dialog box
-    var html = 
+    var html = '<div class="modal-delete">'+
             '<div class="modal-header my-color modal-edit">'+
                 '<button onclick="removeWarning()" type="button" class="close my-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
                 '<h4 class="modal-title my-modal-title" id="myModalLabel">Edit Your View</h4><br>'+
@@ -246,6 +250,7 @@ function editPost(threadid) {
             '<div class="modal-footer">'+
                 '<button class="btn btn-my" type="button" onclick="updateThread('+threadid+')">Ok</button>'+
                 '<button class="btn btn-default" type="button" onclick="removeWarning()">Cancel</button>'+
+            '</div>'+
             '</div>';
     var box = $('<div>').attr('class','warning-box')
                 .html(html);
@@ -272,9 +277,10 @@ function generate_thread(threadobj, auth) {
                     '<img class="img-circle" src="/media/'+threadobj.user.image+'" width=50 height=50/>'+
                 '</div>'+
                 '<div class="post-option">'+
-                    (threadobj.can_edit?'<a href="javascript:void()" onclick="editPost('+threadobj.id+')">'+
-                    '<span class="glyphicon glyphicon-edit"></span>'+
-                    '</a>'+
+                    (threadobj.can_edit?
+                    //'<a href="javascript:void()" onclick="editPost('+threadobj.id+')">'+
+                    //'<span class="glyphicon glyphicon-edit"></span>'+
+                    //'</a>'+
                     '<a href="javascript:void()" onclick="showDeleteWarning('+threadobj.id+')">'+
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
@@ -295,8 +301,8 @@ function generate_thread(threadobj, auth) {
                 '<div class="post-content">'+
                  threadobj.content+
                 '</div><br>'+
-           images_html(threadobj.images)+
-        '<div class="sttime">'+
+                    images_html(threadobj.images)+
+                '<div class="sttime">'+
                 '</div>'+
                 '<div class="row">'+
                   '<div class="display-tag">'+
@@ -309,7 +315,7 @@ function generate_thread(threadobj, auth) {
                 '</div>'+
             '</div>'+
           '</div>'+
-          '<div class="row">'+
+          '<div class="row background-icons">'+
           '<div class="box-icons">'+
             '<div class="icons-ld">'+
                     '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote(this, '+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
@@ -328,8 +334,8 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
               '</div>'+
               '<div class="share">'+
-                '<button class="facebook shadow" onclick="return fbs_click()" target="_blank"></button>'+
-                '<button class="twitter shadow" onclick="return twt_click()"></button>'+
+                '<button class="facebook shadow" onclick="return fbs_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')" target="_blank"></button>'+
+                '<button class="twitter shadow" onclick="return twt_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')"></button>'+
               '</div>'+
             '</div>'+
           '</div>'+
@@ -382,3 +388,17 @@ function mark_read() {
         }
     });
 }
+
+// TWITTER AND FACEBOOK SHARE
+function fbs_click(u, t) {
+      u = 'www.udghos.com'+u;
+      window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');
+      return false;
+}
+
+  function twt_click(u, t) {
+      u = 'www.udghos.com'+u;
+      window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(u), 'sharer', 'toolbar=0,status=0,width=626,height=346');
+      return false;
+    }
+

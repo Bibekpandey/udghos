@@ -7,7 +7,7 @@
   <title>Udghos</title>
 
 <link rel='shortcut icon' href='/static/img/udghos.ico' type='image/x-icon'/ >  
-<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
 
   <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
@@ -65,16 +65,13 @@
 </head>
 
 <body>
-<script>
-  function fbs_click() {u="www.udghos.com/haha";t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
-  </script>
 <div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
   <div id="mask" style="position:absolute;display:none"></div>
 
   <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
-          <a id="navhead" class="navbar-brand" href="/">
+          <a id="navhead" class="navbar-brand" href="/complain/login/">
             <img class="udghos-logo" src="/static/img/Udghos-logo.png" width="30" height="30">
           </a>
         </div>
@@ -84,7 +81,7 @@
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
-              <ul class="dropdown-menu" role="menu">
+              <ul class="dropdown-menu dropdown-settings" role="menu">
                 <li><a href="{% url 'profile' user.id %}">Profile</a></li>
                 <li><a href="#">Settings</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -98,13 +95,12 @@
               </div>
             </form>
             <div class="dropdown">
-                <ul class="gly-bell nav navbar-nav" id="dNotifications" role="button" data-toggle="dropdown">
+                <ul class="gly-bell nav navbar-nav dropdown-toggle" id="dNotifications" role="button" data-toggle="dropdown">
                 <li><i class="glyphicon glyphicon-bell"></i>
                 {% if notifications %}
                 <div class="notification-count">
                 </div>
                 {% endif %}
-              </a>
               </li></ul>
               <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dNotifications">
                 <div class="notification-heading"><h5 class="notification-title">Notifications</h5>
@@ -112,7 +108,6 @@
                     <a class="notification-title pull-right" href="javascript:void()" onclick="mark_read()">Mark as Read</a>
                   </div>
                 </div>
-                <li class="divider"></li>
                 <div class="notifications-wrapper">
                   {% if notifications %}
                   {% else %}
@@ -138,17 +133,17 @@
                         {% ifequal notif.type "downvote" %}
                           Downvote on your thread by {{notif.by}}
                         {% endifequal %}
-                      </p>
-                      <div class="notification-info">
+                        <div class="notification-info">
                         About
                       </div>
+                      </p>
                     </div>
                   </a>
                   {% endfor %}
                 </div>
                 <!--li class="divider"></li>
                 <div class="notification-footer">
-                  <a href="#" class="notification-title">View all</a>
+                  <a href="/notifications/" class="notification-title">View all</a>
                 </div-->
               </ul>
             </div>
@@ -156,7 +151,6 @@
             {% else %}
             
             <ul class="nav navhead-nav nav-unauth">
-              <li class="icon-login"><a href="/complain/login" id="click-signup">LogIn/Sign Up</a></li>
               <li class="icon-login"><a href="/about/">About</a></li>
             </ul> 
             {% endif %}        
@@ -176,14 +170,29 @@
           <div class="col-md-6 text-center header-column">
             <h1>Let's make a change</h1>
             <h3>Post your Complain/Views</h3>
+            {% if authenticated %}
             <button type="button" class="btn btn-my btn-large btn-post-desktop" data-toggle="modal" data-target="#myModal" data-keyboard="true">
               Post a Concern
             </button>
+            {% else %}
+            <a href="/complain/login/">
+              <button type="button" class="btn btn-my btn-large btn-post-desktop">
+              Login/Sign Up
+            </button>
+            {% endif %}
+            {% if authenticated %}
             <a href="/complain/post-concern/">
               <button type="button" class="btn btn-my btn-large btn-post-mobile" >
                 Post a Concern
               </button>
             </a>
+            {% else %}
+            <a href="/complain/post-concern/">
+              <button type="button" class="btn btn-my btn-large btn-post-mobile" >
+                Login/Sign Up
+              </button>
+            </a>
+            {% endif %}            
           </div>
 
           </div>
