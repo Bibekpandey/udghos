@@ -754,3 +754,6 @@ def generate_code(n=10):
         s+= keys[random.randrange(0,l)]
     return s
 
+
+def stay_tuned(request):
+    return render(request, 'complain/stay-tuned.html', {}) 
