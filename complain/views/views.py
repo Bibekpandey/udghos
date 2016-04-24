@@ -261,6 +261,7 @@ def vote_thread(request, thread_id, account, action): # action is 1 for upvote a
 
     useraction = ""
 
+    event = None
     if n_ups==1 and action==1:
         useraction='undo'
         upvotes[0].delete()
@@ -289,7 +290,7 @@ def vote_thread(request, thread_id, account, action): # action is 1 for upvote a
     thread.votes+=delta_vote
     thread.save()
     acc = Account.objects.get(user=request.user)
-    if acc != thread.account:
+    if acc != thread.account and event!=None:
         notif = Notification.objects.create(fromuser=acc,
                 touser=thread.account, thread=thread, event=event)
         notif.save()
