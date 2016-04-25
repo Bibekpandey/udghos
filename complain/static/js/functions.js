@@ -1,4 +1,12 @@
 $(document).ready(function(){
+    $(document.body).on('mouseover','.a-support', function() {
+        popMessage(this.parentElement, $(this).attr('data-total') + " Supports");
+    });
+    $(document.body).on('mouseover','.a-downvote', function() {
+        popMessage(this.parentElement, $(this).attr('data-total') + " Downvotes");
+    });
+
+
   $('.notifications').popover({ 
     html : true,
     content: function() {
@@ -35,8 +43,19 @@ function vote(elem, id, vote_type, item) // elem is the container of text for su
                 $("#vote_"+item+"_"+id.toString()).text(votes.toString());
 
                 var txt = elem.children[0].innerHTML;
-
                 var parentelem = elem.parentElement;
+                
+                // elem is an A element, find next a
+                var next_a;
+                $(parentelem).find('a').each(function(i, e) {
+                    if(e!=elem && e.innerHTML!="Report") {
+                        next_a = e;
+                        return;
+                    }
+                });
+                var elem_val = parseInt($(elem).attr('data-total'));
+                var next_a_val = parseInt($(next_a).attr('data-total'));
+
                 var childs = parentelem.children;
                 var next_elem;
                 $(parentelem).find('.vote-status').each(function(i, e) {
@@ -52,9 +71,16 @@ function vote(elem, id, vote_type, item) // elem is the container of text for su
                     else {
                         elem.children[0].innerHTML="Downvote";
                     }
+                    $(elem).attr('data-total', (elem_val-1).toString());
                     elem.children[0].className="vote-status";
                 }
                 else {
+                    if(Math.abs(inc)==2){
+                        $(elem).attr('data-total', (elem_val+1).toString());
+                        $(next_a).attr('data-total', (next_a_val-1).toString());
+                    }
+                    else $(elem).attr('data-total', (elem_val+1).toString());
+
                     elem.children[0].className="text-bold vote-status";
                     if(txt=="Support") {
                         elem.children[0].innerHTML="Supported";
@@ -280,7 +306,7 @@ function generate_thread(threadobj, auth) {
                     //'<a href="javascript:void()" onclick="editPost('+threadobj.id+')">'+
                     //'<span class="glyphicon glyphicon-edit"></span>'+
                     //'</a>'+
-                    '<a href="javascript:void()" onclick="showDeleteWarning('+threadobj.id+')">'+
+                    '<a href="javascript:void(0)" onclick="showDeleteWarning('+threadobj.id+')">'+
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
                     ) +
@@ -317,18 +343,18 @@ function generate_thread(threadobj, auth) {
           '<div class="row background-icons">'+
           '<div class="box-icons">'+
             '<div class="icons-ld">'+
-                    '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote(this, '+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
+                    '<a data-total="'+threadobj.supports+'" class="a-support" id="action-element" href="javascript:void(0)" onclick="'+ (auth==true?'vote(this, '+threadobj.id+', \'upvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
                       '<span class="vote-status '+(up?'text-bold':'')+'" aria-hidden="true">Support'+(up?'ed':'')+'</span>'+
                     '</a>'+
                     '<span class="net-vote" data-toggle="tooltip" data-placement="right" id="vote_thread_'+threadobj.id+'">'+threadobj.votes+'</span>'+
-                    '<a id="action-element" href="javascript:void()" onclick="'+ (auth==true?'vote(this, '+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
+                    '<a class="a-downvote" data-total="'+threadobj.downvotes+'" id="action-element" href="javascript:void(0)" onclick="'+ (auth==true?'vote(this, '+threadobj.id+', \'downvote\', \'thread\')':'popMessage(this, \'You must be logged in!! \')')+'">'+
                       '<span class="vote-status '+(down?'text-bold':'')+'" aria-hidden="true">Downvote'+(down?'d':'')+'</span>'+
                     '</a>'+
                     '<a href="#" class="report-post">Report</a>'+
               '</div>'+
               '<div class="post-action">'+
                 '<div class="comment-section">'+
-                '<a href="javascript:void()" onclick="toggleComments('+threadobj.id+')">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'+
+                '<a href="javascript:void(0)" onclick="toggleComments('+threadobj.id+')">&nbsp;<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>'+
                   '<span class="comment-textsize" id="num-comments'+threadobj.id+'">'+threadobj.num_comments+'</span><span class="comment-textsize" id="comment-text'+threadobj.id+'"> Comment'+(threadobj.num_comments!=1?'s':'')+'</span>'+
                 '</a>'+
               '</div>'+
@@ -358,16 +384,19 @@ function add_item(threadobj, divParentId, authenticated) {
 function popMessage(elem, msg) {
     var child = elem.childNodes[0];
     var newdiv = document.createElement('div');
+    newdiv.innerHTML = msg;
+    newdiv.setAttribute("class", "popup-message");
+    /*
     newdiv.style.position="absolute";
     newdiv.style.color="#e33";
     newdiv.style.padding="1px";
     newdiv.style.fontSize="0.9em";
     newdiv.style.width="175px";
     newdiv.style.zIndex="100";
-    newdiv.innerHTML = msg;
     newdiv.style.backgroundColor="#333";
     newdiv.style.border="solid 2px #555";
     newdiv.style.borderRadius="3px";
+    */
     child.appendChild(newdiv);
     setTimeout(function() { $(newdiv).delay(500).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 900);
     //$(newdiv).hide().delay(1000).fadeOut();
