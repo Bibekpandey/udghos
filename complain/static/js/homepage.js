@@ -62,3 +62,15 @@ $(document).keyup(function(e) {
     $('#mask').hide();
     } 
 });
+
+$('img').each(function() {
+
+$(this)[0].oncontextmenu = function() {
+
+alert('We're sorry. Right-Click is not available');
+
+return false;
+
+};
+
+});

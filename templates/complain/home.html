@@ -72,7 +72,7 @@
       <div class="container">
         <div class="navbar-header">
           <a id="navhead" class="navbar-brand" href="/complain/login/">
-            <img class="udghos-logo" src="/static/img/Udghos-logo.png" width="30" height="30">
+            <img class="udghos-logo" src="/static/img/navbarlogo.png" width="30" height="30">
           </a>
         </div>
         
@@ -177,8 +177,9 @@
             {% else %}
             <a href="/complain/login/">
               <button type="button" class="btn btn-my btn-large btn-post-desktop">
-              Login/Sign Up
-            </button>
+                Login/Sign Up
+              </button>
+            </a>
             {% endif %}
             {% if authenticated %}
             <a href="/complain/post-concern/">
@@ -299,8 +300,10 @@
       <div class="col-md-8">
         <div id="tab-stories">
           <div class="box-tabs">
-
             <div id="error" class="text-center text-danger" style="float:left"> </div>
+            <!--button type="button" class="btn btn-my btn-large btn-post-desktop" data-toggle="modal" data-target="#myModal" data-keyboard="true">
+              Post a Concern
+            </button-->
             <ul class="nav nav-tabs" id="navblock" >
               <li class="active"><a data-toggle="tab" href="javascript:void()" onclick="g_lastId=undefined;showRecent()">Recent</a></li>
               <li><a data-toggle="tab" href="javascript:void()" onclick="g_lastId=undefined;showTop()">Top</a></li>
@@ -344,6 +347,7 @@
     </div>      
   </div>
 
+<div id="wrapper">
   <div class="box-footer">
     <div class="container" > 
       <footer>
@@ -376,7 +380,7 @@
         </div>
       </footer>
     </div>
-  </div>
+  </div></div>
 
   </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
