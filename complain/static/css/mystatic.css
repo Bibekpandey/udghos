@@ -96,7 +96,7 @@ img:hover{
 .box-tabs{
   margin-top: 15px;
   margin-bottom:30px;
-  margin-left: -2px;
+  margin-left: 10px;
   padding: 2px;
   min-height: 20px;   
 }
@@ -146,13 +146,18 @@ img:hover{
   background: #333;
   margin-bottom: 0px;
   color: #fff;
-  margin-top: 250px;
 }
 .footer-body{
   margin: 10px 10px 0px 10px;
 }
 .form-control-footer{
   width: 50%;
+}
+#wrapper {
+    height:100%;
+    margin:0 auto;
+    min-height:100%;
+    padding-bottom:-500px;
 }
 
 p>a{
@@ -249,9 +254,8 @@ p>a:hover{
 }
 #navcolor {
   background-color: #333;
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #000;
 }
-
 
 #gly-bell{
     position: relative;
@@ -517,18 +521,19 @@ ul{
   font-size: 25px;
   display: inline-block;
   position: relative;
-  background: fff;
   margin-top: -2px;
 }
 .udghos-logo{
-  width: 35px;
-  height: 35px;
-  margin-top: -5px;
+  width: 50px;
+  height: 50px;
+  margin-top: -15px;
   margin-left: -10px;
-  border: 2px solid #fff;
   border-radius: 3px; 
-  background-color: #fff;
-  opacity: 0.8;
+  z-index: 1000;
+  overflow: hidden;
+}
+.udghos-logo:hover{
+  opacity: 0.9;
 }
 .img-udghos{
   position: absolute;
