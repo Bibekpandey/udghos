@@ -150,12 +150,12 @@ function appendComment(elem, commentobj) {
     elem.append(temp.innerHTML);
 }
 
-function images_html(images) {
+function images_html(images, threadid) {
     var html = '';
     for(var x=0;x<images.length;x++) {
                 html+=
-                '<a class="img-post" href="#myModalImage"><img src="/media/'+images[x]+'" height="50%" width="50%" data-toggle="modal" data-target="#myModalImage" data-keyboard="true"></img></a>' +
-                '<div class="modal fade" id="myModalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
+                '<a class="img-post" href="javascript:void(0)"><img src="/media/'+images[x]+'" height="50%" width="50%" data-toggle="modal" data-target="#myModalImage'+x.toString()+threadid.toString()+'" data-keyboard="true"></img></a>' +
+                '<div class="modal fade" id="myModalImage'+x.toString()+threadid.toString()+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
                   '<div class="modal-dialog modal-custom" role="document">'+
                     '<div class="modal-content">'+
                       '<div class="modal-post">'+
@@ -326,7 +326,7 @@ function generate_thread(threadobj, auth) {
                 '<div class="post-content">'+
                  threadobj.content+
                 '</div><br>'+
-                    images_html(threadobj.images)+
+                    images_html(threadobj.images, threadobj.id)+
                 '<div class="sttime">'+
                 '</div>'+
                 '<div class="row">'+
