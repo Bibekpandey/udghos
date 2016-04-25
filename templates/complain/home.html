@@ -267,13 +267,11 @@
                           <label for="recipient-name" class="control-label">Do you have anything to share to Udghos. Feel free to Share your Opinion.</label>
                           <input type="text" class="form-control" id="recipient-name" placeholder="Title relevant to your description">
                       </div>
-                      <form method="post" id="opinion-form" action="{% url 'post' %}" onsubmit="return false;return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
+                      <form method="post" id="opinion-form" action="{% url 'review' %}" class="form-horizontal" role="form" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
-                          <label for="recipient-name" class="control-label">Opinion*</label>
-                          <textarea name="content-udghos" class="form-control" placeholder="Describe your views on Udghos"></textarea>
-                          
+                          <label for="recipient-name" class="control-label">Your Suggestions/Feedbacks/Opinions*</label>
+                          <textarea name="review-content" class="form-control" placeholder="Describe your views on Udghos"></textarea>
                           <div class="form">
                             
                           </div>

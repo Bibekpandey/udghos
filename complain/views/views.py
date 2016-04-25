@@ -755,5 +755,18 @@ def generate_code(n=10):
     return s
 
 
+def post_review(request):
+    if request.method=="POST":
+        if request.user.is_authenticated():
+            acc = Account.objects.get(user=request.user)
+        else:acc = None
+
+        title = request.POST.get('title','').strip()
+        content = request.POST.get('review-content', '').strip()
+        if content!='':
+            review = Review(title=title, content=content, account=acc)
+            review.save()
+        return render(request, "complain/common.html", {"message":"Thank you so much for your reveiw!!"})
+
 def stay_tuned(request):
-    return render(request, 'complain/stay-tuned.html', {}) 
+    return render(request, 'complain/common.html', {"message":"We are Almost Done. STAY TUNED!!"}) 

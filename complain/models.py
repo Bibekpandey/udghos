@@ -119,3 +119,11 @@ class Notification(models.Model):
     thread = models.ForeignKey('Thread', null=True)
     read = models.BooleanField(default=False)
 
+class Review(models.Model):
+    account = models.ForeignKey('Account', blank=True, null=True)
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.date)
