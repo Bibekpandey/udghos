@@ -17,10 +17,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from complain.views.views import stay_tuned
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('complain.urls')),
+    url(r'^$', stay_tuned, name='stay-tuned'),
+    #url(r'^', include('complain.urls')),
     url(r'^complain/', include('complain.urls')),
     
     #url(r'', include('social_auth.urls')),
