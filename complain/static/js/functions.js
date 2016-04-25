@@ -398,6 +398,7 @@ function fbs_click(u, t) {
 
   function twt_click(u, t) {
       u = 'www.udghos.com'+u;
+	t = t + ' '+ url;
       window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(u), 'sharer', 'toolbar=0,status=0,width=626,height=346');
       return false;
     }

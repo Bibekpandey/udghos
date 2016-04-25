@@ -950,11 +950,11 @@ div.share> .twitter {
 .header-column{
   position: relative;
   color: #000;
-  border-right: 3px solid #888;
+  border-right: 0px solid #888;
   margin-bottom: 25px;
 }
 .header-column-first{
-  border-right: 3px solid #888;
+  border-right: 0px solid #888;
   height: 190px;
 }
 .font-header{
