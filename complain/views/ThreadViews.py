@@ -3,6 +3,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from complain.models import *
+from datetime import datetime
+
 NEW_THREADS = 3 # new number of threads when scrolled in browser
 
 def get_thread_json(request):
@@ -270,9 +272,31 @@ def thread_to_dict(user, thread, less=True):
         name = thread.account.user.username
         image = thread.account.profile_pic.name
         uid = thread.account.pk
+
+    # calculate time since the post
+    present = datetime.now()
+    threadtime = thread.time.replace(tzinfo=None)
+    delta = present - threadtime
+    if delta.days > 30:
+        time = thread.time.strftime("on %d %b %Y")
+    elif delta.days <=30 and delta.days>1:
+        time = str(delta.days)+" days ago"
+    else:
+        if delta.seconds >= 3600:
+            hr = int(delta.seconds/3600.0)
+            time = " hours ago" if hr>1 else " hour ago"
+            time = str(hr) + time
+        elif delta.seconds <3600 and delta.seconds>=60:
+            mint = int(delta.seconds/60.0)
+            time = " minutes ago" if mint>1 else " minute ago"
+            time = str(mint) + time
+        else:
+            sec = int(delta.seconds+1)
+            time = " seconds ago" if sec>1 else " second ago"
+            time = str(sec) + time
     return {'id':thread.id,
             'votes':thread.votes,
-            'time':thread.time.strftime("%I:%M %p, %d %b %Y"),
+            'time':time,
             'title':thread.title,
             'content':content,
             'tags':list(map(lambda x: {

@@ -762,7 +762,7 @@ def post_review(request):
         else:acc = None
 
         title = request.POST.get('title','').strip()
-        content = request.POST.get('content', '').strip()
+        content = request.POST.get('review-content', '').strip()
         if content!='':
             review = Review(title=title, content=content, account=acc)
             review.save()
