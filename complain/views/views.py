@@ -629,7 +629,7 @@ def profile_update(request):
 def staff_page(request):
     if request.method=="GET" and request.user.is_staff:
         threads = Thread.objects.filter(status=0)
-        return render(request, "complain/staff-login.html", {'threads':threads})
+        return render(request, "complain/staff-page.html", {'threads':threads})
     else :
         raise Http404
 
@@ -645,6 +645,7 @@ def okay(request):
             return JsonResponse({'success':False, 'error':'something wrong' + repr(e)})
     else:
         return JsonResponse({'success':False,'error':'Invalid request or user'})
+
 def edit(request):
     if request.user.is_staff and request.method=="POST":
         try:
@@ -664,10 +665,14 @@ def edit(request):
 
 def delete(request):
     if request.user.is_staff:
-        pk = int(request.GET['id'])
-        thread = Thread.objects.filter(id=int(request.GET['id']))
-        thread[0].delete()
-        return redirect('staffpage')
+        try:
+            pk = int(request.GET['id'])
+            thread = Thread.objects.filter(id=int(request.GET['id']))
+            thread[0].delete()
+        except Exception as e:
+            pass
+        finally:
+            return redirect('staffpage')
 
 class Concern(View):
     def get(self,request):
