@@ -324,7 +324,7 @@
 
       <div id="profile" class="col-md-4">
         {% if authenticated %}
-        <div class="box-profile">
+        <div class="box-profile-home">
           <img class="img-circle img-homepage" href="{% url 'profile' user.id %}" src="/media/{{profile_pic}}" width=70 height=70 alt="Generic placeholder image" width="100" height="100">
           <div class="media-body">
             <a href="{% url 'profile' user.id %}">
@@ -337,8 +337,8 @@
           </div>
         </div>
         {% endif %}
-        <div class="box-tags">
-          <span class="heading-property tag-heading">Top Tags</span>
+        <div class="box-tags-home">
+          <span class="heading-property tag-heading">My Tags</span>
           <a class="top-tags" href="">Nepal</a>
           <a class="top-tags" href="">Education</a>
           <a class="top-tags" href="">Government</a>

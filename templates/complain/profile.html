@@ -127,7 +127,9 @@
           <div class="profileinfo">
 
           <form id="updateform" method="post" action="{% url 'profile_update' %}" >
-            <img class="img-circle" src="/media/{{user_pic}}" width=200 height=200 data-toggle="modal" data-target="#myModalImage" data-keyboard="true" alt="Generic placeholder image" width="200" height="200" />
+            <div class="show-image">
+              <img class="img-circle img-profile" src="/media/{{user_pic}}" width=200 height=200 data-toggle="modal" data-target="#myModalImage" data-keyboard="true" alt="Generic placeholder image" width="200" height="200" />
+            </div>
             <div class="edit-text">
               <button id="save" class="btn btn-sm" type="button"> Save Info</button><span class="hidden-text hidden-text-font"><b>Edit your Profile</b></span>
             </div>
@@ -177,8 +179,12 @@
             {% csrf_token %}
             <input type="hidden" name="userid" value="{{request.user.id}}" />
             <div id="profile-image-form">
-              <label>Choose Profile image </label>
-              <input type="file" name="image" multiple accept="image/*" />
+              <div class="fileinputs">
+                <input type="file" class="file" name="image" />
+                <div class="fakefile">
+                  <div class="change-picture">Change Your <br>Profile Picture</div>
+                </div>
+              </div>
             </div>
             <div class="btn-update">
               <button type="submit">Update pic</button>

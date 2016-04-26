@@ -77,8 +77,8 @@
   .header-column-last{
     display: none;
   }
-  .box-profile,
-  .box-tags{
+  .box-profile-home,
+  .box-tags-home{
     display: none;
   }
   .btn-post-mobile{
@@ -269,6 +269,11 @@
     width: 50px;
   }
 
+  /*.....Profile........*/
+  .box-profile{
+    margin-top: 125px;
+  }
+
 }
 
 /*///////////////////////////////////////////////////////////////////////////////*/
@@ -280,7 +285,7 @@
     padding: 10px; 
     border-right: 0px solid #fff;   
   }
-  .box-profile {
+  .box-profile-home {
     margin-top: 0px;
   }
 
@@ -372,5 +377,9 @@
     margin-top: -60px;
   }
   
+  /*.......Profile........*/
+  .box-profile{
+    margin-top: 125px;
+  }
   
 }

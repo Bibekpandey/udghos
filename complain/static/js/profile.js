@@ -57,3 +57,24 @@ $('#save').click(function(){
         error: function(data) { alert(JSON.stringify(data));}
     }); 
 });
+
+//.............Profile IMAGE Display ..............///
+$("img-profile").mouseover(function(){
+        var fileup = "<input type=\"file\" name=\"upload\" />";
+        $(this).attr("title",fileup);
+});
+
+$(function () {
+    $(":file").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+});
+
+function imageIsLoaded(e) {
+    $('.img-profile').attr('src', e.target.result);
+};
+
