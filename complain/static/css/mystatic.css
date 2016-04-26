@@ -6,16 +6,12 @@ body {
 
   font-family: 'Varela Round', sans-serif !important;
   color: #000;
-  min-height: 700px;
   background-size:cover;  
 }
 h1,h2,h3,h4{
   text-decoration: none;
   border: 0px solid #000;
 
-}
-img:hover{
-  opacity: 0.9;
 }
 .topic{
   text-align: center;
@@ -154,10 +150,10 @@ img:hover{
   width: 50%;
 }
 #wrapper {
-    height:100%;
-    margin:0 auto;
+
+    margin: 0 auto;
+    padding: 0;
     min-height:100%;
-    padding-bottom:-500px;
 }
 
 p>a{
@@ -638,8 +634,7 @@ ul.dropdown-settings{
 .post-image{
   height: 170%;
   width: 170%;
-  margin-left: 10px;
-  margin-bottom: 0px;
+  margin:auto;
 }
 .img-post{
   width: 200px;
@@ -652,12 +647,11 @@ ul.dropdown-settings{
   margin-top: 100px;
 }
 .modal-custom{
-  width: 45%;
+  width: 50%;
 }
 .modal-post .close-image {
   margin-top: -2px;
   margin-left: 5px;
-  color: reds;
   font-size: 25px;
 }
 .close-image{
@@ -1082,6 +1076,7 @@ div.share> .twitter {
 } 
 .notification-info{
   margin-top: -10px;
+  margin-bottom: 10px;
 }
 .arrow{
   color: #aaa;
@@ -1089,7 +1084,7 @@ div.share> .twitter {
 }
 .single-notification{
   padding:5px;
-  margin:0;
+  margin: 0px;
   background:#ddd;
   border-radius:1px;
   border-top: 1px solid #aaa;
@@ -1154,14 +1149,15 @@ div.share> .twitter {
 }
 
 .popup-message {
-    position:absolute;
-    color: #e33;
-    padding:1px;
+    position: absolute;
+    color: #fff;
+    padding:3px;
+    margin-left: 50px;
     font-size:0.9em;
-    width:175px;
-    z-index=100;
+    width:;
+    z-index:100;
     background-color:#333;
-    border:solid 2px #555;
+    border:solid 1px #555;
     border-radius:3px;
 }
 

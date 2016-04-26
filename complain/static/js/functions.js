@@ -162,7 +162,7 @@ function images_html(images, threadid) {
                         '<button type="button" class="close my-close close-image" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
                       '</div>'+
                       '<div class="row">'+
-                        '<div class="col-md-6">'+
+                        '<div class="col-md-7">'+
                           '<img class="post-image" src="/media/'+images[x]+'"></img>'+
                         '</div>'+
                         
@@ -398,7 +398,7 @@ function popMessage(elem, msg) {
     newdiv.style.borderRadius="3px";
     */
     child.appendChild(newdiv);
-    setTimeout(function() { $(newdiv).delay(500).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 900);
+    setTimeout(function() { $(newdiv).delay(100).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 900);
     //$(newdiv).hide().delay(1000).fadeOut();
 }
 

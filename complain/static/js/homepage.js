@@ -63,14 +63,3 @@ $(document).keyup(function(e) {
     } 
 });
 
-$('img').each(function() {
-
-$(this)[0].oncontextmenu = function() {
-
-alert('We're sorry. Right-Click is not available');
-
-return false;
-
-};
-
-});
