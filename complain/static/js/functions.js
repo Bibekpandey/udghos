@@ -377,7 +377,10 @@ function generate_thread(threadobj, auth) {
 }
 
 function add_item(threadobj, divParentId, authenticated) {
-    if(threadobj.anonymous && !threadobj.can_edit)
+	// check if profile page or not
+	var tmp = window.location.pathname;
+	tmp = tmp.split('/');
+    if(threadobj.anonymous && !threadobj.can_edit && tmp.indexOf('profile')>0)
         return;
     var elem = document.getElementById(divParentId);
     elem.innerHTML+=generate_thread(threadobj, authenticated);
