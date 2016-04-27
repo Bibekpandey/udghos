@@ -365,7 +365,7 @@ function generate_thread(threadobj, auth) {
             '</div>'+
           '</div>'+
           '<div class="comment-form" id="display-form'+threadobj.id+'">'+
-            '<div id="thread-comments'+threadobj.id+'"></div>'+
+            '<div class="display-comments" id="thread-comments'+threadobj.id+'"></div>'+
             (auth==true?
             '<textarea class="form-comment" id="comment-box'+threadobj.id+'" placeholder="Your comment here."></textarea>'+
             '<button class="btn btn-comment" onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')

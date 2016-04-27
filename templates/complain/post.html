@@ -250,6 +250,11 @@
   	<script src="{% static 'js/functions.js' %}"></script>
     
     <script>
+    window.onload = function()  { 
+        $("#display-form"+id.toString()).show("fast", function(){});
+
+    };
+
         var g_thread_container = "thread-container";
         var g_type;
         var g_query, g_tagname;

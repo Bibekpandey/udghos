@@ -653,13 +653,17 @@ ul.dropdown-settings{
   width: 50%;
 }
 .modal-post .close-image {
-  margin-top: -2px;
-  margin-left: 5px;
-  font-size: 25px;
+  margin-top: -5px;
+  margin-left: -35px;
+  font-size: 35px;
+  opacity: 1;
 }
 .close-image{
   z-index: 100;
   position: absolute;
+}
+.close-image:hover{
+  color: #fff;
 }
 
 #logo{

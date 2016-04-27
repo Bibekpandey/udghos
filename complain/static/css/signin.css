@@ -57,29 +57,22 @@ a:hover {
   opacity: 0.8;
 }
 
-html,
+html{
+  
+}
 body {
   height: 100%;
-  background-color: #fff;
-  font-family: 'Varela Round', sans-serif;
   color: #fff;
+  font-family: 'Varela Round', sans-serif !important; 
   text-align: center;
-
-  background: url("../img/IMG HARInew.png") no-repeat ;
+  background-image: url("../img/udghosbackground.jpg") ;
+  background-repeat: no-repeat;
 }
-
-@media (min-width: 768px) {
-  body {
-    background-image: none;
-  }
-}
-
 
 /*.image-login{
-    background-image: url("../img/IMG HARI.png");
+    background-image: url("../img/udghosbackground.jpg");
     background-repeat: no-repeat;
     margin-left: -60px;
-    margin-top: -170px;
     display: block;
     min-width: 100%;
     height: auto;
@@ -177,6 +170,7 @@ text-align:center;
 
 
 #text-login{
+  position: absolute;
   color: #111;
   margin-top: 150px;
 }
