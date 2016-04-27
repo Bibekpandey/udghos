@@ -24,6 +24,7 @@
     </head>
 
 <body>
+    {% csrf_token %}
     {% for thread in threads %}
     <div id="{{thread.id}}" class="thread-container">
         <div class="thread-header">
@@ -37,11 +38,11 @@
                 <a href="javascript:">CANCEL</a>&nbsp;&nbsp;
             </div>
             <div id="ok{{thread.id}}" style="float:right;">
-                <a href="javascript:">OK</a>&nbsp;&nbsp;
+                <a href="javascript:void(0)" onclick="okay(this)">OK</a>&nbsp;&nbsp;
             </div>
 
             <div id="submit{{thread.id}}" class="submit" style="float:right;">
-                <a href="javascript:">SUBMIT</a>&nbsp;&nbsp;
+                <a href="javascript:void(0)" onclick="submitpost(this)">SUBMIT</a>&nbsp;&nbsp;
             </div>
 
             <div id="edit{{thread.id}}" style="float:right;">
@@ -92,5 +93,37 @@
         $('#content'+id).hide();
         $('#textarea'+id).val($('#content'+id).text()).show();
     }
+
+    function submitpost(elem) {
+        var threadid = $(elem).attr('data-value');
+        $.post('/complain/edit/',
+            { 
+                csrfmiddlewaretoken:$('input[type=hidden]').val(),
+                id:threadid,
+                title:$('#input'+threadid).val(),
+                content:$('#textarea'+threadid).val()
+            },
+            function(data) {
+                alert(JSON.stringify(data));
+                if(data.success)
+                    window.location="";
+            }
+        );
+    }
+
+    function okay(elem) {
+        $.post('/complain/okay/',
+            {
+                csrfmiddlewaretoken:$('input[type=hidden]').val(),
+                id:$(elem).attr('data-value')
+            },
+            function(data) {
+                alert(JSON.stringify(data));
+                if(data.success)
+                    window.location="";
+            }
+        );
+    }
+            
 </script>
 </html>
