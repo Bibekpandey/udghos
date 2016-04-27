@@ -1,0 +1,129 @@
+<html>
+<head>
+    <style>
+        .submit>a, .cancel>a {
+            color:#522;
+        }
+        .thread-container {
+            border: solid 2px #777;
+            border-radius:3px;
+            padding:5px;
+            margin-bottom:5px;
+        }
+        .thread-header {
+            padding:3px;
+            background-color:#aaa;
+        }
+        .title {
+            font-family:Ubuntu;
+            font-size:1.11em;
+        }
+        .thread-content
+    </style>
+    <script src="/static/js/jquery.min.js"></script>
+    </head>
+
+<body>
+    {% csrf_token %}
+    {% for thread in threads %}
+    <div id="{{thread.id}}" class="thread-container">
+        <div class="thread-header">
+            <div class="title" id="title{{thread.id}}" style="float:left;font-weight:bold;">{{thread.title}}&nbsp;</div>
+            <input style="float:left" type="text" name="title" id="input{{thread.id}}"/>
+            <div style="float:left;font-style:italic;">{{thread.account}} | &nbsp;</div>
+            <div style="float:left;font-style:italic;">{{thread.time}}</div>
+            <span>&nbsp;</span>
+
+            <div id="cancel{{thread.id}}" class="cancel" style="float:right;">
+                <a href="javascript:">CANCEL</a>&nbsp;&nbsp;
+            </div>
+            <div id="ok{{thread.id}}" style="float:right;">
+                <a href="javascript:void(0)" onclick="okay(this)">OK</a>&nbsp;&nbsp;
+            </div>
+
+            <div id="submit{{thread.id}}" class="submit" style="float:right;">
+                <a href="javascript:void(0)" onclick="submitpost(this)">SUBMIT</a>&nbsp;&nbsp;
+            </div>
+
+            <div id="edit{{thread.id}}" style="float:right;">
+                <a href="javascript:void(0)" onclick="editpost(this)">EDIT</a>&nbsp;&nbsp;
+            </div>
+
+            <div style="float:right;">
+                <a href="javascript:void(0)" onclick="deletepost(this)">DELETE</a>&nbsp;&nbsp;
+            </div>
+        </div>
+        <div class="thread-content" id="content{{thread.id}}">
+            {{ thread.content }}
+        </div>
+        <textarea class="textarea" name="content" id="textarea{{thread.id}}"></textarea>
+    </div>
+    {% endfor %}
+</body>
+<script>
+        (function() {
+            $('textarea').hide();
+            $('input').hide();
+            $('.submit').hide();
+            $('.cancel').hide();
+            $('.thread-container').each(function(i, e) {
+                var id = $(e).attr('id');
+                $(e).find('a').each(function (ii, ee) {
+                    $(ee).attr('data-value', id);
+                });
+            });
+        })();
+    </script>
+
+<script>
+    function deletepost(elem) {
+        if(confirm('Are you sure??'))
+            window.location = "/complain/delete/?id="+$(elem).attr('data-value');
+    }
+
+    function editpost(elem) {
+        var id = $(elem).attr('data-value');
+        $('#edit'+id).hide();
+        $('#ok'+id).hide();
+        $('#cancel'+id).show();
+        $('#submit'+id).show();
+
+        $('#title'+id).hide();
+        $('#input'+id).val($('#title'+id).text()).show();
+        $('#content'+id).hide();
+        $('#textarea'+id).val($('#content'+id).text()).show();
+    }
+
+    function submitpost(elem) {
+        var threadid = $(elem).attr('data-value');
+        $.post('/complain/edit/',
+            { 
+                csrfmiddlewaretoken:$('input[type=hidden]').val(),
+                id:threadid,
+                title:$('#input'+threadid).val(),
+                content:$('#textarea'+threadid).val()
+            },
+            function(data) {
+                alert(JSON.stringify(data));
+                if(data.success)
+                    window.location="";
+            }
+        );
+    }
+
+    function okay(elem) {
+        $.post('/complain/okay/',
+            {
+                csrfmiddlewaretoken:$('input[type=hidden]').val(),
+                id:$(elem).attr('data-value')
+            },
+            function(data) {
+                alert(JSON.stringify(data));
+                if(data.success)
+                    window.location="";
+            }
+        );
+    }
+            
+</script>
+</html>
