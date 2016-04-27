@@ -112,11 +112,6 @@ textarea:focus{
 #nameinfo{
   display: none;
 }
-#profile-image-form{
-  float: right;
-  margin-right: -70px;
-  margin-top: -200px;
-}
 .btn-update{
   float: right;
   margin-top: -25px;
@@ -141,14 +136,53 @@ textarea:focus{
   float: left;
 }
 
-@media (max-width: 991px) {
-  .box-profile{
-    margin-top: 75px;
-  }
+/*///////PROFILE IMAGE////////*/
+#profile-image-form{
+  float: right;
+  margin-right: -70px;
+  margin-top: -200px;
 }
-
-@media (max-width: 767px) {
-  .box-profile{
-    margin-top: 75px;
-  }
+.file{
+  display: hidden;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-top: -255px;
+  margin-right: 70px;
+}
+.file:hover .img-profile{
+  opacity: 0.5;
+}
+div.fileinputs {
+  position: relative;
+  margin-top: -170px;
+}
+.fakefile {
+  position: absolute;
+  font-weight: bold;
+  text-decoration: 2px solid #333;
+  text-shadow: 2px solid #aaa;
+  left: 70px;
+  font-size: 25px;
+  margin-left: -70px;
+  margin-top: -202px;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  opacity: 0.5;
+  width: 200px;
+  height: 200px;
+}
+input.file{
+  position: relative;
+  text-align: right;
+  -moz-opacity:0 ;
+  filter:alpha(opacity: 0);
+  opacity: 0;
+  z-index: 1;
+}
+.fakefile>.change-picture{
+  margin-left: 20px;
+  margin-top: 70px;
+  z-index: 2;
 }

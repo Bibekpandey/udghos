@@ -149,6 +149,9 @@ h1,h2,h3,h4{
 .form-control-footer{
   width: 50%;
 }
+div.form-group{
+  margin-bottom: 0px;
+}
 #wrapper {
 
     margin: 0 auto;
@@ -1161,8 +1164,29 @@ div.share> .twitter {
     border-radius:3px;
 }
 
-/****************  IMAGE*************/
+/****************  MODAL IMAGE/TAGS*************/
 
+.make-anonymous{
+  float: right;
+  margin-top: -10px;
+}
 .img-post{
   position: relative;
+}
+.img li{
+  margin-top: -70px;
+  display: inline;
+}
+.img li img{
+  border: 1px solid #555;
+  border-radius:2px;
+  height: 15%;
+  width: 15%;
+  margin:2px;
+  position: relative;
+}
+ul#image-list.img{
+  margin-top: -15px;
+  margin-left: -40px;
+}
 }
