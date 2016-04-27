@@ -63,3 +63,41 @@ $(document).keyup(function(e) {
     } 
 });
 
+//..........IMAGE ON MODAL.............//
+
+var arrimg=[];
+var newarrimg=[];
+
+$(function () {
+     
+    $(":file").change(function () {
+     
+        console.log(this.files);
+         arrimg=this.files;
+        newarrimg.push(arrimg);
+        
+        console.log(newarrimg);
+        if (this.files) {
+console.log(this.files.length);            
+            for(i=0; i<=this.files.length;i++){
+            var reader = new FileReader();
+           // reader.onload = imageIsLoaded;
+            reader.onload = showUploadedItem;
+            reader.readAsDataURL(this.files[i]);
+            }
+        }
+    });
+});
+
+function showUploadedItem (source) {
+    console.log("archivos");
+    console.log(source);
+      var list = document.getElementById("image-list"),
+        li   = document.createElement("li"),
+        img  = document.createElement("img");  
+      img.src = source.target.result;
+      li.appendChild(img);
+    list.appendChild(li);
+  } 
+
+

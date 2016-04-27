@@ -59,10 +59,6 @@ $('#save').click(function(){
 });
 
 //.............Profile IMAGE Display ..............///
-$("img-profile").mouseover(function(){
-        var fileup = "<input type=\"file\" name=\"upload\" />";
-        $(this).attr("title",fileup);
-});
 
 $(function () {
     $(":file").change(function () {
