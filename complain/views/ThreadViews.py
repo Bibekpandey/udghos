@@ -310,6 +310,7 @@ def thread_to_dict(user, thread, less=True):
                     },
             'num_comments':Comment.objects.all().filter(thread=thread).count(),
             'can_edit':True if thread.account.user == user else False,
+            'anonymous':True if thread.anonymous else False,
             'supports':numupvotes,
             'downvotes':numdownvotes,
             'supported':True if len(upvotes)>0 else False,

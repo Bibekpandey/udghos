@@ -377,6 +377,8 @@ function generate_thread(threadobj, auth) {
 }
 
 function add_item(threadobj, divParentId, authenticated) {
+    if(threadobj.anonymous && !threadobj.can_edit)
+        return;
     var elem = document.getElementById(divParentId);
     elem.innerHTML+=generate_thread(threadobj, authenticated);
 }
