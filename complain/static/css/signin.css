@@ -21,8 +21,7 @@ a:hover {
 }
 
 .btn-my {
-  background: #2BAB93;
-  
+  background: #2BAB93;  
   -webkit-border-radius: 3;
   -moz-border-radius: 3;
   border-radius: 3px;
@@ -47,14 +46,11 @@ a:hover {
 }
 
 .udghos-logo{
-  width: 35px;
-  height: 35px;
-  margin-top: -7px;
-  margin-left: -20px;
-  border: 2px solid #fff;
-  border-radius: 3px; 
+  width: 40px;
+  height: 40px;
+  margin-top: -10px;
+  margin-left: -20px; 
   background-color: #fff;
-  opacity: 0.8;
 }
 
 html{
@@ -65,18 +61,27 @@ body {
   color: #fff;
   font-family: 'Varela Round', sans-serif !important; 
   text-align: center;
-  background-image: url("../img/udghosbackground.jpg") ;
+  background-image: url("../img/udghosbackground.png");
+  background-color: #ddd;
   background-repeat: no-repeat;
+  background-size: 50%;
+  background-position:  left 120px;
 }
 
-/*.image-login{
-    background-image: url("../img/udghosbackground.jpg");
-    background-repeat: no-repeat;
-    margin-left: -60px;
-    display: block;
-    min-width: 100%;
-    height: auto;
-}*/
+.text-login{
+  color: #333;
+  margin-top: 30px;
+  margin-left: 190px;
+}
+.bullets-login{
+  text-align: left;
+  margin-top: 150px;
+  margin-left: 150px;
+  margin-right: -50px;
+  font-size: 35px;
+  padding: 0px;
+  color: #111;
+}
 
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -239,12 +244,15 @@ text-align:center;
   overflow: hidden;
   padding-left:1%;
   padding-right:1%;
-  margin-left:10%;
-  margin-right:10%;
+  margin-left:15%;
+  margin-right:15%;
   margin-top: 30%;
   min-height: 20px;
   background-color: #444;
   border-radius: 2px;
+}
+.row{
+  margin-right: -50px;
 }
 
 .box-footer{
@@ -255,7 +263,6 @@ text-align:center;
   bottom:0;
   left: 0;
   background: #333;
-  opacity: 0.8;
   color: #111;
 }
 .footer-body{

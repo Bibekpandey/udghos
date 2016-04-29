@@ -51,7 +51,7 @@ textarea:focus{
     margin-top: 67px;
     margin-bottom: 5px;
     background-color: #fff;
-    border: 2px solid #ccc;
+    border: 1px solid #aaa;
     border-radius: 3px;
 }
 #heading-border{

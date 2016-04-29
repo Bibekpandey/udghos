@@ -2,9 +2,7 @@
 html,
 body {
   background-color: #fff;
-  background-color:#fff;
-
-  font-family: 'Varela Round', sans-serif !important;
+  font-family: 'Varela Round', serif !important;
   color: #000;
   background-size:cover;  
 }
@@ -57,7 +55,7 @@ h1,h2,h3,h4{
   padding: 10px 10px 0px 10px;
   margin-left: 10px;
   margin-bottom: 15px;
-  border:2px solid #ccc;
+  border:1px solid #aaa;
   border-bottomm: 2px solid #ccc;
   border-radius: 3px;
   
@@ -72,22 +70,28 @@ h1,h2,h3,h4{
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
-  border:2px solid #ccc;
+  border:1px solid #aaa;
   border-radius: 3px;
 }
 .box-image{
   margin-top: 10px;
+
+}
+.center-image{
+  z-index: -1;
 }
 
 .box-header{
-  background: linear-gradient(#fff, #eee); */
+  background: linear-gradient(#eee, #ddd);
+  background-position: center;
+  position: center;
+  background-repeat: no-repeat; 
   font-family: 'Varela Round', sans-serif;
   position: block;
   padding: 10px;
   color: #000; 
   border-radius: 3px;
   margin-top: -10px;
-  opacity: 1;
 }
 .box-tabs{
   margin-top: 15px;
@@ -123,7 +127,7 @@ h1,h2,h3,h4{
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
-  border:2px solid #ccc;
+  border:1px solid #aaa;
   border-radius: 3px;
   font-size: 15px;
 }
@@ -209,6 +213,11 @@ p>a:hover{
 }
 .icons-ld>a{
   text-decoration: none;
+}
+div.row.background-icons{
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 2px;
 }
 
 .comment-section{
@@ -523,12 +532,12 @@ ul{
   margin-top: -2px;
 }
 .udghos-logo{
-  width: 50px;
-  height: 50px;
-  margin-top: -15px;
-  margin-left: -10px;
-  border-radius: 3px; 
+  width: 40px;
+  height: 40px;
+  margin-top: -8px;
+  margin-left: -25px; 
   z-index: 1000;
+  background: #fff;
   overflow: hidden;
 }
 .udghos-logo:hover{
@@ -537,7 +546,7 @@ ul{
 .img-udghos{
   position: absolute;
   margin-left: -150px;
-  opacity: 0.9;
+  opacity: 1;
   margin-top: 40px;
 }
 .navbar-body{
