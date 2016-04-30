@@ -647,6 +647,7 @@ ul.dropdown-settings{
   height: 170%;
   width: 170%;
   margin:auto;
+  margin-left: 5px;
 }
 .img-post{
   width: 200px;
