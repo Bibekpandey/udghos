@@ -152,15 +152,6 @@ text-align:center;
   border-bottom-color: #fff;
 }
 
-@media (min-width: 768px) {
-  .navhead-brand {
-    float: left;
-  }
-  .navhead-nav {
-    float: right;
-  }
-}
-
 
 /*
  * Cover
@@ -309,12 +300,68 @@ p>a:hover{
 .footer-menu{
   position: relative;
 }
+.navhead-brand {
+    float: left;
+  }
+  .navhead-nav {
+    float: right;
+  }
 
-@media(max-width: 640px){
-  .box-footer{
+@media (max-width: 991px) {
+  #navhead{
+    margin-top: 10px;
+    margin-left: 45px;
+    font-size: 50px;
+  }
+  #headnav{
+    margin-right: 25px;
+  }
+  #navcolor{
     height: 100px;
   }
+  .udghos-logo{
+    margin-top: -13px;
+    width: 75px;
+    height: 75px;
+  }
+  body{
+    background-position: center 120px;
+    top: 0;
+  }
+  .text-login{
+    text-align: center;
+    margin-top: 370px;
+  }
+  li.icon-login>a{
+    font-size: 50px;
+  }
+
+  .box-footer{
+    width: 100%;
+    position: relative;
+  }
+  .form-signup {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+  }
+  .container-box{
+    width: 100%; 
+  }
+  .box-signin{
+    margin: 100px -20px 50px 0px;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+  .footer-body{
+    margin: 10px 10px 10px 10px;
+  }
+  .row, .container{
+    width: 99%
+  }
 }
+
 @media (max-width: 767px) {
   .box-signin {
     margin-top: 335px;
@@ -333,29 +380,23 @@ p>a:hover{
     padding: 15px;
     margin: 0 auto;
   }
-}
-
-
-@media (max-width: 991px) {
-  .box-footer{
-    width: 100%;
-    position: relative;
+  body{
+    background-position: center 120px;
+    top: 0;
   }
-  .form-signup {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
+  ul.bullets-login{
+    font-size: 30px;
+    margin-left: 50px;
   }
-  .container-box{
-    width: 100%; 
+  li.icon-login>a{
+    font-size: 35px;
+    margin-top: -100px;
   }
   .box-signin{
-    margin: 325px 0px 0px 0px;
+    margin: 100px -20px 50px 0px;
     left: 0;
     right: 0;
     width: 100%;
   }
-  .footer-body{
-    margin: 10px 10px 10px 10px;
-  }
 }
+

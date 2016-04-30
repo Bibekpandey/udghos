@@ -82,9 +82,8 @@ h1,h2,h3,h4{
 }
 
 .box-header{
-  background: linear-gradient(#eee, #ddd);
-  background-position: center;
-  position: center;
+  background: linear-gradient(#fff, #eee);
+  /*background-image: url("../img/UdghosBlur.png");*/
   background-repeat: no-repeat; 
   font-family: 'Varela Round', sans-serif;
   position: block;
@@ -93,6 +92,7 @@ h1,h2,h3,h4{
   border-radius: 3px;
   margin-top: -10px;
 }
+
 .box-tabs{
   margin-top: 15px;
   margin-bottom:30px;
@@ -545,9 +545,9 @@ ul{
 }
 .img-udghos{
   position: absolute;
-  margin-left: -150px;
-  opacity: 1;
-  margin-top: 40px;
+  margin-left: -250px;
+  opacity: 0.2;
+  margin-top: 20px;
 }
 .navbar-body{
   display: inline-block;

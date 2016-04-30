@@ -162,34 +162,32 @@
     <div class="container-fluid">
       <div class="row">
         <div class="box-header">
-        <div class="box-image">
           <div class="col-md-3 text-center header-column-first">
-            <img class="img-udghos" src="/static/img/Udghos.png" width="300" height="100">
-
+            <h3>How Udghos works?</h3>
+            <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModalReview" data-keyboard="true">
+              Know us more
+            </button>
           </div>
           <div class="col-md-6 text-center header-column">
-            
+            <!--img class="img-udghos" src="/static/img/Udghos.png" width="500" height="170"-->
             <h1>Let's make a change</h1>
             <h3>Post your Complain/Views</h3>
             {% if authenticated %}
             <button type="button" class="btn btn-my btn-large btn-post-desktop" data-toggle="modal" data-target="#myModal" data-keyboard="true">
               Post a Concern
             </button>
-            {% else %}
-            <a href="/complain/login/">
-              <button type="button" class="btn btn-my btn-large btn-post-desktop">
-                Login/Sign Up
-              </button>
-            </a>
-            {% endif %}
-            {% if authenticated %}
             <a href="/complain/post-concern/">
               <button type="button" class="btn btn-my btn-large btn-post-mobile" >
                 Post a Concern
               </button>
             </a>
             {% else %}
-            <a href="/complain/post-concern/">
+            <a href="/complain/login/">
+              <button type="button" class="btn btn-my btn-large btn-post-desktop">
+                Login/Sign Up
+              </button>
+            </a>
+            <a href="/complain/login/">
               <button type="button" class="btn btn-my btn-large btn-post-mobile" >
                 Login/Sign Up
               </button>
@@ -197,7 +195,6 @@
             {% endif %}            
           </div>
 
-          </div>
           <div class="col-md-3 text-center header-column-last">
             <h3>What do you think of Udghos?</h3>
             <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModalReview" data-keyboard="true">
