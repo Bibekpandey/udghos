@@ -51,6 +51,7 @@ class Thread(models.Model):
     last_active = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(default=0) # 0 for not verified, 1 for verified, 2 for updated by admin
     anonymous = models.BooleanField(default=False)
+    target = models.ForeignKey('Target', blank=True, null=True)
 
     def __str__(self):
         return self.title + ' [' + self.account.user.username+']'
@@ -127,3 +128,10 @@ class Review(models.Model):
 
     def __str__(self):
         return str(self.date)
+
+class Target(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
