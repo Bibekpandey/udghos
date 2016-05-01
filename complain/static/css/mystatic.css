@@ -17,16 +17,20 @@ h1,h2,h3,h4{
 
 .btn-my {
   font-family: 'Varela Round', sans-serif;
-  background: #d61010;
-  
+  background: #d71010;
+  color: #fff;
+
   -webkit-border-radius: 3;
   -moz-border-radius: 3;
   border-radius: 3px;
   
-  color: #fff;
   font-size: 15px;
   padding: 5px 10px 5px 10px;
   text-decoration: none;
+}
+.btn-header{
+  color: #444;
+  display: none;
 }
 .btn-large{
   font-size: 25px;
@@ -82,8 +86,10 @@ h1,h2,h3,h4{
 }
 
 .box-header{
-  background: linear-gradient(#fff, #eee);
-  /*background-image: url("../img/UdghosBlur.png");*/
+  /*background: linear-gradient(#fff, #eee);*/
+  background-image: url("../img/udghos-header.png");
+  background-size: 85% 200px;
+  background-position: center;
   background-repeat: no-repeat; 
   font-family: 'Varela Round', sans-serif;
   position: block;
@@ -91,6 +97,10 @@ h1,h2,h3,h4{
   color: #000; 
   border-radius: 3px;
   margin-top: -10px;
+  height: 300px;
+}
+h1{
+  font-size: 60px;
 }
 
 .box-tabs{
@@ -145,6 +155,7 @@ h1,h2,h3,h4{
 .box-footer{
   background: #333;
   margin-bottom: 0px;
+  margin-top: 50px;
   color: #fff;
 }
 .footer-body{
@@ -297,9 +308,6 @@ div.row.background-icons{
   height: 70px;
   margin-left: 25%;
   display: none;
-}
-.header-column>a{
-  text-decoration: none;
 }
 .post-action{
   position: relative;
@@ -969,9 +977,21 @@ div.share> .twitter {
   border-right: 0px solid #888;
   margin-bottom: 25px;
 }
+.header-column>a{
+  text-decoration: none;
+}
 .header-column-first{
+  margin-top: 15px;
   border-right: 0px solid #888;
   height: 190px;
+}
+.header-column-first>h3,
+.header-column-last>h3{
+  font-size: 15px;
+  color: #555;
+}
+.header-column-last{
+  margin-top: 15px;
 }
 .font-header{
   font-size: 50px;
