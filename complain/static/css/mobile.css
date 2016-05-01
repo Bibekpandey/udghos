@@ -122,6 +122,11 @@
   .post-body>span{
     font-size: 25px;
   }
+  .post-image{
+    width: 100%;
+    height: 100%;
+    position: center;
+  }
   .heading-property{
     font-size: 30px;
   }

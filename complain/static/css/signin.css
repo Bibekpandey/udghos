@@ -307,6 +307,11 @@ p>a:hover{
     float: right;
   }
 
+
+.login-mobile-test{
+  display: none;
+}
+
 @media (max-width: 991px) {
   #navhead{
     margin-top: 10px;
@@ -335,10 +340,80 @@ p>a:hover{
   li.icon-login>a{
     font-size: 50px;
   }
+  .form-control {
+  display: block;
+  width: 200%;
+  height: 55px;
+  margin: 10px 0px -5px -150px;
+  padding: 6px 12px;
+  font-size: 25px;
+  line-height: 2.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  }
+
+  .checkbox{
+    font-size: 35px;
+  }
+  a.forgot-password{
+    font-size: 25px;
+  }
+  input.checkbox-input{
+    height: 40px;
+    line-height: 2.54;
+    margin-bottom: -20px;
+  }
+
+  .p-signin{
+    font-size: 30px;
+  }
+  #click-signup-link,#click-signin{
+    font-size: 35px;
+  }
+  .btn.btn-my {
+    width: 200%;
+    height: 55px;
+  }
+  .form-signin-heading,
+  .form-signup-heading{
+    font-size: 45px;
+  }
+  button.btn.btn-my.btn-block{
+    margin-top: 10px;
+    width: 100%;
+    margin-left: 0px;
+  }
+  .bullets-login >li{
+    display: none;
+  }
+  .login-mobile-test{
+    display: block;
+    font-size: 50px;
+    margin-left: 150px;
+    color: #111;
+  }
+  div.box-signin{
+    margin-left: 15%;
+  }
 
   .box-footer{
+    margin-top: 25px;
     width: 100%;
+    height: 100%;
     position: relative;
+  }
+    #wrapper{
+    margin: 0 auto;
+    padding: 0;
+    max-height:100%;
   }
   .form-signup {
     max-width: 330px;
@@ -346,26 +421,31 @@ p>a:hover{
     margin: 0 auto;
   }
   .container-box{
-    width: 100%; 
+    width: 100%;
+    margin-left: -40px; 
   }
   .box-signin{
     margin: 100px -20px 50px 0px;
     left: 0;
     right: 0;
-    width: 100%;
+    width: 90%;
+    padding: 20px;
   }
   .footer-body{
     margin: 10px 10px 10px 10px;
   }
   .row, .container{
-    width: 99%
+    width: 97%
+  }
+  p>a{
+    font-size: 35px;
+  }
+  p.copyright{
+    font-size: 20px;
   }
 }
 
 @media (max-width: 767px) {
-  .box-signin {
-    margin-top: 335px;
-  }
   .navhead-nav{
     float: right;
   }
@@ -383,6 +463,7 @@ p>a:hover{
   body{
     background-position: center 120px;
     top: 0;
+    width: 100%;
   }
   ul.bullets-login{
     font-size: 30px;
@@ -398,5 +479,12 @@ p>a:hover{
     right: 0;
     width: 100%;
   }
+  .form-control {
+    margin-left: 0px;
+    width: 100%;
+  font-size: 15px;
+  line-height: 1.42857143;
+  }
+
 }
 
