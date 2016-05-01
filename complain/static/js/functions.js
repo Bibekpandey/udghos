@@ -196,7 +196,7 @@ function deleteThread(threadid) {
     });
 }
 
-function showDeleteWarning(threadid) {
+function showDeleteWarning(message, threadid) {
     $('#mask').css({
         "width":$(document).width(),
         "height":$(document).height(),
@@ -216,12 +216,12 @@ function showDeleteWarning(threadid) {
                 '<h4 class="modal-title my-modal-title" id="myModalLabel">Warning</h4><br>'+
             '</div>'+
             '<div class="warning-text">'+
-                'Are you Sure you want to delete the thread? '+
+                message +
                 'It cannot be undone.'+
             '</div>'+
             '<div class="modal-footer">'+
-                '<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Ok</button>'+
-                '<button class="btn btn-default" type="button" onclick="removeWarning()">Cancel</button>'+
+                (threadid!=undefined?'<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Ok</button>':'')+
+                '<button class="btn btn-default" type="button" onclick="removeWarning()">'+(threadid!=undefined?'Cancel':'Ok')+'</button>'+
             '</div>'+
             '</div>';
     var box = $('<div>').attr('class','warning-box')
@@ -306,7 +306,7 @@ function generate_thread(threadobj, auth) {
                     //'<a href="javascript:void()" onclick="editPost('+threadobj.id+')">'+
                     //'<span class="glyphicon glyphicon-edit"></span>'+
                     //'</a>'+
-                    '<a href="javascript:void(0)" onclick="showDeleteWarning('+threadobj.id+')">'+
+                    '<a href="javascript:void(0)" onclick="showDeleteWarning(\'Are you sure you want to delete the thread? This can not be undone.\','+threadobj.id+')">'+
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
                     ) +
@@ -403,7 +403,7 @@ function popMessage(elem, msg) {
     newdiv.style.borderRadius="3px";
     */
     child.appendChild(newdiv);
-    setTimeout(function() { $(newdiv).delay(100).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 900);
+    setTimeout(function() { $(newdiv).delay(100).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 700);
     //$(newdiv).hide().delay(1000).fadeOut();
 }
 
