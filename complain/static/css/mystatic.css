@@ -87,7 +87,7 @@ h1,h2,h3,h4{
 
 .box-header{
   /*background: linear-gradient(#fff, #eee);*/
-  background-image: url("../img/udghos-header.png");
+  background-image: url("/static/img/udghos-header.png");
   background-size: 85% 200px;
   background-position: center;
   background-repeat: no-repeat; 
@@ -1223,4 +1223,4 @@ ul#image-list.img{
   margin-top: -15px;
   margin-left: -40px;
 }
-}
+
