@@ -61,7 +61,7 @@ body {
   color: #fff;
   font-family: 'Varela Round', sans-serif !important; 
   text-align: center;
-  background-image: url("../img/udghosbackground.png");
+  background-image: url("/static/img/udghosbackground.png");
   background-color: #ddd;
   background-repeat: no-repeat;
   background-size: 50%;
