@@ -21,8 +21,8 @@ from complain.views.views import stay_tuned
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', stay_tuned, name='stay-tuned'),
-    #url(r'^', include('complain.urls')),
+    #url(r'^$', stay_tuned, name='stay-tuned'),
+    url(r'^', include('complain.urls')),
     url(r'^complain/', include('complain.urls')),
     
     #url(r'', include('social_auth.urls')),

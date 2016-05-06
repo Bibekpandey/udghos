@@ -745,7 +745,7 @@ def verify(request, code):
 def mail_send(code, email):
     subject, from_email, to = 'account verification', 'noreply@udghos.com', email
     text = "Welcome to udghos.com. This is the email that lets you verify your account in udghos.com. The following is the link to verify:"
-    html = '<a href="http://localhost.com/verify/'+str(code)+'">udghos.com/verify/'+str(code)+'</a>'
+    html = '<a href="http://udghos.com/verify/'+str(code)+'">udghos.com/verify/'+str(code)+'</a>'
     msg = EmailMultiAlternatives(subject, "", from_email, [to])
     msg.attach_alternative(html, "text/html")
     msg.send()
