@@ -559,6 +559,7 @@ def profile_update(request):
         firstname = request.POST['first-name']
         lastname = request.POST['last-name']
         address = request.POST['address']
+        about = request.POST['about']
         uid = request.POST['userid']
         try:
             image = request.FILES['image']
