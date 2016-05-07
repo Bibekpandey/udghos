@@ -67,6 +67,25 @@ body {
   background-size: 50%;
   background-position:  left 120px;
 }
+#float-notification{
+  position: absolute;
+  float: right;
+  display: none;
+  right: 0;
+  margin-right: 50px;
+  margin-top: 5%;
+  background: #ddd;
+  border: 1px solid #aaa;
+  padding: 5px;
+  min-width: 250px;
+  min-height: 70px;
+  border-radius: 3px;
+  z-index: 5;
+  color: #333
+}
+#float-notification:hover{
+  background: #eee;
+}
 
 .text-login{
   color: #333;

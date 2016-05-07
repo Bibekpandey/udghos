@@ -11,6 +11,22 @@ h1,h2,h3,h4{
   border: 0px solid #000;
 
 }
+#float-notification{
+  position: absolute;
+  float: right;
+  right: 0;
+  display: none;
+  margin-right: 50px;
+  background: #ccc;
+  border: 1px solid #aaa;
+  padding: 5px;
+  min-width: 200px;
+  min-height: 50px;
+  border-radius: 3px;
+}
+#float-notification:hover{
+  background: #ddd;
+}
 .topic{
   text-align: center;
 }
@@ -31,6 +47,16 @@ h1,h2,h3,h4{
 .btn-header{
   color: #444;
   display: none;
+}
+.btn-review {
+  background: #d71010;
+  color: #fff;
+  border-radius: 3px 3px 0px 0px;
+  right: 0px;
+  bottom: 0px;
+  font-size: 20px;
+  position: fixed;
+  text-decoration: none;
 }
 .btn-large{
   font-size: 25px;

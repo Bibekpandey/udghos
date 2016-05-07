@@ -65,6 +65,14 @@
 </head>
 
 <body>
+
+<div id="float-notification">
+  <div id="notification-text">
+  
+    
+  </div>
+</div>
+
 <div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
   <div id="mask" style="position:absolute;display:none"></div>
 
@@ -163,10 +171,10 @@
       <div class="row">
         <div class="box-header">
           <div class="col-md-3 text-center header-column-first">
-            <!--h3>How Udghos works?</h3-->
+            <!--h3>How Udghos works?</h3>
             <button type="button" class="btn btn-sm btn-header">
               Know us more
-            </button>
+            </button-->
           </div>
           <div class="col-md-6 text-center header-column">
             <!--img class="img-udghos" src="/static/img/Udghos.png" width="500" height="170"-->
@@ -192,14 +200,16 @@
                 Login/Sign Up
               </button>
             </a>
-            {% endif %}            
-          </div>
+            {% endif %}
+            <div class="">
+              <a href="#">How udghos works?</a>         
+            </div>
 
           <div class="col-md-3 text-center header-column-last">
-            <!--h3>What do you think?</h3-->
+            <!--h3>What do you think?</h3>
             <button type="button" class="btn btn-sm btn-header" data-toggle="modal" data-target="#myModalReview" data-keyboard="true">
               Write a review
-            </button>
+            </button-->
           </div>
 
           <div class="container">
@@ -216,13 +226,13 @@
                       <div class="form-group">
                                                 </div>
                       <form method="post" id="thread-form" action="{% url 'post' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
-                          <label for="recipient-name" class="control-label">Title * <small id="title-warning" class="alert-danger" style="display:none"> Please provide a title for the issue!!</small></label>
+                          <label for="recipient-name" class="control-label">Title * <small id="title-warning" class="alert-danger" style="display:none">Write appropriate title to your concern</small></label>
                           <input name="title" type="text" class="form-control" id="recipient-name" placeholder="Title relevant to the description" oninput="$('#title-warning').hide()">
 
                         {% csrf_token %}
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
-                          <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none"> Please provide a description of the issue!! </small></label>
+                          <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none">Describe your concern and the solution</small></label>
                           <textarea name="content" class="form-control" placeholder="Your queries here." oninput="$('#description-warning').hide()"></textarea>
                           
                           <div class="form">
@@ -347,6 +357,13 @@
         </div>
       </div>   
     </div>      
+  </div>
+
+  <div class="btn-review">
+    <button type="button" class="btn btn-my" data-toggle="modal" data-target="#myModalReview" data-keyboard="true">
+      Write a review
+    </button>
+    </div>
   </div>
 
 <div id="wrapper">
