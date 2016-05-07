@@ -72,7 +72,8 @@ function signUp() {
             $('#signup-message').hide();
             $('#float-notification').show();  
             $('#notification-text').text(data.message);
-            setTimeout(function() { $('#notification-text').delay(100).fadeOut(); }, 900);
+            setTimeout(function() { $('#float-notification').delay(100).fadeOut(); }, 900);
+            $('#float-notification').hide();
             return false;
         }
     });
