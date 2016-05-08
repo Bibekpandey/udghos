@@ -792,3 +792,9 @@ def post_review(request):
 
 def stay_tuned(request):
     return render(request, 'complain/common.html', {"message":"We are Almost Done. STAY TUNED!!"}) 
+
+def how_it_works(request):
+    return render(request, 'complain/how-it-works.html',{})  
+
+def about(request):
+    return render(request, 'complain/about.html',{})  

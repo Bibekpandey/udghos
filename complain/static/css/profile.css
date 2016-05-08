@@ -1,5 +1,5 @@
 body{
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Varela Round', sans-serif ;
     padding:0;
     margin:0;
     width:100%;
@@ -44,7 +44,7 @@ textarea:focus{
 
 
 .box-profile{
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Varela Round', sans-serif !important;
     min-height: 20px;
     padding: 20px;
     margin: 2px;
@@ -65,6 +65,7 @@ textarea:focus{
 .profile-pro{
   border-bottom: 1px solid #ddd;
 }
+
 .my-tags{
   margin-top: 15px;
   border: none;
@@ -153,6 +154,7 @@ textarea:focus{
 .file:hover .img-profile{
   opacity: 0.5;
 }
+
 div.fileinputs {
   position: relative;
   margin-top: -170px;
@@ -185,4 +187,67 @@ input.file{
   margin-left: 20px;
   margin-top: 70px;
   z-index: 2;
+}
+#first-name,
+  #last-name{
+    font-family: 'Varela Round', sans-serif !important;
+    font-size: 25px;
+  }
+
+
+@media (max-width: 991px) {
+  .box-profile{
+    margin-left: 10px;
+  }
+  .edit-button{
+    position: relative;
+    margin-left: 10%;
+    margin-top: -65px;
+  }
+  .edit-text>button{
+    margin-left: -300px;
+  }
+  .edit-text>span{
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  #save,
+  #edit{
+    font-size: 25px;
+  }
+  #first-name,
+  #last-name{
+    font-family: 'Varela Round', sans-serif !important;
+    font-size: 50px;
+  }
+  #username{
+    font-size: 30px;
+  }
+  #address{
+    font-size: 35px;
+  }
+  #about{
+    color: #777;
+    font-size: 10px;
+  }
+  .hidden-text>span{
+    font-size: 30px;
+  }
+  b{
+    font-size: 25px;
+    margin-top: 10px;
+  }
+  img.img-circle.img-profile{
+    width: 200px;
+    height: 200px;
+  }
+  .fakefile {
+    margin-left: -70px;
+    margin-top: -70px;
+  }
+  input.file{
+    margin-top: -550px;
+  }
+
 }

@@ -137,7 +137,8 @@
               <img class="img-circle img-profile" src="/media/{{user_pic}}" width=200 height=200 data-toggle="modal" data-target="#myModalImage" data-keyboard="true" alt="Generic placeholder image" width="200" height="200" />
             </div>
             <div class="edit-text">
-              <button id="save" class="btn btn-sm" type="button"> Save Info</button><span class="hidden-text hidden-text-font"><b>Edit your Profile</b></span>
+              <button id="save" class="btn btn-sm" type="button"> Save Info</button>
+              <span class="hidden-text hidden-text-font">Edit your Profile</span>
             </div>
             <input type="hidden" name="userid" value="{{request.user.id}}" />
             <div id="dataprofile" class="my-name">
@@ -264,35 +265,7 @@
       </footer>
     </div>
   </div>
-<div class="container">
-    <div id="popover_notification_content" style="display: none">
-      <div class="notification-body">
-    {% if notifications %}
-      {% else %}
-      <div class="single-notification">
-        &nbsp; No new notifications
-      </div>
-      {% endif %}
 
-      {% for notif in notifications %}
-        <div class="single-notification">
-          <a href="/thread/{{notif.thread}}/">{% ifequal notif.type "comment" %}
-          Comment on your thread by {{notif.by}}
-          {% endifequal %}
-          {% ifequal notif.type "support" %}
-            Support on your thread by {{notif.by}}
-          {% endifequal %}
-          {% ifequal notif.type "downvote" %}
-            Downvote on your thread by {{notif.by}}
-          {% endifequal %}
-
-            <div class="stimg-notification">
-                <img class="img-circle" src="/media/{{threadobj.user.image}}" width=25 height=25/>
-            </div>
-          </a>
-        </div>
-    {% endfor %}
-    </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

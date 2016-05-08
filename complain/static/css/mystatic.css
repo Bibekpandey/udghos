@@ -5,6 +5,10 @@ body {
   font-family: 'Varela Round', serif !important;
   color: #000;
   background-size:cover;  
+  padding:0;
+    margin:0;
+    width:100%;
+    min-height:500px;
 }
 h1,h2,h3,h4{
   text-decoration: none;
@@ -50,15 +54,20 @@ h1,h2,h3,h4{
   display: none;
 }
 .btn-review {
-  background: #d71010;
+  background: #25f;
   color: #fff;
   border-radius: 3px 3px 0px 0px;
   right: 0px;
+  margin-right: 10px;
   bottom: 0px;
-  font-size: 20px;
+  font-size: 15px;
   position: fixed;
   text-decoration: none;
 }
+.btn-review:hover{
+  color: #fff;
+  background: #36f;
+} 
 .btn-large{
   font-size: 25px;
 }
@@ -97,7 +106,7 @@ h1,h2,h3,h4{
   min-height: 20px;
   padding: 10px 15px 15px 15px;
   margin: 2px;
-  margin-top: 10px;
+  margin-top: 67px;
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
@@ -132,6 +141,13 @@ h1{
 }
 .how{
   margin-top: 10px;
+}
+.event-heading{
+  border-bottom: 1px solid #999;
+  margin-bottom: 10px;
+}
+.event-text{
+  color: #777;
 }
 
 .box-tabs{
@@ -172,6 +188,10 @@ h1{
   border-radius: 3px;
   font-size: 15px;
 }
+.box-tags-home{
+  margin-top: 67px;
+}
+
 .box-tag{
   background-color: #ccc;
   display: none;
@@ -188,6 +208,12 @@ h1{
   margin-bottom: 0px;
   margin-top: 50px;
   color: #fff;
+}
+ #footer {
+   position:relative;
+   margin-top: 270px;
+   bottom:0px;
+   width: 100%;
 }
 .footer-body{
   margin: 10px 10px 0px 10px;
