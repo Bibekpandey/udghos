@@ -1003,7 +1003,7 @@ div.share> .twitter {
     width:35%;
     float:left;
 }
-.selected-tags {
+.selected-tags, .selected-targets {
     background-color:#ddd;
     border-radius:2px;
     padding:2px;
@@ -1025,6 +1025,31 @@ div.share> .twitter {
 }
 
 #tags-suggest-list > li:hover {
+	background-color:#bbb;
+}
+
+
+#tags-suggest-list > li:hover {
+	background-color:#bbb;
+}
+
+.suggestions {
+	background-color:#aaa;
+	width:34%;
+	margin-top:30px;		
+}
+
+.suggestions > li {
+	background-color:#ccc;
+	margin-top:1px;
+}
+
+.suggestions > li:hover {
+	background-color:#bbb;
+}
+
+
+.suggestions > li:hover {
 	background-color:#bbb;
 }
 

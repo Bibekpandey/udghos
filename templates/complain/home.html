@@ -30,6 +30,13 @@
         for(var x=0;x<selected.length;x++) {
             tagids.push(selected[x].getAttribute('id').replace('selected-', ''))
         }
+
+        // then collect targets
+        selected = document.getElementsByClassName('selected-targets');
+        var targetids =[];
+        for(var x=0;x<selected.length;x++) {
+            targetids.push(selected[x].getAttribute('id').replace('selected-', ''))
+        }
         // check if title is empty
         var tit = $('input[name=title]').val();
         if(tit.trim() =='') {
@@ -44,6 +51,11 @@
         }
         if(tagids.length==0) {
             $('#tags-warning').show();
+            return false;
+        }
+
+        if(targetids.length==0) {
+            $('#targets-warning').show();
             return false;
         }
         var inputelem = document.createElement('input');
@@ -240,11 +252,21 @@
                           <div class="form">
                             <label for="recipient-name" class="control-label">Tags * <small id="tags-warning" class="alert-danger" style="display:none">Please provide at least 1 tag(max 4) </small></label><br>
                             <input type="text" class="form-control" placeholder="Type in tag names (max 4)" id="tagbox"/>
-                            <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">
+                            <ul class="nav suggestions" id="tags-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
                               <div id="tags-chosen">
                               </div>
                           </div><br><br>
+
+                            <div class="form">
+                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
+                            <input type="text" class="form-control" placeholder="Who is to be addressed? (max 3)" id="targetbox"/>
+                            <ul class="nav suggestions" id="targets-suggest-list" style="z-index:100;position:absolute;">
+                            </ul>
+                              <div id="targets-chosen">
+                              </div>
+                          </div><br><br>
+
                             <label for="recipient-name" class="control-label">Image(s)</label>
                           <input type="file" name="images" multiple accept="image/*" /><br>
                           <ul id="image-list" class="img" />
@@ -423,12 +445,20 @@
 
   <script>
     var g_end_of_posts = false;
-    $('#tagbox').on('input', getTags);
+
+    var g_select_items = {
+        'tag':{max:4, current:[]},
+        'target':{max:2,current:[]}
+    };
+
+    $('#tagbox').on('input', function(){getItems('tag');});
+    $('#targetbox').on('input', function(){getItems('target');});
+
     window.onload = function()  { 
         $('html,body').animate({scrollTop:0}, 500);
         $('.comment-form').hide();
-        $('#error').text(window.localStorage.getItem("message"));
-        window.localStorage.setItem("message","");
+        //$('#error').text(window.localStorage.getItem("message"));
+        //window.localStorage.setItem("message","");
         showRecent(); 
     };
 
@@ -462,7 +492,7 @@
     }
 
     function showTop() {
-	g_end_of_posts = false;
+	    g_end_of_posts = false;
         g_thread_container = "top-threads";
         g_thread_type = 'top';
         g_earliertop = 0;
@@ -524,39 +554,39 @@
             }
         });
     }
-function getTags() {
-        var query = $('#tagbox').val();
+function getItems(itemtype) {
+        var query = $('#'+itemtype+'box').val();
         if (query != '') {
-            $.get('/complain/tags?query='+query, function(data) {
-                renderTags(data);
+            $.get('/complain/'+itemtype+'s/?query='+query, function(data) {
+                renderItem(itemtype, data);
             });
         }
     }
 
-    function renderTags(data) {
-        var tags = data.tags;
-		var ul = document.getElementById('tags-suggest-list');
+    function renderItem(itemtype, data) {
+        var items = data.items;
+		var ul = document.getElementById(itemtype+'s-suggest-list');
 		ul.innerHTML="";
-        for(var x in tags) {
-            if (g_tags_selected.indexOf(tags[x].name) < 0 && g_tags_selected.length<4)
-			    ul.innerHTML += '<li id="tag-'+tags[x].id+'" onclick="addTag(this)">'+tags[x].name+'</li>';
+        for(var x in items) {
+            if (g_select_items[itemtype].current.indexOf(items[x].name)<0 && g_select_items[itemtype].current.length < g_select_items[itemtype].max)
+			    ul.innerHTML += '<li class="suggestion" id="'+itemtype+'-'+items[x].id+'" onclick="addItem(this,\''+itemtype+'\')">'+items[x].name+'</li>';
         }
     }
 	
-	function addTag(elem) {
-        $('#tags-warning').hide();
-        $('#tagbox').val('');
-        $('#tags-suggest-list').empty();
-        g_tags_selected.push(elem.innerHTML);
-        var id = elem.getAttribute('id').replace('tag-', '');
-		var tags_elem = document.getElementById('tags-chosen');	
-		tags_elem.innerHTML+= '<span id="selected-'+id+'"class="btn selected-tags">' +elem.innerHTML+ '<button type="button" class="close my-close" id="close-tag"><span onclick="removeTag(\''+id+'\''+',\''+elem.innerHTML+'\')" aria-hidden="true">&times;</span></button></span>';
+	function addItem(elem, itemtype) {
+        $('#'+itemtype+'s-warning').hide();
+        $('#'+itemtype+'box').val('');
+        $('#'+itemtype+'s-suggest-list').empty();
+        g_select_items[itemtype].current.push(elem.innerHTML);
+        var id = elem.getAttribute('id').replace(itemtype+'-', '');
+		var items_elem = document.getElementById(itemtype+'s-chosen');	
+		items_elem.innerHTML+= '<span id="selected-'+itemtype+'-'+id+'"class="btn selected-'+itemtype+'s">' +elem.innerHTML+ '<button type="button" class="close my-close" ><span onclick="removeItem(\''+id+'\''+',\''+itemtype+'\', \''+elem.innerHTML+'\')" aria-hidden="true">&times;</span></button></span>';
 	}
 
-    function removeTag(id, tagname) {
-        var index = g_tags_selected.indexOf(tagname);
-        g_tags_selected.splice(index, 1);
-        $('#selected-'+id).remove();
+    function removeItem(id, itemtype, name) {
+        var index = g_select_items[itemtype].current.indexOf(name);
+        g_select_items[itemtype].current.splice(index, 1);
+        $('#selected-'+itemtype+'-'+id).remove();
     }
 
 
