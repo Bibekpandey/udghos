@@ -24,6 +24,12 @@
 
   <body>
 
+  <div id="float-notification">
+  <div id="notification-text">
+    haha
+  </div>
+</div>
+
   
   <nav id="navcolor" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -51,6 +57,11 @@
             <li>Get Supports</li> 
             <li>Solve it</li>
           </ul>
+          <div class="login-mobile-test">
+            Udghos your voice<br>
+            Get Supports<br>
+            Solve it
+          </div>
       </div>
       <div class="col-md-4 login-box">
         <div class="box-signin">
@@ -74,10 +85,11 @@
               <label for="inputPassword" class="sr-only">Password</label>
               <input type="password" id="inputPassword" class="form-control login-form" placeholder="Password" name="password" required>
               <div class="checkbox">
-                <label><input type="checkbox" value="remember-me"> Remember me</label>
+                <label><input class="checkbox-input" type="checkbox" value="remember-me"> Remember me</label>
               </div>
               <input type="submit" value="Sign In" class="btn btn btn-my btn-block">
             </form>
+            <p class="p-signin"><a href="#" class="forgot-password">Forgot Password?</a></p>
             <p class="p-signin">New User? <a href="#" id="click-signup-link">Sign Up</a></p>
           </div>
 
@@ -104,7 +116,6 @@
               <input type="password" name="password" id="password" class="form-control login-form" placeholder="Password" required>
                           
               <button class="btn btn btn-my btn-block" type="button" onclick="return signUp()">Sign Up</button>
-              <a href="#" class="forgot-password">Forgot Password?</a></p>
               {% csrf_token %}
               <p class="p-signin">Already a User? <a href="#" id="click-signin">Sign In</a></p>
             </form>
@@ -114,9 +125,7 @@
     </div>
   </div>
                
-  <div class="container container-box">
-    <div class="row">
-      <div class="col-md-12">
+      <div id="wrapper">
         <div class="box-footer">
           <div class="container">
             <footer>
@@ -138,15 +147,14 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
 
     </body>   
 
 
 
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/signin.js' %}"></script>
+    <script src="{% static 'js/signin.js' %}"></script>
 
 
   

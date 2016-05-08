@@ -52,3 +52,98 @@ div.social-wrap.b > .facebook:hover {
 div.social-wrap.b > .twitter:hover {
 	background-color: #66BDFF;
 }
+
+@media(max-width: 991px){
+    div.social-wrap button {
+    
+    height: 70px;
+    background: none;
+    border: none;
+    display: block;
+    background-position: right center;
+    background-repeat: no-repeat;
+    border-radius: 2px;
+    color: white;
+    font-family:"Merriweather Sans", sans-serif;
+    font-size: 35px;
+    margin-bottom: 5px;
+    margin-left: -150px;
+    width: 200%;
+    border-bottom: 2px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    box-shadow: 0 2px 2px -2px gray;
+
+}
+
+
+
+
+div.social-wrap.b > .googleplus {
+    background-size: 65px 65px, cover;
+    background-image: url(http://i.imgur.com/paYWSNt.png);
+    background-color: #DD4B39;
+    margin-bottom: 10px;
+}
+
+div.social-wrap.b > .facebook {
+    background-image: url(http://i.imgur.com/v2bi4gW.png);
+    background-size: 65px 65px, cover;
+    background-repeat:no-repeat;
+    background-color: #3B5998;
+}
+div.social-wrap.b > .twitter {
+    background-image: url(http://i.imgur.com/AR0S6e3.png);
+    background-size: 65px 65px, cover;
+    background-color: #55ACEE;
+}
+   
+}
+
+
+
+@media(max-width: 767px){
+    div.social-wrap button {
+    height: 35px;
+    background: none;
+    border: none;
+    display: block;
+    background-position: right center;
+    background-repeat: no-repeat;
+    border-radius: 2px;
+    color: white;
+    font-family:"Merriweather Sans", sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    width: 100%;
+    border-bottom: 2px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    box-shadow: 0 2px 2px -2px gray;
+
+}
+
+
+
+
+div.social-wrap.b > .googleplus {
+    background-size: 30px 30px, cover;
+    background-image: url(http://i.imgur.com/paYWSNt.png);
+    background-color: #DD4B39;
+    margin-bottom: 10px;
+}
+
+div.social-wrap.b > .facebook {
+    background-image: url(http://i.imgur.com/v2bi4gW.png);
+    background-size: 30px 30px, cover;
+    background-repeat:no-repeat;
+    background-color: #3B5998;
+}
+div.social-wrap.b > .twitter {
+    background-image: url(http://i.imgur.com/AR0S6e3.png);
+    background-size: 30px 30px, cover;
+    background-color: #55ACEE;
+}
+   
+}

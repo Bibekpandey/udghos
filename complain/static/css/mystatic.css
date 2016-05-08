@@ -11,21 +11,52 @@ h1,h2,h3,h4{
   border: 0px solid #000;
 
 }
+#float-notification{
+  position: absolute;
+  float: right;
+  right: 0;
+  display: none;
+  margin-right: 50px;
+  background: #ccc transparent;
+  border: 1px solid #aaa;
+  padding: 5px;
+  min-width: 200px;
+  min-height: 50px;
+  border-radius: 3px;
+}
+#float-notification:hover{
+  background: #ddd;
+}
+
 .topic{
   text-align: center;
 }
 
 .btn-my {
   font-family: 'Varela Round', sans-serif;
-  background: #d61010;
-  
+  background: #d71010;
+  color: #fff;
+
   -webkit-border-radius: 3;
   -moz-border-radius: 3;
   border-radius: 3px;
   
-  color: #fff;
   font-size: 15px;
   padding: 5px 10px 5px 10px;
+  text-decoration: none;
+}
+.btn-header{
+  color: #444;
+  display: none;
+}
+.btn-review {
+  background: #d71010;
+  color: #fff;
+  border-radius: 3px 3px 0px 0px;
+  right: 0px;
+  bottom: 0px;
+  font-size: 20px;
+  position: fixed;
   text-decoration: none;
 }
 .btn-large{
@@ -66,7 +97,7 @@ h1,h2,h3,h4{
   min-height: 20px;
   padding: 10px 15px 15px 15px;
   margin: 2px;
-  margin-top: 65px;
+  margin-top: 10px;
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
@@ -82,8 +113,10 @@ h1,h2,h3,h4{
 }
 
 .box-header{
-  background: linear-gradient(#fff, #eee);
-  /*background-image: url("../img/UdghosBlur.png");*/
+  /*background: linear-gradient(#fff, #eee);*/
+  background-image: url("/static/img/udghos-header.png");
+  background-size: 85% 200px;
+  background-position: center;
   background-repeat: no-repeat; 
   font-family: 'Varela Round', sans-serif;
   position: block;
@@ -91,6 +124,14 @@ h1,h2,h3,h4{
   color: #000; 
   border-radius: 3px;
   margin-top: -10px;
+  height: 300px;
+  right: 0;
+}
+h1{
+  font-size: 60px;
+}
+.how{
+  margin-top: 10px;
 }
 
 .box-tabs{
@@ -145,6 +186,7 @@ h1,h2,h3,h4{
 .box-footer{
   background: #333;
   margin-bottom: 0px;
+  margin-top: 50px;
   color: #fff;
 }
 .footer-body{
@@ -297,9 +339,6 @@ div.row.background-icons{
   height: 70px;
   margin-left: 25%;
   display: none;
-}
-.header-column>a{
-  text-decoration: none;
 }
 .post-action{
   position: relative;
@@ -969,9 +1008,21 @@ div.share> .twitter {
   border-right: 0px solid #888;
   margin-bottom: 25px;
 }
+.header-column>a{
+  text-decoration: none;
+}
 .header-column-first{
+  margin-top: 15px;
   border-right: 0px solid #888;
   height: 190px;
+}
+.header-column-first>h3,
+.header-column-last>h3{
+  font-size: 15px;
+  color: #555;
+}
+.header-column-last{
+  margin-top: 15px;
 }
 .font-header{
   font-size: 50px;
@@ -1203,4 +1254,4 @@ ul#image-list.img{
   margin-top: -15px;
   margin-left: -40px;
 }
-}
+

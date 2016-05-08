@@ -68,8 +68,12 @@ function signUp() {
             window.location='/not-verified/';
         }
         else {
-            document.getElementById('signup-form').reset();  
-            $('#signup-message').text(data.message);
+            document.getElementById('signup-form').reset();
+            $('#signup-message').hide();
+            $('#float-notification').show();  
+            $('#notification-text').text(data.message);
+            setTimeout(function() { $('#float-notification').delay(100).fadeOut(); }, 900);
+            $('#float-notification').hide();
             return false;
         }
     });
