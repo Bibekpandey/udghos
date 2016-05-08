@@ -5,6 +5,10 @@ body {
   font-family: 'Varela Round', serif !important;
   color: #000;
   background-size:cover;  
+  padding:0;
+    margin:0;
+    width:100%;
+    min-height:500px;
 }
 h1,h2,h3,h4{
   text-decoration: none;
@@ -204,6 +208,12 @@ h1{
   margin-bottom: 0px;
   margin-top: 50px;
   color: #fff;
+}
+ #footer {
+   position:relative;
+   margin-top: 270px;
+   bottom:0px;
+   width: 100%;
 }
 .footer-body{
   margin: 10px 10px 0px 10px;
