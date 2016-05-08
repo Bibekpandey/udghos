@@ -37,7 +37,8 @@ urlpatterns =  [
         url(r'^comment-delete/', delete_comment, name='delete_comment'),
         url(r'^get-comments/', get_comments, name='get_comments'),
 
-        url(r'^tags/', get_tags, name='get_tags'),
+        url(r'^tags/', get_tags, name='get-tags'),
+        url(r'^targets/', get_targets, name='get-targets'),
 
         #url(r'^reply/', reply, name='reply'),
         url(r'^error/', error, name='error'),

@@ -501,12 +501,28 @@ def get_tags(request):
             d = [] 
             for x in tags:
                 d.append({'id':x.id,'name':x.name})
-            return JsonResponse({'tags':d})
+            return JsonResponse({'items':d})
         else:
-            return JsonResponse({'tags':[]})
+            return JsonResponse({'items':[]})
 
-
-        
+def get_targets(request):
+    if request.method=='GET':
+        query = request.GET.get('query', '').strip()
+        if query !='':
+            words = query.split(' ')
+            d = []
+            temp = []
+            for word in words:
+                items = Target.objects.filter(name__contains=word)
+                for x in items:
+                    if x not in temp:
+                        temp.append(x)
+            for x in temp:
+                d.append({'id':x.id, 'name':x.name})    
+            return JsonResponse({'items':d})
+        else:
+            return JsonResponse({'items':[]})
+                
 
 class Profile(View):
     def get(self,request, profileid):
