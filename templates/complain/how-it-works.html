@@ -1,0 +1,294 @@
+{% load staticfiles %}
+{% load zip %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+ 	<title>Udghos</title>
+<link rel='shortcut icon' href='/static/img/udghos.ico' type='image/x-icon'/ >  
+
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+
+  	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+  <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
+  <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
+
+
+</head>
+
+	<body>
+
+<style>
+  body {
+    padding:0;
+    margin:0;
+    width:100%;
+    min-height:500px;
+  }
+  #footer {
+   position:relative;
+   margin-top: 270px;
+   bottom:0px;
+   width: 100%;
+  }
+  .how-text{
+    font-size: 20px;
+  }
+  .how-heading{
+    margin-bottom: 20px;
+  }
+
+</style>
+<div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
+  <div id="mask" style="position:absolute;display:none"></div>
+
+  <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
+      <div class="container">
+        <div class="navbar-header">
+          <a id="navhead" class="navbar-brand" href="/">
+            <img class="udghos-logo" src="/static/img/navbarlogo.png" width="30" height="30">
+          </a>
+        </div>
+        
+      </div>
+  </nav>
+
+  	<div class="container" id="content-top">
+  		<div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <h1 class="how-heading">How Udghos works</h1>
+          <p class="how-text">We let people to post their concern regarding society and let them support and comment on the all posts available. Posts will be asked for who they want to choose as their concern’s addresser from the list available. The list includes all the ministry offices and officers, representatives from the political parties, commission for the investigation of abuse of authority, Nepal police, Nepal traffic police, private businessmen, and other people and organizations with higher authority like parliamentary representatives or policy maker.
+          </p>
+          <p class="how-text">
+          Once the support reaches certain number of supports we will let know who you have chosen as a concern addresser telling them the number of supports the concern has and make them address the issue. This a place where you speak for the nation and the nation speak with you.  
+          Moreover, we will be increasing the number or people and organizations available in the list to address your concern.
+        </p>
+        </div>
+  			       
+  			
+  		</div>
+  	</div>
+
+
+  <div id="footer" class="box-footer">
+    <div class="container" > 
+      <footer>
+        <div class="footer-body">
+          <p class="pull-right">
+            <a href="#">Back to top</a>
+          </p>
+          <p>
+            <a href="/about/">About</a>&middot;
+            <a href="#">Privacy</a> &middot; 
+            <a href="#">Terms & Conditions</a>
+          </p>
+          <p class="pull-right">
+            <form class="footer-form" role="search">
+              <div class="form-group">
+                <div id="search-bar" class="inner-addon right-addon nav-search">
+                  <i class="glyphicon glyphicon-footer glyphicon-search"></i>
+                  <input type="text" placeholder="Search" class="form-control form-control-footer" />
+                </div>
+              </div>
+            </form>
+          </p>
+          <p class="pull-right">
+            <a href="https://facebook.com/udghos">Facebook</a>&middot;
+            <a href="https://twitter.com/udghosnepal">Twitter</a>
+          </p>
+          <p class="copyright">
+            &copy; 2016 Udghos, Inc.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </div>
+<div class="container">
+    <div id="popover_notification_content" style="display: none">
+      <div class="notification-body">
+    {% if notifications %}
+      {% else %}
+      <div class="single-notification">
+        &nbsp; No new notifications
+      </div>
+      {% endif %}
+
+      {% for notif in notifications %}
+        <div class="single-notification">
+          <a href="/thread/{{notif.thread}}/">{% ifequal notif.type "comment" %}
+          Comment on your thread by {{notif.by}}
+          {% endifequal %}
+          {% ifequal notif.type "support" %}
+            Support on your thread by {{notif.by}}
+          {% endifequal %}
+          {% ifequal notif.type "downvote" %}
+            Downvote on your thread by {{notif.by}}
+          {% endifequal %}
+
+            <div class="stimg-notification">
+                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
+            </div>
+          </a>
+        </div>
+    {% endfor %}
+    </div>
+<div class="container">
+    <div id="popover_notification_content" style="display: none">
+      <div class="notification-body">
+    {% if notifications %}
+      {% else %}
+      <div class="single-notification">
+        &nbsp; No new notifications
+      </div>
+      {% endif %}
+
+      {% for notif in notifications %}
+        <div class="single-notification">
+          <a href="/thread/{{notif.thread}}/">{% ifequal notif.type "comment" %}
+          Comment on your thread by {{notif.by}}
+          {% endifequal %}
+          {% ifequal notif.type "support" %}
+            Support on your thread by {{notif.by}}
+          {% endifequal %}
+          {% ifequal notif.type "downvote" %}
+            Downvote on your thread by {{notif.by}}
+          {% endifequal %}
+
+            <div class="stimg-notification">
+                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
+            </div>
+          </a>
+        </div>
+    {% endfor %}
+    </div>
+
+</body>
+
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/myjs.js' %}"></script>
+    <script src="{% static 'js/homepage.js' %}"></script>
+  	<script src="{% static 'js/functions.js' %}"></script>
+    
+    <script>
+        var g_thread_container = "thread-container";
+        var g_type;
+        var g_query, g_tagname;
+        var g_lastId;
+        var g_earliertop;
+        window.onload = function () { 
+            window.onscroll = function() {
+
+                // first get direction of scroll
+                var curr = window.scrollY;
+                if (curr <= g_earliertop) {
+                    return;
+                }
+                g_earliertop = curr;
+                var elems = document.getElementsByClassName('box thread');
+                var last = elems[elems.length-1];
+
+                var lastRect = last.getBoundingClientRect();
+                var windowH = window.innerHeight;
+                if(lastRect.top <= 0.85*windowH) {
+                    if(g_lastId==null) return;
+                    console.log('here');
+                    var data = {earlierthan:g_lastId.toString()};
+                    g_lastId = null;
+                    if(g_type=='search')
+                        getSearch(g_query, data);
+                    else if (g_type=='tag')
+                        getTagged(g_tagname, data);
+                 }
+            }   
+
+            try {
+                // get threadid from url
+                var temp = location.pathname.split('/');
+
+                // but this page is for tags and search results too
+                if(temp.indexOf('thread') >= 0) {// means this page is for thread
+                    g_type='thread';
+                    var threadid = temp[temp.length-2]; // last one is empty
+                    $.ajax({
+                        url:'/complain/thread/?id='+threadid, 
+                        success:function(data) {
+                            add_item(data.thread, g_thread_container, data.authenticated)
+                        },
+                        error:function(data) { window.location="/";}
+                    });
+                }
+                else if (temp.indexOf('search') >= 0) { // this is result for search
+                    g_type='search';
+                    var query;
+                    var search = location.search.substring(1).split('&');
+                    for(var x=0;x<search.length;x++) {
+                        var temp = search[x].split('=');
+                        if(temp[0]=='query') {
+                            query = decodeURI(temp[1]);
+                            break;
+                        }
+                    }
+                    g_query = query;
+                    $('#searchquery').val(query);
+                    getSearch(query, {});
+                }
+                else if (temp.indexOf('tagged') >= 0) { // this is result for tags
+                    g_type='tag';
+                    var tagname;
+                    var parts = location.pathname.split('/');
+                    tagname = parts[parts.length-2];
+                    g_tagname = tagname;
+                    getTagged(tagname, {});
+                }
+                    
+            }
+            catch(e){
+                //alert('exception');
+            }
+        };
+
+        function getSearch(query, data) {
+            $.ajax({
+                url:'/complain/threads/?query='+query, 
+                data:data,
+
+                success:function(data) {
+					$('#result').show();
+                    $('#result-for').text('"'+query+'"');
+                    if(data.threads.length==0) $('#not-found').show();
+                    g_lastId = data.lastid;
+                    for(var x=0;x<data.threads.length;x++) {
+                        add_item(data.threads[x], g_thread_container, data.authenticated)
+                    }
+                },
+
+                error:function(data) { window.location="/";}
+            });
+        }
+
+
+        function getTagged(tagname, data) {
+            $.ajax({
+                url:'/complain/threads/?tagname='+tagname,
+                data:data,
+                success:function(data) {
+					$('#result').show();
+                    $('#result-for').text('tag "'+tagname+'"');
+                    if(data.threads.length==0)$('#not-found').show();
+                    g_lastId = data.lastid;
+                    for(var x=0;x<data.threads.length;x++) {
+                    add_item(data.threads[x], g_thread_container, data.authenticated)
+                    }
+                },
+                error:function(data) { window.location="/";}
+            });
+        }
+    </script>
+</html>
+

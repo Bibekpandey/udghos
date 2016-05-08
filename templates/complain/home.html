@@ -203,7 +203,7 @@
             </a>
             {% endif %}
             <div class="how">
-              <a href="#">How udghos works?</a>       
+              <a href="/how-it-works/">How udghos works?</a>       
             </div>
           </div>
 
@@ -350,20 +350,29 @@
             </p>
           </div>
         </div>
-        {% endif %}
-        <div class="box-tags box-tags-home">
-          <span class="heading-property tag-heading">My Tags</span>
-          <a class="top-tags" href="">Nepal</a>
-          <a class="top-tags" href="">Education</a>
-          <a class="top-tags" href="">Government</a>
+        <div class="box-tags">
+            <div class="tag-heading event-heading">My Tags</div>
+            <a class="top-tags" href="">Nepal</a>
+            <a class="top-tags" href="">Education</a>
+            <a class="top-tags" href="">Government</a>
         </div>
+        {% else %}
+        <div class="box-tags box-tags-home">
+            <div class="tag-heading event-heading">Top Tags</div>
+            <a class="top-tags" href="">Nepal</a>
+            <a class="top-tags" href="">Education</a>
+            <a class="top-tags" href="">Government</a>
+        </div>         
+        {% endif %}
       </div>   
     </div>      
   </div>
 
+
+
   <div class="container">
     <div class="btn-review">
-      <button type="button" class="btn btn-my" data-toggle="modal" data-target="#myModalReview" data-keyboard="true">
+      <button type="button" class="btn btn-review" data-toggle="modal" data-target="#myModalReview" data-keyboard="true">
         Write a review
       </button>
     </div>

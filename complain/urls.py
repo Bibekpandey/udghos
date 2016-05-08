@@ -50,6 +50,8 @@ urlpatterns =  [
         url(r'^post-concern/', Concern.as_view(), name='concern'),
 
         url(r'^post-review/', post_review, name='review'),
+        url(r'^how-it-works/', how_it_works, name='work'),
+        url(r'^about/', about, name='about'),
 
 
 ]
