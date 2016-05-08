@@ -36,8 +36,12 @@
    width: 100%;
   }
   .box{
-    margin-top: 50px;
+    margin-top: 25px;
   }
+  a.notification-title.pull-right{
+  margin-top: 10px;
+}
+ }  
 
 </style>
 <div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
@@ -57,7 +61,7 @@
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
-              <ul class="dropdown-menu" role="menu">
+              <ul class="dropdown-menu dropdown-settings" role="menu">
                 <li><a href="{% url 'profile' user.id %}">Profile</a></li>
                 <li><a href="#">Settings</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -71,13 +75,12 @@
               </div>
             </form>
             <div class="dropdown">
-                <ul class="gly-bell nav navbar-nav" id="dNotifications" role="button" data-toggle="dropdown">
+                <ul class="gly-bell nav navbar-nav dropdown-toggle" id="dNotifications" role="button" data-toggle="dropdown">
                 <li><i class="glyphicon glyphicon-bell"></i>
                 {% if notifications %}
                 <div class="notification-count">
                 </div>
                 {% endif %}
-              </a>
               </li></ul>
               <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dNotifications">
                 <div class="notification-heading"><h5 class="notification-title">Notifications</h5>
@@ -85,7 +88,6 @@
                     <a class="notification-title pull-right" href="javascript:void()" onclick="mark_read()">Mark as Read</a>
                   </div>
                 </div>
-                <li class="divider"></li>
                 <div class="notifications-wrapper">
                   {% if notifications %}
                   {% else %}
@@ -111,28 +113,26 @@
                         {% ifequal notif.type "downvote" %}
                           Downvote on your thread by {{notif.by}}
                         {% endifequal %}
-                      </p>
-                      <div class="notification-info">
+                        <div class="notification-info">
                         About
                       </div>
+                      </p>
                     </div>
                   </a>
                   {% endfor %}
                 </div>
-                <li class="divider"></li>
-                <div class="notification-footer"><a href="#" class="notification-title">View all</a></div>
               </ul>
             </div>
           </ul>
             {% else %}
             
             <ul class="nav navhead-nav nav-unauth">
-              <li class="icon-login"><a href="/complain/login" id="click-signup">LogIn/Sign Up</a></li>
               <li class="icon-login"><a href="/about/">About</a></li>
             </ul> 
             {% endif %}        
       </div>
   </nav>
+
 
   	<div class="container" id="content-top">
   		<div class="row">
