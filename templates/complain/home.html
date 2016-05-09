@@ -244,6 +244,15 @@
                         <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none">Describe your concern and the solution</small></label>
                           <textarea name="content" class="form-control" placeholder="Your queries here." oninput="$('#description-warning').hide()"></textarea>
+
+                          <div class="form">
+                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
+                            <input type="text" class="form-control" placeholder="Who is to be addressed? (max 3)" id="targetbox"/>
+                            <ul class="nav suggestions" id="targets-suggest-list" style="z-index:100;position:absolute;">
+                            </ul>
+                              <div id="targets-chosen">
+                              </div>
+                          </div>
                           
                           <div class="form">
                             <label for="recipient-name" class="control-label">Tags * <small id="tags-warning" class="alert-danger" style="display:none">Please provide at least 1 tag(max 4) </small></label><br>
@@ -251,15 +260,6 @@
                             <ul class="nav suggestions" id="tags-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
                               <div id="tags-chosen">
-                              </div>
-                          </div><br><br>
-
-                            <div class="form">
-                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
-                            <input type="text" class="form-control" placeholder="Who is to be addressed? (max 3)" id="targetbox"/>
-                            <ul class="nav suggestions" id="targets-suggest-list" style="z-index:100;position:absolute;">
-                            </ul>
-                              <div id="targets-chosen">
                               </div>
                           </div><br><br>
 
@@ -409,21 +409,11 @@
             <a href="#">Terms & Conditions</a>
           </p>
           <p class="pull-right">
-            <form class="footer-form" role="search" onsubmit="return search()>
-              <div class="form-group">
-                <div id="search-bar" class="inner-addon right-addon nav-search">
-                  <i class="glyphicon glyphicon-footer glyphicon-search"></i>
-                  <input type="text" placeholder="Search" class="form-control form-control-footer" />
-                </div>
-              </div>
-            </form>
-          </p>
-          <p class="pull-right">
             <a href="https://facebook.com/udghos">Facebook</a>&middot;
             <a href="https://twitter.com/udghosnepal">Twitter</a>
           </p>
           <p class="copyright">
-            &copy; 2016 Udghos, Inc.
+            &copy; 2016 Udghos.com
           </p>
         </div>
       </footer>
