@@ -178,6 +178,15 @@
                 <textarea name="content" class="form-control" placeholder="Your queries here." oninput="$('#description-warning').hide()"></textarea>
                           
                 <div class="form">
+                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
+                            <input type="text" class="form-control" placeholder="Who is to be addressed? (max 2)" id="targetbox"/>
+                            <ul class="nav suggestions" id="targets-suggest-list" style="z-index:100;position:absolute;">
+                            </ul>
+                              <div id="targets-chosen">
+                              </div>
+                </div>
+
+                <div class="form">
                   <label for="recipient-name" class="control-label">Tags * <small id="tags-warning" class="alert-danger" style="display:none">Please provide at least 1 tag(max 4) </small></label><br>
                   <input type="text" class="form-control" placeholder="Type in tag names (max 4)" id="tagbox"/>
                   <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">

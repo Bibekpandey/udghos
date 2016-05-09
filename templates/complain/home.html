@@ -255,7 +255,7 @@
 
                           <div class="form">
                             <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
-                            <input type="text" class="form-control" placeholder="Who is to be addressed? (max 3)" id="targetbox"/>
+                            <input type="text" class="form-control" placeholder="Who is to be addressed? (max 2)" id="targetbox"/>
                             <ul class="nav suggestions" id="targets-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
                               <div id="targets-chosen">
@@ -269,12 +269,13 @@
                             </ul>
                               <div id="tags-chosen">
                               </div>
-                          </div><br><br>
-
+                          </div>
+                          <div class="image-form">
                             <label for="recipient-name" class="control-label">Image(s)</label>
-                          <input type="file" name="images" multiple accept="image/*" /><br>
-                          <ul id="image-list" class="img" />
-                            
+                            <input type="file" name="images" multiple accept="image/*" /><br>
+                            <ul id="image-list" class="img" />
+                            </ul>
+                          </div>
                         </div>
                         <div class="make-anonymous">
                           <input type="checkbox" name="anonymous" value="yes"/><b>Make me Anonymous</b>
