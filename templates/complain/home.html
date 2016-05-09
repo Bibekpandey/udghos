@@ -446,16 +446,16 @@
         'target':{max:2,current:[]}
     };
 
-    $('#tagbox').on('input', function(){getItems('tag');});
-    $('#tagbox').focus(function() {$('#targets-suggest-list').empty().hide();});
+    $('#tagbox').on('input', function(){$('#tags-suggest-list').show(); getItems('tag');});
+    $('#tagbox').focus(function() {$('#targets-suggest-list').hide();});
 
-    $('#targetbox').on('input', function(){getItems('target');}); 
-    $('#targetbox').focus(function() { $('#tags-suggest-list').empty().hide();});
+    $('#targetbox').on('input', function(){$('#targets-suggest-list').show();getItems('target');}); 
+    $('#targetbox').focus(function() { $('#tags-suggest-list').hide();});
 
     $('#targetbox,#tagbox').focusout(function() {
-            $('#tags-suggest-list').empty().hide();
+            $('#tags-suggest-list').hide();
             $('#tagbox,#targetbox').val('');
-            $('#targets-suggest-list').empty().hide();
+            $('#targets-suggest-list').hide();
     });
 
     window.onload = function()  { 
