@@ -447,7 +447,16 @@
     };
 
     $('#tagbox').on('input', function(){getItems('tag');});
-    $('#targetbox').on('input', function(){getItems('target');});
+    $('#tagbox').focus(function() {$('#targets-suggest-list').empty().hide();});
+
+    $('#targetbox').on('input', function(){getItems('target');}); 
+    $('#targetbox').focus(function() { $('#tags-suggest-list').empty().hide();});
+
+    $('#targetbox,#tagbox').focusout(function() {
+            $('#tags-suggest-list').empty().hide();
+            $('#tagbox,#targetbox').val('');
+            $('#targets-suggest-list').empty().hide();
+    });
 
     window.onload = function()  { 
         $('html,body').animate({scrollTop:0}, 500);
