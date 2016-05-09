@@ -230,7 +230,9 @@ div.form-group{
     padding: 0;
     min-height:100%;
 }
-
+.image-form{
+  margin-top: 35px;
+}
 p>a{
   font-size: 15px;
   margin: 5px;
@@ -402,8 +404,20 @@ div.row.background-icons{
   display: block;
   float: right;
   margin-top: -20px;
-  margin-right: 15px;
+  margin-right: 25px;
   margin-bottom: 2px;
+}
+.display-target{
+  display: block;
+  float: left;
+  background-color: #eee;
+  border-radius: 5px;
+  margin-top: -47px;
+  margin-left: 5px;
+  margin-bottom: 2px;
+}
+.target-text{
+  padding: 2px;
 }
 .comment-form{
   background-color: #eee;
@@ -728,6 +742,9 @@ ul.dropdown-settings{
 .modal-custom{
   width: 50%;
 }
+.modal-content{
+  margin-top: -25px;
+}
 .modal-post .close-image {
   margin-top: -5px;
   margin-left: -35px;
@@ -1011,6 +1028,7 @@ div.share> .twitter {
     font-size:0.9em;
     margin:2px;
     margin-top:3px;
+    position: relative;
     vertical-align:middle;
 
 }

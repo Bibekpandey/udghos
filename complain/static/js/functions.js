@@ -330,6 +330,7 @@ function generate_thread(threadobj, auth) {
                 '<div class="sttime">'+
                 '</div>'+
                 '<div class="row">'+
+                    
                   '<div class="display-tag">'+
                     '<span id="tag-post2" class="glyphicon glyphicon-tags"></span>';
                 for(var x in threadobj.tags) {
@@ -340,6 +341,9 @@ function generate_thread(threadobj, auth) {
                 '</div>'+
             '</div>'+
           '</div>'+
+          //'<div class="display-target">'+
+          //      '<span class="target-text">Address to udghos.com</span>'+
+          //'</div>'+
           '<div class="row background-icons">'+
           '<div class="box-icons">'+
             '<div class="icons-ld">'+

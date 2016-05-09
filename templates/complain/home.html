@@ -22,21 +22,22 @@
   <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
 
 
-    <script>
+<script>
     function submitPost() {
         // first collect tags
         var selected = document.getElementsByClassName('selected-tags');
         var tagids =[];
         for(var x=0;x<selected.length;x++) {
-            tagids.push(selected[x].getAttribute('id').replace('selected-', ''))
+            tagids.push(selected[x].getAttribute('id').replace('selected-tag-', ''))
         }
 
         // then collect targets
         selected = document.getElementsByClassName('selected-targets');
         var targetids =[];
         for(var x=0;x<selected.length;x++) {
-            targetids.push(selected[x].getAttribute('id').replace('selected-', ''))
+            targetids.push(selected[x].getAttribute('id').replace('selected-target-', ''))
         }
+
         // check if title is empty
         var tit = $('input[name=title]').val();
         if(tit.trim() =='') {
@@ -58,12 +59,19 @@
             $('#targets-warning').show();
             return false;
         }
-        var inputelem = document.createElement('input');
-        inputelem.setAttribute("type", "hidden");
-        inputelem.setAttribute("name", "tagids");
-        inputelem.setAttribute("value", tagids.toString());
+        var taginputelem = document.createElement('input');
+        taginputelem.setAttribute("type", "hidden");
+        taginputelem.setAttribute("name", "tagids");
+        taginputelem.setAttribute("value", tagids.toString());
+
+        var targetinputelem = document.createElement('input');
+        targetinputelem.setAttribute("type", "hidden");
+        targetinputelem.setAttribute("name", "targetids");
+        targetinputelem.setAttribute("value", targetids.toString());
+
         var form = document.getElementById("thread-form");
-        form.appendChild(inputelem);
+        form.appendChild(taginputelem);
+        form.appendChild(targetinputelem);
     }
     </script>
 
@@ -244,6 +252,15 @@
                         <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none">Describe your concern and the solution</small></label>
                           <textarea name="content" class="form-control" placeholder="Your queries here." oninput="$('#description-warning').hide()"></textarea>
+
+                          <div class="form">
+                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
+                            <input type="text" class="form-control" placeholder="Who is to be addressed? (max 2)" id="targetbox"/>
+                            <ul class="nav suggestions" id="targets-suggest-list" style="z-index:100;position:absolute;">
+                            </ul>
+                              <div id="targets-chosen">
+                              </div>
+                          </div>
                           
                           <div class="form">
                             <label for="recipient-name" class="control-label">Tags * <small id="tags-warning" class="alert-danger" style="display:none">Please provide at least 1 tag(max 4) </small></label><br>
@@ -252,21 +269,13 @@
                             </ul>
                               <div id="tags-chosen">
                               </div>
-                          </div><br><br>
-
-                            <div class="form">
-                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
-                            <input type="text" class="form-control" placeholder="Who is to be addressed? (max 3)" id="targetbox"/>
-                            <ul class="nav suggestions" id="targets-suggest-list" style="z-index:100;position:absolute;">
-                            </ul>
-                              <div id="targets-chosen">
-                              </div>
-                          </div><br><br>
-
+                          </div>
+                          <div class="image-form">
                             <label for="recipient-name" class="control-label">Image(s)</label>
-                          <input type="file" name="images" multiple accept="image/*" /><br>
-                          <ul id="image-list" class="img" />
-                            
+                            <input type="file" name="images" multiple accept="image/*" /><br>
+                            <ul id="image-list" class="img" />
+                            </ul>
+                          </div>
                         </div>
                         <div class="make-anonymous">
                           <input type="checkbox" name="anonymous" value="yes"/><b>Make me Anonymous</b>
@@ -409,21 +418,11 @@
             <a href="#">Terms & Conditions</a>
           </p>
           <p class="pull-right">
-            <form class="footer-form" role="search" onsubmit="return search()>
-              <div class="form-group">
-                <div id="search-bar" class="inner-addon right-addon nav-search">
-                  <i class="glyphicon glyphicon-footer glyphicon-search"></i>
-                  <input type="text" placeholder="Search" class="form-control form-control-footer" />
-                </div>
-              </div>
-            </form>
-          </p>
-          <p class="pull-right">
             <a href="https://facebook.com/udghos">Facebook</a>&middot;
             <a href="https://twitter.com/udghosnepal">Twitter</a>
           </p>
           <p class="copyright">
-            &copy; 2016 Udghos, Inc.
+            &copy; 2016 Udghos.com
           </p>
         </div>
       </footer>
@@ -448,7 +447,16 @@
     };
 
     $('#tagbox').on('input', function(){getItems('tag');});
-    $('#targetbox').on('input', function(){getItems('target');});
+    $('#tagbox').focus(function() {$('#targets-suggest-list').empty().hide();});
+
+    $('#targetbox').on('input', function(){getItems('target');}); 
+    $('#targetbox').focus(function() { $('#tags-suggest-list').empty().hide();});
+
+    $('#targetbox,#tagbox').focusout(function() {
+            $('#tags-suggest-list').empty().hide();
+            $('#tagbox,#targetbox').val('');
+            $('#targets-suggest-list').empty().hide();
+    });
 
     window.onload = function()  { 
         $('html,body').animate({scrollTop:0}, 500);
