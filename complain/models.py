@@ -8,8 +8,7 @@ from datetime import datetime
 (COMPLAINT, DISCUSSTION) = (0, 1)
 VERIFIED = 1
 EDITED = 2
-NOTVERIFIED = 0
-
+NOTVERIFIED = 0 
 COMMENTED=1
 SUPPORTED=2
 MESSAGGED=3
@@ -51,7 +50,7 @@ class Thread(models.Model):
     last_active = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(default=0) # 0 for not verified, 1 for verified, 2 for updated by admin
     anonymous = models.BooleanField(default=False)
-    target = models.ManyToManyField('Target', blank=True, null=True)
+    targets = models.ManyToManyField('Target', blank=True, null=True)
 
     def __str__(self):
         return self.title + ' [' + self.account.user.username+']'

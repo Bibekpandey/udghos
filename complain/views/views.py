@@ -237,6 +237,18 @@ class Post(View):
             thread.tags.add(ThreadTag.objects.get(pk=tagid))
         thread.save()
 
+        # now the targets
+        strtargetids = request.POST.get('targetids', '')
+        targetids = []
+        for x in strtargetids.split(','):
+            try:
+                targetids.append(int(x))
+            except ValueError:
+                pass
+        for tid in targetids:
+            thread.targets.add(Target.objects.get(pk=tid))
+        thread.save()
+
         images = request.FILES.getlist('images')
         for image in images:
             img = ThreadImage(name=image.name, thread=thread)
