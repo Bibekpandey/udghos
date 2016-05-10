@@ -256,9 +256,9 @@
                           <div class="form">
                             <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
                             <input type="text" class="form-control" placeholder="Who is to be addressed? (max 2)" id="targetbox"/>
-                            <ul class="nav suggestions" id="targets-suggest-list" style="z-index:100;position:absolute;">
+                            <ul class="nav suggestions suggestion-target" id="targets-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
-                              <div id="targets-chosen">
+                              <div class="li-style" id="targets-chosen">
                               </div>
                           </div>
                           
@@ -378,20 +378,20 @@
           </div>
         </div>
         <div class="box-tags">
-            <div class="tag-heading event-heading">My Tags </div>
-		{% for tag in tags %}
-		<div class="display-tag">
-		<a href="/threads/tagged/{{tag.name}}">{{tag.name}}</a>
-		</div>
-		{% endfor %}
-
+            <div class="tag-heading event-heading">My Tags </div><br>
+        		  {% for tag in tags %}
+        		    <div class="display-tag display-tag-home">
+        		      <a href="/threads/tagged/{{tag.name}}">{{tag.name}}</a>
+        		    </div><br>
+        		  {% endfor %}
+            </div>
         </div>
         {% else %}
         <div class="box-tags box-tags-home">
             <div class="tag-heading event-heading">Top Tags</div>
-            <a class="top-tags" href="">Nepal</a>
-            <a class="top-tags" href="">Education</a>
-            <a class="top-tags" href="">Government</a>
+            <a class="top-tags" href="/threads/tagged/nepal">Nepal</a>
+            <a class="top-tags" href="/threads/tagged/education">Education</a>
+            <a class="top-tags" href="threads/tagged/government">Government</a>
         </div>         
         {% endif %}
       </div>   

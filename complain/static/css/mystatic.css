@@ -419,6 +419,16 @@ div.row.background-icons{
   margin-left: 5px;
   margin-bottom: 2px;
 }
+.display-tag-home>a{
+  color: #d71010;
+  margin: 5px;
+}
+.display-tag-home{
+  float: left;
+  color: #d71010;
+  padding: 1px;
+  margin-left: -5px;
+}
 .target-text{
   padding: 2px;
 }
@@ -510,6 +520,8 @@ div.row.background-icons{
 .my-close{
   float: left;
   color: #d71010;
+  margin-top: -2px;
+  margin-right: 2px;
 }
 .close-icon{
   position: absolute;
@@ -1057,8 +1069,14 @@ div.share> .twitter {
 
 .suggestions {
 	background-color:#aaa;
-	width:34%;
-	margin-top:30px;		
+	width:95%;
+	margin-top:30px;
+  max-height:80px;  
+  overflow-x:hidden; 
+  overflow-y:auto;
+}
+.suggestion-target{
+  margin-top: 0px;
 }
 
 .suggestions > li {
