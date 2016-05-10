@@ -378,10 +378,13 @@
           </div>
         </div>
         <div class="box-tags">
-            <div class="tag-heading event-heading">My Tags</div>
-            <a class="top-tags" href="">Nepal</a>
-            <a class="top-tags" href="">Education</a>
-            <a class="top-tags" href="">Government</a>
+            <div class="tag-heading event-heading">My Tags </div>
+		{% for tag in tags %}
+		<div class="display-tag">
+		<a href="/threads/tagged/{{tag.name}}">{{tag.name}}</a>
+		</div>
+		{% endfor %}
+
         </div>
         {% else %}
         <div class="box-tags box-tags-home">
