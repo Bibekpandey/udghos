@@ -36,6 +36,8 @@ class Index(View):
             self.context['authenticated'] = True
             self.context['user'] = request.user
             acc = Account.objects.get(user=request.user)
+            tags = list(acc.tags.all())
+            self.context['tags'] = tags
             self.context['address'] = acc.address
             self.context['profile_pic'] = acc.profile_pic
             self.context['notifications'] = get_notifications(request)
