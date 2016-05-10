@@ -133,7 +133,7 @@ h1,h2,h3,h4{
   color: #000; 
   border-radius: 3px;
   margin-top: -10px;
-  height: 300px;
+  height: 250px;
   right: 0;
 }
 h1{
@@ -142,6 +142,9 @@ h1{
 .how{
   margin-top: 10px;
 }
+.how>a{
+    color: #d71010;
+  }
 .event-heading{
   border-bottom: 1px solid #999;
   margin-bottom: 10px;
