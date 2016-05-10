@@ -297,7 +297,7 @@
         }
         window.onload = function() {
             $('html,body').animate({scrollTop:0}, 500);
-            $('#error').text(window.localStorage.getItem("message"));
+            //$('#error').text(window.localStorage.getItem("message"));
             window.localStorage.setItem("message", "");
             $('#profile-image-form').hide();
             drawTagBoxes(g_current_tags);
@@ -335,7 +335,7 @@ function getTags() {
     }
 
     function renderTags(data) {
-        var tags = data.tags;
+        var tags = data.items;
 		var ul = document.getElementById('tags-suggest-list');
 		ul.innerHTML="";
         for(var x in tags) {

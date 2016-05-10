@@ -1,20 +1,4 @@
-/*
-A custom Bootstrap 3.2 'Google Plus style' theme
-from http://bootply.com
 
-This CSS code should follow the 'bootstrap.css'
-in your HTML file.
-
-license: MIT
-author: bootply.com
-*/
-
-@import url(http://fonts.googleapis.com/css?family=Roboto:400);
-body {
-  background-color:#ddd;
-  -webkit-font-smoothing: antialiased;
-  font: normal 14px Roboto,arial,sans-serif;
-}
 .navbar-default {background-color:#f4f4f4;border-width:0;font-weight:80;z-index:5;}
 .navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > li:hover > a {
 	border:0 solid #4285f4;
