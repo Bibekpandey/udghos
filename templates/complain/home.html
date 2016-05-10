@@ -452,13 +452,14 @@
     $('#targetbox').on('input', function(){$('#targets-suggest-list').show();getItems('target');}); 
     $('#targetbox').focus(function() { $('#tags-suggest-list').hide();});
 
-    $('#targetbox,#tagbox').focusout(function() {
-            $('#tags-suggest-list').hide();
-            $('#tagbox,#targetbox').val('');
-            $('#targets-suggest-list').hide();
-    });
-
     window.onload = function()  { 
+	$('html').click(function() {
+		$('#tags-suggest-list').hide();
+            	$('#tagbox,#targetbox').val('');
+            	$('#targets-suggest-list').hide();
+	});
+	$('#tags-suggest-list,#targets-suggest-list').click(function(event) { event.stopPropagation(); });
+
         $('html,body').animate({scrollTop:0}, 500);
         $('.comment-form').hide();
         //$('#error').text(window.localStorage.getItem("message"));
