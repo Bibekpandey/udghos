@@ -5,7 +5,6 @@ $('#edit').click(function(){
   $('.hidden-cross').show();
   $('.dataarea').each(function() {
     var content = $(this).html();
-    alert();
     $(this).html('<textarea name="'+$(this).attr('id')+'">' + content + '</textarea>');
   });  
 

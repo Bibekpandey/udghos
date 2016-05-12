@@ -25,7 +25,11 @@ import math, traceback
 
 COMPLAINT, DISCUSSION = 0, 1
 
-#error message def error(request): return HttpResponse('Login error') class Index(View): def get(self, request):
+#error message 
+def error(request): return HttpResponse('Login error') 
+
+class Index(View): 
+    def get(self, request):
         self.context = {}
         if request.user.is_authenticated():
             self.context['authenticated'] = True
@@ -548,6 +552,7 @@ class Profile(View):
             self.context['user_pic'] = acc.profile_pic
             self.context['notifications'] = get_notifications(request)
             self.context['account'] = acc
+            self.context['about'] = acc.about
             self.context['edit'] = False
             self.context['tags'] = tags
             if request.user.id==profileid:
