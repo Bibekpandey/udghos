@@ -28,6 +28,7 @@ class Account(models.Model):
     points = models.IntegerField(default=10)
     profile_pic = models.ImageField(null=True, upload_to=get_image_path, blank=True)
     tags_followed = models.ManyToManyField('ThreadTag', blank=True)
+    about = models.TextField(null=True)
     def __str__(self):
         return self.user.username
 
