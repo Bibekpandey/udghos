@@ -25,6 +25,10 @@
 .notification-heading{
   margin-top: 5px;
 }
+#error{
+  position: absolute;
+  min-height: 30px;
+}
 
 </style>
 
@@ -137,27 +141,26 @@
             <div class="show-image">
               <img class="img-circle img-profile" src="/media/{{user_pic}}" width=200 height=200 data-toggle="modal" data-target="#myModalImage" data-keyboard="true" alt="Generic placeholder image" width="200" height="200" />
             </div>
+            {% if edit %}
             <div class="edit-text">
-              <button id="save" class="btn btn-sm" type="button"> Save Info</button>
+              <button id="save" class="btn btn-black" type="button"> Save Info</button>
+                <button id="edit" class="btn btn-black" type="button"> Edit Info</button>
               <span class="hidden-text hidden-text-font">Edit your Profile</span>
             </div>
+            {% endif %}
             <input type="hidden" name="userid" value="{{request.user.id}}" />
             <div id="dataprofile" class="my-name">
               <div class="hidden-text">
                 <b>First Name</b>
               </div>
+              {% csrf_token %}
               <span id="first-name" class="datainfo post-title">{{account.user.first_name}}</span>
               <div class="hidden-text">
                 <b>Last Name</b>
               </div>
               <span id="last-name" class="datainfo post-title">{{account.user.last_name}}</span>
   
-              {% if edit %}
-              {% csrf_token %}
-              <div class="edit-button">
-                <button id="edit" class="btn btn-sm" type="button"> Edit Info</button>
-              </div>
-                {% endif %}
+              
             </div>
             <div class="my-username">
               <br>
@@ -298,7 +301,7 @@
         window.onload = function() {
             $('html,body').animate({scrollTop:0}, 500);
             //$('#error').text(window.localStorage.getItem("message"));
-            window.localStorage.setItem("message", "");
+            //window.localStorage.setItem("message", "");
             $('#profile-image-form').hide();
             drawTagBoxes(g_current_tags);
             $('.hidden-cross').hide();

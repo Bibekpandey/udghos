@@ -20,7 +20,7 @@ $('#edit').click(function(){
 
 $('#save').click(function(){
     $('#profile-image-form').hide();
-    $('#error').text('Changing profile...');
+    //$('#error').text('Changing profile...');
     var new_tag_ids = '';
     var removed_tag_ids = '';
     for(var x=0;x<g_new_tags.length;x++) new_tag_ids+=g_new_tags[x].id.toString()+',';
@@ -38,14 +38,14 @@ $('#save').click(function(){
         url: '/complain/profile-update/',   
         data: $('#updateform').serialize(),
         success: function(data) { 
-            $('#error').text(data.error);
+            //$('#error').text(data.error);
             if(data.success==true) {
                 window.location="";
-                $('#save, .info').hide();
+                $('#save, .infoo').hide();
                 $('textarea').each(function(){
                 var content = $(this).val();//.replace(/\n/g,"<br>");
                 $(this).html(content);
-                $(this).contents().unwrap();    
+                //  $(this).contents().unwrap();    
   }); 
                 $('#edit').show(); 
 
