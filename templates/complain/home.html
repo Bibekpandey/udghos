@@ -21,7 +21,6 @@
   <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
   <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
 
-
   
     <style>
         .alert-danger {
@@ -327,7 +326,7 @@
           </div>
         </div>
         <div class="box-tags">
-            <div class="tag-heading event-heading">My Tags <div class="btn-black">Add</div></div><br>
+            <div class="tag-heading event-heading">My Tags <a id="myButton" href="{% url 'profile' user.id %}"><button class="btn btn-black">Add</button></a></div><br>
 
         		  {% for tag in tags %}
         		    <div class="display-tag display-tag-home">

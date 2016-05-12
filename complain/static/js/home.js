@@ -206,3 +206,5 @@ function getItems(itemtype) {
         g_select_items[itemtype].current.splice(index, 1);
         $('#selected-'+itemtype+'-'+id).remove();
     }
+
+
