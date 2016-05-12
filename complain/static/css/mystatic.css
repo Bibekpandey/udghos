@@ -419,6 +419,16 @@ div.row.background-icons{
   margin-left: 5px;
   margin-bottom: 2px;
 }
+.display-tag-home>a{
+  color: #d71010;
+  margin: 5px;
+}
+.display-tag-home{
+  float: left;
+  color: #d71010;
+  padding: 1px;
+  margin-left: -5px;
+}
 .target-text{
   padding: 2px;
 }
@@ -461,18 +471,14 @@ div.row.background-icons{
   float: right;
   display: inline-block;
   margin-left: 2.5px;
-  text-decoration: none; 
   padding: 0px 2px 0px 2px;
-  background-color:#ddd;
   color:#d71010;
   border-radius: 3px;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .tagname2:hover{
-  text-decoration: none;
   color: #d71010;
-  background-color: #eee;
 }
 
 #action-element{
@@ -510,6 +516,8 @@ div.row.background-icons{
 .my-close{
   float: left;
   color: #d71010;
+  margin-top: -2px;
+  margin-right: 2px;
 }
 .close-icon{
   position: absolute;
@@ -615,9 +623,9 @@ ul{
   margin-top: -2px;
 }
 .udghos-logo{
-  width: 40px;
-  height: 40px;
-  margin-top: -8px;
+  width: 48px;
+  height: 48px;
+  margin-top: -12px;
   margin-left: -25px; 
   z-index: 1000;
   background: #fff;
@@ -641,10 +649,18 @@ ul{
 
 .dropdown-menu{
   float: right;
+  padding: 0px;
   margin-top: -4px;
   margin-right: -40px;
   background-color: #eee;
   font-family: 'Varela Round', sans-serif;
+}
+.dropdown-menu>li{
+  margin-top: 0px;
+  background-color: #555;
+}
+.dropdown-menu>li>a{
+  color: #fff;
 }
 ul.dropdown-settings{
   margin-top: -12px;
@@ -847,6 +863,18 @@ ul.dropdown-settings{
   height: 25px;
   padding: 2px;
   border: 0px solid #555;
+}
+.btn-black{
+  background-color: #777;
+  border-radius: 5px;
+  color: #fff;
+  padding: 5px;
+  float: right;
+  font-size: 15px;
+}
+.btn-black:hover{
+  background-color: #888;
+  color: #fff;
 }
 #show-btn{
   display: none;
@@ -1057,8 +1085,14 @@ div.share> .twitter {
 
 .suggestions {
 	background-color:#aaa;
-	width:34%;
-	margin-top:30px;		
+	width:95%;
+	margin-top:30px;
+  max-height:80px;  
+  overflow-x:hidden; 
+  overflow-y:auto;
+}
+.suggestion-target{
+  margin-top: 0px;
 }
 
 .suggestions > li {

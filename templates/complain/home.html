@@ -251,14 +251,14 @@
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none">Describe your concern and the solution</small></label>
-                          <textarea name="content" class="form-control" placeholder="Your queries here." oninput="$('#description-warning').hide()"></textarea>
+                          <textarea name="content" class="form-control" placeholder="Describe your issue along with solition(if you have)" oninput="$('#description-warning').hide()"></textarea>
 
                           <div class="form">
                             <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
                             <input type="text" class="form-control" placeholder="Who is to be addressed? (max 2)" id="targetbox"/>
-                            <ul class="nav suggestions" id="targets-suggest-list" style="z-index:100;position:absolute;">
+                            <ul class="nav suggestions suggestion-target" id="targets-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
-                              <div id="targets-chosen">
+                              <div class="li-style" id="targets-chosen">
                               </div>
                           </div>
                           
@@ -378,17 +378,21 @@
           </div>
         </div>
         <div class="box-tags">
-            <div class="tag-heading event-heading">My Tags</div>
-            <a class="top-tags" href="">Nepal</a>
-            <a class="top-tags" href="">Education</a>
-            <a class="top-tags" href="">Government</a>
+            <div class="tag-heading event-heading">My Tags <div class="btn-black">Add</div></div><br>
+
+        		  {% for tag in tags %}
+        		    <div class="display-tag display-tag-home">
+        		      <a href="/threads/tagged/{{tag.name}}">{{tag.name}}</a>
+        		    </div><br>
+        		  {% endfor %}
+            </div>
         </div>
         {% else %}
         <div class="box-tags box-tags-home">
             <div class="tag-heading event-heading">Top Tags</div>
-            <a class="top-tags" href="">Nepal</a>
-            <a class="top-tags" href="">Education</a>
-            <a class="top-tags" href="">Government</a>
+            <a class="top-tags" href="/threads/tagged/nepal">Nepal</a>
+            <a class="top-tags" href="/threads/tagged/education">Education</a>
+            <a class="top-tags" href="threads/tagged/government">Government</a>
         </div>         
         {% endif %}
       </div>   
@@ -452,13 +456,14 @@
     $('#targetbox').on('input', function(){$('#targets-suggest-list').show();getItems('target');}); 
     $('#targetbox').focus(function() { $('#tags-suggest-list').hide();});
 
-    $('#targetbox,#tagbox').focusout(function() {
-            $('#tags-suggest-list').hide();
-            $('#tagbox,#targetbox').val('');
-            $('#targets-suggest-list').hide();
-    });
-
     window.onload = function()  { 
+	$('html').click(function() {
+		$('#tags-suggest-list').hide();
+            	$('#tagbox,#targetbox').val('');
+            	$('#targets-suggest-list').hide();
+	});
+	$('#tags-suggest-list,#targets-suggest-list').click(function(event) { event.stopPropagation(); });
+
         $('html,body').animate({scrollTop:0}, 500);
         $('.comment-form').hide();
         //$('#error').text(window.localStorage.getItem("message"));

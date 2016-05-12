@@ -19,18 +19,11 @@ h1,h2,h3,h4,h5{
 }
 .edit-text>button{
   font-size: 15px;
-  margin-left: 0px;
-  margin-top: 20px;
-  height: 50px;
+  padding: 2px;
+  height: 35px;
 }
 #edit{
   margin-right: 35%;
-}
-#save{
-  position: absolute;
-  margin-left: -20px;
-  margin-bottom: 20px;
-  margin-right: 20%;
 }
 textarea{
   height: 35px;
@@ -83,14 +76,14 @@ textarea:focus{
 .address-tab,
 .about-tab,
 .tags-tab{
-  font-size: 30px;
+  font-size: 20px;
   margin-top: 20px;
   display: block;
   position: relative;
 }
 .my-username{
   color: #777;
-  margin-top: 50px;
+  margin-top: -10px;
   margin-bottom: 20px;
 }
 .my-address{
@@ -104,11 +97,10 @@ textarea:focus{
   margin-bottom: 5px;
 }
 #save{
-  float: right;
-  position: relative;
+  position: absolute;
   display: none;
-  margin-left: 110px;
-  margin-top: -10px;
+  margin-left: 170px;
+  margin-top: -3px;
 }
 #nameinfo{
   display: none;
@@ -167,7 +159,7 @@ div.fileinputs {
   left: 70px;
   font-size: 25px;
   margin-left: -70px;
-  margin-top: -202px;
+  margin-top: -179px;
   border-radius: 50%;
   background: #111;
   color: #fff;

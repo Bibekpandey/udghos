@@ -46,14 +46,10 @@
   .form-control-navbar{
     margin-top: 10px;
     height: 65px;
-  }
+    }
   .input.form-control{
     font-size: 50px;
-  }
-  input.form-control.form-control-footer{
     width: 100%;
-    height: 45px;
-    font-size: 25px;
   }
   .box{
     font-size: 25px !important;
