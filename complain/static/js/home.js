@@ -1,3 +1,57 @@
+function submitPost() {
+        // first collect tags
+        var selected = document.getElementsByClassName('selected-tags');
+        var tagids =[];
+        for(var x=0;x<selected.length;x++) {
+            tagids.push(selected[x].getAttribute('id').replace('selected-tag-', ''))
+        }
+
+        // then collect targets
+        selected = document.getElementsByClassName('selected-targets');
+        var targetids =[];
+        for(var x=0;x<selected.length;x++) {
+            targetids.push(selected[x].getAttribute('id').replace('selected-target-', ''))
+        }
+
+        // check if title is empty
+        var tit = $('input[name=title]').val();
+        if(tit.trim() =='') {
+            $('#title-warning').show();
+            return false;
+        }
+        // now check if description is empty
+        var desc = $('textarea[name=content]').val();
+        if (desc.trim() == '') {
+            $('#description-warning').show();
+            return false;
+        }
+        if(tagids.length==0) {
+            $('#tags-warning').show();
+            return false;
+        }
+
+        if(targetids.length==0) {
+            $('#targets-warning').show();
+            return false;
+        }
+        var taginputelem = document.createElement('input');
+        taginputelem.setAttribute("type", "hidden");
+        taginputelem.setAttribute("name", "tagids");
+        taginputelem.setAttribute("value", tagids.toString());
+
+        var targetinputelem = document.createElement('input');
+        targetinputelem.setAttribute("type", "hidden");
+        targetinputelem.setAttribute("name", "targetids");
+        targetinputelem.setAttribute("value", targetids.toString());
+
+        var form = document.getElementById("thread-form");
+        form.appendChild(taginputelem);
+        form.appendChild(targetinputelem);
+    }    
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
     var g_end_of_posts = false;
 
     var g_select_items = {

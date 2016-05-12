@@ -380,7 +380,7 @@ div.row.background-icons{
 }
 .post-concern{
   width: 100%;
-  font-size: 40px;
+  font-size: 20px;
 }
 .title-concern{
   width: 100%;
@@ -510,8 +510,14 @@ div.row.background-icons{
 .my-modal-title{
   float: right;  
 }
+.post-concern{
+  margin-top: 65px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
 .my-color{
-  background: #ccc;
+  background: #777;
+  color: #fff;
 }
 .my-close{
   float: left;
@@ -754,9 +760,6 @@ ul.dropdown-settings{
 }
 .post-option{
   float: right;
-}
-.post-concern{
-  margin-top: 100px;
 }
 .modal-custom{
   width: 50%;
@@ -1087,9 +1090,10 @@ div.share> .twitter {
 	background-color:#aaa;
 	width:95%;
 	margin-top:30px;
-  max-height:80px;  
+  max-height:125px;  
   overflow-x:hidden; 
   overflow-y:auto;
+  border-radius: 5px;
 }
 .suggestion-target{
   margin-top: 0px;
@@ -1098,6 +1102,9 @@ div.share> .twitter {
 .suggestions > li {
 	background-color:#ccc;
 	margin-top:1px;
+  height: 30px;
+  padding: 2px;
+  padding-top: 5px;
 }
 
 .suggestions > li:hover {
