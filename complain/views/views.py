@@ -25,11 +25,10 @@ import math, traceback
 
 COMPLAINT, DISCUSSION = 0, 1
 
-#error message
-def error(request):
-    return HttpResponse('Login error')
+#error message 
+def error(request): return HttpResponse('Login error') 
 
-class Index(View):
+class Index(View): 
     def get(self, request):
         self.context = {}
         if request.user.is_authenticated():
@@ -122,7 +121,6 @@ class Login(View):
 def logout_user(request):
     logout(request)
     return redirect('login')
-
 
 class Signup(View):
     context = {}
@@ -556,6 +554,7 @@ class Profile(View):
             self.context['user_pic'] = acc.profile_pic
             self.context['notifications'] = get_notifications(request)
             self.context['account'] = acc
+            self.context['about'] = acc.about
             self.context['edit'] = False
             self.context['tags'] = tags
             if request.user.id==profileid:
@@ -617,6 +616,7 @@ def profile_update(request):
         usr.last_name = lastname
         usr.username=username
         acc.address = address
+        acc.about = about;
         usr.save()
         acc.save()
 

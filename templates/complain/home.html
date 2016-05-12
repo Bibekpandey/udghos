@@ -251,7 +251,7 @@
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none">Describe your concern and the solution</small></label>
-                          <textarea name="content" class="form-control" placeholder="Your queries here." oninput="$('#description-warning').hide()"></textarea>
+                          <textarea name="content" class="form-control" placeholder="Describe your issue along with solition(if you have)" oninput="$('#description-warning').hide()"></textarea>
 
                           <div class="form">
                             <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
@@ -378,7 +378,8 @@
           </div>
         </div>
         <div class="box-tags">
-            <div class="tag-heading event-heading">My Tags </div><br>
+            <div class="tag-heading event-heading">My Tags <div class="btn-black">Add</div></div><br>
+
         		  {% for tag in tags %}
         		    <div class="display-tag display-tag-home">
         		      <a href="/threads/tagged/{{tag.name}}">{{tag.name}}</a>
