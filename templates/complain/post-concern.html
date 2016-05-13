@@ -42,12 +42,16 @@
           margin-top: 0px;
         }
         .make-anonymous>input{
-          width: 15px;
-          height: 15px;
+          width: 20px;
+          height: 20px;
         }
         .btn-my,
         .btn-default{
-          font-size: 25px;
+          font-size: 30px;
+        }
+        .box-footer{
+          margin-top: 120px;
+          bottom: 0;
         }
     </style>
 </head>
@@ -179,9 +183,9 @@
                 <div class="form">
                             <label for="recipient-name" class="control-label">Tags * <small id="tags-warning" class="alert-danger" style="display:none">Please provide at least 1 tag(max 4) </small></label><br>
                             <input type="text" class="form-control" placeholder="Type in tag names (max 4)" id="tagbox"/>
-                            <ul class="nav suggestions" id="tags-suggest-list" style="z-index:100;position:absolute;">
+                            <ul class="nav suggestions suggestions-tag" id="tags-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
-                              <div id="tags-chosen">
+                              <div class="li-style" id="tags-chosen">
                               </div>
                 </div>
                           
@@ -195,7 +199,7 @@
                         </div>
                         <div class="make-anonymous">
                           <input type="checkbox" name="anonymous" value="yes"/><b>Make me Anonymous</b>
-                        </div>
+                        </div><br>
               </div>
             
               <div class="modal-footer">

@@ -102,8 +102,6 @@ h1,h2,h3,h4{
 }
 .box-profile{
   font-family: 'Varela Round', sans-serif;
-  position: block;
-  min-height: 20px;
   padding: 10px 15px 15px 15px;
   margin: 2px;
   margin-top: 67px;
@@ -800,6 +798,9 @@ ul.dropdown-settings{
 .glyphicon-triangle-bottom{
   color: #fff;
 }
+.glyphicon-tags{
+  font-size: 12px;
+}
 .glyphicon-bell{
   margin-top: 5px;
   margin-right: -5px;
@@ -1111,6 +1112,7 @@ div.share> .twitter {
   height: 30px;
   padding: 2px;
   padding-top: 5px;
+  padding-left: 10px;
 }
 
 .suggestions > li:hover {
