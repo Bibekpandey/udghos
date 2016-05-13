@@ -115,12 +115,13 @@ textarea:focus{
 .add-tags{
   margin-top: 5px;
   margin-right: 5px;
+  margin-left: -15px;
 }
 .media-body{
   float: left;
 }
-.profile-info{
-  padding-left: 70px;
+.info-section{
+  padding-left: 75px;
 }
 /*///////PROFILE IMAGE////////*/
 #profile-image-form{
@@ -180,13 +181,21 @@ input.file{
     font-family: 'Varela Round', sans-serif !important;
     font-size: 25px;
   }
+.suggestions{
+  margin-top: 10px;
+  margin-left: 70px;
+}
+
 
 
 
 @media (max-width: 991px) {
+  body{
+    width: 99%;
+  }
   .box-profile{
     margin-top: 125px;
-    margin-left: 10px;
+    margin-left: 15px;
   }
   #first-name,
   #last-name{
@@ -216,16 +225,50 @@ input.file{
   }
   .show-image>img{
     float: center;
-    position: absolute;
+  }
+  .image-section{
+    padding: 10px 40% 10px 38%;
+    float: left;
+    height: 300px;
+  }
+  #edit{
+    margin-top: -350px;
+    margin-bottom: 25px;
+  }
+  #save{
+    margin-top: -510px;
+    margin-bottom: 25px;
+
+  }
+  .hidden-text-font{
+    margin-top: -100px;
   }
 }
 @media (max-width: 767px) {
   #first-name,
-  #last-name,
+  #last-name{
+    position: relative;
+    margin-top: 10px;
+    font-size: 20px;
+  }
   #username,
   #address,
   #about{
     font-size: 15px;
+  }
+  .image-section{
+    padding: 10px 30% 10px 30%;
+    float: left;
+    height: 300px;
+  }
+  #edit{
+    margin-top: -330px;
+    margin-bottom: 50px;
+
+  }
+  #save{
+    margin-top: -480px;
+    margin-bottom: 25px;
   }
 }
 

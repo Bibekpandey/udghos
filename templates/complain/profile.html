@@ -133,7 +133,7 @@
       <div class="col-md-2"></div>
       <div class="col-md-8">
         <div class="box-profile">  
-          <div class="col-md-4">
+          <div class="col-md-4 image-section">
             <form id="picture_update" method="post" enctype="multipart/form-data" action="/complain/image-update/">
               {% csrf_token %}
               <input type="hidden" name="userid" value="{{request.user.id}}" />
@@ -155,7 +155,7 @@
                 </div>
                 
               </div>
-              <div class="col-md-8 profile-info">
+              <div class="col-md-8 info-section">
                 <input type="hidden" name="userid" value="{{request.user.id}}" />
                 <div class="row">
                   <div class="col-md-6">
@@ -218,7 +218,7 @@
                 <div class="form">
                   <label style="float:left" class="add-tags hidden-text"> Add tags: </label>
                   <input type="text" class="form-control hidden-text" placeholder="Type in tag names " id="tagbox"/>
-                  <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">
+                  <ul class="nav suggestions" id="tags-suggest-list" style="z-index:100;position:absolute;">
                   </ul><br>
                 </div>
               </div>
@@ -232,91 +232,6 @@
     </div>
   </div>
 
-  <!--div class="container">
-    <div class="row">
-      <div class="col-md-2">
-      </div>
-      <div class="col-md-8">
-        <div class="box-profile">
-          <b class="text-center text-danger" id="error"></b>
-          <div class="profileinfo">
-
-          <form id="updateform" method="post" action="{% url 'profile_update' %}" >
-            <div class="show-image">
-              <img class="img-circle img-profile" src="/media/{{user_pic}}" width=200 height=200 data-toggle="modal" data-target="#myModalImage" data-keyboard="true" alt="Generic placeholder image" width="200" height="200" />
-            </div>
-            {% if edit %}
-            <div class="edit-text">
-              <button id="save" class="btn btn-black" type="button"> Save Info</button>
-                <button id="edit" class="btn btn-black" type="button"> Edit Info</button>
-              <span class="hidden-text hidden-text-font">Edit your Profile</span>
-            </div>
-            {% endif %}
-            <input type="hidden" name="userid" value="{{request.user.id}}" />
-            <div id="dataprofile" class="my-name">
-              <div class="hidden-text">
-                <b>First Name</b>
-              </div>
-              {% csrf_token %}
-              <span id="first-name" class="datainfo post-title">{{account.user.first_name}}</span>
-              <div class="hidden-text">
-                <b>Last Name</b>
-              </div>
-              <span id="last-name" class="datainfo post-title">{{account.user.last_name}}</span>
-  
-              
-            </div>
-            <div class="my-username">
-              <br>
-              <div class="hidden-text"><b>Username</b></div>
-                <span id="username" class="datainfo">{{account.user.username}}</span>
-            </div>
-            <div class="my-address">
-              <div class="hidden-text"><b>Address</b></div>
-                <span id="address" class="datainfo">{{account.address}}</span>
-            </div>
-            <div class="about-me">
-              <div class="hidden-text"><b>About</b></div>
-                <span id="about" class="datainfo">{{account.about}}</span>
-            </div>
-            <div class="my-tag">
-              <span class="tags-tab">Followed Tags</span>
-              <div id="tags-chosen">
-              </div>
-            </div>
-          </form>
-
-          {% for tag in tags %}
-          <input type="hidden" class="taginfo" value="{{tag.name}},{{tag.id}}"/>
-            {% endfor %}
-
-          <form id="picture_update" method="post" enctype="multipart/form-data" action="/complain/image-update/">
-            {% csrf_token %}
-            <input type="hidden" name="userid" value="{{request.user.id}}" />
-            <div id="profile-image-form">
-              <div class="fileinputs">
-                <input type="file" class="file" name="image" />
-                <div class="fakefile">
-                  <div class="change-picture">Change Your <br>Profile Picture</div>
-                </div>
-              </div>
-            </div>
-            <div class="btn-update">
-              <button type="submit">Update pic</button>
-            </div>
-          </form>
-          <div class="form">
-            <label style="float:left" class="add-tags hidden-text"> Add tags: </label>
-            <input type="text" class="form-control hidden-text" placeholder="Type in tag names " id="tagbox"/>
-            <ul class="nav" id="tags-suggest-list" style="z-index:100;position:absolute;">
-            </ul><br>
-          </div>
-
-        </div>
-      </div>
-      </div>
-    </div>
-  </div-->
 
   <div class="container">
     <div class="row">
@@ -373,6 +288,8 @@
     <script src="{% static 'js/functions.js' %}"></script>
 
     <script src="{% static 'js/profile.js' %}"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+
 
     <script>
         $('#tagbox').on('input', getTags);
