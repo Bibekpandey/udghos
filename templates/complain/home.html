@@ -81,6 +81,12 @@
             color:red;
             font-size:0.9em;
         }
+        .btn-black > a {
+            color:white;
+        }
+        .btn-black > a:hover {
+            text-decoration:none;
+        }
     </style>
 </head>
 
@@ -378,7 +384,8 @@
           </div>
         </div>
         <div class="box-tags">
-            <div class="tag-heading event-heading">My Tags <div class="btn-black">Add</div></div><br>
+            <div class="tag-heading event-heading">My Tags <div class="btn-black">
+                <a href="javascript:void(0)" onclick="profile_add_tags">Add</a></div></div><br>
 
         		  {% for tag in tags %}
         		    <div class="display-tag display-tag-home">
