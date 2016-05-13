@@ -97,7 +97,7 @@
     display: none;
   }
   .box-profile-home,
-  .box-tags-home{
+  .box-tags-home,.box-tags{
     display: none;
   }
   .btn-post-mobile{
@@ -114,7 +114,7 @@
   }
   .glyphicon-tags,
   .glyphicon-close{
-    font-size: 20px;
+    font-size: 25px;
   }
   .notification-count{
     width: 30px;
@@ -139,8 +139,8 @@
     font-size: 50px;
   }
   .post-content{
-    margin-top: 3px;
-    font-size: 40px;
+    margin-top: -1px;
+    font-size: 30px;
   }
   .post-body>span{
     font-size: 25px;
@@ -217,7 +217,7 @@
     color: #555;
   }
   .tagname{
-    margin-top: -25px;
+    margin-top: -10px;
     margin-left: 10px;
     font-size: 40px;
   }
@@ -227,6 +227,11 @@
   .comment-form{
     margin-top: 40px;
   }
+  div.row.background-icons{
+    margin-left: -10px;
+    margin-right: -10px;
+  border-radius: 5px;
+}
   div.share button{
     height: 80px;
     margin-bottom: 20px;
@@ -284,7 +289,6 @@
     padding-left: 20px;
     margin-top: 15px;
     width: 100%;
-    border-bottom: 2px solid #fff;
   }
   /*/////////////////Modal////////////////*/
   .btn-post-desktop{
@@ -306,6 +310,20 @@
   .post-concern{
     margin-left: 10px;
     margin-top: 110px;
+  }
+  .my-modal-title{
+    font-size: 35px;
+  }
+  .warning-box {
+    margin-top: -50px;
+    font-size: 30px;
+    height: 300px;
+    width: 550px;
+    border-radius: 5px;
+}
+  .btn-default,.btn-my{
+    font-size: 30px; 
+
   }
 
 }
@@ -343,6 +361,21 @@
   .nav-tabs{
     font-size: 25px;
   }
+
+  /*////////  FONT Decrease  ////////////////*/
+  .icons-ld{
+    font-size: 30px;
+  }
+  .tagname{
+    font-size: 25px;
+  }
+  .display-tag{
+    margin-top: 10px;
+  }
+  #tag-post2{
+    font-size: 20px;
+  }
+
   .navbar-form{
     width: 0%;
     border: 0px solid #fff;
@@ -422,6 +455,7 @@
   .nav-unauth{
     margin-top: -60px;
   }
+
   
   /*.......Profile........*/
   .box-profile{
