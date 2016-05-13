@@ -279,6 +279,7 @@
   /*.....Profile........*/
   .box-profile{
     margin-top: 125px;
+
   }
 
   .post-concern{
@@ -299,6 +300,9 @@
   }
   .box-profile-home {
     margin-top: 0px;
+  }
+  .udghos-logo{
+    margin-left: 15px;
   }
   .box-header{
     margin-bottom: 140px;
