@@ -92,7 +92,7 @@ body {
   margin-top: 30px;
   margin-left: 190px;
 }
-.bullets-login{
+/*.bullets-login{
   text-align: center;
   margin-top: 100px;
   margin-left: 70px;
@@ -100,10 +100,9 @@ body {
   font-size: 35px;
   padding: 15px;
   color: #fff;
-  font-weight: bolds;
 }
 .bubble-text{
-  background-color: #fff;
+  background-color: #eee;
   text-shadow: 3px solid #333;
   color: #333;
   border-radius: 25px;
@@ -123,6 +122,30 @@ body {
   width: 150px;
   margin-left: 105px;
 }
+*/
+
+.bullets-login{
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 25px;
+  padding: 15px;
+}
+.bubble-text{
+  background-color: #444;
+  text-shadow: 3px solid #333;
+  color: #fff;
+  border-radius: 25px;
+  margin-bottom: 35px;
+  border: 0px solid #aaa;
+}
+
+.box-margin{
+  border-right: 1px solid #999;
+  margin-top: 50px;
+}
+
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
@@ -272,12 +295,14 @@ text-align:center;
   overflow: hidden;
   padding-left:1%;
   padding-right:1%;
-  margin-left:15%;
-  margin-right:15%;
-  margin-top: 30%;
+  margin-left:20%;
+  margin-right:4%;
+  margin-top: 10%;
   min-height: 20px;
   background-color: #444;
+  color:#fff;
   border-radius: 2px;
+  border: 1px solid #777;
 }
 .row{
   margin-right: -50px;

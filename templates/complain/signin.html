@@ -48,7 +48,7 @@
   <div class="container container-box">
     <div class="row">
     <div class="col-md-4"></div>
-      <div class="col-md-4 text-center">
+      <!--div class="col-md-4 text-center">
         <div class="text-login" >
           <h1 id="text-login" class="signin-heading"></h1>
         </div>
@@ -57,11 +57,21 @@
             <div class="bubble-text bubble-text2">Get Supports</div> 
             <div class="bubble-text bubble-text3">Solve it</div>
           </ul>
-      </div>
-      <div class="col-md-4 login-box">
+      </div-->
+    
+      <div class="col-md-8 login-box">
         <div class="box-signin">
+        <div class="col-md-6 box-margin">
+          <ul class="bullets-login"> 
+            <div class="bubble-text bubble-text1">Udghos your voice</div>
+            <div class="bubble-text bubble-text2">Get Supports</div> 
+            <div class="bubble-text bubble-text3">Solve it</div>
+          </ul>
+        </div>
+        <div class="col-md-6">
           <b><span id="signin-message" class="text-bold text-center text-danger"></span></b>
-          <div id="signin" class="meta-info" >
+          <div id="signin" cla
+          ss="meta-info" >
             <form id="signin-form" class="form-signin" method="post" onsubmit="return signin()">
               {% csrf_token %}
               <h2 class="form-signin-heading">Udghos Login</h2>
@@ -118,7 +128,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div></div>
                
       <div id="wrapper">
         <div class="box-footer">
