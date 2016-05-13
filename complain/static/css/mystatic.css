@@ -798,6 +798,9 @@ ul.dropdown-settings{
 .glyphicon-triangle-bottom{
   color: #fff;
 }
+.glyphicon-tags{
+  font-size: 12px;
+}
 .glyphicon-bell{
   margin-top: 5px;
   margin-right: -5px;
