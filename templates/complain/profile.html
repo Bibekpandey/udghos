@@ -149,11 +149,13 @@
                 <button type="submit">Update pic</button>
               </div>
             </form>
-            <form id="updateform" method="post" action="{% url 'profile_update' %}" >
+            
                 <div class="show-image">
                   <img class="img-circle img-profile" src="/media/{{user_pic}}" width=200 height=200 data-toggle="modal" data-target="#myModalImage" data-keyboard="true" alt="Generic placeholder image" width="200" height="200" />
                 </div>
                 
+              </div>
+              <form id="updateform" method="post" action="{% url 'profile_update' %}" >
               <div class="col-md-8 info-section">
                 <input type="hidden" name="userid" value="{{request.user.id}}" />
                 <div class="row">
