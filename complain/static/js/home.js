@@ -207,4 +207,10 @@ function getItems(itemtype) {
         $('#selected-'+itemtype+'-'+id).remove();
     }
 
+    function profile_add_tags() {
+            var id = $("input[name=uid]").val();
+            window.localStorage.setItem("edit", "ok");
+            window.location = "profile/"+id;
+        }
+
 

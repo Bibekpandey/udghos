@@ -33,6 +33,11 @@
    bottom:0px;
    width: 100%;
   }
+  @media(max-width: 991px){
+    .result-tag{
+      margin-top: 150px;
+    }
+  }
 
 </style>
 <div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
@@ -51,7 +56,7 @@
   		<div class="row">
             <div class="col-md-4"></div>
   			<div class="col-md-4">
-                <div style="height:250px;">
+                <div class="result-tag" style="height:250px;">
                     <span class="text-center" style="display:inline-block;vertical-align:middle;">
                         <h2 style="line-height:50px;height:60px">{{message}}</h2>
                     </span>

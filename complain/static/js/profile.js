@@ -1,4 +1,4 @@
-$('#edit').click(function(){
+function clickEdit(){
   $('#edit').hide();
   $('#save').show();
   $('.box-profile').css("min-height", "500px");
@@ -17,7 +17,16 @@ $('#edit').click(function(){
   $('#profile-image-form').show();
   $('#nameinfo').show();
   $('.info').fadeIn('fast');
-});
+}
+
+function checkEdit() {
+    if(window.localStorage.getItem("edit") == "ok") {
+        window.localStorage.setItem("edit", undefined);
+        clickEdit();
+    }
+}
+
+$('#edit').click(clickEdit);
 
 $('#save').click(function(){
     $('#profile-image-form').hide();
