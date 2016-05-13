@@ -243,6 +243,10 @@ input.file{
   .hidden-text-font{
     margin-top: -100px;
   }
+  #tags-chosen>span{
+    padding: 1px;
+    font-size: 30px;
+  }
 }
 @media (max-width: 767px) {
   #first-name,
