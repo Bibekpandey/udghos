@@ -160,7 +160,6 @@
                 <b>Last Name</b>
               </div>
               <span id="last-name" class="datainfo post-title">{{account.user.last_name}}</span>
-  
               
             </div>
             <div class="my-username">
@@ -306,6 +305,7 @@
             drawTagBoxes(g_current_tags);
             $('.hidden-cross').hide();
             getUserThreads({});
+            checkEdit();
         }
 
         window.onscroll = function() {

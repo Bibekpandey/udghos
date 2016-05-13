@@ -261,8 +261,8 @@
                       <div class="form-group">
                           <label for="recipient-name" class="control-label">Do you have anything to share to Udghos. Feel free to Share your Opinion.</label>
                           <input type="text" class="form-control" id="recipient-name" placeholder="Title relevant to your description">
-                      </div>
-                      <form method="post" id="opinion-form" action="{% url 'review' %}" class="form-horizontal" role="form" enctype="multipart/form-data">
+                  </div>
+                  <form method="post" id="opinion-form" action="{% url 'review' %}" class="form-horizontal" role="form" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Your Suggestions/Feedbacks/Opinions*</label>
@@ -329,11 +329,12 @@
               <span class="label label-info">{{threads|length}} Posts</span> 
               
             </p>
+            <input type="hidden" name="uid" value="{{user.id}}"/>
           </div>
         </div>
         <div class="box-tags">
             <div class="tag-heading event-heading">My Tags <div class="btn-black">
-                <a href="javascript:void(0)" onclick="profile_add_tags">Add</a></div></div><br>
+                <a href="javascript:void(0)" onclick="profile_add_tags()">Add</a></div></div><br>
 
         		  {% for tag in tags %}
         		    <div class="display-tag display-tag-home">
@@ -353,8 +354,6 @@
       </div>   
     </div>      
   </div>
-
-
 
   <div class="container">
     <div class="btn-review">
@@ -388,8 +387,6 @@
     </div>
   </div>
 
-
-
   </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -397,6 +394,5 @@
     <script src="{% static 'js/homepage.js' %}"></script>
     <script src="{% static 'js/functions.js'%}"></script>
     <script src="{% static 'js/home.js'%}"></script>
-
 
   </html>
