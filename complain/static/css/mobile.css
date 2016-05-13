@@ -47,10 +47,27 @@
     margin-top: 10px;
     height: 65px;
     }
-  input.form-control,
+
   textarea.form-control{
+    font-size: 30px;
+    width: 100%;
+  }
+  input.form-control{
     font-size: 25px;
     width: 100%;
+  }
+  label.control-label{
+    font-size: 35px;
+    margin-top: 15px;
+  }
+  .li-style{
+    font-size: 25px;
+  }
+  .close{
+    font-size: 30px;
+    width: 20px;
+    height: 20px;
+    margin-top: 0px;
   }
   .box{
     font-size: 25px !important;
@@ -104,6 +121,10 @@
     height: 30px;
     margin-top: -65px;
     margin-left: 30px;
+  }
+  .suggestions > li {
+    height: 50px;
+    font-size: 30px;
   }
   
   /*********POST CONTENT *****************/
