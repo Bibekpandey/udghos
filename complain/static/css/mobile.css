@@ -144,15 +144,15 @@
   width: 100%;
   height: 100%;
   margin-top: 10%;
-  margin-left: 10%;
-  padding: 1%;
+  margin-right: 1%;
+  padding: 5%;
 }
-
 .modal-content {
   height: auto;
   min-height: 50%;
   border-radius: 0;
 }
+
 
   .suggestions {
     background-color:#aaa;
@@ -360,6 +360,7 @@
   }
   .my-modal-title{
     font-size: 35px;
+    margin-bottom: 10px;
   }
   .warning-box {
     margin-top: -50px;
