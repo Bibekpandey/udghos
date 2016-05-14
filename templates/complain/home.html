@@ -221,7 +221,7 @@ xfbml: true});
                           <textarea name="content" class="form-control" placeholder="Describe your issue along with solition(if you have)" oninput="$('#description-warning').hide()"></textarea>
 
                           <div class="form">
-                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
+                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">The default will be Udghos </small></label><br>
                             <input type="text" class="form-control" placeholder="Who is to be addressed? (max 2)" id="targetbox"/>
                             <ul class="nav suggestions suggestion-target" id="targets-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
@@ -339,9 +339,7 @@ xfbml: true});
             <a href="{% url 'profile' user.id %}">
             <h3 class="heading-property user-heading">{{user.username}}</h3></a>
               <h5 class="heading-property">{{address}}</h5>
-
-              <span class="label label-info">{{threads|length}} Posts</span> 
-              
+             
             </p>
             <input type="hidden" name="uid" value="{{user.id}}"/>
           </div>

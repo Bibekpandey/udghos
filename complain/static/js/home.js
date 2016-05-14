@@ -56,7 +56,7 @@ function submitPost() {
 
     var g_select_items = {
         'tag':{max:4, current:[]},
-        'target':{max:2,current:[]}
+        'target':{max:1,current:[]}
     };
 
     $('#tagbox').on('input', function(){$('#tags-suggest-list').show(); getItems('tag');});
