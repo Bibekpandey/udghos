@@ -31,8 +31,8 @@ function submitPost() {
         }
 
         if(targetids.length==0) {
-            $('#targets-warning').show();
-            return false;
+            //$('#targets-warning').show();
+           // return false;
         }
         var taginputelem = document.createElement('input');
         taginputelem.setAttribute("type", "hidden");

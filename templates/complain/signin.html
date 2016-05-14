@@ -55,7 +55,6 @@
           <div class="col-md-6 box-margin">
           <div class="login-logo">
             Udghos
-            <!-- <img class="udghos" src="/static/img/Udghos.png" width="175" height="55"> -->
           </div>
           <ul class="bullets-login"> 
               <div class="bubble-text bubble-text1">
@@ -85,9 +84,9 @@
                   $('.googleplus').click(function() { location.href="{%url 'social:begin' 'google-oauth2' %}";return false;});
                 </script>
               </div>
-              <label for="inputEmail" class="sr-only">Username</label>
+              <label for="inputEmail" class="sr-only"><span class="login-up">Username</span></label>
               <input type="text" id="inputEmail" class="form-control login-form" placeholder="Username" name="username" required autofocus>
-              <label for="inputPassword" class="sr-only">Password</label>
+              <label for="inputPassword" class="sr-only"><span class="login-up">Password</span></label>
               <input type="password" id="inputPassword" class="form-control login-form" placeholder="Password" name="password" required>
               <div class="checkbox">
                 <label><input class="checkbox-input" type="checkbox" value="remember-me"> Remember me</label>

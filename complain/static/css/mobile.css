@@ -45,7 +45,7 @@
   }
   .form-control-navbar{
     margin-top: 10px;
-    height: 65px;
+    height: 75px;
     }
 
   textarea.form-control{
@@ -56,7 +56,7 @@
   input.form-control{
     font-size: 25px;
     width: 100%;
-    height: 50px;
+    height: 65px;
   }
   label.control-label{
     font-size: 35px;
@@ -144,15 +144,15 @@
   width: 100%;
   height: 100%;
   margin-top: 10%;
-  margin-left: 10%;
-  padding: 1%;
+  margin-right: 1%;
+  padding: 5%;
 }
-
 .modal-content {
   height: auto;
   min-height: 50%;
   border-radius: 0;
 }
+
 
   .suggestions {
     background-color:#aaa;
@@ -263,6 +263,9 @@
     font-size: 35px;
     color: #555;
   }
+  i.glyphicon.glyphicon-search{
+    margin-top: 12px;
+  }
   .tagname{
     margin-top: -10px;
     margin-left: 10px;
@@ -360,6 +363,7 @@
   }
   .my-modal-title{
     font-size: 35px;
+    margin-bottom: 10px;
   }
   .warning-box {
     margin-top: -50px;
@@ -367,10 +371,14 @@
     height: 300px;
     width: 550px;
     border-radius: 5px;
-}
+  }
   .btn-default,.btn-my{
     font-size: 30px; 
 
+  }
+  .display-target{
+    font-size: 25px;
+    margin-top: -70px;
   }
 
 }
@@ -508,5 +516,39 @@
   .box-profile{
     margin-top: 125px;
   }
+  .btn-review{
+    font-size: 25px;
+    border-radius: 10px 10px 0px 0px;
+  }
   
+}
+
+@media(max-width: 500px){
+  #navhead{
+    margin-top: 20px;
+    margin-left: 10px;
+    font-size: 10px;
+  }
+  #headnav{
+    margin-right: -10px;
+  }
+  .navbar-name{
+    margin-top: 10px;
+  }
+  .nav-unauth>li>a{
+    margin-top: 10px;
+    font-size: 15px;
+  }
+  .glyphicon{
+    font-size: 25px;
+  }
+  .glyphicon-bell{
+    margin-top: -50px;
+  }
+  .img-navbar{
+    margin-top: 7px;
+    width: 50px;
+    height: 50px;
+  }
+
 }
