@@ -400,8 +400,6 @@ class ThreadPage(View):
             self.context['notifications'] = get_notifications(request)
             self.context['profile_pic'] = Account.objects.get(user=request.user).profile_pic
 
-        thread = Thread.objects.get(id=thread_id)
-        self.context['title'] = thread.title
 
         comments =[]# Comment.objects.filter(thread=thread)
         #self.context['comments']= comments
