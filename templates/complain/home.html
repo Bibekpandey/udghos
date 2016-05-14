@@ -325,9 +325,7 @@
             <a href="{% url 'profile' user.id %}">
             <h3 class="heading-property user-heading">{{user.username}}</h3></a>
               <h5 class="heading-property">{{address}}</h5>
-
-              <span class="label label-info">{{threads|length}} Posts</span> 
-              
+             
             </p>
             <input type="hidden" name="uid" value="{{user.id}}"/>
           </div>

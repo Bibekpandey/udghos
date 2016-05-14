@@ -326,7 +326,9 @@ function generate_thread(threadobj, auth) {
                 '<div class="post-content">'+
                  threadobj.content+
                 '</div><br>'+
+                '<div class="post-thread-image">'+
                     images_html(threadobj.images, threadobj.id)+
+                '</div>'+
                 '<div class="sttime">'+
                 '</div>'+
                 '<div class="row">'+
@@ -341,9 +343,9 @@ function generate_thread(threadobj, auth) {
                 '</div>'+
             '</div>'+
           '</div>'+
-          //'<div class="display-target">'+
-          //      '<span class="target-text">Address to udghos.com</span>'+
-          //'</div>'+
+          '<div class="display-target">'+
+                '<span class="target-text">To </span><span>'+threadobj.target+'</span>'+
+          '</div>'+
           '<div class="row background-icons">'+
           '<div class="box-icons">'+
             '<div class="icons-ld">'+
