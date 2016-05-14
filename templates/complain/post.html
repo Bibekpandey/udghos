@@ -180,7 +180,6 @@ xfbml: true});
         <div class="footer-body">
           <p class="pull-right">
             <a href="#">Back to top</a>
-            <div id="share_button">share</div>
           </p>
           <p>
             <a href="/about/">About</a>&middot;
@@ -268,18 +267,6 @@ xfbml: true});
     <script>
   
   $(document).ready(function(){
-$('#share_button').click(function(e){
-e.preventDefault();
-FB.ui(
-{
-method: 'feed',
-name: 'This is the content of the "name" field.',
-link: 'http://localhost.com',
-caption: 'This is the content of the "caption" field.',
-description: 'This is the content of the "description" field, below the caption.',
-message: ''
-});
-});
 });
 
 
@@ -327,6 +314,20 @@ message: ''
                         success:function(data) {
                             add_item(data.thread, g_thread_container, data.authenticated);
                             toggleComments(parseInt(threadid));
+                            $('.fb-share').click(function(e){
+                            e.preventDefault();
+                            FB.ui(
+                            {
+                            method: 'feed',
+                            name: data.thread.title,
+                            link: 'http://udghos.com/thread/'+data.thread.id.toString(),
+                            caption: 'udghos.com',
+                            description: data.thread.content.substr(0, 100),
+                            picture:(data.thread.images.length>0?"http://udghos.com/media/"+data.thread.images[0]:"http://udghos.com/static/img/navbarlogo.png"),
+                            message: ''
+                            });
+                            });
+
                         },
                         error:function(data) { window.location="/";}
                     });

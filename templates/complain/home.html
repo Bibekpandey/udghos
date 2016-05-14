@@ -38,6 +38,20 @@
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script>
+(function() {
+var e = document.createElement('script'); e.async = true;
+e.src = document.location.protocol +
+'//connect.facebook.net/en_US/all.js';
+document.getElementById('fb-root').appendChild(e);
+}());
+window.fbAsyncInit = function() {
+FB.init({appId: '1652950188302583', status: true, cookie: true,
+xfbml: true});
+};
+
+</script>
 
 <div class="container">
   <div id="float-notification">
@@ -207,7 +221,7 @@
                           <textarea name="content" class="form-control" placeholder="Describe your issue along with solition(if you have)" oninput="$('#description-warning').hide()"></textarea>
 
                           <div class="form">
-                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Please provide at least 1 people/organization (max 2) </small></label><br>
+                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">The default will be Udghos </small></label><br>
                             <input type="text" class="form-control" placeholder="Who is to be addressed? (max 2)" id="targetbox"/>
                             <ul class="nav suggestions suggestion-target" id="targets-suggest-list" style="z-index:100;position:absolute;">
                             </ul>

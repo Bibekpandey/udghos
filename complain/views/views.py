@@ -247,6 +247,10 @@ class Post(View):
                 pass
         for tid in targetids:
             thread.targets.add(Target.objects.get(pk=tid))
+        if len(targetids)==0:
+            t = Target.objects.filter(name_icontains='udghos')
+            if not len(t)==0:
+                thread.targets.add(t[0])
         thread.save()
 
         images = request.FILES.getlist('images')
@@ -709,6 +713,13 @@ class Concern(View):
     def get(self,request):
         self.context = {}
         if request.user.is_authenticated():
+            acc = Account.objects.get(user=request.user)
+            tags = list(acc.tags_followed.all())
+            self.context['tags'] = tags
+            self.context['address'] = acc.address
+            self.context['profile_pic'] = acc.profile_pic
+            self.context['notifications'] = get_notifications(request)
+
             self.context['authenticated'] = True
         return render(request, "complain/post-concern.html",self.context)
 

@@ -56,7 +56,7 @@ function submitPost() {
 
     var g_select_items = {
         'tag':{max:4, current:[]},
-        'target':{max:2,current:[]}
+        'target':{max:1,current:[]}
     };
 
     $('#tagbox').on('input', function(){$('#tags-suggest-list').show(); getItems('tag');});
@@ -170,6 +170,23 @@ function submitPost() {
             for(var x=0;x<data.threads.length;x++) {
                 add_item(data.threads[x], g_thread_container, data.authenticated);
             }
+
+
+            $('.fb-share').click(function(e){
+                        var img = $(this).attr('data-image');
+                            e.preventDefault();
+                            FB.ui(
+                            {
+                            method: 'feed',
+                            name: $(this).attr('data-title'),
+                            link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
+                            caption: 'udghos.com',
+                            description: $(this).attr('data-content'),
+                            picture:(img!=''?'http://udghos.com/media/'+img:'http://udghos.com/static/img/navbarlogo.png'),
+                            message: ''
+                            });
+            });
+
         });
     }
 function getItems(itemtype) {
