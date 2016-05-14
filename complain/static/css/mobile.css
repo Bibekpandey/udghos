@@ -711,6 +711,7 @@
 
   .btn-review{
     font-size: 15px;
+    display: none;
   }
   div.row.background-icons{
     margin-left: -10px;
