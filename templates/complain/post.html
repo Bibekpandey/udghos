@@ -322,8 +322,8 @@ xfbml: true});
                             method: 'feed',
                             name: data.thread.title,
                             link: 'http://udghos.com/thread/'+data.thread.id.toString(),
-                            caption: data.thread.title,
-                            description: data.thread.content,
+                            caption: 'http://udghos.com',
+                            description: data.thread.content.substr(0, 100),
                             message: ''
                             });
                             });

@@ -178,8 +178,8 @@ function submitPost() {
                             method: 'feed',
                             name: $(this).attr('data-title'),
                             link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
-                            caption: $(this).attr('data-title'),
-                            description: $(this).attr('data-title'),
+                            caption: 'http://udghos.com',
+                            description: $(this).attr('data-content'),
                             message: ''
                             });
             });
