@@ -170,6 +170,20 @@ function submitPost() {
             for(var x=0;x<data.threads.length;x++) {
                 add_item(data.threads[x], g_thread_container, data.authenticated);
             }
+
+            $('.fb-share').click(function(e){
+                            e.preventDefault();
+                            FB.ui(
+                            {
+                            method: 'feed',
+                            name: $(this).attr('data-title'),
+                            link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
+                            caption: $(this).attr('data-title'),
+                            description: $(this).attr('data-title'),
+                            message: ''
+                            });
+            });
+
         });
     }
 function getItems(itemtype) {

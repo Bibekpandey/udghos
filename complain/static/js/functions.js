@@ -13,7 +13,10 @@ $(document).ready(function(){
       return $('#popover_notification_content').html();
     }
   });
+
 });
+
+
 
 function get_csrf(){
         var a = document.getElementsByTagName("input");
@@ -363,7 +366,7 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
               '</div>'+
               '<div class="share">'+
-                '<button class="facebook shadow" onclick="return fbs_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')" target="_blank"></button>'+
+                '<button data-id="'+threadobj.id.toString()+'" data-title="'+threadobj.title+'" class="fb-share facebook shadow" aonclick="return fbs_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')" target="_blank"></button>'+
                 '<button class="twitter shadow" onclick="return twt_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')"></button>'+
               '</div>'+
             '</div>'+
