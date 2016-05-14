@@ -180,7 +180,6 @@ xfbml: true});
         <div class="footer-body">
           <p class="pull-right">
             <a href="#">Back to top</a>
-            <div id="share_button">share</div>
           </p>
           <p>
             <a href="/about/">About</a>&middot;
@@ -324,7 +323,7 @@ xfbml: true});
                             link: 'http://udghos.com/thread/'+data.thread.id.toString(),
                             caption: 'udghos.com',
                             description: data.thread.content.substr(0, 100),
-                            picture:(data.thread.images.length>0?"http://udghos.com"+data.thread.images[0]:"http://udghos.com/static/img/navbarlogo.png"),
+                            picture:(data.thread.images.length>0?"http://udghos.com/media/"+data.thread.images[0]:"http://udghos.com/static/img/navbarlogo.png"),
                             message: ''
                             });
                             });

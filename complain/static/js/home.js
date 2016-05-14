@@ -182,7 +182,7 @@ function submitPost() {
                             link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
                             caption: 'udghos.com',
                             description: $(this).attr('data-content'),
-                            picture:(img!=''?'http://udghos.com'+img:'http://udghos.com/static/img/navbarlogo.png'),
+                            picture:(img!=''?'http://udghos.com/media/'+img:'http://udghos.com/static/img/navbarlogo.png'),
                             message: ''
                             });
             });
