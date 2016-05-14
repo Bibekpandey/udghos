@@ -171,6 +171,8 @@ function submitPost() {
                 add_item(data.threads[x], g_thread_container, data.authenticated);
             }
 
+            var img = $(this).attr('data-image');
+
             $('.fb-share').click(function(e){
                             e.preventDefault();
                             FB.ui(
@@ -178,8 +180,9 @@ function submitPost() {
                             method: 'feed',
                             name: $(this).attr('data-title'),
                             link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
-                            caption: 'http://udghos.com',
+                            caption: 'udghos.com',
                             description: $(this).attr('data-content'),
+                            picture:(img!=''?'http://udghos.com'+img:'http://udghos.com/static/img/navbarlogo.png'),
                             message: ''
                             });
             });

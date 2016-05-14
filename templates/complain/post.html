@@ -322,8 +322,9 @@ xfbml: true});
                             method: 'feed',
                             name: data.thread.title,
                             link: 'http://udghos.com/thread/'+data.thread.id.toString(),
-                            caption: 'http://udghos.com',
+                            caption: 'udghos.com',
                             description: data.thread.content.substr(0, 100),
+                            picture:(data.thread.images.length>0?"http://udghos.com"+data.thread.images[0]:"http://udghos.com/static/img/navbarlogo.png"),
                             message: ''
                             });
                             });
