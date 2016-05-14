@@ -298,6 +298,7 @@ def thread_to_dict(user, thread, less=True):
             'votes':thread.votes,
             'time':time,
             'title':thread.title,
+            'target':thread.targets.all()[0].name,
             'content':content,
             'tags':list(map(lambda x: {
                             'name':x.name,
