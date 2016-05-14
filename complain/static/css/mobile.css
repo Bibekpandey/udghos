@@ -49,17 +49,20 @@
     }
 
   textarea.form-control{
-    font-size: 30px;
+    font-size: 15px;
     width: 100%;
-    height: 200px;
+    height: 100px;
   }
   input.form-control{
-    font-size: 25px;
+    font-size: 15px;
     width: 100%;
-    height: 65px;
+    height:50px;
+  }
+  input#tagbox.form-control{
+    width: 100%;
   }
   label.control-label{
-    font-size: 35px;
+    font-size: 20px;
     margin-top: 15px;
   }
   .li-style{
@@ -72,7 +75,7 @@
     margin-top: 0px;
   }
   .make-anonymous{
-    font-size: 30px;
+    font-size: px;
     margin-top: -10px;
   }
 
@@ -156,20 +159,20 @@
 
   .suggestions {
     background-color:#aaa;
-    width:95%;
+    width:90%;
     margin-top:0px;
-    max-height:250px;  
+    max-height:200px;  
     overflow-x:hidden; 
     overflow-y:auto;
     border-radius: 5px;
 }
 #tags-suggest-list{
   margin-top: 50px;
+  width: 92%;
 }
   .suggestions > li {
-    height: 70px;
-
-    font-size: 35px;
+    height: 50px;
+    font-size: 25px;
   }
   /*********POST CONTENT *****************/
   .stimg{
@@ -299,7 +302,7 @@
   
   /*footer*/
   .copyright{
-    font-size: 25px;
+    font-size: 15px;
   }
   .footer-body{
     margin: 25px 25px 25px 25px;
@@ -308,7 +311,7 @@
     margin-right: 0%;
   }
   p>a{
-    font-size: 30px;
+    font-size: 15px;
     margin: 5px;
     text-decoration: none;
     color: #fff;
@@ -362,7 +365,7 @@
     margin-top: 125px;
   }
   .my-modal-title{
-    font-size: 35px;
+    font-size: 25px;
     margin-bottom: 10px;
   }
   .warning-box {
@@ -529,24 +532,35 @@
     margin-left: 10px;
     font-size: 10px;
   }
+  #navcolor{
+    height: 70px;
+  }
   #headnav{
     margin-right: -10px;
   }
+  .udghos-logo{
+    margin-top: -25px;
+    width: 50px;
+    height: 50px;
+  }
   .navbar-name{
-    margin-top: 10px;
+    margin-top: 0px;
   }
   .nav-unauth>li>a{
     margin-top: 10px;
     font-size: 15px;
   }
   .glyphicon{
-    font-size: 25px;
+    font-size: 30px;
+  }
+  .gly-bell{
+    margin-top: -5px;
   }
   .glyphicon-bell{
     margin-top: -50px;
   }
   .img-navbar{
-    margin-top: 7px;
+    margin-top: -10px;
     width: 50px;
     height: 50px;
   }
