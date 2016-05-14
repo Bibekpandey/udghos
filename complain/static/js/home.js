@@ -171,9 +171,9 @@ function submitPost() {
                 add_item(data.threads[x], g_thread_container, data.authenticated);
             }
 
-            var img = $(this).attr('data-image');
 
             $('.fb-share').click(function(e){
+                        var img = $(this).attr('data-image');
                             e.preventDefault();
                             FB.ui(
                             {
