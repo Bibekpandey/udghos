@@ -808,7 +808,7 @@ def post_review(request):
             acc = Account.objects.get(user=request.user)
         else:acc = None
 
-        title = request.POST.get('title','').strip()
+        title = request.POST.get('review-title','').strip()
         content = request.POST.get('review-content', '').strip()
         if content!='':
             review = Review(title=title, content=content, account=acc)
