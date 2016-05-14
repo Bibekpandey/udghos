@@ -82,7 +82,6 @@ def delete_comment(request):
 
 # CREATE ACCOUNT, takes in user object
 def createAccount(userobj):
-    print('in ccreate acccount')
     # check if Account already exists
     try:
         accnt = Account.objects.get(user=userobj)
@@ -129,7 +128,8 @@ class Signup(View):
 
     def post(self, request):
         ret = {}
-        print('...')
+        usr = None
+        acc = None
         try:
             firstName = request.POST['firstname'].strip()
             lastName = request.POST['lastname'].strip()
@@ -149,8 +149,10 @@ class Signup(View):
                             email=email)
             newUser.set_password(password)
             newUser.save()
+            usr = newUser
             account = Account(user=newUser)
             account.save()
+            acc = account
             user = authenticate(username=username, password=password)
             ret['success'] = True
             ret['message'] = "successfully signed up"
@@ -808,7 +810,7 @@ def post_review(request):
             acc = Account.objects.get(user=request.user)
         else:acc = None
 
-        title = request.POST.get('title','').strip()
+        title = request.POST.get('review-title','').strip()
         content = request.POST.get('review-content', '').strip()
         if content!='':
             review = Review(title=title, content=content, account=acc)
