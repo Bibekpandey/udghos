@@ -263,17 +263,16 @@ xfbml: true});
                       <h4 class="modal-title my-modal-title" id="myModalLabel">Write A Review</h4><br>
                     </div>
                     <div class="modal-body">
+                  <form method="post" id="opinion-form" action="{% url 'review' %}" class="form-horizontal" role="form" enctype="multipart/form-data">
                       <div class="form-group">
                           <label for="recipient-name" class="control-label">Do you have anything to share to Udghos. Feel free to Share your Opinion.</label>
-                          <input type="text" class="form-control" id="recipient-name" placeholder="Title relevant to your description">
+                          <input type="text" name="review-title" class="form-control" id="recipient-name" placeholder="Title relevant to your description">
                   </div>
-                  <form method="post" id="opinion-form" action="{% url 'review' %}" class="form-horizontal" role="form" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Your Suggestions/Feedbacks/Opinions*</label>
                           <textarea name="review-content" class="form-control" placeholder="Describe your views on Udghos"></textarea>
                           <div class="form">
-                            
                           </div>
                         </div>
                         <div class="modal-footer">
