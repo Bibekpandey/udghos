@@ -429,7 +429,7 @@ function mark_read() {
 // TWITTER AND FACEBOOK SHARE
 function fbs_click(u, t) {
       u = 'www.udghos.com'+u;
-      window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');
+      window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&p[title]='+encodeURIComponent(t),'facebook-sharer','toolbar=0,status=0,width=626,height=436');
       return false;
 }
 

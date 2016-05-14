@@ -6,13 +6,13 @@ $('input').on('input', function() {
 $( "#signup" ).hide("fast");
 $( "#click-signup" ).click(function() {
   $( "#signin" ).hide( "fast");
-  $(".box-signin").css( "margin-top", "20%" );
+  $(".box-signin").css( "margin-top", "10%" );
   $( "#signup" ).show("fast");
 
 
 });
 $( "#click-signin" ).click(function() {
-  $(".box-signin").css( "margin-top", "30%" );
+  $(".box-signin").css( "margin-top", "12%" );
 	$( "#signup" ).hide("fast");
 	$( "#signin" ).show("fast");
 
@@ -20,12 +20,12 @@ $( "#click-signin" ).click(function() {
 
 $( "#click-signup-link" ).click(function() {
   $( "#signin" ).hide( "fast");
-  $(".box-signin").css( "margin-top", "20%" );
+  $(".box-signin").css( "margin-top", "10%" );
   $( "#signup" ).show("fast");
 });
 
 $( "#click-signin-link" ).click(function() {
-  $(".box-signin").css( "margin-top", "30%" );
+  $(".box-signin").css( "margin-top", "12%" );
 	$( "#signup" ).hide("fast");
 
 	$( "#signin" ).show("fast");

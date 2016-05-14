@@ -231,6 +231,11 @@ input.file{
     float: left;
     height: 300px;
   }
+  .edit-text>button{
+    width: 150px;
+    height: 70px;
+    font-size: 30px;
+  }
   #edit{
     margin-top: -350px;
     margin-bottom: 25px;

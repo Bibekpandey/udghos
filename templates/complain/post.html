@@ -4,7 +4,14 @@
 
 <html lang="en">
 <head>
- 	<title>Udghos</title>
+<meta charset="utf-8">
+<meta property="og:type" content="article"> 
+/* or this depending content type */ 
+<meta property="og:type" content="Concern">
+<meta property="og:title" content="Issue in udghos.com">
+<meta property="og:description" content="{{title}}">
+
+ 	<title>{{title}}</title>
   <link rel='shortcut icon' href='/static/img/udghos.ico' type='image/x-icon'/ >  
 
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'>
@@ -16,12 +23,6 @@
 
   <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
   <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
-
-
-</head>
-
-	<body>
-
 <style>
   body {
     padding:0;
@@ -44,6 +45,26 @@
  }  
 
 </style>
+
+</head>
+
+	<body>
+  
+<div id="fb-root"></div>
+<script>
+(function() {
+var e = document.createElement('script'); e.async = true;
+e.src = document.location.protocol +
+'//connect.facebook.net/en_US/all.js';
+document.getElementById('fb-root').appendChild(e);
+}());
+window.fbAsyncInit = function() {
+FB.init({appId: '1652950188302583', status: true, cookie: true,
+xfbml: true});
+};
+
+</script>
+
 <div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
   <div id="mask" style="position:absolute;display:none"></div>
 
@@ -137,7 +158,7 @@
   	<div class="container" id="content-top">
   		<div class="row">
         <div class="col-md-1">
-          
+
         </div>
   			<div class="col-md-10">
             {% if results  or 1 %}
@@ -159,6 +180,7 @@
         <div class="footer-body">
           <p class="pull-right">
             <a href="#">Back to top</a>
+            <div id="share_button">share</div>
           </p>
           <p>
             <a href="/about/">About</a>&middot;
@@ -245,6 +267,20 @@
     
     <script>
   
+  $(document).ready(function(){
+$('#share_button').click(function(e){
+e.preventDefault();
+FB.ui(
+{
+method: 'feed',
+name: 'This is the content of the "name" field.',
+link: 'http://localhost.com',
+caption: 'This is the content of the "caption" field.',
+description: 'This is the content of the "description" field, below the caption.',
+message: ''
+});
+});
+});
 
 
         var g_thread_container = "thread-container";
