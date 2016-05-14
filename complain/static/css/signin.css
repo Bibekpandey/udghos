@@ -433,7 +433,7 @@ p>a:hover{
     margin-top: 25px;
   }
   body{
-    background-position: center 120px;
+    background-position: center 150px;
     top: 0;
   }
   .text-login{
@@ -494,12 +494,6 @@ p>a:hover{
   .bullets-login >li{
     display: none;
   }
-  .login-mobile-test{
-    display: block;
-    font-size: 50px;
-    margin-left: 150px;
-    color: #111;
-  }
   div.box-signin{
     margin-left: 11%;
   }
@@ -514,6 +508,12 @@ p>a:hover{
     width: 100%;
     height: 100%;
     position: relative;
+  }
+  .box-margin{  
+    display: none;
+  }
+  .login-box{
+    margin-top: 500px;
   }
     #wrapper{
     margin: 0 auto;
@@ -560,7 +560,7 @@ p>a:hover{
     margin: 0 auto;
   }
   body{
-    background-position: center 120px;
+    background-position: center 170px;
     top: 0;
     width: 100%;
   }
