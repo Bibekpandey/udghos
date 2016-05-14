@@ -205,7 +205,7 @@ xfbml: true});
                   <div class="modal-content">
                     <div class="modal-header my-color">
                       <button type="button" class="close my-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title my-modal-title" id="myModalLabel">Post Your View</h4><br>
+                      <h4 class="modal-title my-modal-title" id="myModalLabel">Post Your Concern</h4><br>
                     </div>
                     <div class="modal-body">
                       <div class="form-group">
@@ -218,11 +218,11 @@ xfbml: true});
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none">Describe your concern and the solution</small></label>
-                          <textarea name="content" class="form-control" placeholder="Describe your issue along with solition(if you have)" oninput="$('#description-warning').hide()"></textarea>
+                          <textarea name="content" class="form-control" placeholder="Describe your concern and the solution" oninput="$('#description-warning').hide()"></textarea>
 
                           <div class="form">
-                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">The default will be Udghos </small></label><br>
-                            <input type="text" class="form-control" placeholder="Who is to be addressed? (max 2)" id="targetbox"/>
+                            <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none">Udghos will suggest you the best possible ways</small></label><br>
+                            <input type="text" class="form-control" placeholder="Udghos will suggest you the best possible way" id="targetbox"/>
                             <ul class="nav suggestions suggestion-target" id="targets-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
                               <div class="li-style" id="targets-chosen">
