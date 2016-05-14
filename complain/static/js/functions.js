@@ -366,7 +366,7 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
               '</div>'+
               '<div class="share">'+
-                '<button data-content="'+threadobj.content.substr(0,100)+' ..." data-id="'+threadobj.id.toString()+'" data-title="'+threadobj.title+'" data-image="'+(threadobj.length>0?threadobj.images[0]:"")+'" class="fb-share facebook shadow" aonclick="return fbs_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')" target="_blank"></button>'+
+                '<button data-content="'+threadobj.content.substr(0,100)+' ..." data-id="'+threadobj.id.toString()+'" data-title="'+threadobj.title+'" data-image="'+(threadobj.images.length>0?threadobj.images[0]:"")+'" class="fb-share facebook shadow" aonclick="return fbs_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')" target="_blank"></button>'+
                 '<button class="twitter shadow" onclick="return twt_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')"></button>'+
               '</div>'+
             '</div>'+
