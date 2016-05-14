@@ -46,11 +46,16 @@ a:hover {
 }
 
 .udghos-logo{
-  width: 40px;
-  height: 40px;
-  margin-top: -10px;
-  margin-left: -20px; 
-  background-color: #fff;
+  width: 48px;
+  height: 48px;
+  margin-top: -14px;
+  margin-left: -25px; 
+  z-index: 1000;
+  background: #fff;
+  overflow: hidden;
+}
+.udghos{
+  float: left;
 }
 
 html{
@@ -58,8 +63,8 @@ html{
 }
 body {
   height: 100%;
-  color: #fff;
-  font-family: 'Varela Round', sans-serif !important; 
+  color: ;
+  font-family: 'Varela Round', serif !important; 
   text-align: center;
   background-image: url("/static/img/udghosbackground.png");
   background-color: #eee;
@@ -123,27 +128,48 @@ body {
   margin-left: 105px;
 }
 */
-
+.glyphicon{
+    font-size: 25px;
+    color: #fff;
+    margin-right: 20px; 
+  }
+.glyphicon-group{
+  opacity: 1;
+  color: #fff;
+  margin-right: 15px;
+}
+.login-logo{
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 50px;
+  margin-top: -20px;
+  text-align: center;
+  color: #fff;
+  padding-left: 15px;
+}
 .bullets-login{
   text-align: center;
   margin-top: 30px;
   margin-left: 10px;
   margin-right: 10px;
-  font-size: 25px;
+  font-size: 35px;
   padding: 15px;
 }
 .bubble-text{
-  background-color: #eee;
+  background-color: ;
   text-shadow: 3px solid #333;
-  color: #333;
-  border-radius: 25px;
-  margin-bottom: 35px;
+  color: #fff;
+  margin-bottom: 25px;
   border: 0px solid #aaa;
+  font-family: 'Josefin Sans', sans-serif;
+}
+.bubble-text3{
+  margin-right: 5px;
 }
 
 .box-margin{
-  border-right: 1px solid #999;
-  margin-top: 50px;
+  border-right: 1px solid #777;
+  margin-top: 30px;
+  height: 100%;
 }
 
 
@@ -242,6 +268,7 @@ text-align:center;
 }
 .form-signin-heading{
   margin-top:5px;
+  font-family: 'Josefin Sans', sans-serif;
 }
 .form-signup-heading
 {
@@ -281,6 +308,12 @@ text-align:center;
   margin-top: -10px;
   padding-top: 5px;
 }
+.p-signin>a{
+  color: #fff;
+}
+.p-signin>a:hover{
+  color: #222;
+}
 .signin-heading{
   margin-top:25%;
 }
@@ -297,11 +330,11 @@ text-align:center;
   padding-right:1%;
   margin-left:20%;
   margin-right:4%;
-  margin-top: 10%;
+  margin-top: 12%;
   min-height: 20px;
-  background-color: #eee;
-  color:#333;
-  border-radius: 2px;
+  background-color: #444;
+  color:#fff;
+  border-radius: 5px;
   border: 1px solid #777;
 }
 .row{
@@ -391,6 +424,14 @@ p>a:hover{
     width: 75px;
     height: 75px;
   }
+  .udghos{
+    float: none;
+    width: 250px;
+    height: 100px;
+  }
+  .bullets-login{
+    margin-top: 25px;
+  }
   body{
     background-position: center 120px;
     top: 0;
@@ -434,9 +475,6 @@ p>a:hover{
     margin-bottom: -20px;
   }
 
-  .p-signin{
-    font-size: 30px;
-  }
   #click-signup-link,#click-signin{
     font-size: 35px;
   }
