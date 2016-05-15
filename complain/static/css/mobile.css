@@ -371,7 +371,7 @@
   }
   .warning-box {
     margin-top: -50px;
-    font-size: 30px;
+    font-size: 15px;
     height: 300px;
     width: 550px;
     border-radius: 5px;
@@ -527,6 +527,9 @@
   
 }
 
+/*.................................................................................................*/
+/*                                   NEW MOBILE DESIGN                                             */
+/*.................................................................................................*/
 @media(max-width: 500px){
   #navhead{
     margin-top: 20px;
@@ -555,7 +558,10 @@
     font-size: 15px;
   }
   .box-header{
-    margin-bottom: 50px;
+    margin-bottom: 0px;
+  }
+  .box-tabs{
+    margin-bottom: 35px;
   }
   .glyphicon{
     font-size: 30px;
@@ -580,9 +586,18 @@
   }
   .btn-post-mobile{
     font-size: 20px;
+    width: 200px;
+    height: 50px;
+  }
+  .how{
+    font-size: 15px;
   }
   .box{
     margin-top: -5px;
+  }
+  .dropdown-menu>li>a{
+    font-size: 25px;
+    width: 100%;
   }
 
   /*     ....................POST CONTENT .........................*/
@@ -605,6 +620,10 @@
     font-size: 10px;
     margin-bottom: -20px;
   }
+  .post-option{
+    margin-top: 10px;
+    margin-right: -15px;
+  }
   .box-icons{
     font-size: 10px;
   }
@@ -614,7 +633,7 @@
     width: 100px;
   }
   .comment-section{
-    margin-right: 150px;
+    margin-left: -15px;
     font-size: 15px;
     border:none;
   }
@@ -634,7 +653,7 @@
   }
 
   .net-vote{
-    font-size: 20px;  
+    font-size: 15px;  
     margin: -10px 5px 0px 5px;
   }
   .comment-textsize{
@@ -649,6 +668,15 @@
     margin-top: 1px;
     font-size: 15px;
     color: #555;
+  }
+  .glyphicon-remove{
+    font-size: 15px;
+  }
+  .notification-count{
+    margin-top: -45px;
+    margin-left: 15px;
+    width: 20px;
+    height: 20px;
   }
   i.glyphicon.glyphicon-search{
     margin-top: 12px;
@@ -665,7 +693,7 @@
     margin-top: 40px;
   }
   .icons-ld{
-    margin: -10px 0px 0px 10px;
+    margin: 0px 0px 0px 0px;
     width: 100%;
     font-size: 15px;
   }
@@ -687,16 +715,18 @@
   }
   .report-post{
     margin-top: 5px;
+    margin-right: 20px;
   }
   .comment-user{
     font-size: 15px;
+    margin-right: 10px;
+    position: relative;
   }
-  .comment-date{
-    margin-top: 0px;
+  span.comment-date{
     font-size: 9px;
   }
   .comment-text{
-    margin-top: 0px;
+    margin-top: -10px;
     font-size: 15px;
   }
   .form-comment{
@@ -708,7 +738,16 @@
   }
 
 
-
+  .warning-box {
+    margin-top: 50px;
+    font-size: 15px;
+    height: 200px;
+    width: 350px;
+    border-radius: 5px;
+  }
+  .btn-default,.btn-my{
+    font-size: 15px; 
+  }
   .btn-review{
     font-size: 15px;
     display: none;
