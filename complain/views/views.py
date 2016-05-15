@@ -38,6 +38,7 @@ class Index(View):
             tags = list(acc.tags_followed.all())
             self.context['tags'] = tags
             self.context['address'] = acc.address
+            self.context['about'] = acc.about
             self.context['profile_pic'] = acc.profile_pic
             self.context['notifications'] = get_notifications(request)
         else:
