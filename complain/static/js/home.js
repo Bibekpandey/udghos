@@ -26,8 +26,8 @@ function submitPost() {
             return false;
         }
         if(tagids.length==0) {
-            $('#tags-warning').show();
-            return false;
+            //$('#tags-warning').show();
+            //return false;
         }
 
         if(targetids.length==0) {
