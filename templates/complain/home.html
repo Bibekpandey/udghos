@@ -172,24 +172,18 @@ xfbml: true});
               </button>
             </a>
             {% else %}
-            <a href="/complain/login/">
-              <button type="button" class="btn btn-my btn-large btn-post-desktop">
-                Post a Concern.
+               <button type="button" class="btn btn-my btn-large btn-post-desktop" data-toggle="modal" data-target="#myModalLogin" data-keyboard="true">
+                Post a Concern
               </button>
-            </a>
-            <a href="/complain/login/">
-              <button type="button" class="btn btn-my btn-large btn-post-mobile" >
-                Post a Concern.
+              <button type="button" class="btn btn-my btn-large btn-post-mobile" data-toggle="modal" data-target="#myModalLogin" data-keyboard="true">
+                Post a Concern
               </button>
-            </a>
             {% endif %}
             <div class="how">
               <a href="/how-it-works/">How udghos works?</a>       
             </div>
           </div>
 
-          <div class="col-md-3 text-center header-column-last">
-          </div>
 
           <div class="container">
             <div class="row">
@@ -293,6 +287,32 @@ xfbml: true});
       </div>
     </div>
   </div>
+
+  <div class="container">
+    <div class="row">
+      <!-- Modal Review-->
+      <div class="modal fade" id="myModalLogin" tabindex="-1" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header my-color">
+              <button type="button" class="close my-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title my-modal-title" id="myModalLabel">Please Login to Post Concern</h4><br>
+            </div>
+            <div class="modal-body">
+              You should login to Udghos to Post Concern. Do you want to login now?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <a href="/complain/login/">
+                <button class="btn btn-my">Login</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>     
+    </div>
+  </div>
+          
 
   <div class="container">
     <div class="row">

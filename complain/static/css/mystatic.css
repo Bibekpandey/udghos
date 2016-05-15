@@ -445,11 +445,13 @@ div.row.background-icons{
 }
 
 .btn-comment{
-  background-color: #fff;
+  background-color: #777;
   border-color: #999;
+  color: #fff;
   height: 30px;
   padding: 2px;
   position: relative;
+  border-radius: 3px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -1105,6 +1107,9 @@ div.share> .twitter {
   overflow-x:hidden; 
   overflow-y:auto;
   border-radius: 5px;
+}
+.suggestion-target{
+  margin-top: 0px;
 }
 .suggestion-target{
   margin-top: 0px;
