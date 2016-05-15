@@ -313,7 +313,7 @@ function generate_thread(threadobj, auth) {
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
                     ) +
-                '</div>'+
+                '<progress value="50" max="75" /></div>'+
               '<div id="textst" class="sttext">'+
                 '<a href="/complain/thread/'+threadobj.id.toString()+'">'+
                 '<div class="post-title">'+
@@ -329,7 +329,7 @@ function generate_thread(threadobj, auth) {
                 '<div class="post-content">'+
                  threadobj.content+
                 '</div>'+
-                '<div class="post-thread-image">'+
+                '<div class="post-thread-image"><br>'+
                     images_html(threadobj.images, threadobj.id)+
                 '</div>'+
                 '<div class="sttime">'+
@@ -377,7 +377,7 @@ function generate_thread(threadobj, auth) {
             '<div class="display-comments" id="thread-comments'+threadobj.id+'"></div>'+
             (auth==true?
             '<textarea class="form-comment" id="comment-box'+threadobj.id+'" placeholder="Your comment here."></textarea>'+
-            '<button class="btn btn-comment btn-black" onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
+            '<button class="btn btn-comment" onclick="postComment('+threadobj.id+', \''+threadobj.user.name+'\')">Comment</button>':'')
             +
           '</div>'+
           '</div>'+
