@@ -342,7 +342,7 @@
 
   .post-concern{
     margin-left: 10px;
-    margin-top: 125px;
+    margin-top: 55px;
   }
   .my-modal-title{
     font-size: 15px;
@@ -360,7 +360,7 @@
 
   }
   .display-target{
-    font-size: 25px;
+    font-size: 15px;
     margin-top: -70px;    
   }
 
@@ -527,7 +527,7 @@
   }
   #navhead{
     margin-top: 15px;
-    margin-left: 10px;
+    margin-left: -5px;
     font-size: 10px;
   }
   #navcolor{
@@ -609,13 +609,15 @@
   }
   .notifications{
     margin-top: -10px;
+    margin-right: -25px;
+    min-width:375px; 
   }
   ul.dropdown-menu.notifications:after{
     margin-top: 5px;
     right: 90px;
   }
   div.dropdown.open .gly-bell{
-    margin-left: 75%;
+    margin-left: 70%;
     margin-top: -40px;
   }
 
@@ -801,6 +803,15 @@
   ul#tags-suggest-list{
     width: 95%;
     margin-top: 33px;
+  }
+  .li-style>span{
+    font-size: 15px;
+  }
+  .close{
+    font-size: 25px;
+    width: 15px;
+    height: 15px;
+    margin-top: -2px;
   }
 
 

@@ -1,7 +1,7 @@
 function clickEdit(){
   $('#edit').hide();
   $('#save').show();
-  $('.box-profile').css("min-height", "500px");
+  $('.box-profile').css("min-height", "550px");
   $('.hidden-text').show();
   $('.hidden-cross').show();
   $('.dataarea').each(function() {
