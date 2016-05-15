@@ -194,7 +194,7 @@ input.file{
     width: 99%;
   }
   .box-profile{
-    margin-top: 125px;
+    margin-top: 65px;
     margin-left: 15px;
   }
   #first-name,
@@ -250,7 +250,7 @@ input.file{
   }
   #tags-chosen>span{
     padding: 1px;
-    font-size: 30px;
+    font-size: 15px;
   }
 }
 @media (max-width: 767px) {
@@ -286,14 +286,27 @@ input.file{
 /*............................................................................*/
 @media(max-width: 500px){
   .edit-text>button{
-    width: 90px;
-    height: 50px;
+    width: 70px;
+    height: 35px;
     font-size: 15px;
   }  
   .image-section{
     padding: 10px 30% 10px 20%;
     float: left;
     height: 300px;
+  }
+  .info-section{
+    margin-left: -50px;
+  }
+  .box-prifile{
+    min-height: 550px;
+  }
+  ul#tags-suggest-list{
+    margin-top: 64px;
+    margin-left: -20px;
+  }
+  input.form-control{
+    margin-left: -20px;
   }
 
 }

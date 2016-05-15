@@ -130,12 +130,6 @@
     margin-top: -38px;
     margin-left: 12px;
   }
-  ul.dropdown-menu.notifications{
-    right: 0;
-    background-color: #444;
-    width: 100%;
-    height: 100%;
-  }
 
   .modal-dialog {
   width: 100%;
@@ -348,7 +342,7 @@
 
   .post-concern{
     margin-left: 10px;
-    margin-top: 125px;
+    margin-top: 55px;
   }
   .my-modal-title{
     font-size: 15px;
@@ -366,7 +360,7 @@
 
   }
   .display-target{
-    font-size: 25px;
+    font-size: 15px;
     margin-top: -70px;    
   }
 
@@ -405,6 +399,7 @@
   .nav-tabs{
     font-size: 25px;
   }
+
 
   /*////////  FONT Decrease  ////////////////*/
   .icons-ld{
@@ -456,11 +451,6 @@
     margin-top: 0px;
     font-size: 20px;
   }
-  #gly-bell{
-    margin-top: 2px;
-    margin-right: 25px;
-    float: right;
-  }
   .glyphicon-search{
     color: #fff;
     margin-right: 15px;
@@ -502,16 +492,42 @@
     font-size: 25px;
     border-radius: 10px 10px 0px 0px;
   }
+  div.dropdown.open .gly-bell{
+    margin-left: 90%;
+  }
+  ul.dropdown-menu.notifications{
+    margin-top: -10px;
+  }
+  ul.dropdown-menu.notifications:after{
+    margin-top: 35px;
+  }
+  .notification-heading { 
+    background-color: #eee;
+  }
   
+}
+@media(max-width: 559px){
+  div.dropdown.open .gly-bell{
+    margin-left: 80%;
+    margin-top: -30px;
+  }
+  ul.dropdown-menu.notifications:after{
+    margin-top: 10px;
+    right: 65px;
+  }
 }
 
 /*.................................................................................................*/
 /*                                   NEW MOBILE DESIGN                                             */
 /*.................................................................................................*/
 @media(max-width: 500px){
+  .box{
+    width: 100%;
+    margin-left: 7px;
+  }
   #navhead{
     margin-top: 15px;
-    margin-left: 10px;
+    margin-left: -5px;
     font-size: 10px;
   }
   #navcolor{
@@ -587,6 +603,22 @@
   top: -6px;
   right: 65px;
   width: 15px;
+  }
+  .notification-heading{
+    background-color: #eee;
+  }
+  .notifications{
+    margin-top: -10px;
+    margin-right: -25px;
+    min-width:375px; 
+  }
+  ul.dropdown-menu.notifications:after{
+    margin-top: 5px;
+    right: 90px;
+  }
+  div.dropdown.open .gly-bell{
+    margin-left: 70%;
+    margin-top: -40px;
   }
 
   /*     ....................POST CONTENT .........................*/
@@ -771,6 +803,15 @@
   ul#tags-suggest-list{
     width: 95%;
     margin-top: 33px;
+  }
+  .li-style>span{
+    font-size: 15px;
+  }
+  .close{
+    font-size: 25px;
+    width: 15px;
+    height: 15px;
+    margin-top: -2px;
   }
 
 
