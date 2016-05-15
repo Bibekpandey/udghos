@@ -313,7 +313,7 @@ function generate_thread(threadobj, auth) {
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
                     ) +
-                '</div>'+
+                '<progress value="50" max="75" /></div>'+
               '<div id="textst" class="sttext">'+
                 '<a href="/complain/thread/'+threadobj.id.toString()+'">'+
                 '<div class="post-title">'+
