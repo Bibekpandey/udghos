@@ -15,6 +15,12 @@ h1,h2,h3,h4{
   border: 0px solid #000;
 
 }
+progress {
+  display: none;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+
+}
 #float-notification{
   position: absolute;
   float: right;
@@ -445,11 +451,13 @@ div.row.background-icons{
 }
 
 .btn-comment{
-  background-color: #fff;
+  background-color: #777;
   border-color: #999;
+  color: #fff;
   height: 30px;
   padding: 2px;
   position: relative;
+  border-radius: 3px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -1100,13 +1108,16 @@ div.share> .twitter {
 .suggestions {
 	background-color:#aaa;
 	width:95%;
-	margin-top:30px;
+	margin-top:0px;
   max-height:125px;  
   overflow-x:hidden; 
   overflow-y:auto;
   border-radius: 5px;
 }
-.suggestion-target{
+ul#tags-suggest-list{
+  margin-top: 33px;
+}
+.suggestions-target{
   margin-top: 0px;
 }
 
@@ -1123,10 +1134,6 @@ div.share> .twitter {
 	background-color:#bbb;
 }
 
-
-.suggestions > li:hover {
-	background-color:#bbb;
-}
 
 .header-column{
   position: relative;
