@@ -281,6 +281,23 @@ input.file{
   }
 }
 
+/*............................................................................*/
+/*..............................NEW MOBILE DESIGN ............................*/
+/*............................................................................*/
+@media(max-width: 500px){
+  .edit-text>button{
+    width: 90px;
+    height: 50px;
+    font-size: 15px;
+  }  
+  .image-section{
+    padding: 10px 30% 10px 20%;
+    float: left;
+    height: 300px;
+  }
+
+}
+
 @-moz-document url-prefix() {
     .fakefile {
         margin-top: -217px;
