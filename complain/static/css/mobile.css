@@ -532,12 +532,12 @@
 /*.................................................................................................*/
 @media(max-width: 500px){
   #navhead{
-    margin-top: 20px;
+    margin-top: 15px;
     margin-left: 10px;
     font-size: 10px;
   }
   #navcolor{
-    height: 70px;
+    height: 50px;
   }
   #headnav{
     margin-right: -10px;
@@ -547,14 +547,14 @@
   }
   .udghos-logo{
     margin-top: -25px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
   .navbar-name{
     margin-top: 0px;
   }
   .nav-unauth>li>a{
-    margin-top: 10px;
+    margin-top: 0px;
     font-size: 15px;
   }
   .box-header{
@@ -564,18 +564,18 @@
     margin-bottom: 35px;
   }
   .glyphicon{
-    font-size: 30px;
+    font-size: 25px;
   }
   .gly-bell{
-    margin-top: -5px;
+    margin-top: -12px;
   }
   .glyphicon-bell{
     margin-top: -50px;
   }
   .img-navbar{
     margin-top: -10px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
   .header-column>h1{
     margin-top: -15px;
@@ -586,7 +586,6 @@
   }
   .btn-post-mobile{
     font-size: 20px;
-    width: 200px;
     height: 50px;
   }
   .how{
