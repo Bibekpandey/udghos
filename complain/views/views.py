@@ -236,6 +236,8 @@ class Post(View):
                 tagids.append(int(x))
             except ValueError:
                 pass
+        if tagids==[]:
+            thread.tags.add(ThreadTag.objects.get(name__icontains='Not-Specified'))
         for tagid in tagids:
             thread.tags.add(ThreadTag.objects.get(pk=tagid))
         thread.save()
