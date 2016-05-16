@@ -170,7 +170,7 @@ class Signup(View):
                 a.delete()
                 u.delete()
             ret['success'] = False
-            ret['message'] = repr(e)
+            ret['message'] = "Can't sign up right now. Please try social login"
             return JsonResponse(ret)
 
 class Post(View):
@@ -236,6 +236,8 @@ class Post(View):
                 tagids.append(int(x))
             except ValueError:
                 pass
+        if tagids==[]:
+            thread.tags.add(ThreadTag.objects.get(name__icontains='Not-Specified'))
         for tagid in tagids:
             thread.tags.add(ThreadTag.objects.get(pk=tagid))
         thread.save()
