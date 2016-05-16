@@ -4,7 +4,6 @@
 
 <html lang="en">
 <head>
-<link rel='shortcut icon' href='/static/img/udghos.ico' type='image/x-icon'/ >  
 
 <meta charset="utf-8">
 <meta property="og:type" content="article"> 
@@ -12,6 +11,7 @@
 <meta property="og:type" content="Concern">
 <meta property="og:title" content="Issue in udghos.com">
 <meta property="og:description" content="{{title}}">
+  <link rel='shortcut icon' href='/static/img/udghos.ico' type='image/x-icon'/ >  
 
  	<title>{{title}}</title>
 
@@ -35,8 +35,8 @@
   }
   #footer {
    position:relative;
-   margin-top: 300px;
-   bottom:0px;
+   margin-top: 500px;
+   bottom:0;
    width: 100%;
   }
   .box{
@@ -44,7 +44,14 @@
   }
   a.notification-title.pull-right{
   margin-top: 10px;
-}
+  }
+  h2{
+    background-color: #333;
+    padding: 0px 5px 0px 5px;
+    color: #fff;
+    margin-top: -10px;
+    margin-bottom: 35px;  
+    border-radius: 3px;  
  }  
 
 </style>
@@ -71,7 +78,9 @@ xfbml: true});
 <div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
   <div id="mask" style="position:absolute;display:none"></div>
 
-    {% csrf_token %}
+  
+  {% csrf_token %}
+
   <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
@@ -151,6 +160,7 @@ xfbml: true});
             {% else %}
             
             <ul class="nav navhead-nav nav-unauth">
+              <li class="icon-login"><a href="/complain/login/">Login</a></li>
               <li class="icon-login"><a href="/about/">About</a></li>
             </ul> 
             {% endif %}        
@@ -165,7 +175,7 @@ xfbml: true});
         </div>
   			<div class="col-md-10">
             {% if results  or 1 %}
-                <h2 style="margin-left:10px;background-color:#bbb"><span id="result" style="display:none">Results for </span><span id="result-for"></span></h2>
+                <h2 style="margin-left:10px;}"><span id="result" style="display:none">Results for </span><span id="result-for"></span></h2>
                 <h3 id="not-found" style="margin:10px;display:none"> Nothing Found</h3>
             {% endif %}
                 <div class="tab-stories">

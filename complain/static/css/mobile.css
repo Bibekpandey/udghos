@@ -38,7 +38,7 @@
     font-size: 25px;
   }
   .single-notification{
-    height: 125px;
+    height: 100px;
   }
   .form-control-navbar{
     margin-top: 0px;
@@ -607,18 +607,24 @@
   .notification-heading{
     background-color: #eee;
   }
+  h5.notification-title{
+    margin-top: -7px;
+    padding-top: 5px;
+  }
   .notifications{
     margin-top: -10px;
-    margin-right: -25px;
-    min-width:375px; 
+    margin-right: -22px;
+    min-width:360px; 
   }
   ul.dropdown-menu.notifications:after{
-    margin-top: 5px;
-    right: 90px;
+    display: none;
   }
   div.dropdown.open .gly-bell{
     margin-left: 70%;
     margin-top: -40px;
+  }
+  .mark-read>a{
+    color: #25f;
   }
 
   /*     ....................POST CONTENT .........................*/
