@@ -2,6 +2,7 @@ function clickEdit(){
   $('#edit').hide();
   $('#save').show();
   $('.box-profile').css("min-height", "550px");
+  $('#bloodgroup').css("display","none");
   $('.hidden-text').show();
   $('.hidden-cross').show();
   $('.dataarea').each(function() {

@@ -56,33 +56,37 @@ textarea:focus{
   border: none;
 }
 .about-tab{
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .about-me{
-  margin-top: -20px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: -5px;
 }
 .tags{
   margin-top: -20px;
 }
-.address-tab,
-.about-tab,
+
 .tags-tab{
-  font-size: 20px;
-  margin-top: 20px;
+  font-size: 25px;
+  margin-top: 25px;
   display: block;
   position: relative;
 }
 .my-username{
   color: #777;
-  margin-top: -10px;
-  margin-bottom: 20px;
+  font-size: 15px;
+  margin-top: -20px;
+  margin-bottom: 15px;
 }
 .my-address{
   margin-top: 5px;
 }
-.about-me{
-  margin-top: 20px;
+.my-bloodgroup{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+#bloodgroup,#address,#about{
+  font-size: 15px;
 }
 .glyphicon-map-marker{
   font-size: 20px;
