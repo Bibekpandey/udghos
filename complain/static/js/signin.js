@@ -69,7 +69,7 @@ function signUp() {
         }
         else {
             document.getElementById('signup-form').reset();
-            $('#signup-message').text("Can't sign up right now. Please try Social signup");
+            $('#signup-message').text(data.message);
             return false;
             $('#signup-message').hide();
             $('#float-notification').show();  

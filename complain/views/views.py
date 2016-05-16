@@ -170,7 +170,7 @@ class Signup(View):
                 a.delete()
                 u.delete()
             ret['success'] = False
-            ret['message'] = repr(e)
+            ret['message'] = "Can't sign up right now. Please try social login"
             return JsonResponse(ret)
 
 class Post(View):
