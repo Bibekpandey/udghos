@@ -83,6 +83,7 @@ progress {
   font-size: 15px;
   position: fixed;
   text-decoration: none;
+  z-index: 5;
 }
 .btn-review:hover{
   color: #fff;
