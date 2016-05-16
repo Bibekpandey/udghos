@@ -366,9 +366,11 @@ xfbml: true});
                 <a href="javascript:void(0)" onclick="profile_add_tags()">Add</a></div></div><br>
 
         		  {% for tag in tags %}
+                <div class="row" style="margin-left: 0px;">
         		    <div class="display-tag display-tag-home">
         		      <a href="/threads/tagged/{{tag.name}}">{{tag.name}}</a>
-        		    </div><br>
+        		    </div>
+                </div>
         		  {% endfor %}
             </div>
         </div>

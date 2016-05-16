@@ -21,9 +21,11 @@ progress {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   position: absolute;
-  
-
 }
+.my-progress-bar {
+  background-color: #d71010;
+}
+
 
 #float-notification{
   position: absolute;
@@ -121,6 +123,11 @@ progress {
   border:1px solid #aaa;
   border-radius: 3px;
 }
+.box-post-info{
+  margin-top: 10px;
+  border: 0px solid #aaa;
+  border-radius: 3px;
+}
 .box-image{
   margin-top: 10px;
 
@@ -189,7 +196,7 @@ h1{
   font-family: 'Varela Round', sans-serif;
   position: block;
   min-height: 20px;
-  padding: 10px 15px 15px 15px;
+  padding: 10px 15px 5px 15px;
   margin: 2px;
   margin-top: 20px;
   margin-left: 10px;
@@ -428,6 +435,8 @@ div.row.background-icons{
 .display-tag-home>a{
   color: #d71010;
   margin: 5px;
+  display: block;
+  margin-top: 10px; 
 }
 .display-tag-home{
   float: left;
@@ -570,6 +579,7 @@ div.row.background-icons{
 }
 .tag-heading{
   font-size: 25px;
+  margin-bottom: 0px;
 }
 
 .inner-addon { 
