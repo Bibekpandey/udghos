@@ -17,10 +17,14 @@ h1,h2,h3,h4{
 }
 progress {
   display: none;
+  margin-top: 50px;
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
+  position: absolute;
+  
 
 }
+
 #float-notification{
   position: absolute;
   float: right;
@@ -417,10 +421,9 @@ div.row.background-icons{
 .display-target{
   display: block;
   float: left;
-  border-radius: 5px;
-  margin-top: -47px;
+  margin-top: -50px;
+  opacity: 0.8;
   margin-left: 5px;
-  margin-bottom: 2px;
 }
 .display-tag-home>a{
   color: #d71010;
@@ -437,7 +440,7 @@ div.row.background-icons{
   color: #d71010;
 }
 .post-thread-image{
-  margin-top: -10px;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 .comment-form{
@@ -461,6 +464,11 @@ div.row.background-icons{
   margin-top: 5px;
   margin-bottom: 5px;
 }
+.btn-comment:hover{
+  background-color: #666;
+  color: #fff;
+}
+
 #tag-post1{
   float: right;
   margin-top: 5px;
@@ -748,6 +756,8 @@ ul.dropdown-settings{
 .post-content{
   margin-top: -10px;
   margin-left: 2px;
+  margin-right: 10px;
+  text-align: justify;
   color: #555;
   font-size: 17px;
 }
@@ -1133,7 +1143,6 @@ ul#tags-suggest-list{
 .suggestions > li:hover {
 	background-color:#bbb;
 }
-
 
 .header-column{
   position: relative;

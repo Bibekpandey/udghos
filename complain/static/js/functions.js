@@ -327,9 +327,9 @@ function generate_thread(threadobj, auth) {
 
                 '</div>'+
                 '<div class="post-content">'+
-                 threadobj.content+
+                    threadobj.content+
                 '</div>'+
-                '<div class="post-thread-image"><br>'+
+                '<div class="post-thread-image">'+
                     images_html(threadobj.images, threadobj.id)+
                 '</div>'+
                 '<div class="sttime">'+

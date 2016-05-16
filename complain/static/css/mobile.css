@@ -215,7 +215,7 @@
   }
   .comment-text{
     margin-top: 15px;
-    font-size: 40px;
+    font-size: 20px;
   }
   .form-comment{
     font-size: 40px;
@@ -668,11 +668,7 @@
   .comment-user{
     font-size: 15px;
   }
-  .comment-date{
-    font-size: 15px;
-  }
   .comment-text{
-    margin-top: 15px;
     font-size: 20px;
   }
   .form-comment{
@@ -752,14 +748,25 @@
   }
   span.comment-date{
     font-size: 9px;
+    margin-bottom: -20px;
+  }
+  .comment>span.comment-user{
+    margin-top: 10px;
   }
   .comment-text{
-    margin-top: -10px;
+    margin-top: 0px;
+    margin-bottom: 5px;
     font-size: 15px;
+  }
+  .comment{
+    margin-left: -3px;
+    margin-top: -10px;
+    padding-top: 2px;
   }
   .form-comment{
     font-size: 20px;
     height: 50px;
+    margin-left: -3px;
   }
   textarea.form-comment{
     font-size: 15px;
