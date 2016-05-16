@@ -185,7 +185,10 @@ input.file{
   margin-top: 10px;
   margin-left: 70px;
 }
-
+ul#tags-suggest-list{
+    margin-top: 34px;
+    margin-left: 50px;
+  }
 
 
 

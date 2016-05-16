@@ -1273,6 +1273,7 @@ ul#tags-suggest-list{
 .notification-title {
   color:#ff7788;
   font-size:1rem;
+  margin-left: 5px;
   display:relative;
 } 
 .notification-info{

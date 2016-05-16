@@ -400,25 +400,25 @@ class ThreadPage(View):
             self.context['authenticated'] = True
             self.context['notifications'] = get_notifications(request)
             self.context['profile_pic'] = Account.objects.get(user=request.user).profile_pic
+            comments =[]# Comment.objects.filter(thread=thread)
+            #self.context['comments']= comments
 
+            replies = []
+            # images
+            images = []#ThreadImage.objects.filter(thread=thread)
+            self.context['images'] = []
+            for i in images:
+                self.context['images'].append(i.name)
+            # comments
+            for comment in comments:
+                replys = Reply.objects.filter(comment=comment)
+                replies.append(list(replys))
 
-        comments =[]# Comment.objects.filter(thread=thread)
-        #self.context['comments']= comments
+            self.context['replies'] = replies
 
-        replies = []
-        # images
-        images = []#ThreadImage.objects.filter(thread=thread)
-        self.context['images'] = []
-        for i in images:
-            self.context['images'].append(i.name)
-        # comments
-        for comment in comments:
-            replys = Reply.objects.filter(comment=comment)
-            replies.append(list(replys))
-
-        self.context['replies'] = replies
-
-        self.context['total_comments'] = len(comments)
+            self.context['total_comments'] = len(comments)
+        else:
+            self.context['authenticated'] = False
 
         return render(request, "complain/post.html", self.context)
 
