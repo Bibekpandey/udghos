@@ -5227,7 +5227,9 @@ a.thumbnail.active {
   }
 }
 .progress {
-  height: 20px;
+  /*-webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);*/
+  height: 10px;
   margin-bottom: 20px;
   overflow: hidden;
   background-color: #f5f5f5;

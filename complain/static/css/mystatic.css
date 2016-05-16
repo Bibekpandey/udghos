@@ -17,10 +17,24 @@ h1,h2,h3,h4{
 }
 progress {
   display: none;
+  margin-top: 50px;
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
-
+  position: absolute;
 }
+.my-progress-bar {
+  background-color: #d71010;
+}
+.progress-area{
+  display: inlinse-block;
+  position: relative;
+  float: right;
+  width: 100px;
+  margin-top: 0px;
+  margin-right: 5px;
+}
+
+
 #float-notification{
   position: absolute;
   float: right;
@@ -69,6 +83,7 @@ progress {
   font-size: 15px;
   position: fixed;
   text-decoration: none;
+  z-index: 5;
 }
 .btn-review:hover{
   color: #fff;
@@ -115,6 +130,11 @@ progress {
   margin-bottom: 10px;
   background-color: #fff;
   border:1px solid #aaa;
+  border-radius: 3px;
+}
+.box-post-info{
+  margin-top: 10px;
+  border: 0px solid #aaa;
   border-radius: 3px;
 }
 .box-image{
@@ -185,7 +205,7 @@ h1{
   font-family: 'Varela Round', sans-serif;
   position: block;
   min-height: 20px;
-  padding: 10px 15px 15px 15px;
+  padding: 10px 15px 5px 15px;
   margin: 2px;
   margin-top: 20px;
   margin-left: 10px;
@@ -417,14 +437,15 @@ div.row.background-icons{
 .display-target{
   display: block;
   float: left;
-  border-radius: 5px;
-  margin-top: -47px;
+  margin-top: -50px;
+  opacity: 0.8;
   margin-left: 5px;
-  margin-bottom: 2px;
 }
 .display-tag-home>a{
   color: #d71010;
   margin: 5px;
+  display: block;
+  margin-top: 10px; 
 }
 .display-tag-home{
   float: left;
@@ -437,7 +458,7 @@ div.row.background-icons{
   color: #d71010;
 }
 .post-thread-image{
-  margin-top: -10px;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 .comment-form{
@@ -461,6 +482,11 @@ div.row.background-icons{
   margin-top: 5px;
   margin-bottom: 5px;
 }
+.btn-comment:hover{
+  background-color: #666;
+  color: #fff;
+}
+
 #tag-post1{
   float: right;
   margin-top: 5px;
@@ -549,7 +575,7 @@ div.row.background-icons{
   position: relative;
   font-size: 15px;
   font-weight: bold;
-  margin-top: -47px;
+  margin-top: 47px;
   margin-left: 2px;
   margin-bottom: 10px;
   color: #d71010;
@@ -562,6 +588,7 @@ div.row.background-icons{
 }
 .tag-heading{
   font-size: 25px;
+  margin-bottom: 0px;
 }
 
 .inner-addon { 
@@ -748,6 +775,8 @@ ul.dropdown-settings{
 .post-content{
   margin-top: -10px;
   margin-left: 2px;
+  margin-right: 10px;
+  text-align: justify;
   color: #555;
   font-size: 17px;
 }
@@ -758,7 +787,7 @@ ul.dropdown-settings{
   margin-top: -7px;
   margin-bottom: -5px;
   margin-left: 2px;
-  font-size: 25px;
+  font-size: 20px;
 }
 .post-title:hover{
   color: #d71010;
@@ -1133,7 +1162,6 @@ ul#tags-suggest-list{
 .suggestions > li:hover {
 	background-color:#bbb;
 }
-
 
 .header-column{
   position: relative;

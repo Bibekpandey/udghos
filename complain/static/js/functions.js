@@ -322,14 +322,21 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
                 '<div class="post-body">'+
                     (threadobj.user.id==0?'<a href="#">':'<a href="/complain/profile/'+threadobj.user.id+'">')+
-                    '<span class="heading-property heading-post">'+threadobj.user.name+'</span></a>'+
-                    '<span class="sttime"> &nbsp;'+threadobj.time+'</span>'+
-
+                    '<span class="heading-property heading-post">'+threadobj.user.name+'</a>'+
+                    // '<div class="progress-area">'+
+                            // '<div class="progress">'+
+                                // '<div class="progress-bar my-progress-bar" role="progressbar" aria-valuenow="+threadobj.supportstoString()+" aria-valuemin="0" aria-valuemax="100" style="width:70%">'+
+                                // '</div>'+
+                            // '</div>'+
+                        // '</div>'+
+                        '</span>'+
+                    '<span class="sttime"> &nbsp;'+threadobj.time+
+                    '</span>'+
                 '</div>'+
                 '<div class="post-content">'+
-                 threadobj.content+
+                    threadobj.content+
                 '</div>'+
-                '<div class="post-thread-image"><br>'+
+                '<div class="post-thread-image">'+
                     images_html(threadobj.images, threadobj.id)+
                 '</div>'+
                 '<div class="sttime">'+
