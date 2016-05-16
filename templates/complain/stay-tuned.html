@@ -77,16 +77,6 @@
             <a href="#">Terms & Conditions</a>
           </p>
           <p class="pull-right">
-            <form class="footer-form" role="search">
-              <div class="form-group">
-                <div id="search-bar" class="inner-addon right-addon nav-search">
-                  <i class="glyphicon glyphicon-footer glyphicon-search"></i>
-                  <input type="text" placeholder="Search" class="form-control form-control-footer" />
-                </div>
-              </div>
-            </form>
-          </p>
-          <p class="pull-right">
             <a href="https://facebook.com/udghos">Facebook</a>&middot;
             <a href="https://twitter.com/udghosnepal">Twitter</a>
           </p>
@@ -97,64 +87,7 @@
       </footer>
     </div>
   </div>
-<div class="container">
-    <div id="popover_notification_content" style="display: none">
-      <div class="notification-body">
-    {% if notifications %}
-      {% else %}
-      <div class="single-notification">
-        &nbsp; No new notifications
-      </div>
-      {% endif %}
 
-      {% for notif in notifications %}
-        <div class="single-notification">
-          <a href="/thread/{{notif.thread}}/">{% ifequal notif.type "comment" %}
-          Comment on your thread by {{notif.by}}
-          {% endifequal %}
-          {% ifequal notif.type "support" %}
-            Support on your thread by {{notif.by}}
-          {% endifequal %}
-          {% ifequal notif.type "downvote" %}
-            Downvote on your thread by {{notif.by}}
-          {% endifequal %}
-
-            <div class="stimg-notification">
-                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
-            </div>
-          </a>
-        </div>
-    {% endfor %}
-    </div>
-<div class="container">
-    <div id="popover_notification_content" style="display: none">
-      <div class="notification-body">
-    {% if notifications %}
-      {% else %}
-      <div class="single-notification">
-        &nbsp; No new notifications
-      </div>
-      {% endif %}
-
-      {% for notif in notifications %}
-        <div class="single-notification">
-          <a href="/thread/{{notif.thread}}/">{% ifequal notif.type "comment" %}
-          Comment on your thread by {{notif.by}}
-          {% endifequal %}
-          {% ifequal notif.type "support" %}
-            Support on your thread by {{notif.by}}
-          {% endifequal %}
-          {% ifequal notif.type "downvote" %}
-            Downvote on your thread by {{notif.by}}
-          {% endifequal %}
-
-            <div class="stimg-notification">
-                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
-            </div>
-          </a>
-        </div>
-    {% endfor %}
-    </div>
 
 </body>
 

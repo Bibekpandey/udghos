@@ -25,6 +25,14 @@ progress {
 .my-progress-bar {
   background-color: #d71010;
 }
+.progress-area{
+  display: inlinse-block;
+  position: relative;
+  float: right;
+  width: 100px;
+  margin-top: 0px;
+  margin-right: 5px;
+}
 
 
 #float-notification{
@@ -566,7 +574,7 @@ div.row.background-icons{
   position: relative;
   font-size: 15px;
   font-weight: bold;
-  margin-top: -47px;
+  margin-top: 47px;
   margin-left: 2px;
   margin-bottom: 10px;
   color: #d71010;
