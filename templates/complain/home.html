@@ -38,6 +38,7 @@
         }
         .box-footer{
           margin-top: 200px !important;
+          margin-bottom: 0px !important;
         }
     </style>
 </head>
@@ -264,7 +265,7 @@ xfbml: true});
                     </div>
                     <div class="modal-body">
                   <form method="post" id="opinion-form" action="{% url 'review' %}" class="form-horizontal" role="form" enctype="multipart/form-data">
-                      <div class="form-group">
+                      <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Do you have anything to share to Udghos. Feel free to Share your Opinion.</label>
                           <input type="text" name="review-title" class="form-control" id="recipient-name" placeholder="Title relevant to your description">
                   </div>
@@ -326,9 +327,6 @@ xfbml: true});
         <div id="tab-stories">
           <div class="box-tabs">
             <div id="error" class="text-center text-danger" style="float:left"> </div>
-            <!--button type="button" class="btn btn-my btn-large btn-post-desktop" data-toggle="modal" data-target="#myModal" data-keyboard="true">
-              Post a Concern
-            </button-->
             <ul class="nav nav-tabs" id="navblock" >
               <li class="active"><a data-toggle="tab" href="javascript:void()" onclick="g_lastId=undefined;showRecent()">Recent</a></li>
               <li><a data-toggle="tab" href="javascript:void()" onclick="g_lastId=undefined;showTop()">Top</a></li>
