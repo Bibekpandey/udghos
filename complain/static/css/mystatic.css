@@ -130,7 +130,10 @@ progress {
   margin-bottom: 10px;
   background-color: #fff;
   border:1px solid #aaa;
-  border-radius: 3px;
+  border-radius: 5px 5px 0px 0px;
+}
+.box-profile-home{
+  padding: 0px 0px 5px 0px;
 }
 .box-post-info{
   margin-top: 10px;
@@ -205,14 +208,14 @@ h1{
   font-family: 'Varela Round', sans-serif;
   position: block;
   min-height: 20px;
-  padding: 10px 15px 5px 15px;
+  padding: 0px 0px 5px 0px;
   margin: 2px;
   margin-top: 20px;
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
   border:1px solid #aaa;
-  border-radius: 3px;
+  border-radius: 5px 5px 0px 0px;
   font-size: 15px;
 }
 .box-tags-home{
@@ -431,28 +434,23 @@ div.row.background-icons{
 .display-tag{
   display: block;
   float: right;
-  margin-top: -20px;
-  margin-right: 25px;
-  margin-bottom: 2px;
+  margin: 0px 25px 0px 5px; 
 }
 .display-target{
   display: block;
   float: left;
-  margin-top: -50px;
+  margin-top: -45px;
   opacity: 0.8;
   margin-left: 5px;
 }
 .display-tag-home>a{
   color: #d71010;
-  margin: 5px;
-  display: block;
-  margin-top: 10px; 
+  display: block; 
 }
 .display-tag-home{
   float: left;
   color: #d71010;
-  padding: 1px;
-  margin-left: -5px;
+  margin: 0px 0px 0px 10px;
 }
 .target-text{
   padding: 2px;
@@ -512,10 +510,6 @@ div.row.background-icons{
   color:#d71010;
   border-radius: 3px;
   font-size: 15px;
-}
-
-.tagname2:hover{
-  color: #d71010;
 }
 
 #action-element{
@@ -588,8 +582,12 @@ div.row.background-icons{
   margin-top: 5px;
 }
 .tag-heading{
+  background-color: #444;
+  color: #fff;
   font-size: 25px;
-  margin-bottom: 0px;
+  padding: 0px 0px 0px 10px;
+  margin-bottom: 5px;
+  border-radius: 3px 3px 0px 0px;
 }
 
 .inner-addon { 
@@ -778,12 +776,12 @@ ul.dropdown-settings{
   margin-left: 2px;
   margin-right: 10px;
   text-align: justify;
-  color: #555;
+  color: #333;
   font-size: 15px;
 }
 .post-title{
   font-family: 'Bitter', serif !important;
-  color: #333;
+  color: #222;
   font-weight: bold;
   margin-top: -7px;
   margin-bottom: -5px;

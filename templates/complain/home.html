@@ -348,6 +348,7 @@ xfbml: true});
       <div id="profile" class="col-md-4">
         {% if authenticated %}
         <div class="box-profile box-profile-home">
+          <div class="tag-heading event-heading">{{user.first_name}} {{user.last_name}}</div>
           <img class="img-circle img-homepage" href="{% url 'profile' user.id %}" src="/media/{{profile_pic}}" width=70 height=70 alt="Generic placeholder image" width="100" height="100">
           <div class="media-body">
             <a href="{% url 'profile' user.id %}">
@@ -361,7 +362,7 @@ xfbml: true});
         </div>
         <div class="box-tags">
             <div class="tag-heading event-heading">My Tags <div class="btn-black">
-                <a href="javascript:void(0)" onclick="profile_add_tags()">Add</a></div></div><br>
+                <a href="javascript:void(0)" onclick="profile_add_tags()">Add</a></div></div>
 
         		  {% for tag in tags %}
                 <div class="row" style="margin-left: 0px;">
@@ -375,9 +376,9 @@ xfbml: true});
         {% else %}
         <div class="box-tags box-tags-home">
             <div class="tag-heading event-heading">Top Tags</div>
-            <a class="top-tags" href="/threads/tagged/nepal">Nepal</a>
             <a class="top-tags" href="/threads/tagged/education">Education</a>
-            <a class="top-tags" href="threads/tagged/government">Government</a>
+            <a class="top-tags" href="/threads/tagged/environment">Environment</a>
+            <a class="top-tags" href="threads/tagged/transportation">Transportation</a>
         </div>         
         {% endif %}
       </div>   
