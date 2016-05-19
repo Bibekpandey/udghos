@@ -230,4 +230,3 @@ function getItems(itemtype) {
             window.location = "profile/"+id;
         }
 
-

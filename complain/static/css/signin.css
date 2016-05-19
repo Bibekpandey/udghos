@@ -410,18 +410,18 @@ p>a:hover{
   #navhead{
     margin-top: 10px;
     margin-left: 45px;
-    font-size: 50px;
+    font-size: 25px;
   }
   #headnav{
     margin-right: 25px;
   }
   #navcolor{
-    height: 100px;
+    height: 50px;
   }
   .udghos-logo{
-    margin-top: -13px;
-    width: 75px;
-    height: 75px;
+    margin-top: -20px;
+    width: 40px;
+    height: 40px;
   }
   .udghos{
     float: none;
@@ -436,7 +436,8 @@ p>a:hover{
     top: 0;
   }
   li.icon-login>a{
-    font-size: 50px;
+    margin-top: -5px;
+    font-size: 25px;
   }
   .form-control {
   display: block;
@@ -529,6 +530,7 @@ p>a:hover{
 @media (max-width: 767px) {
   .navhead-nav{
     float: right;
+    margin-top: -45px;
   }
   .container{
     width: 100%;
@@ -551,8 +553,8 @@ p>a:hover{
     margin-left: 50px;
   }
   li.icon-login>a{
-    font-size: 35px;
-    margin-top: -100px;
+    font-size: 20px;
+    margin-top: -250px;
   }
   .box-signin{
     margin: 100px -20px 50px 0px;

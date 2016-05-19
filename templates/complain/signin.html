@@ -109,6 +109,11 @@
                 <button class="facebook" type="button" formnovalidate>Facebook</button>
                 <button class="twitter" type="button" formnovalidate>Twitter</button>
                 <button class="googleplus" type="button" formnovalidate>Google Plus</button>
+                <script>
+                $('.facebook').click(function() { window.location="{%url 'social:begin' 'facebook' %}"; return false;});
+                  $('.twitter').click(function() { location.href="{%url 'social:begin' 'twitter' %}"; return false;});
+                  $('.googleplus').click(function() { location.href="{%url 'social:begin' 'google-oauth2' %}";return false;});
+                </script>
               </div>
                          
               <label for="text" class="sr-only">First Name</label>

@@ -117,6 +117,7 @@ progress {
   margin-left: 10px;
   margin-bottom: 15px;
   border:1px solid #aaa;
+  background-color: #fff;
   border-bottomm: 2px solid #ccc;
   border-radius: 3px;
   
@@ -130,7 +131,14 @@ progress {
   margin-bottom: 10px;
   background-color: #fff;
   border:1px solid #aaa;
-  border-radius: 3px;
+  border-radius: 5px 5px 0px 0px;
+}
+.box-profile>a{
+  text-decoration: none;
+  color: #d71010;
+}
+.box-profile-home{
+  padding: 0px 0px 5px 0px;
 }
 .box-post-info{
   margin-top: 10px;
@@ -147,24 +155,26 @@ progress {
 
 .box-header{
   /*background: linear-gradient(#fff, #eee);*/
+
   background-image: url("/static/img/udghos-header.png");
   background-size: 85% 200px;
   background-position: center;
   background-repeat: no-repeat; 
+  
+  background-color: #fff;  
   font-family: 'Varela Round', sans-serif;
   position: block;
-  padding: 10px;
-  color: #000; 
+  padding: 10px; 
   border-radius: 3px;
   margin-top: -10px;
   height: 250px;
   right: 0;
 }
 h1{
-  font-size: 60px;
+  font-size: 50px;
 }
 .how{
-  margin-top: 10px;
+  margin-top: 5px;
 }
 .how>a{
     color: #d71010;
@@ -205,14 +215,14 @@ h1{
   font-family: 'Varela Round', sans-serif;
   position: block;
   min-height: 20px;
-  padding: 10px 15px 5px 15px;
+  padding: 0px 0px 5px 0px;
   margin: 2px;
   margin-top: 20px;
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
   border:1px solid #aaa;
-  border-radius: 3px;
+  border-radius: 5px 5px 0px 0px;
   font-size: 15px;
 }
 .box-tags-home{
@@ -244,6 +254,15 @@ h1{
 }
 .footer-body{
   margin: 10px 10px 0px 10px;
+}
+#recipient-name{
+  line-height: 18px;
+}
+textarea{    
+    overflow:hidden;
+    overflow-x:hidden;
+    padding:10px;
+    line-height: 2px;
 }
 .form-control-footer{
   width: 50%;
@@ -431,28 +450,23 @@ div.row.background-icons{
 .display-tag{
   display: block;
   float: right;
-  margin-top: -20px;
-  margin-right: 25px;
-  margin-bottom: 2px;
+  margin: 0px 25px 0px 5px; 
 }
 .display-target{
   display: block;
   float: left;
-  margin-top: -50px;
+  margin-top: -45px;
   opacity: 0.8;
   margin-left: 5px;
 }
 .display-tag-home>a{
   color: #d71010;
-  margin: 5px;
-  display: block;
-  margin-top: 10px; 
+  display: block; 
 }
 .display-tag-home{
   float: left;
   color: #d71010;
-  padding: 1px;
-  margin-left: -5px;
+  margin: 0px 0px 0px 10px;
 }
 .target-text{
   padding: 2px;
@@ -514,10 +528,6 @@ div.row.background-icons{
   font-size: 15px;
 }
 
-.tagname2:hover{
-  color: #d71010;
-}
-
 #action-element{
   margin-left: 10px;
   margin-right: 10px;
@@ -536,6 +546,10 @@ div.row.background-icons{
 }
 .media-body>a{
   text-decoration: none;
+  color: #d71010;
+}
+.media-body>a:hover{
+  color: #e82121;
 }
 .modal{
     z-index: 10000;
@@ -588,8 +602,12 @@ div.row.background-icons{
   margin-top: 5px;
 }
 .tag-heading{
+  background-color: #444;
+  color: #fff;
   font-size: 25px;
-  margin-bottom: 0px;
+  padding: 0px 0px 0px 10px;
+  margin-bottom: 10px;
+  border-radius: 3px 3px 0px 0px;
 }
 
 .inner-addon { 
@@ -778,12 +796,12 @@ ul.dropdown-settings{
   margin-left: 2px;
   margin-right: 10px;
   text-align: justify;
-  color: #555;
+  color: #333;
   font-size: 15px;
 }
 .post-title{
   font-family: 'Bitter', serif !important;
-  color: #333;
+  color: #222;
   font-weight: bold;
   margin-top: -7px;
   margin-bottom: -5px;
@@ -928,6 +946,20 @@ ul.dropdown-settings{
   background-color: #888;
   color: #fff;
 }
+.btn-white{
+  background-color: #fff;
+  border-radius: 5px;
+  color: #333;
+  padding: 5px;
+  float: right;
+  margin: 2px 5px ;
+  font-size: 15px;
+}
+.btn-white>a{
+  text-decoration: none;
+  color: #333;
+}
+
 #show-btn{
   display: none;
 }
@@ -1166,7 +1198,7 @@ ul#tags-suggest-list{
 
 .header-column{
   position: relative;
-  color: #000;
+  color: #111;
   border-right: 0px solid #888;
   margin-bottom: 25px;
 }
