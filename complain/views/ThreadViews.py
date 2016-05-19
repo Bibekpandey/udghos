@@ -5,7 +5,7 @@ from django.db.models import Q
 from complain.models import *
 from datetime import datetime
 
-NEW_THREADS = 3 # new number of threads when scrolled in browser
+NEW_THREADS = 15 # new number of threads when scrolled in browser
 
 def get_thread_json(request):
     if request.user.is_authenticated():auth=True
