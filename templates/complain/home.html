@@ -164,8 +164,8 @@ xfbml: true});
           <div class="col-md-3 text-center header-column-first">
           </div>
           <div class="col-md-6 text-center header-column">
-            <h1>Make a difference</h1>
-            <h3>Post your Concern/Views</h3>
+            <h1>Let's Make a difference</h1>
+            <h4>Post your Concern/Views</h4>
             {% if authenticated %}
             <button type="button" class="btn btn-my btn-large btn-post-desktop" data-toggle="modal" data-target="#myModal" data-keyboard="true">
               Post a Concern
@@ -203,18 +203,18 @@ xfbml: true});
                       <div class="form-group">
                       </div>
                       <form method="post" id="thread-form" action="{% url 'post' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
-                          <label for="recipient-name" class="control-label">Title * <small id="title-warning" class="alert-danger" style="display:none">Write appropriate title to your concern</small></label>
-                          <input name="title" type="text" class="form-control" id="recipient-name" placeholder="Title relevant to the description" oninput="$('#title-warning').hide()">
+                          <label for="recipient-name" class="control-label">Title * (Make it short)<small id="title-warning" class="alert-danger" style="display:none">Write appropriate title to your concern</small></label>
+                          <textarea name="title" type="text" class="form-control txtarea" rows="1" cols="100" id="recipient-name" placeholder="Title relevant to your Concern" oninput="$('#title-warning').hide()"></textarea>
 
                         {% csrf_token %}
                         <input type="hidden" name="thread_type" value="complaint"/>
                         <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Description * <small id="description-warning" class="alert-danger" style="display:none">Please enter the description to you title</small></label>
-                          <textarea name="content" class="form-control" placeholder="Describe your concern and the solution" oninput="$('#description-warning').hide()"></textarea>
+                          <textarea name="content" class="form-control txtarea" rows="5" cols="100" placeholder="Describe your Concern and the Solution" oninput="$('#description-warning').hide()"></textarea>
 
                           <div class="form">
                             <label for="recipient-name" class="control-label">Who is to be addressed? <small id="targets-warning" class="alert-danger" style="display:none"></small></label><br>
-                            <input type="text" class="form-control" placeholder="If empty Udghos will be addressed" id="targetbox"/>
+                            <input type="text" class="form-control" placeholder="If empty Udghos will automatically address" id="targetbox"/>
                             <ul class="nav suggestions suggestions-target" id="targets-suggest-list" style="z-index:100;position:absolute;">
                             </ul>
                               <div class="li-style" id="targets-chosen">
@@ -267,12 +267,12 @@ xfbml: true});
                   <form method="post" id="opinion-form" action="{% url 'review' %}" class="form-horizontal" role="form" enctype="multipart/form-data">
                       <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Do you have anything to share to Udghos. Feel free to Share your Opinion.</label>
-                          <input type="text" name="review-title" class="form-control" id="recipient-name" placeholder="Title relevant to your description">
+                          <textarea type="text" name="review-title" class="form-control txtarea" rows="5" cols="100" id="recipient-name" placeholder="Title relevant to your description"></textarea>
                   </div>
                         {% csrf_token %}
                         <div class="form-group" style="padding:14px;">
                           <label for="recipient-name" class="control-label">Your Suggestions/Feedbacks/Opinions*</label>
-                          <textarea name="review-content" class="form-control" placeholder="Describe your views on Udghos"></textarea>
+                          <textarea name="review-content" class="form-control txtarea" rows="5" cols="100" placeholder="Describe your views on Udghos"></textarea>
                           <div class="form">
                           </div>
                         </div>
@@ -361,28 +361,35 @@ xfbml: true});
           </div>
         </div>
         <div class="box-tags">
-            <div class="tag-heading event-heading">My Tags <div class="btn-black">
-                <a href="javascript:void(0)" onclick="profile_add_tags()">Add</a></div></div>
+            <div class="tag-heading event-heading">My Tags 
+              <div class="btn-white">
+                <a href="javascript:void(0)" onclick="profile_add_tags()">Add</a></div>
+              </div>
 
         		  {% for tag in tags %}
                 <div class="row" style="margin-left: 0px;">
-        		    <div class="display-tag display-tag-home">
-        		      <a href="/threads/tagged/{{tag.name}}">{{tag.name}}</a>
-        		    </div>
+        		      <div class="display-tag display-tag-home">
+        		        <a href="/threads/tagged/{{tag.name}}">{{tag.name}}</a>
+        		      </div>
                 </div>
         		  {% endfor %}
             </div>
         </div>
         {% else %}
         <div class="box-tags box-tags-home">
-            <div class="tag-heading event-heading">Top Tags</div>
-            <a class="top-tags" href="/threads/tagged/education">Education</a>
-            <a class="top-tags" href="/threads/tagged/environment">Environment</a>
-            <a class="top-tags" href="threads/tagged/transportation">Transportation</a>
-        </div>         
+          <div class="tag-heading event-heading">Top Tags</div>
+            <div class="row" style="margin-left: 0px;">
+              <div class="display-tag display-tag-home">
+                <a href="/threads/tagged/education">Education</a>
+                <a href="/threads/tagged/environment">Environment</a>
+                <a href="threads/tagged/transportation">Transportation</a>
+              </div>
+            </div>
+          </div>
+                 
         {% endif %}
       </div>   
-    </div>      
+    </div>    
   </div>
 
   <div class="container">
@@ -424,5 +431,36 @@ xfbml: true});
     <script src="{% static 'js/homepage.js' %}"></script>
     <script src="{% static 'js/functions.js'%}"></script>
     <script src="{% static 'js/home.js'%}"></script>
+    <script>
+      (function($) {
+          $.fn.autogrow = function() {
+            return this.each(function() {
+                var textarea = this;
+                $.fn.autogrow.resize(textarea);
+                $(textarea).focus(function() {
+                    textarea.interval = setInterval(function() {
+                        $.fn.autogrow.resize(textarea);
+                    }, 500);
+                }).blur(function() {
+                    clearInterval(textarea.interval);
+                });
+            });
+          };
+          $.fn.autogrow.resize = function(textarea) {
+            var lineHeight = parseInt($(textarea).css('line-height'), 15);
+            var lines = textarea.value.split('\n');
+            var columns = textarea.cols;
+            var lineCount = 0;
+            $.each(lines, function() {
+                lineCount += Math.ceil(this.length / columns) || 1;
+            });
+            var height = lineHeight * (lineCount + 1);
+            $(textarea).css('height', height);
+          };
+      })(jQuery);
+
+      $('.txtarea').autogrow();
+
+    </script>
 
   </html>
