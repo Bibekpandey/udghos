@@ -133,6 +133,10 @@ progress {
   border:1px solid #aaa;
   border-radius: 5px 5px 0px 0px;
 }
+.box-profile>a{
+  text-decoration: none;
+  color: #d71010;
+}
 .box-profile-home{
   padding: 0px 0px 5px 0px;
 }
@@ -542,6 +546,10 @@ div.row.background-icons{
 }
 .media-body>a{
   text-decoration: none;
+  color: #d71010;
+}
+.media-body>a:hover{
+  color: #e82121;
 }
 .modal{
     z-index: 10000;
