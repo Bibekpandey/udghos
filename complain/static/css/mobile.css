@@ -835,7 +835,8 @@
     margin-top: -2px;
   }
   .box-footer{
-    margin-top: 75px !important;
+    margin-top: 165px !important;
+    bottom: 0 !important;
   }
 
 
