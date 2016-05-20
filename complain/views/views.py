@@ -724,8 +724,26 @@ class Concern(View):
             self.context['notifications'] = get_notifications(request)
 
             self.context['authenticated'] = True
+        else:
+            self.context['authenticated'] = False
         return render(request, "complain/post-concern.html",self.context)
 
+class Mynotifications(View):
+    def get(self,request):
+        self.context = {}
+        if request.user.is_authenticated():
+            acc = Account.objects.get(user=request.user)
+            tags = list(acc.tags_followed.all())
+            self.context['tags'] = tags
+            self.context['address'] = acc.address
+            self.context['profile_pic'] = acc.profile_pic
+            self.context['notifications'] = get_notifications(request)
+
+            self.context['authenticated'] = True
+        else:
+            self.context['authenticated'] = False
+        return render(request, "complain/mynotifications.html",self.context)
+        
 
 def mark_read_notifications(request):
     if request.user.is_authenticated():
@@ -826,3 +844,5 @@ def how_it_works(request):
 
 def about(request):
     return render(request, 'complain/about.html',{})  
+
+
