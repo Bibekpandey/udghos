@@ -1,7 +1,7 @@
 /* CSS used here will be applied after bootstrap.css */
 html,
 body {
-  background-color: #fff;
+  background-color: #fafafa;
   font-family: 'Varela Round', serif !important;
   color: #000;
   background-size:cover;  
@@ -133,7 +133,7 @@ progress {
   border:1px solid #aaa;
   border-radius: 5px 5px 0px 0px;
 }
-.box-profile>a{
+.box-profile-home>a{
   text-decoration: none;
   color: #d71010;
 }
@@ -171,7 +171,7 @@ progress {
   right: 0;
 }
 h1{
-  font-size: 50px;
+  font-size: 45px;
 }
 .how{
   margin-top: 5px;
@@ -181,7 +181,6 @@ h1{
   }
 .event-heading{
   border-bottom: 1px solid #999;
-  margin-bottom: 10px;
 }
 .event-text{
   color: #777;
@@ -463,6 +462,9 @@ div.row.background-icons{
   color: #d71010;
   display: block; 
 }
+.tagname:hover{
+  color: #e82121;
+}
 .display-tag-home{
   float: left;
   color: #d71010;
@@ -546,7 +548,7 @@ div.row.background-icons{
 }
 .media-body>a{
   text-decoration: none;
-  color: #d71010;
+  color: #777;
 }
 .media-body>a:hover{
   color: #e82121;
@@ -602,12 +604,15 @@ div.row.background-icons{
   margin-top: 5px;
 }
 .tag-heading{
-  background-color: #444;
-  color: #fff;
+  background-color: #eee;
+  color: #333;
   font-size: 25px;
   padding: 0px 0px 0px 10px;
   margin-bottom: 10px;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 2px 2px 0px 0px;
+}
+a>.tag-heading:hover{
+  color: #e82121;
 }
 
 .inner-addon { 
@@ -869,6 +874,9 @@ ul.dropdown-settings{
 .glyphicon-bell:hover{
   color: #ccc;
 }
+.glyphicon-bell-mobile{
+  display: none;
+}
 
 .glyphicon-remove{
   display: none;
@@ -941,6 +949,7 @@ ul.dropdown-settings{
   padding: 5px;
   float: right;
   font-size: 15px;
+  margin: 2px 5px;
 }
 .btn-black:hover{
   background-color: #888;

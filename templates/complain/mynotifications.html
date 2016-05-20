@@ -4,20 +4,9 @@
 
 <html lang="en">
 <head>
+ 	<title>Udghos</title>
   <link rel='shortcut icon' href='/static/img/udghos.ico' type='image/x-icon'/ >  
-
-<meta charset="utf-8">
-<meta property="og:type" content="article"> 
-/* or this depending content type */ 
-<meta property="og:type" content="Concern">
-<meta property="og:title" content="Issue in udghos.com">
-<meta property="og:description" content="{{title}}">
-
- 	<title>{{title}}</title>
-
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-
-	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'>
 
   <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
@@ -26,12 +15,18 @@
 
   <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
   <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
+
+
+</head>
+
+	<body>
+
 <style>
   body {
     padding:0;
     margin:0;
     width:100%;
-    min-height:700px;
+    min-height:500px;
   }
   #footer {
    position:relative;
@@ -39,49 +34,29 @@
    bottom:0;
    width: 100%;
   }
-  .box{
-    margin-top: -25px;
+  #content-top{
+    margin-top: 50px;
   }
-  a.notification-title.pull-right{
-  margin-top: 10px;
+  .mynotification-title{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #555;
   }
-  h2{
-    background-color: #333;
-    padding: 0px 5px 0px 5px;
-    color: #fff;
-    margin-top: -10px;
-    margin-bottom: 35px;  
-    border-radius: 3px;  
- }  
+  .mynotification-heading{
+    padding: 5px;
+  }
+  .mark-read-mobile{
+    margin-top: 0px;
+  }
+  .notifications-wrapper-mobile{
+    margin-top: 20px;
+    border: px solid #555;
+    margin-left: 10px;
+  }
 
 </style>
 
-</head>
 
-	<body>
-  
-<div id="fb-root"></div>
-<script>
-(function() {
-var e = document.createElement('script'); e.async = true;
-e.src = document.location.protocol +
-'//connect.facebook.net/en_US/all.js';
-document.getElementById('fb-root').appendChild(e);
-}());
-window.fbAsyncInit = function() {
-FB.init({appId: '1652950188302583', status: true, cookie: true,
-xfbml: true});
-};
-
-</script>
-
-<div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
-  <div id="mask" style="position:absolute;display:none"></div>
-
-  
-  {% csrf_token %}
-
-  <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
+<nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
           <a id="navhead" class="navbar-brand" href="/complain/login/">
@@ -99,7 +74,7 @@ xfbml: true});
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu dropdown-settings" role="menu">
                 <li><a href="{% url 'profile' user.id %}">Profile</a></li>
-                <li><a href="#">Settings</a></li>
+                <!-- <li><a href="#">Settings</a></li> -->
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
             <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
@@ -171,27 +146,55 @@ xfbml: true});
   </nav>
 
 
-  	<div class="container" id="content-top">
-  		<div class="row">
-        <div class="col-md-1">
 
-        </div>
-  			<div class="col-md-10">
-            {% if results  or 1 %}
-                <h2 style="margin-left:10px;}"><span id="result" style="display:none">Results for </span><span id="result-for"></span></h2>
-                <h3 id="not-found" style="margin:10px;display:none"> Nothing Found</h3>
-            {% endif %}
-                <div class="tab-stories">
-                    <div id="thread-container">
-                    </div>
+    <div class="container" id="content-top">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+                <div class="mynotification-heading"><h2 class="mynotification-title">Notifications</h2>
+                  <div class="mark-read mark-read-mobile">
+                    <a class="notification-title pull-right" href="javascript:void()" onclick="mark_read()">Mark as Read</a>
+                  </div>
                 </div>
-  			</div>
-        <div class="col-md-2">
-          <div class="box-post-info">
-          </div>
+                <div class="notifications-wrapper notifications-wrapper-mobile">
+                  {% if notifications %}
+                  {% else %}
+                  <a class="content" href="#">
+                    <div class="single-notification">
+                    &nbsp; No new notifications
+                    </div>
+                  </a>
+                  {% endif %}
+                  {% for notif in notifications %}
+                  <a class="content" href="/thread/{{notif.thread}}/">
+                    <div class="single-notification">
+                      <div class="stimg-notification">
+                            <img class="img-circle" src="/media/{{notif.by_image}}" width=50 height=50/>
+                      </div>
+                      <p class="notification-title">
+                        {% ifequal notif.type "comment" %}
+                        Comment on your thread by {{notif.by}}
+                        {% endifequal %}
+                        {% ifequal notif.type "support" %}
+                          Support on your thread by {{notif.by}}
+                        {% endifequal %}
+                        {% ifequal notif.type "downvote" %}
+                          Downvote on your thread by {{notif.by}}
+                        {% endifequal %}
+                        <div class="notification-info">
+                        About
+                      </div>
+                      </p>
+                    </div>
+                  </a>
+                  {% endfor %}
+                </div>
+              </ul>
+            </div>
+      
         </div>
-  		</div>
-  	</div>
+      </div>
+
 
 
   <div id="footer" class="box-footer">
@@ -217,79 +220,18 @@ xfbml: true});
       </footer>
     </div>
   </div>
-<div class="container">
-    <div id="popover_notification_content" style="display: none">
-      <div class="notification-body">
-    {% if notifications %}
-      {% else %}
-      <div class="single-notification">
-        &nbsp; No new notifications
-      </div>
-      {% endif %}
 
-      {% for notif in notifications %}
-        <div class="single-notification">
-          <a href="/thread/{{notif.thread}}/">{% ifequal notif.type "comment" %}
-          Comment on your thread by {{notif.by}}
-          {% endifequal %}
-          {% ifequal notif.type "support" %}
-            Support on your thread by {{notif.by}}
-          {% endifequal %}
-          {% ifequal notif.type "downvote" %}
-            Downvote on your thread by {{notif.by}}
-          {% endifequal %}
-
-            <div class="stimg-notification">
-                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
-            </div>
-          </a>
-        </div>
-    {% endfor %}
-    </div>
-<div class="container">
-    <div id="popover_notification_content" style="display: none">
-      <div class="notification-body">
-    {% if notifications %}
-      {% else %}
-      <div class="single-notification">
-        &nbsp; No new notifications
-      </div>
-      {% endif %}
-
-      {% for notif in notifications %}
-        <div class="single-notification">
-          <a href="/thread/{{notif.thread}}/">{% ifequal notif.type "comment" %}
-          Comment on your thread by {{notif.by}}
-          {% endifequal %}
-          {% ifequal notif.type "support" %}
-            Support on your thread by {{notif.by}}
-          {% endifequal %}
-          {% ifequal notif.type "downvote" %}
-            Downvote on your thread by {{notif.by}}
-          {% endifequal %}
-
-            <div class="stimg-notification">
-                <img class="img-circle" src="/media/+threadobj.user.image" width=25 height=25/>
-            </div>
-          </a>
-        </div>
-    {% endfor %}
-    </div>
 
 </body>
 
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/myjs.js' %}"></script>
     <script src="{% static 'js/homepage.js' %}"></script>
   	<script src="{% static 'js/functions.js' %}"></script>
     
     <script>
-  
-  $(document).ready(function(){
-});
-
-
         var g_thread_container = "thread-container";
         var g_type;
         var g_query, g_tagname;
@@ -319,7 +261,7 @@ xfbml: true});
                     else if (g_type=='tag')
                         getTagged(g_tagname, data);
                  }
-            }
+            }   
 
             try {
                 // get threadid from url
@@ -332,22 +274,7 @@ xfbml: true});
                     $.ajax({
                         url:'/complain/thread/?id='+threadid, 
                         success:function(data) {
-                            add_item(data.thread, g_thread_container, data.authenticated);
-                            toggleComments(parseInt(threadid));
-                            $('.fb-share').click(function(e){
-                            e.preventDefault();
-                            FB.ui(
-                            {
-                            method: 'feed',
-                            name: data.thread.title,
-                            link: 'http://udghos.com/thread/'+data.thread.id.toString(),
-                            caption: 'udghos.com',
-                            description: data.thread.content.substr(0, 100),
-                            picture:(data.thread.images.length>0?"http://udghos.com/media/"+data.thread.images[0]:"http://udghos.com/static/img/navbarlogo.png"),
-                            message: ''
-                            });
-                            });
-
+                            add_item(data.thread, g_thread_container, data.authenticated)
                         },
                         error:function(data) { window.location="/";}
                     });

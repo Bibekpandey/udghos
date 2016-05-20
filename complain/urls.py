@@ -53,6 +53,8 @@ urlpatterns =  [
         url(r'^post-review/', post_review, name='review'),
         url(r'^how-it-works/', how_it_works, name='work'),
         url(r'^about/', about, name='about'),
+        url(r'^mynotifications/', Mynotifications.as_view(), name='mynotifications'),
+
 
 
 ]
