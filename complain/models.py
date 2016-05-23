@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.utils import timezone
+
 from django.template.defaultfilters import slugify
 from datetime import datetime
 
@@ -64,6 +66,12 @@ class Comment(models.Model):
     thread = models.ForeignKey(Thread)
     votes = models.IntegerField(default=0)
     #downvotes = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        super(Comment, self).save(*args, **kwargs)
+        activity = Activity(account=self.account,thread=self.thread, activity_type=COMMENTED)
+        activity.save()
+
     
     def __str__(self):
         return  self.text[:5] + '... [' + self.account.user.username+']'
@@ -83,9 +91,25 @@ class ThreadUpvote(models.Model):
     account = models.ForeignKey(Account)
     thread = models.ForeignKey(Thread)
 
+    def save(self, *args, **kwargs):
+        super(ThreadUpvote, self).save(*args, **kwargs)
+        activity = Activity(account=self.account,thread=self.thread, activity_type=SUPPORTED)
+        activity.save()
+
 class ThreadDownvote(models.Model):
     account = models.ForeignKey(Account)
     thread = models.ForeignKey(Thread)
+
+    def save(self, *args, **kwargs):
+        super(ThreadUpvote, self).save(*args, **kwargs)
+        activity = Activity(account=self.account,thread=self.thread, activity_type=DOWNVOTED)
+        activity.save()
+
+class Activity(models.Model):
+    account = models.ForeignKey(Account) 
+    thread = models.ForeignKey(Thread)
+    activity_type = models.IntegerField()
+    date = models.DateTimeField(default=timezone.now)
 
 class CommentUpvote(models.Model):
     account = models.ForeignKey(Account)
