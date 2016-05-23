@@ -63,7 +63,6 @@ xfbml: true});
 <div class="container">
   <div id="float-notification">
     <div id="notification-text">
-    
     </div>
   </div>
 </div>
@@ -352,12 +351,20 @@ xfbml: true});
 
       <div id="profile" class="col-md-4">
         {% if authenticated %}
+
         <div class="box-profile box-profile-home">
           <a href="{% url 'profile' user.id %}">
             <div class="tag-heading event-heading">{{user.first_name}} {{user.last_name}}</div>
           </a>
           <img class="img-circle img-homepage" href="{% url 'profile' user.id %}" src="/media/{{profile_pic}}" width=70 height=70 alt="Generic placeholder image" width="100" height="100">
           <div class="media-body">
+          <div class="progress-area-home">
+              <div class="progress">
+                <div class="progress-bar my-progress-bar" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                </div>
+              </div>
+              <a class="complete-your-profile" href="javascript:void(0)" onclick="profile_add_tags()">Complete your Profile</a>
+            </div>
             <a href="{% url 'profile' user.id %}">
             <h4 class="heading-property user-heading">{{user.username}}</h4></a>
               <h5 class="heading-property">{{address}}</h5>
@@ -367,6 +374,7 @@ xfbml: true});
             <input type="hidden" name="uid" value="{{user.id}}"/>
           </div>
         </div>
+
         <div class="box-tags">
             <div class="tag-heading event-heading">My Tags 
               <div class="btn-black">

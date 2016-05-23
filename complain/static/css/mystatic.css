@@ -22,6 +22,9 @@ progress {
   -moz-transform: rotate(-90deg);
   position: absolute;
 }
+.progress{
+  margin-bottom: 5px;
+}
 .my-progress-bar {
   background-color: #d71010;
 }
@@ -30,10 +33,19 @@ progress {
   position: relative;
   float: right;
   width: 100px;
-  margin-top: 0px;
+  margin-top: -10px;
   margin-right: 5px;
 }
-
+.progress-area-home{
+  margin-top: 10px;
+  padding: 1px;
+  width: 100%;
+}
+.progress-area-profile{
+  margin-top: 10px;
+  padding: 5px 10px 5px 10px;
+  width: 100%;
+}
 
 #float-notification{
   position: absolute;
@@ -138,6 +150,7 @@ progress {
   color: #d71010;
 }
 .box-profile-home{
+  margin-top: 64px;
   padding: 0px 0px 5px 0px;
 }
 .box-post-info{
@@ -216,13 +229,19 @@ h1{
   min-height: 20px;
   padding: 0px 0px 5px 0px;
   margin: 2px;
-  margin-top: 20px;
+  margin-top: 15px;
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
   border:1px solid #aaa;
   border-radius: 5px 5px 0px 0px;
   font-size: 15px;
+}
+.box-complete{
+  margin-top: 67px;
+  border: 1px solid #aaa;
+  margin-left: 0px;
+  border-radius: 3px;
 }
 .box-tags-home{
   margin-top: 67px;
@@ -461,6 +480,10 @@ div.row.background-icons{
 .display-tag-home>a{
   color: #d71010;
   display: block; 
+}
+.display-complete>a{
+  color: #1B5CC4;
+  margin-bottom: 10px;
 }
 .tagname:hover{
   color: #e82121;
