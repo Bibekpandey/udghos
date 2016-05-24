@@ -38,8 +38,10 @@
     margin-top: 10px;
   }
   .password-section{
-    margin-left: 25px;
     margin-top: -10px;
+  }
+  li.active{
+    background-color: #fff;
   }
 
 </style>
@@ -138,13 +140,13 @@
 
   	<div class="container" id="content-top">
   		<div class="row" style="margin-top: 50px";>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="container">
             <!-- <h3>Settings</h3> -->
             <div class="col-md-3">
               <ul class="nav nav-pills nav-stacked">
-                <li class="active" data-toggle="pill" href="#home"><a href="#">Change Password</a></li>
-                <!-- <li><a data-toggle="pill" href="#menu1">Privacy</a></li> -->
+                <li class="active" data-toggle="pill" href="#home"><a href="#">Password</a></li>
+                <li><a data-toggle="pill" href="#menu1">Mobile</a></li>
                 
               </ul>
             </div>
@@ -152,7 +154,8 @@
         </div>
         <div class="col-md-4 password-section">
           <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
+            <div id="home" class="tab-pane fade in active" style="margin-top: -20px;">
+              <h3>Change Password</h3>
               <label for="inputPassword" class="sr-only"></label>
               <input type="password" id="inputPassword" class="form-control" placeholder="Old Password" name="password" required>
               
@@ -166,10 +169,16 @@
                 <button class="btn btn-black" style="margin-right: 0px">Update</button>
               </div>
             </div>
-            <!-- <div id="menu1" class="tab-pane fade"> -->
-              <!-- <h3>Privacy</h3> -->
-              <!-- <p>Your Mobile no. is kept secret and used for verification purpose</p> -->
-            <!-- </div> -->
+            <div id="menu1" class="tab-pane fade" style="margin-top: -20px;">
+              <h3>Mobile</h3>
+              <input type="text" id="inputMobile" class="form-control" placeholder="Mobile no." name="mobile" required>
+              <br>
+              <p>Your Mobile no. is kept secret and used for verification purpose</p>
+              <br>
+              <div class="password-change-footer">
+                <button class="btn btn-black" style="margin-right: 0px">Verify Phone</button>
+              </div>
+            </div>
           </div>
         </div>  			
   		</div>
