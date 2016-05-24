@@ -755,6 +755,7 @@ class Settings(View):
             self.context['address'] = acc.address
             self.context['profile_pic'] = acc.profile_pic
             self.context['notifications'] = get_notifications(request)
+            self.context['password_set'] = True if request.user.has_usable_password() else False
 
             self.context['authenticated'] = True
         else:
@@ -809,9 +810,13 @@ def get_activities(request):
     pass
 
 def change_password(request):
-    if request.method=='POST':
+    if request.method=='POST' or 1:
         if request.user.is_authenticated():
-            new_password = request.POST.get('password', '')
+            old_password = request.POST.get('old-password', '')
+            if request.user.has_usable_password():
+                if not request.user.check_password(old_password):
+                    return JsonResponse({'success':False,'message':'Old password does not match'})
+            new_password = request.POST.get('new-password', '')
             if len(new_password) < 8:
                 return JsonResponse({'success':False, 'message':'Password needs to be at least 8 characters long'})
             request.user.set_password(new_password)
