@@ -156,17 +156,22 @@
           <div class="tab-content">
             <div id="home" class="tab-pane fade in active" style="margin-top: -20px;">
               <h3>Change Password</h3>
-              <label for="inputPassword" class="sr-only"></label>
-              <input type="password" id="inputPassword" class="form-control" placeholder="Old Password" name="password" required>
-              
-              <label for="inputPassword" class="sr-only"></label>
-              <input type="password" id="inputPassword" class="form-control" placeholder="New Password" name="password" required>
-              
-              <label for="inputPassword" class="sr-only"></label>
-              <input type="password" id="inputPassword" class="form-control" placeholder="Confirm New Password" name="password-confirm" required>
+              <form id="form-password">
+              {% csrf_token %}
+            {% if password_set %}
+                <label for="inputPassword" class="sr-only"></label>
+                <input type="password" id="old-password" class="form-control" placeholder="Old Password" name="old-password" >
+            {% endif %}
+                
+                <label for="inputPassword" class="sr-only"></label>
+                <input type="password" id="new-password" class="form-control" placeholder="New Password" name="new-password" required>
+                
+                <label for="inputPassword" class="sr-only"></label>
+                <input type="password" id="confirm-password" class="form-control" placeholder="Confirm New Password" name="confirm-password" required>
+            </form>
               <br>
               <div class="password-change-footer">
-                <button class="btn btn-black" style="margin-right: 0px">Update</button>
+                <button type="button" onclick="updatePassword()" class="btn btn-black" style="margin-right: 0px">Update</button>
               </div>
             </div>
             <div id="menu1" class="tab-pane fade" style="margin-top: -20px;">
@@ -216,6 +221,17 @@
     <script src="{% static 'js/myjs.js' %}"></script>
     <script src="{% static 'js/homepage.js' %}"></script>
   	<script src="{% static 'js/functions.js' %}"></script>
+
+    <script>
+        function updatePassword() {
+            $.post('/change-password/', 
+                $('#form-password').serialize(), 
+                function(data) {
+                    alert(data.message);
+                    $('#form-password').reset();
+            });
+        }
+    </script>
     
 </html>
 

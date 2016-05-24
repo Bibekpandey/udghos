@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.utils import timezone
+
 from django.template.defaultfilters import slugify
 from datetime import datetime
 
@@ -13,6 +15,8 @@ COMMENTED=1
 SUPPORTED=2
 MESSAGGED=3
 DOWNVOTED=4
+
+activity = {1:'COMMMENT', 2:'SUPPORT', 4:'DOWNVOTE', 3:'MESSAGE'}
 
 def get_image_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -64,6 +68,12 @@ class Comment(models.Model):
     thread = models.ForeignKey(Thread)
     votes = models.IntegerField(default=0)
     #downvotes = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        super(Comment, self).save(*args, **kwargs)
+        activity = Activity(account=self.account,thread=self.thread, activity_type=COMMENTED)
+        activity.save()
+
     
     def __str__(self):
         return  self.text[:5] + '... [' + self.account.user.username+']'
@@ -83,9 +93,29 @@ class ThreadUpvote(models.Model):
     account = models.ForeignKey(Account)
     thread = models.ForeignKey(Thread)
 
+    def save(self, *args, **kwargs):
+        super(ThreadUpvote, self).save(*args, **kwargs)
+        activity = Activity(account=self.account,thread=self.thread, activity_type=SUPPORTED)
+        activity.save()
+
 class ThreadDownvote(models.Model):
     account = models.ForeignKey(Account)
     thread = models.ForeignKey(Thread)
+
+    def save(self, *args, **kwargs):
+        super(ThreadUpvote, self).save(*args, **kwargs)
+        activity = Activity(account=self.account,thread=self.thread, activity_type=DOWNVOTED)
+        activity.save()
+
+class Activity(models.Model):
+    account = models.ForeignKey(Account) 
+    thread = models.ForeignKey(Thread)
+    activity_type = models.IntegerField()
+    date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return activity[self.activity_type] + ' : ' + self.thread
+
 
 class CommentUpvote(models.Model):
     account = models.ForeignKey(Account)
