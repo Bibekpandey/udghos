@@ -54,5 +54,11 @@ urlpatterns =  [
         url(r'^how-it-works/', how_it_works, name='work'),
         url(r'^about/', about, name='about'),
 
+        # settings
+        url(r'^change-password/', change_password, name='change-password'),
+
+        # activities
+        url(r'^activities/', get_activities, name='get-activities'),
+
 
 ]
