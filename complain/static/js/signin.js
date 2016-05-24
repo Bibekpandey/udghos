@@ -39,7 +39,7 @@ function signin() {
     var inputuser = document.getElementById("inputEmail").value;
     $('.notification-body').fadeIn()
     $('.notification-body').text("Welcome back, " +inputuser);
-    $('#float-notification').fadeOut(5000);
+    $('#float-notification').fadeOut(7000);
 
     $.post('/login/', $('#signin-form').serialize(), function(data) {
         if(data.success) {
@@ -49,7 +49,11 @@ function signin() {
             if(data.message=="NOT VERIFIED") {
                 window.location = "/not-verified/";
             }
-            $('#signin-message').text(data.message);
+            $('#float-notification').show();
+            $('.notification-heading').text(data.message);
+            $('#float-notification').fadeOut(7000);
+            $('.notification-body').hide();
+
         }
     });
     return false;
@@ -67,22 +71,25 @@ else {
 }
 
 function signUp() {
-    $('#signup-message').text("Signing up.. Please Wait..");
+    $('#float-notification').show();
+    $('.notification-heading').text("Signing up.. Please Wait...");
+    $('#float-notification').fadeOut(7000);
 
     $.post('/complain/signup/', $('#signup-form').serialize(), function(data) {
-        $('#message').text(data.message);
+        $('.notification-heading').text(data.message);
+        $('.notification-body').text("Please use another username");
         if(data.success) {
             window.location='/not-verified/';
         }
         else {
             document.getElementById('signup-form').reset();
-            $('#signup-message').text(data.message);
+            $('.notification-heading').text(data.message);
             return false;
             $('#signup-message').hide();
             $('#float-notification').show();  
-            $('#notification-text').text(data.message);
-            setTimeout(function() { $('#float-notification').delay(100).fadeOut(); }, 900);
-            $('#float-notification').hide();
+            $('.notification-heading').text(data.message);
+            $('#float-notification').fadeOut(7000);
+
             return false;
         }
     });
