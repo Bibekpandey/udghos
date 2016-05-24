@@ -36,6 +36,25 @@ textarea:focus{
     border: 1px solid #aaa;
     border-radius: 3px;
 }
+.box-activity{
+  margin-top: 67px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
+.activity-body{
+  padding: 10px;
+  border-bottom: 1px solid #aaa;
+}
+.activity-heading{
+  color: #d71010;
+  font-size: 15px;
+}
+.activity-text{
+  color: #555;
+}
+.tag-heading{
+  margin-bottom: 0px;
+}
 #heading-border{
   border-bottom: 1px solid #ddd;
 }
@@ -291,7 +310,7 @@ ul#tags-suggest-list{
 /*............................................................................*/
 /*..............................NEW MOBILE DESIGN ............................*/
 /*............................................................................*/
-@media(max-width: 500px){
+@media(max-width: 767px){
   .edit-text>button{
     width: 70px;
     height: 35px;
@@ -316,11 +335,4 @@ ul#tags-suggest-list{
     margin-left: -20px;
   }
 
-}
-
-@-moz-document url-prefix() {
-    .fakefile {
-        margin-top: -217px;
-        font-size: 20px;
-    }
 }

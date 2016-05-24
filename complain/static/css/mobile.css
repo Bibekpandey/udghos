@@ -35,7 +35,7 @@
     margin-left: 100px;
   }
   .how{
-    font-size: 25px;
+    font-size: 20px;
   }
   .single-notification{
     height: 100px;
@@ -77,7 +77,7 @@
     font-size: 25px !important;
   }
   .box-header {
-    margin-top: 30px;
+    margin-top: 10px;
     width: 100%;
     margin-bottom: 70px;
   }
@@ -155,14 +155,14 @@
     height: 90px;
   }
   .post-title{
-    font-size: 50px;
+    font-size: 30px;
   }
   .post-content{
     margin-top: -1px;
-    font-size: 30px;
+    font-size: 20px;
   }
   .post-body>span{
-    font-size: 25px;
+    font-size: 15px;
   }
   .post-image{
     width: 100%;
@@ -173,7 +173,7 @@
     margin-top: 50px;
   }
   .heading-property{
-    font-size: 30px;
+    font-size: 20px;
   }
   input#searchquery{
     font-size: 20px;
@@ -194,21 +194,21 @@
     margin-bottom: 50px;
   }
   .box-icons{
-    font-size: 25px;
+    font-size: 20px;
   }
   .btn-upvote{
-    font-size: 25px;
+    font-size: 20px;
     height: 40px;
     width: 100px;
   }
   .comment-section{
     margin-right: 150px;
-    font-size: 40px;
-    border-top: 1px solid #fff;
+    font-size: 20px;
+    border-top: 0px solid #fff;
     border-bottom: 1px solid #fff;
   }
   .comment-user{
-    font-size: 35px;
+    font-size: 25px;
   }
   .comment-date{
     font-size: 25px;
@@ -223,15 +223,15 @@
   }
 
   .net-vote{
-    font-size: 50px;  
+    font-size: 30px;  
     margin: -10px 5px 0px 5px;
   }
   .comment-textsize{
     margin-top: -15px;
-    font-size: 45px;
+    font-size: 25px;
   }
   .glyphicon-comment{
-    font-size: 50px;
+    font-size: 25px;
     margin-top: -5px 5px 0px 5px;
   }
   .glyphicon-footer{
@@ -250,9 +250,9 @@
     font-size: 20px;
   }
   .tagname{
-    margin-top: -10px;
+    margin-top: 0px;
     margin-left: 10px;
-    font-size: 40px;
+    font-size: 20px;
   }
   .display-tag{
     margin-right: 40px;
@@ -266,18 +266,18 @@
   border-radius: 5px;
 }
   div.share button{
-    height: 80px;
+    height: 40px;
     margin-bottom: 20px;
-    width: 80px;
+    width: 40px;
   }
   div.share > .facebook{
     margin-right: 20px;
-    margin-top: -70px;
-    background-size: 80px 80px;
+    margin-top: -40px;
+    background-size: 40px 40px;
   }
   div.share > .twitter{
-    margin-top: -70px;
-    background-size: 80px 80px;
+    margin-top: -40px;
+    background-size: 40px 40px;
   }
   
   /*footer*/
@@ -300,12 +300,12 @@
     color: #fff;
   }
   .nav-unauth>li>a{
-    font-size: 50px;
+    font-size: 25px;
   }
   .icons-ld{
     margin: -10px 0px 0px 10px;
     width: 100%;
-    font-size: 50px;
+    font-size: 25px;
   }
   .background-icons{
     margin-top: -20px;
@@ -315,7 +315,7 @@
   .report-post{
     margin-top: 0px;
     float: right;
-    margin-right: 35px;
+    margin-right: 25px;
   }
   .post-action{
     margin: -10px 0px 5px 0px;
@@ -545,7 +545,7 @@
     height: 40px;
   }
   .navbar-name{
-    margin-top: 0px;
+    margin-top: -22px;
   }
   .nav-unauth>li>a{
     margin-top: 0px;
@@ -554,7 +554,8 @@
   .box-header{
     background-position: center 0px;
     background-size: 95% 125px;
-    margin-bottom: 0px;
+    margin-bottom: -20px;
+    margin-top: 5px;
   }
   .box-tabs{
     margin-bottom: 35px;
@@ -562,14 +563,21 @@
   .glyphicon{
     font-size: 25px;
   }
-  .gly-bell{
-    margin-top: -7px;
-  }
   .glyphicon-bell{
-    margin-top: -50px;
+    margin-top: -2px;
+    display: none;
+  }
+  a.glyphicon-mobile:hover{
+    text-decoration: none;
+  }
+  .glyphicon-bell-mobile{
+    display: block;
+  }
+  .glyphicon-triangle-bottom{
+    font-size: 20px;
   }
   .img-navbar{
-    margin-top: -5px;
+    margin-top: -28px;
     width: 30px;
     height: 30px;
   }
@@ -698,7 +706,7 @@
   }
   .notification-count{
     margin-top: -37px;
-    margin-left: 12px;
+    margin-left: -4px;
     width: 20px;
     height: 20px;
   }
@@ -826,13 +834,11 @@
     height: 15px;
     margin-top: -2px;
   }
+  .box-footer{
+    margin-top: 165px !important;
+    bottom: 0 !important;
+  }
 
 
 }
 
-@media not all and (-webkit-min-device-pixel-ratio:0) {  
-    .navcolor {
-        background-color: #fff;  
-        font-size:12px;  
-    }  
-}  

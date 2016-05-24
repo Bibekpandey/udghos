@@ -22,6 +22,7 @@
 
   <link href="{% static 'css/mystatic.css' %}" rel="stylesheet">
   <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="handheld" href="{% static 'css/handheld.css' %}">
 
   
     <style>
@@ -61,8 +62,13 @@ xfbml: true});
 
 <div class="container">
   <div id="float-notification">
-    <div id="notification-text">
-    
+    <div class="notification-heading">
+      <h4 style="margin-top: 0px;">Support on Your Post</h4>
+    </div>
+    <div class="notification-body">
+      This is notification text area.
+      lets make it long.mlkndkfnaknkasn
+      dksndknsajkdnjkandkanskdnaskdnkjas
     </div>
   </div>
 </div>
@@ -80,14 +86,17 @@ xfbml: true});
         
         {% if authenticated %}
           <ul id="headnav" class="nav navbar-nav navbar-right">
+            <a class="glyphicon-mobile" href="/mynotifications/">
+              <i class="glyphicon glyphicon-bell glyphicon-bell-mobile"></i>
+            </a>
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu dropdown-settings" role="menu">
                 <li><a href="{% url 'profile' user.id %}">Profile</a></li>
-                <li><a href="#">Settings</a></li>
+                <!-- <li><a href="#">Settings</a></li> -->
                 <li><a href="{% url 'logout' %}">Logout</a></li>
-            </ul>
+              </ul>
             <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
               <div class="form-group ">
                 <div id="search-bar" class="inner-addon right-addon nav-search">
@@ -98,12 +107,13 @@ xfbml: true});
             </form>
             <div class="dropdown">
                 <ul class="gly-bell nav navbar-nav dropdown-toggle" id="dNotifications" role="button" data-toggle="dropdown">
-                <li><i class="glyphicon glyphicon-bell"></i>
-                {% if notifications %}
-                <div class="notification-count">
-                </div>
-                {% endif %}
-              </li></ul>
+                <li>
+                  <i class="glyphicon glyphicon-bell"></i>
+                  {% if notifications %}
+                  <div class="notification-count">
+                  </div>
+                  {% endif %}
+                </li></ul>
               <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dNotifications">
                 <div class="notification-heading"><h5 class="notification-title">Notifications</h5>
                   <div class="mark-read">
@@ -164,8 +174,8 @@ xfbml: true});
           <div class="col-md-3 text-center header-column-first">
           </div>
           <div class="col-md-6 text-center header-column">
-            <h1>Let's Make a difference</h1>
-            <h4>Post your Concern/Views</h4>
+            <h1>Udghos</h1>
+            <h3>Where the Nation Speaks with you</h3>
             {% if authenticated %}
             <button type="button" class="btn btn-my btn-large btn-post-desktop" data-toggle="modal" data-target="#myModal" data-keyboard="true">
               Post a Concern
@@ -203,7 +213,7 @@ xfbml: true});
                       <div class="form-group">
                       </div>
                       <form method="post" id="thread-form" action="{% url 'post' %}" onsubmit="return submitPost()" class="form-horizontal" role="form" enctype="multipart/form-data">
-                          <label for="recipient-name" class="control-label">Title * (Make it short)<small id="title-warning" class="alert-danger" style="display:none">Write appropriate title to your concern</small></label>
+                          <label for="recipient-name" class="control-label">Title *<small id="title-warning" class="alert-danger" style="display:none">Write appropriate title to your concern</small></label>
                           <textarea name="title" type="text" class="form-control txtarea" rows="1" cols="100" id="recipient-name" placeholder="Title relevant to your Concern" oninput="$('#title-warning').hide()"></textarea>
 
                         {% csrf_token %}
@@ -347,24 +357,33 @@ xfbml: true});
 
       <div id="profile" class="col-md-4">
         {% if authenticated %}
+
         <div class="box-profile box-profile-home">
           <a href="{% url 'profile' user.id %}">
             <div class="tag-heading event-heading">{{user.first_name}} {{user.last_name}}</div>
           </a>
           <img class="img-circle img-homepage" href="{% url 'profile' user.id %}" src="/media/{{profile_pic}}" width=70 height=70 alt="Generic placeholder image" width="100" height="100">
           <div class="media-body">
+          <div class="progress-area-home">
+              <div class="progress">
+                <div class="progress-bar my-progress-bar" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                </div>
+              </div>
+              <a class="complete-your-profile" href="javascript:void(0)" onclick="profile_add_tags()">Complete your Profile</a>
+            </div>
             <a href="{% url 'profile' user.id %}">
-            <h3 class="heading-property user-heading">{{user.username}}</h3></a>
+            <h4 class="heading-property user-heading">{{user.username}}</h4></a>
               <h5 class="heading-property">{{address}}</h5>
-              <h6 class="heading-property">{{about}}</h6>
+              <h5 class="heading-property">{{about}}</h5>
              
             </p>
             <input type="hidden" name="uid" value="{{user.id}}"/>
           </div>
         </div>
+
         <div class="box-tags">
             <div class="tag-heading event-heading">My Tags 
-              <div class="btn-white">
+              <div class="btn-black">
                 <a href="javascript:void(0)" onclick="profile_add_tags()">Add</a></div>
               </div>
 

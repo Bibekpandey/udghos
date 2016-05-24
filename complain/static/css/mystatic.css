@@ -22,6 +22,9 @@ progress {
   -moz-transform: rotate(-90deg);
   position: absolute;
 }
+.progress{
+  margin-bottom: 5px;
+}
 .my-progress-bar {
   background-color: #d71010;
 }
@@ -30,26 +33,45 @@ progress {
   position: relative;
   float: right;
   width: 100px;
-  margin-top: 0px;
+  margin-top: -10px;
   margin-right: 5px;
 }
-
+.progress-area-home{
+  margin-top: 10px;
+  padding: 1px;
+  width: 100%;
+}
+.progress-area-profile{
+  margin-top: 10px;
+  padding: 5px 10px 5px 10px;
+  width: 100%;
+}
 
 #float-notification{
-  position: absolute;
+  background: #333;
+  color: #fff;
+  position: fixed;
+  z-index: 5;
   float: right;
   right: 0;
   display: none;
-  margin-right: 50px;
-  background: #ccc transparent;
-  border: 1px solid #aaa;
+  margin: 55px 10px;
+  border: 1px solid #333;
   padding: 5px;
   min-width: 200px;
-  min-height: 50px;
+  max-width: 350px;
+  min-height: 70px;
+  max-height: 150px;
   border-radius: 3px;
 }
 #float-notification:hover{
-  background: #ddd;
+  background: #444;
+}
+.notification-heading{
+  
+}
+.notification-body{
+  padding: 5px;
 }
 
 .topic{
@@ -133,11 +155,12 @@ progress {
   border:1px solid #aaa;
   border-radius: 5px 5px 0px 0px;
 }
-.box-profile>a{
+.box-profile-home>a{
   text-decoration: none;
   color: #d71010;
 }
 .box-profile-home{
+  margin-top: 64px;
   padding: 0px 0px 5px 0px;
 }
 .box-post-info{
@@ -171,7 +194,7 @@ progress {
   right: 0;
 }
 h1{
-  font-size: 50px;
+  font-size: 45px;
 }
 .how{
   margin-top: 5px;
@@ -181,7 +204,6 @@ h1{
   }
 .event-heading{
   border-bottom: 1px solid #999;
-  margin-bottom: 10px;
 }
 .event-text{
   color: #777;
@@ -217,7 +239,7 @@ h1{
   min-height: 20px;
   padding: 0px 0px 5px 0px;
   margin: 2px;
-  margin-top: 20px;
+  margin-top: 15px;
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
@@ -463,6 +485,13 @@ div.row.background-icons{
   color: #d71010;
   display: block; 
 }
+.display-complete>a{
+  color: #1B5CC4;
+  margin-bottom: 10px;
+}
+.tagname:hover{
+  color: #e82121;
+}
 .display-tag-home{
   float: left;
   color: #d71010;
@@ -546,7 +575,7 @@ div.row.background-icons{
 }
 .media-body>a{
   text-decoration: none;
-  color: #d71010;
+  color: #777;
 }
 .media-body>a:hover{
   color: #e82121;
@@ -586,6 +615,9 @@ div.row.background-icons{
   text-decoration: none;
   border-bottom: none;
 }
+h5.heading-property{
+  color: #444;
+}
 .heading-post{
   position: relative;
   font-size: 15px;
@@ -599,15 +631,19 @@ div.row.background-icons{
   color: #777;
 }
 .user-heading{
+  color: #333;
   margin-top: 5px;
 }
+.user-heading:hover{
+  color: #e82121; 
+}
 .tag-heading{
-  background-color: #444;
-  color: #fff;
+  background-color: #f5f5f5;
+  color: #333;
   font-size: 25px;
   padding: 0px 0px 0px 10px;
   margin-bottom: 10px;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 2px 2px 0px 0px;
 }
 
 .inner-addon { 
@@ -869,6 +905,9 @@ ul.dropdown-settings{
 .glyphicon-bell:hover{
   color: #ccc;
 }
+.glyphicon-bell-mobile{
+  display: none;
+}
 
 .glyphicon-remove{
   display: none;
@@ -941,6 +980,7 @@ ul.dropdown-settings{
   padding: 5px;
   float: right;
   font-size: 15px;
+  margin: 2px 5px;
 }
 .btn-black:hover{
   background-color: #888;
@@ -1369,6 +1409,7 @@ ul#tags-suggest-list{
   margin-right: 15px;
   float: right;
 }
+
 .notifications-wrapper {
      overflow:auto;
       max-height:250px;

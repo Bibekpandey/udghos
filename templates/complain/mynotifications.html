@@ -30,55 +30,171 @@
   }
   #footer {
    position:relative;
-   margin-top: 200px;
-   bottom:0px;
+   margin-top: 500px;
+   bottom:0;
    width: 100%;
   }
-  .how-text{
-    font-size: 20px;
+  #content-top{
+    margin-top: 50px;
   }
-  .how-heading{
-    margin-bottom: 20px;
+  .mynotification-title{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #555;
   }
-  @media(max-width: 991px){
-    .how-top{
-      padding-left: 50px;
-      padding-right: 50px;
-    }
+  .mynotification-heading{
+    padding: 5px;
+  }
+  .mark-read-mobile{
+    margin-top: 0px;
+  }
+  .notifications-wrapper-mobile{
+    margin-top: 20px;
+    border: px solid #555;
+    margin-left: 10px;
+  }
 
 </style>
-<div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
-  <div id="mask" style="position:absolute;display:none"></div>
+
 
 <nav id="navcolor" class="navbar navbar-inverse navbar-mathi">
       <div class="container">
         <div class="navbar-header">
-          <a id="navhead" class="navbar-brand" href="/">
+          <a id="navhead" class="navbar-brand" href="/complain/login/">
             <img class="udghos-logo" src="/static/img/navbarlogo.png" width="30" height="30">
           </a>
         </div>
-        <ul class="nav navhead-nav nav-unauth">
-              <li class="icon-login"><a href="/">Home</a></li>
-        </ul> 
         
+        {% if authenticated %}
+          <ul id="headnav" class="nav navbar-nav navbar-right">
+            <a class="glyphicon-mobile" href="/mynotifications/">
+              <i class="glyphicon glyphicon-bell glyphicon-bell-mobile"></i>
+            </a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="navbar-name"> <i class="glyphicon glyphicon-triangle-bottom"></i></span>
+              <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
+              <ul class="dropdown-menu dropdown-settings" role="menu">
+                <li><a href="{% url 'profile' user.id %}">Profile</a></li>
+                <!-- <li><a href="#">Settings</a></li> -->
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+            <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
+              <div class="form-group ">
+                <div id="search-bar" class="inner-addon right-addon nav-search">
+                  <i class="glyphicon glyphicon-search"></i>
+                  <input type="text" id="searchquery" placeholder="Search" class="form-control form-control-navbar" />
+                </div>
+              </div>
+            </form>
+            <div class="dropdown">
+                <ul class="gly-bell nav navbar-nav dropdown-toggle" id="dNotifications" role="button" data-toggle="dropdown">
+                <li><i class="glyphicon glyphicon-bell"></i>
+                {% if notifications %}
+                <div class="notification-count">
+                </div>
+                {% endif %}
+              </li></ul>
+              <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dNotifications">
+                <div class="notification-heading"><h5 class="notification-title">Notifications</h5>
+                  <div class="mark-read">
+                    <a class="notification-title pull-right" href="javascript:void()" onclick="mark_read()">Mark as Read</a>
+                  </div>
+                </div>
+                <div class="notifications-wrapper">
+                  {% if notifications %}
+                  {% else %}
+                  <a class="content" href="#">
+                    <div class="single-notification">
+                    &nbsp; No new notifications
+                    </div>
+                  </a>
+                  {% endif %}
+                  {% for notif in notifications %}
+                  <a class="content" href="/thread/{{notif.thread}}/">
+                    <div class="single-notification">
+                      <div class="stimg-notification">
+                            <img class="img-circle" src="/media/{{notif.by_image}}" width=50 height=50/>
+                      </div>
+                      <p class="notification-title">
+                        {% ifequal notif.type "comment" %}
+                        Comment on your thread by {{notif.by}}
+                        {% endifequal %}
+                        {% ifequal notif.type "support" %}
+                          Support on your thread by {{notif.by}}
+                        {% endifequal %}
+                        {% ifequal notif.type "downvote" %}
+                          Downvote on your thread by {{notif.by}}
+                        {% endifequal %}
+                        <div class="notification-info">
+                        About
+                      </div>
+                      </p>
+                    </div>
+                  </a>
+                  {% endfor %}
+                </div>
+              </ul>
+            </div>
+          </ul>
+            {% else %}
+            
+            <ul class="nav navhead-nav nav-unauth">
+              <li class="icon-login"><a href="/complain/login/">Login</a></li>
+              <li class="icon-login"><a href="/about/">About</a></li>
+            </ul> 
+            {% endif %}        
       </div>
   </nav>
 
-  	<div class="container" id="content-top">
-  		<div class="row">
+
+
+    <div class="container" id="content-top">
+      <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8 how-top">
-          <h1 class="how-heading">About</h1>
-          <p class="how-text" align="justify">Udghos.com is not merely a website but a national platform for peoples’ social concerns. It has been developed to give such concerns proper addressing from anywhere it be.  
-          </p>
-          <p class="how-text" align="justify">
-          Especially your concerns on governmental and non-governmental organizations, consumer complains, technical advices and your other demands regarding change for the betterment of people is what udghos has been created for. It works for the public inconvenience and the way it can be changed. In a line, udghos is a technological advancement for the change in society.
-        </p>
+        <div class="col-md-8">
+                <div class="mynotification-heading"><h2 class="mynotification-title">Notifications</h2>
+                  <div class="mark-read mark-read-mobile">
+                    <a class="notification-title pull-right" href="javascript:void()" onclick="mark_read()">Mark as Read</a>
+                  </div>
+                </div>
+                <div class="notifications-wrapper notifications-wrapper-mobile">
+                  {% if notifications %}
+                  {% else %}
+                  <a class="content" href="#">
+                    <div class="single-notification">
+                    &nbsp; No new notifications
+                    </div>
+                  </a>
+                  {% endif %}
+                  {% for notif in notifications %}
+                  <a class="content" href="/thread/{{notif.thread}}/">
+                    <div class="single-notification">
+                      <div class="stimg-notification">
+                            <img class="img-circle" src="/media/{{notif.by_image}}" width=50 height=50/>
+                      </div>
+                      <p class="notification-title">
+                        {% ifequal notif.type "comment" %}
+                        Comment on your thread by {{notif.by}}
+                        {% endifequal %}
+                        {% ifequal notif.type "support" %}
+                          Support on your thread by {{notif.by}}
+                        {% endifequal %}
+                        {% ifequal notif.type "downvote" %}
+                          Downvote on your thread by {{notif.by}}
+                        {% endifequal %}
+                        <div class="notification-info">
+                        About
+                      </div>
+                      </p>
+                    </div>
+                  </a>
+                  {% endfor %}
+                </div>
+              </ul>
+            </div>
+      
         </div>
-  			       
-  			
-  		</div>
-  	</div>
+      </div>
+
 
 
   <div id="footer" class="box-footer">
@@ -104,6 +220,7 @@
       </footer>
     </div>
   </div>
+
 
 </body>
 

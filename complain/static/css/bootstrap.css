@@ -4197,7 +4197,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #990012;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #d71010;
 }
 .nav-stacked > li {
   float: none;
@@ -5229,7 +5231,7 @@ a.thumbnail.active {
 .progress {
   /*-webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);*/
-  height: 10px;
+  height: 7px;
   margin-bottom: 20px;
   overflow: hidden;
   background-color: #f5f5f5;
