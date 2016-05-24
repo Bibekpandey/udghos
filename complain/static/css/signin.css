@@ -72,23 +72,24 @@ body {
   background-position:  left 200px;
 }
 #float-notification{
-  position: absolute;
-  float: right;
-  display: none;
-  right: 0;
-  margin-right: 50px;
-  margin-top: 5%;
-  background: #ddd;
-  border: 1px solid #aaa;
-  padding: 5px;
-  min-width: 250px;
-  min-height: 70px;
-  border-radius: 3px;
+  background: #333;
+  color: #fff;
+  position: fixed;
   z-index: 5;
-  color: #333
+  float: right;
+  right: 0;
+  display: none;
+  margin: 55px 10px;
+  border: 1px solid #333;
+  padding: 5px;
+  min-width: 200px;
+  max-width: 350px;
+  min-height: 70px;
+  max-height: 150px;
+  border-radius: 3px;
 }
 #float-notification:hover{
-  background: #eee;
+  background: #444;
 }
 
 .text-login{

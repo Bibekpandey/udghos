@@ -34,6 +34,13 @@ $( "#click-signin-link" ).click(function() {
 
 
 function signin() {
+    $('#float-notification').show();
+    $('.notification-heading').text("Signing in.. Please wait...");
+    var inputuser = document.getElementById("inputEmail").value;
+    $('.notification-body').fadeIn()
+    $('.notification-body').text("Welcome back, " +inputuser);
+    $('#float-notification').fadeOut(5000);
+
     $.post('/login/', $('#signin-form').serialize(), function(data) {
         if(data.success) {
             window.location = "/";
