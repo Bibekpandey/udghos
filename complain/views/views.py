@@ -766,6 +766,23 @@ def get_notification_dict(notification):
         ret['type']='message'
     return ret
 
+
+####################
+# GET ACTIVITIES
+####################
+def get_activities(request):
+    pass
+
+def change_password(request):
+    if request.method=='POST':
+        if request.user.is_authenticated():
+            new_password = request.POST.get('password', '')
+            if len(new_password) < 8:
+                return JsonResponse({'success':False, 'message':'Password needs to be at least 8 characters long'})
+            request.user.set_password(new_password)
+            request.user.save()
+            return JsonResponse({'success':True, 'message':'Successfully changed password'})
+
 def verify_page(request):
     return render(request, "complain/verify.html")
 
@@ -790,7 +807,7 @@ def verify(request, code):
 def mail_send(code, email):
     subject, from_email, to = 'account verification', 'noreply@udghos.com', email
     text = "Welcome to udghos.com. This is the email that lets you verify your account in udghos.com. The following is the link to verify:"
-    html = '<a href="http://udghos.com/verify/'+str(code)+'">udghos.com/verify/'+str(code)+'</a>'
+    html = 'Please verify your account by clicking this link: <a href="http://udghos.com/verify/'+str(code)+'">udghos.com/verify/'+str(code)+'</a>'
     msg = EmailMultiAlternatives(subject, "", from_email, [to])
     msg.attach_alternative(html, "text/html")
     msg.send()
