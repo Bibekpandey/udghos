@@ -36,6 +36,25 @@ textarea:focus{
     border: 1px solid #aaa;
     border-radius: 3px;
 }
+.box-activity{
+  margin-top: 67px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
+.activity-body{
+  padding: 10px;
+  border-bottom: 1px solid #aaa;
+}
+.activity-heading{
+  color: #d71010;
+  font-size: 15px;
+}
+.activity-text{
+  color: #555;
+}
+.tag-heading{
+  margin-bottom: 0px;
+}
 #heading-border{
   border-bottom: 1px solid #ddd;
 }

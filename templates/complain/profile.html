@@ -257,27 +257,31 @@
             {% endfor %}
           </div>
         </div>
+        {% if authenticated %}
       <div class="col-md-4">
-        <div class="box-complete">
+        <div class="box-activity">
             <div class="tag-heading event-heading">
-              Your Profile Status
+              My activity
             </div>
-            <div class="progress-area-profile">
-              <div class="progress">
-                <div class="progress-bar my-progress-bar" aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                </div>
+            <div class="activity-body">
+              <div class="activity-heading">
+                Commented on Sujan Neupane post
+              </div>
+              <div class="activity-text">
+                hello this is my post
               </div>
             </div>
-            <div class="row" style="margin-left: 0px;">
-              <div class="display-tag-home display-complete">
-                <a href="">Add profile info</a>
-                <a href="">Follow Tags</a>
-                <a href="">Verify mobile no.</a>
-                <a href="">Post a Concern</a>
+            <div class="activity-body">
+              <div class="activity-heading">
+                Supported on Sujan Neupane post
+              </div>
+              <div class="activity-text">
+                hello this is my post
               </div>
             </div>
           </div>
         </div>
+        {% endif %}
     </div>
   </div>
 
