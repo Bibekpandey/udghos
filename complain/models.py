@@ -16,6 +16,8 @@ SUPPORTED=2
 MESSAGGED=3
 DOWNVOTED=4
 
+activity = {1:'COMMMENT', 2:'SUPPORT', 4:'DOWNVOTE', 3:'MESSAGE'}
+
 def get_image_path(instance, filename):
     ext = filename.split('.')[-1]
     return 'profile_pics/'+str(instance.user.id)+'.'+ext
@@ -110,6 +112,10 @@ class Activity(models.Model):
     thread = models.ForeignKey(Thread)
     activity_type = models.IntegerField()
     date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return activity[self.activity_type] + ' : ' + self.thread
+
 
 class CommentUpvote(models.Model):
     account = models.ForeignKey(Account)
