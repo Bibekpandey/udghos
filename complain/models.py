@@ -16,7 +16,7 @@ SUPPORTED=2
 MESSAGGED=3
 DOWNVOTED=4
 
-activity = {1:'COMMMENT', 2:'SUPPORT', 4:'DOWNVOTE', 3:'MESSAGE'}
+activity = {1:'COMMENT', 2:'SUPPORT', 4:'DOWNVOTE', 3:'MESSAGE'}
 
 def get_image_path(instance, filename):
     ext = filename.split('.')[-1]

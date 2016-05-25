@@ -20,7 +20,7 @@ import json
 import random
 import os
 
-dict_activity_type = {1:'COMMMENT', 2:'SUPPORT', 4:'DOWNVOTE', 3:'MESSAGE'}
+dict_activity_type = {1:'COMMENT', 2:'SUPPORT', 4:'DOWNVOTE', 3:'MESSAGE'}
 # view modules
 from .ThreadViews import *
 
@@ -814,7 +814,7 @@ def get_activities(request):
         page = request.GET.get('page','')
 
         activities_list = Activity.objects.filter(account__user=request.user)
-        paginator = Paginator(activities_list, 5)
+        paginator = Paginator(activities_list, 2)
 
         try:
             activities = paginator.page(page)
@@ -824,8 +824,10 @@ def get_activities(request):
             activities = paginator.page(paginator.num_pages)
 
         ret = {}
-        ret['end'] = False if activities.has_other_pages() else True
-        ret['next'] = None if ret['end']==True else activities.next_page_number()
+        ret['end'] = False if activities.has_next() else True
+        if activities.has_next():
+            ret['next'] = activities.next_page_number()
+        else: ret['next'] = None
         ret['activities'] = dict_activities(activities.object_list)
         return JsonResponse(ret)
     return JsonResponse({'activities':[], 'end':True})
