@@ -9,6 +9,8 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -18,6 +20,7 @@ import json
 import random
 import os
 
+dict_activity_type = {1:'COMMENT', 2:'SUPPORT', 4:'DOWNVOTE', 3:'MESSAGE'}
 # view modules
 from .ThreadViews import *
 
@@ -807,7 +810,42 @@ def get_notification_dict(notification):
 # GET ACTIVITIES
 ####################
 def get_activities(request):
-    pass
+    if request.user.is_authenticated():
+        page = request.GET.get('page','')
+
+        activities_list = Activity.objects.filter(account__user=request.user)
+        paginator = Paginator(activities_list, 2)
+
+        try:
+            activities = paginator.page(page)
+        except PageNotAnInteger:
+            activities = paginator.page(1)
+        except EmptyPage:
+            activities = paginator.page(paginator.num_pages)
+
+        ret = {}
+        ret['end'] = False if activities.has_next() else True
+        if activities.has_next():
+            ret['next'] = activities.next_page_number()
+        else: ret['next'] = None
+        ret['activities'] = dict_activities(activities.object_list)
+        return JsonResponse(ret)
+    return JsonResponse({'activities':[], 'end':True})
+
+
+
+def dict_activities(activities):
+    l = []
+    for each in activities:
+        activity = {}
+        activity['action'] = dict_activity_type[each.activity_type]
+        activity['time'] = time_since_event(each.date)
+        activity['thread'] = {'id':each.thread.id, 
+                            'title':each.thread.title}
+        l.append(activity)
+    return l
+
+
 
 def change_password(request):
     if request.method=='POST' or 1:
