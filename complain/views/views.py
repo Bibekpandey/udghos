@@ -825,6 +825,7 @@ def get_activities(request):
 
         ret = {}
         ret['end'] = False if activities.has_other_pages() else True
+        ret['next'] = None if ret['end']==True else activities.next_page_number()
         ret['activities'] = dict_activities(activities.object_list)
         return JsonResponse(ret)
     return JsonResponse({'activities':[], 'end':True})
