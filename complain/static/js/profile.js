@@ -66,7 +66,8 @@ $('#save').click(function(){
             $('#picture_update').submit();
         },
         error: function(data) { alert(JSON.stringify(data));}
-    }); 
+        
+    });
 });
 
 //.............Profile IMAGE Display ..............///
