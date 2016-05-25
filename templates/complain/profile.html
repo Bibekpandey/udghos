@@ -66,7 +66,7 @@
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu dropdown-settings" role="menu">
                 <li><a href="{% url 'profile' user.id %}">Profile</a></li>
-                <!-- <li><a href="#">Settings</a></li> -->
+                <li><a href="/settings">Settings</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
             <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
