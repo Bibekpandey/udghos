@@ -814,7 +814,7 @@ def get_activities(request):
         page = request.GET.get('page','')
 
         activities_list = Activity.objects.filter(account__user=request.user)
-        paginator = Paginator(activities_list, 2)
+        paginator = Paginator(activities_list, 5)
 
         try:
             activities = paginator.page(page)

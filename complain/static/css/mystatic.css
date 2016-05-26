@@ -16,7 +16,7 @@ h1,h2,h3,h4{
 
 }
 progress {
-  display: none;
+    display:none;
   margin-top: 50px;
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
