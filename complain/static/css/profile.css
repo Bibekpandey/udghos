@@ -40,6 +40,9 @@ textarea:focus{
   margin-top: 67px;
   border: 1px solid #aaa;
   border-radius: 3px;
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto; 
 }
 .activity-body{
   padding: 10px;
