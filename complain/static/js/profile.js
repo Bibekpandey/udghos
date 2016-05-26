@@ -113,17 +113,6 @@ function imageIsLoaded(e) {
                 }
             });
         }
-        window.onload = function() {
-            $('html,body').animate({scrollTop:0}, 500);
-            //$('#error').text(window.localStorage.getItem("message"));
-            //window.localStorage.setItem("message", "");
-            $('#profile-image-form').hide();
-            drawTagBoxes(g_current_tags);
-            $('.hidden-cross').hide();
-            getUserThreads({});
-            checkEdit();
-        }
-
         window.onscroll = function() {
             // first get direction of scroll
             var curr = window.scrollY;
