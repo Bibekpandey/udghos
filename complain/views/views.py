@@ -813,8 +813,8 @@ def get_activities(request):
     if request.user.is_authenticated():
         page = request.GET.get('page','')
 
-        activities_list = Activity.objects.filter(account__user=request.user)
-        paginator = Paginator(activities_list, 2)
+        activities_list = Activity.objects.filter(account__user=request.user).order_by('-date')
+        paginator = Paginator(activities_list, 5)
 
         try:
             activities = paginator.page(page)

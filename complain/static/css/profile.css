@@ -40,7 +40,8 @@ textarea:focus{
   margin-top: 67px;
   border: 1px solid #aaa;
   border-radius: 3px;
-  max-height: 500px;
+  max-height: 300px;
+  min-height: 100px;
   overflow-x: hidden;
   overflow-y: auto; 
 }
@@ -55,6 +56,19 @@ textarea:focus{
 .activity-text{
   color: #555;
 }
+#more-activities{
+  background-color: #eee;
+}
+#more-activities-link{
+}
+a#more-activities-link{
+  padding-left: 140px;
+  color: #333;
+  text-decoration: none;
+  position: relative;
+}
+
+
 .tag-heading{
   margin-bottom: 0px;
 }
@@ -336,6 +350,10 @@ ul#tags-suggest-list{
   }
   input.form-control{
     margin-left: -20px;
+  }
+  .box-activity{
+    margin-top: 20px;
+    margin-left: 15px;
   }
 
 }
