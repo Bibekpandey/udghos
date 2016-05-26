@@ -103,7 +103,7 @@ class ThreadDownvote(models.Model):
     thread = models.ForeignKey(Thread)
 
     def save(self, *args, **kwargs):
-        super(ThreadUpvote, self).save(*args, **kwargs)
+        super(ThreadDownvote, self).save(*args, **kwargs)
         activity = Activity(account=self.account,thread=self.thread, activity_type=DOWNVOTED)
         activity.save()
 
