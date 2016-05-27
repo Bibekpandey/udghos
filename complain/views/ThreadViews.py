@@ -6,6 +6,7 @@ from complain.models import *
 from datetime import datetime
 
 NEW_THREADS = 15 # new number of threads when scrolled in browser
+REQUIRED_VOTES = 2000
 
 def get_thread_json(request):
     if request.user.is_authenticated():auth=True
@@ -294,6 +295,7 @@ def thread_to_dict(user, thread, less=True):
             'num_comments':Comment.objects.all().filter(thread=thread).count(),
             'can_edit':True if thread.account.user == user else False,
             'anonymous':True if thread.anonymous else False,
+            'total_votes':REQUIRED_VOTES,
             'supports':numupvotes,
             'downvotes':numdownvotes,
             'supported':True if len(upvotes)>0 else False,
