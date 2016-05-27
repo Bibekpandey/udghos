@@ -29,7 +29,7 @@ progress {
   background-color: #d71010;
 }
 .progress-area{
-  display: inlinse-block;
+  display: inline-block;
   position: relative;
   float: right;
   width: 100px;
