@@ -168,43 +168,43 @@
               </div>
             </form>
             
-                <div class="show-image">
-                  <img class="img-circle img-profile" src="/media/{{user_pic}}" width=200 height=200 data-toggle="modal" data-target="#myModalImage" data-keyboard="true" alt="Generic placeholder image" width="200" height="200" />
-                </div>
+            <div class="show-image">
+              <img class="img-circle img-profile" src="/media/{{user_pic}}" width=200 height=200 data-toggle="modal" data-target="#myModalImage" data-keyboard="true" alt="Generic placeholder image" width="200" height="200" />
+            </div>
                 
-              </div>
-              <form id="updateform" method="post" action="{% url 'profile_update' %}" >
-              <div class="col-md-8 info-section">
-                <input type="hidden" name="userid" value="{{request.user.id}}" />
-                <div class="row">
-                  <div class="col-md-6">
-                    {% if edit %}
-                    <span class="hidden-text hidden-text-font">Edit your Profile</span>
-                    {% endif %}
-                    <div id="dataprofile" class="my-name">
-                      <div class="hidden-text">
-                        <b>First Name</b>
-                      </div>
-                      {% csrf_token %}
-                      <span id="first-name" class="datainfo post-title">{{account.user.first_name}}</span>
-                      <div class="hidden-text">
-                        <b>Last Name</b>
-                      </div>
-                      <span id="last-name" class="datainfo post-title">{{account.user.last_name}}</span>
-                    </div>
-                  </div>
+          </div>
+          <div class="col-md-8 info-section">
+            <form id="updateform" method="post" action="{% url 'profile_update' %}" >
+              <div class="row">
+                <div class="col-md-6">
+                  <input type="hidden" name="userid" value="{{request.user.id}}" />
+              
                   {% if edit %}
-                  <div class="col-md-2">
-                    <div class="edit-text">
+                    <span class="hidden-text hidden-text-font">Edit your Profile</span>
+                  {% endif %}
+                  <div id="dataprofile" class="my-name">
+                    <div class="hidden-text">
+                      <b>First Name</b>
+                    </div>
+                    {% csrf_token %}
+                    <span id="first-name" class="datainfo post-title">{{account.user.first_name}}</span>
+                    <div class="hidden-text">
+                      <b>Last Name</b>
+                    </div>
+                    <span id="last-name" class="datainfo post-title">{{account.user.last_name}}</span>
+                  </div>
+                </div>
+                {% if edit %}
+                <div class="col-md-2">
+                  <div class="edit-text">
                       <button id="save" class="btn btn-black" type="button"> Save Info</button>
                       <button id="edit" class="btn btn-black" type="button"> Edit Info</button>
-                    </div>
                   </div>
                 </div>
                 {% else %}
-                <br><br>
+            
                 {% endif %}
-
+              </div>
                 <div class="row">
                   <div class="my-username"><br>
                     <div class="hidden-text">
@@ -279,9 +279,9 @@
             <div id="more-activities">
                 <a id="more-activities-link" href="javascript:void(0)" data-nextpage="1" onclick="load_activities()">Load More... </a>
             </div>
-          </div>
         </div>
-        {% endif %}
+      </div>
+      {% endif %}
     </div>
   </div>
 
