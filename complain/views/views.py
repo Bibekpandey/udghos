@@ -9,6 +9,8 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -18,6 +20,7 @@ import json
 import random
 import os
 
+dict_activity_type = {1:'COMMENT', 2:'SUPPORT', 4:'DOWNVOTE', 3:'MESSAGE'}
 # view modules
 from .ThreadViews import *
 
@@ -743,6 +746,24 @@ class Mynotifications(View):
         else:
             self.context['authenticated'] = False
         return render(request, "complain/mynotifications.html",self.context)
+
+
+class Settings(View):
+    def get(self,request):
+        self.context = {}
+        if request.user.is_authenticated():
+            acc = Account.objects.get(user=request.user)
+            tags = list(acc.tags_followed.all())
+            self.context['tags'] = tags
+            self.context['address'] = acc.address
+            self.context['profile_pic'] = acc.profile_pic
+            self.context['notifications'] = get_notifications(request)
+            self.context['password_set'] = True if request.user.has_usable_password() else False
+
+            self.context['authenticated'] = True
+        else:
+            self.context['authenticated'] = False
+        return render(request, "complain/settings.html",self.context)
         
 
 def mark_read_notifications(request):
@@ -784,6 +805,62 @@ def get_notification_dict(notification):
         ret['type']='message'
     return ret
 
+
+####################
+# GET ACTIVITIES
+####################
+def get_activities(request):
+    if request.user.is_authenticated():
+        page = request.GET.get('page','')
+
+        activities_list = Activity.objects.filter(account__user=request.user).order_by('-date')
+        paginator = Paginator(activities_list, 5)
+
+        try:
+            activities = paginator.page(page)
+        except PageNotAnInteger:
+            activities = paginator.page(1)
+        except EmptyPage:
+            activities = paginator.page(paginator.num_pages)
+
+        ret = {}
+        ret['end'] = False if activities.has_next() else True
+        if activities.has_next():
+            ret['next'] = activities.next_page_number()
+        else: ret['next'] = None
+        ret['activities'] = dict_activities(activities.object_list)
+        return JsonResponse(ret)
+    return JsonResponse({'activities':[], 'end':True})
+
+
+
+def dict_activities(activities):
+    l = []
+    for each in activities:
+        activity = {}
+        activity['action'] = dict_activity_type[each.activity_type]
+        activity['time'] = time_since_event(each.date)
+        activity['thread'] = {'id':each.thread.id, 
+                            'title':each.thread.title}
+        l.append(activity)
+    return l
+
+
+
+def change_password(request):
+    if request.method=='POST' or 1:
+        if request.user.is_authenticated():
+            old_password = request.POST.get('old-password', '')
+            if request.user.has_usable_password():
+                if not request.user.check_password(old_password):
+                    return JsonResponse({'success':False,'message':'Old password does not match'})
+            new_password = request.POST.get('new-password', '')
+            if len(new_password) < 8:
+                return JsonResponse({'success':False, 'message':'Password needs to be at least 8 characters long'})
+            request.user.set_password(new_password)
+            request.user.save()
+            return JsonResponse({'success':True, 'message':'Successfully changed password'})
+
 def verify_page(request):
     return render(request, "complain/verify.html")
 
@@ -808,7 +885,7 @@ def verify(request, code):
 def mail_send(code, email):
     subject, from_email, to = 'account verification', 'noreply@udghos.com', email
     text = "Welcome to udghos.com. This is the email that lets you verify your account in udghos.com. The following is the link to verify:"
-    html = '<a href="http://udghos.com/verify/'+str(code)+'">udghos.com/verify/'+str(code)+'</a>'
+    html = 'Please verify your account by clicking this link: <a href="http://udghos.com/verify/'+str(code)+'">udghos.com/verify/'+str(code)+'</a>'
     msg = EmailMultiAlternatives(subject, "", from_email, [to])
     msg.attach_alternative(html, "text/html")
     msg.send()

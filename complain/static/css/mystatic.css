@@ -16,40 +16,63 @@ h1,h2,h3,h4{
 
 }
 progress {
-  display: none;
+    display:none;
   margin-top: 50px;
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   position: absolute;
 }
+.progress{
+  margin-bottom: 5px;
+  background-color: #ccc;
+}
 .my-progress-bar {
   background-color: #d71010;
 }
 .progress-area{
-  display: inlinse-block;
+  display: inline-block;
   position: relative;
   float: right;
   width: 100px;
-  margin-top: 0px;
+  margin-top: 5px;
   margin-right: 5px;
 }
-
+.progress-area-home{
+  margin-top: 10px;
+  padding: 1px;
+  width: 100%;
+}
+.progress-area-profile{
+  margin-top: 10px;
+  padding: 5px 10px 5px 10px;
+  width: 100%;
+}
 
 #float-notification{
-  position: absolute;
+  background: #333;
+  color: #fff;
+  position: fixed;
+  z-index: 5;
   float: right;
   right: 0;
   display: none;
-  margin-right: 50px;
-  background: #ccc transparent;
-  border: 1px solid #aaa;
+  margin: 55px 10px;
+  border: 1px solid #333;
   padding: 5px;
   min-width: 200px;
-  min-height: 50px;
+  max-width: 350px;
+  min-height: 70px;
+  max-height: 150px;
   border-radius: 3px;
 }
 #float-notification:hover{
-  background: #ddd;
+  background: #444;
+}
+.notification-heading{
+  
+}
+.notification-body{
+  padding: 5px;
 }
 
 .topic{
@@ -138,6 +161,7 @@ progress {
   color: #d71010;
 }
 .box-profile-home{
+  margin-top: 64px;
   padding: 0px 0px 5px 0px;
 }
 .box-post-info{
@@ -216,7 +240,7 @@ h1{
   min-height: 20px;
   padding: 0px 0px 5px 0px;
   margin: 2px;
-  margin-top: 20px;
+  margin-top: 15px;
   margin-left: 10px;
   margin-bottom: 10px;
   background-color: #fff;
@@ -462,6 +486,10 @@ div.row.background-icons{
   color: #d71010;
   display: block; 
 }
+.display-complete>a{
+  color: #1B5CC4;
+  margin-bottom: 10px;
+}
 .tagname:hover{
   color: #e82121;
 }
@@ -588,6 +616,9 @@ div.row.background-icons{
   text-decoration: none;
   border-bottom: none;
 }
+h5.heading-property{
+  color: #444;
+}
 .heading-post{
   position: relative;
   font-size: 15px;
@@ -601,7 +632,11 @@ div.row.background-icons{
   color: #777;
 }
 .user-heading{
+  color: #333;
   margin-top: 5px;
+}
+.user-heading:hover{
+  color: #e82121; 
 }
 .tag-heading{
   background-color: #f5f5f5;
@@ -610,9 +645,6 @@ div.row.background-icons{
   padding: 0px 0px 0px 10px;
   margin-bottom: 10px;
   border-radius: 2px 2px 0px 0px;
-}
-a>.tag-heading:hover{
-  color: #e82121;
 }
 
 .inner-addon { 
@@ -1378,6 +1410,7 @@ ul#tags-suggest-list{
   margin-right: 15px;
   float: right;
 }
+
 .notifications-wrapper {
      overflow:auto;
       max-height:250px;
@@ -1427,7 +1460,7 @@ ul#tags-suggest-list{
     padding:3px;
     margin-left: 50px;
     font-size:0.9em;
-    width:;
+    max-width: 250px;
     z-index:100;
     background-color:#333;
     border:solid 1px #555;

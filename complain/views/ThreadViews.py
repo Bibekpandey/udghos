@@ -6,6 +6,7 @@ from complain.models import *
 from datetime import datetime
 
 NEW_THREADS = 15 # new number of threads when scrolled in browser
+REQUIRED_VOTES = 2000
 
 def get_thread_json(request):
     if request.user.is_authenticated():auth=True
@@ -274,26 +275,8 @@ def thread_to_dict(user, thread, less=True):
         uid = thread.account.pk
 
     # calculate time since the post
-    present = datetime.now()
-    threadtime = thread.time.replace(tzinfo=None)
-    delta = present - threadtime
-    if delta.days > 30:
-        time = thread.time.strftime("on %d %b %Y")
-    elif delta.days <=30 and delta.days>1:
-        time = str(delta.days)+" days ago"
-    else:
-        if delta.seconds >= 3600:
-            hr = int(delta.seconds/3600.0)
-            time = " hours ago" if hr>1 else " hour ago"
-            time = str(hr) + time
-        elif delta.seconds <3600 and delta.seconds>=60:
-            mint = int(delta.seconds/60.0)
-            time = " minutes ago" if mint>1 else " minute ago"
-            time = str(mint) + time
-        else:
-            sec = int(delta.seconds+1)
-            time = " seconds ago" if sec>1 else " second ago"
-            time = str(sec) + time
+    time = time_since_event(thread.time)
+
     return {'id':thread.id,
             'votes':thread.votes,
             'time':time,
@@ -312,6 +295,7 @@ def thread_to_dict(user, thread, less=True):
             'num_comments':Comment.objects.all().filter(thread=thread).count(),
             'can_edit':True if thread.account.user == user else False,
             'anonymous':True if thread.anonymous else False,
+            'total_votes':REQUIRED_VOTES,
             'supports':numupvotes,
             'downvotes':numdownvotes,
             'supported':True if len(upvotes)>0 else False,
@@ -320,4 +304,26 @@ def thread_to_dict(user, thread, less=True):
                                 ThreadImage.objects.filter(thread=thread))),
             }
     
+def time_since_event(time):
+    present = datetime.now()
+    rawtime = time.replace(tzinfo=None)
+    delta = present - rawtime
+    if delta.days > 30:
+        ret = time.strftime("on %d %b %Y")
+    elif delta.days <=30 and delta.days>1:
+        ret = str(delta.days)+" days ago"
+    else:
+        if delta.seconds >= 3600:
+            hr = int(delta.seconds/3600.0)
+            ret = " hours ago" if hr>1 else " hour ago"
+            ret = str(hr) + ret 
+        elif delta.seconds <3600 and delta.seconds>=60:
+            mint = int(delta.seconds/60.0)
+            ret = " minutes ago" if mint>1 else " minute ago"
+            ret = str(mint) + ret 
+        else:
+            sec = int(delta.seconds+1)
+            ret = " seconds ago" if sec>1 else " second ago"
+            ret = str(sec) + ret 
+    return ret
 

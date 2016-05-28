@@ -21,6 +21,16 @@
     <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
     <link href="{% static 'css/profile.css' %}" rel="stylesheet">
 
+<style>
+    .activity-body:hover {
+        background:#eee;
+        cursor:pointer;
+        cursor:hand;
+    }
+    .activity-title {
+        color:#555;
+    }
+</style>
 
 </head>
 <body>
@@ -66,7 +76,7 @@
               <img class="img-navbar" src="/media/{{profile_pic}}" width=30 height=30 /></a>
               <ul class="dropdown-menu dropdown-settings" role="menu">
                 <li><a href="{% url 'profile' user.id %}">Profile</a></li>
-                <!-- <li><a href="#">Settings</a></li> -->
+                <li><a href="/settings">Settings</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
             <form class="navbar-form navbar-right form-group-navbar" role="search" onsubmit="return search()">
@@ -139,7 +149,6 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-2"></div>
       <div class="col-md-8">
         <div class="box-profile">  
           <div class="col-md-4 image-section">
@@ -258,15 +267,27 @@
             {% endfor %}
           </div>
         </div>
-      </div>
+        {% if authenticated %}
+      <div class="col-md-4">
+        <div class="box-activity">
+            <div class="tag-heading event-heading">
+              Recent Activities
+            </div>
+            <div id="activities-container">
+                
+            </div>
+            <div id="more-activities">
+                <a id="more-activities-link" href="javascript:void(0)" data-nextpage="1" onclick="load_activities()">Load More... </a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
     </div>
   </div>
 
 
   <div class="container">
     <div class="row">
-      <div class="col-md-2">
-      </div>
       <div class="col-md-8">
         <div id="tab-stories">
           <div class="box-tabs">
@@ -322,32 +343,6 @@
 
 
     <script>
-        $('#tagbox').on('input', getTags);
-
-        var g_lastId;
-        var g_tagedit =false;
-        var g_tags_selected = [];
-        var g_current_tags = [];
-        var g_new_tags = [];
-        var g_removed_tags = [];
-        var g_earliertop = window.scrollY;
-
-        $('.taginfo').each(function(index, element) {
-            var parts = $(element).val().split(',');
-            g_current_tags.push({name:parts[0], id:parseInt(parts[1])});
-
-        });
-
-        function getUserThreads(querydata) {
-            var temp = location.href.split('/');
-            var id = temp[temp.length-2];
-            $.get('/complain/threads/user/'+id+'/', querydata, function(data) {
-                g_lastId = data.lastid;
-                for(var x = 0;x<data.threads.length;x++) {
-                    add_item(data.threads[x], "recent-threads", data.authenticated);
-                }
-            });
-        }
         window.onload = function() {
             $('html,body').animate({scrollTop:0}, 500);
             //$('#error').text(window.localStorage.getItem("message"));
@@ -357,106 +352,34 @@
             $('.hidden-cross').hide();
             getUserThreads({});
             checkEdit();
+
+            load_activities();
         }
 
-        window.onscroll = function() {
-            // first get direction of scroll
-            var curr = window.scrollY;
-            if (curr <= g_earliertop) {
-                return;
-            }
-            g_earliertop = curr;
-            var elems = document.getElementsByClassName('box thread');
-            var last = elems[elems.length-1];
+        function load_activities() {
+            var next_page = $('#more-activities-link').attr('data-nextpage');
 
-            var lastRect = last.getBoundingClientRect();
-            var windowH = window.innerHeight;
-            if(lastRect.top <= 0.85*windowH) {
-                if(g_lastId==null) return;
-                var data = {earlierthan:g_lastId.toString()};
-                g_lastId = null;
-                getUserThreads(data);
-            }
-        }
-
-function getTags() {
-        var query = $('#tagbox').val();
-        if (query != '') {
-            $.get('/complain/tags?query='+query, function(data) {
-                renderTags(data);
+            $.get('/activities/?page='+next_page, function(data) {
+                if(data.end) {
+                    $('#more-activities').hide();
+                } else {
+                    $('#more-activities-link').attr('data-nextpage', data.next.toString()); 
+                }
+                // now render the activities
+                var acts = data.activities;
+                for(var x=0;x<acts.length;x++) {
+                    var html = '';
+                    var action;
+                    if(acts[x].action=='COMMENT') action="Commented on";
+                    else if(acts[x].action=='SUPPORT') action="Supported";
+                    else action="Downvoted";
+                    html+='<div class="activity-body" onclick="window.location=\'/thread/'+acts[x].thread.id.toString()+'\'"><div class="activity-heading">';
+                    html+=action+' thread ';
+                    html+='<span class="activity-title">'+acts[x].thread.title+'</span></div></div>';
+                    $('#activities-container').append(html);
+                }
             });
         }
-    }
-
-    function renderTags(data) {
-        var tags = data.items;
-		var ul = document.getElementById('tags-suggest-list');
-		ul.innerHTML="";
-        for(var x in tags) {
-            if (!tagInArr(tags[x], g_current_tags) && !tagInArr(tags[x], g_new_tags) || tagInArr(tags[x], g_removed_tags)) {
-			    ul.innerHTML += '<li id="tag-'+tags[x].id+'" onclick="selectTag(this)">'+tags[x].name+'</li>';
-            }
-        }
-    }
-	
-    function drawTagBoxes(tags) {
-        $(tags).each(function(index, element) {
-            drawTabBox(element.id, element.name);
-        });
-    }
-    function drawTabBox(id, txt) {
-        var tags_elem = document.getElementById('tags-chosen');	
-		tags_elem.innerHTML+= '<span id="selected-'+id+'"class="btn selected-tags"> <span onclick="location=\'/threads/tagged/'+txt+'\'">'+txt+ '</span><button type="button" class="close my-close" id="close-tag"><span class="hidden-cross" onclick="removeTag(\''+id+'\''+',\''+txt+'\')" aria-hidden="true">&times;</span></button></span>';
-
-    }
-	function selectTag(elem) {
-        $('#tags-warning').hide();
-        $('#tagbox').val('');
-        $('#tags-suggest-list').empty();
-        var tag = {name:elem.innerHTML, id:parseInt(elem.id.split('-')[1])};
-
-        // first remove if it is in removed array
-        if(tagInArr(tag, g_removed_tags)) {
-            removeTagFromArr(tag, g_removed_tags);
-        }
-
-        if(!tagInArr(tag, g_new_tags) && !tagInArr(tag, g_current_tags)) {
-            g_new_tags.push(tag);
-        }
-        var id = elem.getAttribute('id').replace('tag-', '');
-        drawTabBox(id, elem.innerHTML);
-	}
-
-    function tagInArr(tag, arr) {
-        for(var x=0;x<arr.length;x++) {
-            if(tag.name==arr[x].name && tag.id==arr[x].id)
-                return true;
-        }
-        return false;
-    }
-
-    function removeTagFromArr(tag, arr) {
-        for(var x=0;x<arr.length;x++) {
-            if(tag.name==arr[x].name && tag.id==arr[x].id) {
-                arr.splice(x, 1);
-                return;
-            }
-        }
-    }
-    function removeTag(id, tagname) {
-        var tag = {id:parseInt(id), name:tagname};
-        if(tagInArr(tag, g_new_tags)) {
-            removeTagFromArr(tag, g_new_tags);
-            $('#selected-'+id).remove();
-        }
-        //var index = g_tags_selected.indexOf(tagname);
-        //g_tags_selected.splice(index, 1);
-        // check if it is in current or not
-        if(tagInArr(tag, g_current_tags)) {
-            g_removed_tags.push(tag);
-            $('#selected-'+id).remove();
-        }
-    }
     </script>
 
 </body>

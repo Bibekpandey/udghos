@@ -54,7 +54,15 @@ urlpatterns =  [
         url(r'^how-it-works/', how_it_works, name='work'),
         url(r'^about/', about, name='about'),
         url(r'^mynotifications/', Mynotifications.as_view(), name='mynotifications'),
+        url(r'^settings/', Settings.as_view(), name='settingss'),
 
+
+
+        # settings
+        url(r'^change-password/', change_password, name='change-password'),
+
+        # activities
+        url(r'^activities/', get_activities, name='get-activities'),
 
 
 ]

@@ -297,7 +297,6 @@ function editPost(threadid) {
 function generate_thread(threadobj, auth) {
     var up = threadobj.supported;
     var down = threadobj.thumbed_down;
-    
     var thread_str = '<div class="box thread" id="thread-'+threadobj.id+'">'+
         '<div class="stbody">'+
             '<div id="recent" class="tab-pane fade in active">'+
@@ -313,8 +312,7 @@ function generate_thread(threadobj, auth) {
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
                     ) +
-                '<progress value="50" max="75" /></div>'+
-              '<div id="textst" class="sttext">'+
+              '</div><div id="textst" class="sttext">'+
                 '<a href="/complain/thread/'+threadobj.id.toString()+'">'+
                 '<div class="post-title">'+
                     (threadobj.title||threadobj.content)+
@@ -323,12 +321,12 @@ function generate_thread(threadobj, auth) {
                 '<div class="post-body">'+
                     (threadobj.user.id==0?'<a href="#">':'<a href="/complain/profile/'+threadobj.user.id+'">')+
                     '<span class="heading-property heading-post">'+threadobj.user.name+'</a>'+
-                    // '<div class="progress-area">'+
-                            // '<div class="progress">'+
-                                // '<div class="progress-bar my-progress-bar" role="progressbar" aria-valuenow="+threadobj.supportstoString()+" aria-valuemin="0" aria-valuemax="100" style="width:70%">'+
-                                // '</div>'+
-                            // '</div>'+
-                        // '</div>'+
+                     '<div class="progress-area">'+
+                             '<div class="progress" onmouseover="popMessage(this, \'Requires '+(threadobj.total_votes-threadobj.votes)+' supports\')">'+
+                                 '<div class="progress-bar my-progress-bar" role="progressbar" aria-valuenow="'+threadobj.votes.toString()+'" aria-valuemin="0" aria-valuemax="'+threadobj.total_votes.toString()+'" style="width:'+Math.round(threadobj.votes*100/threadobj.total_votes)+'%">'+
+                                 '</div>'+
+                             '</div>'+
+                         '</div>'+
                         '</span>'+
                     '<span class="sttime"> &nbsp;'+threadobj.time+
                     '</span>'+
@@ -419,7 +417,7 @@ function popMessage(elem, msg) {
     newdiv.style.borderRadius="3px";
     */
     child.appendChild(newdiv);
-    setTimeout(function() { $(newdiv).delay(100).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 700);
+    setTimeout(function() { $(newdiv).delay(100).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 1000);
     //$(newdiv).hide().delay(1000).fadeOut();
 }
 
