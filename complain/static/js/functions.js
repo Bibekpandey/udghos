@@ -322,7 +322,7 @@ function generate_thread(threadobj, auth) {
                     (threadobj.user.id==0?'<a href="#">':'<a href="/complain/profile/'+threadobj.user.id+'">')+
                     '<span class="heading-property heading-post">'+threadobj.user.name+'</a>'+
                      '<div class="progress-area">'+
-                             '<div class="progress" onmouseover="popMessage(this, \'Requires '+(threadobj.total_votes-threadobj.votes)+' votes\')">'+
+                             '<div class="progress" onmouseover="popMessage(this, \'Requires '+(threadobj.total_votes-threadobj.votes)+' supports\')">'+
                                  '<div class="progress-bar my-progress-bar" role="progressbar" aria-valuenow="'+threadobj.votes.toString()+'" aria-valuemin="0" aria-valuemax="'+threadobj.total_votes.toString()+'" style="width:'+Math.round(threadobj.votes*100/threadobj.total_votes)+'%">'+
                                  '</div>'+
                              '</div>'+
@@ -417,7 +417,7 @@ function popMessage(elem, msg) {
     newdiv.style.borderRadius="3px";
     */
     child.appendChild(newdiv);
-    setTimeout(function() { $(newdiv).delay(100).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 700);
+    setTimeout(function() { $(newdiv).delay(100).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 1000);
     //$(newdiv).hide().delay(1000).fadeOut();
 }
 
