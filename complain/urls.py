@@ -28,7 +28,7 @@ urlpatterns =  [
         url(r'^threads/favourite/', get_favourite_threads, name='favourite-threads'),
         url(r'^threads/user/([0-9]+)/', get_user_threads, name='user-threads'),
         url(r'^threads/search/$', ThreadPage.as_view(), name='search'),
-        url(r'^thread/([0-9]+)/', ThreadPage.as_view(), name='get-thread'),
+        url(r'^thread/(?P<thread_id>[0-9]+)/', ThreadPage.as_view(), name='get-thread'),
         url(r'^thread/delete/([0-9]+)/', delete_thread, name='delete-thread'),
         url(r'^post-thread/', Post.as_view(), name='post'),
 
