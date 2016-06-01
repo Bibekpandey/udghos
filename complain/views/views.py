@@ -405,14 +405,14 @@ class ThreadPage(View):
             self.context['authenticated'] = True
             self.context['notifications'] = get_notifications(request)
             self.context['profile_pic'] = Account.objects.get(user=request.user).profile_pic
-            threads = Thread.objects.get(id=thread_id)
-            if len(threads)>0:
-                self.context['id'] = threads[0].id
-                self.context['title'] = threads[0].title
-                self.context['description'] = threads[0].content[:140] + '...'
         else:
             self.context['authenticated'] = False
 
+        threads = Thread.objects.filter(id=thread_id)
+        if len(threads)>0:
+            self.context['id'] = threads[0].id
+            self.context['title'] = threads[0].title
+            self.context['description'] = threads[0].content[:140] + '...'
         return render(request, "complain/post.html", self.context)
 
 
