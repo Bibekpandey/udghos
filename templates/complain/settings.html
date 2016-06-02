@@ -39,8 +39,8 @@
   }
   .password-section{
     margin-top: 0px;
-    padding-top: 20px;
-    border: 1px solid #aaa;
+    padding-top: 0px;
+    border: 0px solid #aaa;
     width: 500px;
     height: 300px;
     border-radius: 3px;
@@ -48,9 +48,6 @@
   li.active{
     background-color: #fff;
   }
-  #blah {
-  background: url(/static/img/udghos-header.png) top left repeat-y;
-}
 
 </style>
 <div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
@@ -163,7 +160,7 @@
         <div class="col-md-4 password-section">
           <div class="tab-content">
             <div id="home" class="tab-pane fade in active" style="margin-top: -20px;">
-              <h3>Change Password</h3>
+              <h2>Change Password</h2>
               <form id="form-password">
               {% csrf_token %}
             {% if password_set %}
@@ -199,15 +196,6 @@
   		</div>
   	</div>
 
-<div class="container">
-    <form id="form1" runat="server">
-        <input type='file' id="imgInp" />
-        <br>
-        <img id="blah" src="http://udghos.com/static/img/navbarlogo.png" alt="your image" height="100" />
-    </form>
-
-    <a id="download">Download as image</a>
-</div>
 
   <div id="footer" class="box-footer">
     <div class="container" > 
