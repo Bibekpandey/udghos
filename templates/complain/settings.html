@@ -48,9 +48,9 @@
   li.active{
     background-color: #fff;
   }
-  .nav-pills-custom{
-    
-  }
+  #blah {
+  background: url(/static/img/udghos-header.png) top left repeat-y;
+}
 
 </style>
 <div id="warning-box" style="position:absolute;top:0px;left:0px;display:none"></div>
@@ -199,6 +199,15 @@
   		</div>
   	</div>
 
+<div class="container">
+    <form id="form1" runat="server">
+        <input type='file' id="imgInp" />
+        <br>
+        <img id="blah" src="http://udghos.com/static/img/navbarlogo.png" alt="your image" height="100" />
+    </form>
+
+    <a id="download">Download as image</a>
+</div>
 
   <div id="footer" class="box-footer">
     <div class="container" > 
@@ -241,6 +250,22 @@
                     $('#form-password').reset();
             });
         }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#imgInp").change(function(){
+        readURL(this);
+    });
     </script>
     
 </html>
