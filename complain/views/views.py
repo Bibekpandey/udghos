@@ -413,6 +413,9 @@ class ThreadPage(View):
             self.context['id'] = threads[0].id
             self.context['title'] = threads[0].title
             self.context['description'] = threads[0].content[:140] + '...'
+            img = ThreadImage.objects.filter(thread=threads[0])
+            if len(img)>0:
+                self.context['image'] = img[0].name 
         return render(request, "complain/post.html", self.context)
 
 
