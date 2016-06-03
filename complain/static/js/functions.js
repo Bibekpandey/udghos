@@ -313,13 +313,13 @@ function generate_thread(threadobj, auth) {
                         '</a>'
                     ) +
               '</div><div id="textst" class="sttext">'+
-                '<a href="/complain/thread/'+threadobj.id.toString()+'">'+
+                '<a href="/thread/'+threadobj.id.toString()+'">'+
                 '<div class="post-title">'+
                     (threadobj.title||threadobj.content)+
                 '</div>'+
                 '</a>'+
                 '<div class="post-body">'+
-                    (threadobj.user.id==0?'<a href="#">':'<a href="/complain/profile/'+threadobj.user.id+'">')+
+                    (threadobj.user.id==0?'<a href="#">':'<a href="/profile/'+threadobj.user.id+'">')+
                     '<span class="heading-property heading-post">'+threadobj.user.name+'</a>'+
                      '<div class="progress-area">'+
                              '<div class="progress" onmouseover="popMessage(this, \'Requires '+(threadobj.total_votes-threadobj.votes)+' supports\')">'+
