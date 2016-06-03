@@ -416,6 +416,8 @@ class ThreadPage(View):
             img = ThreadImage.objects.filter(thread=threads[0])
             if len(img)>0:
                 self.context['image'] = img[0].name 
+            else:
+                self.context['image'] = None
         return render(request, "complain/post.html", self.context)
 
 
