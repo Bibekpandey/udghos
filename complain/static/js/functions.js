@@ -67,6 +67,7 @@ function vote(elem, id, vote_type, item) // elem is the container of text for su
                     }
                 });
 
+                var supported = false;
                 if(data.action=='undo') {
                     if(txt=="Supported") {
                         elem.children[0].innerHTML="Support";
@@ -86,19 +87,35 @@ function vote(elem, id, vote_type, item) // elem is the container of text for su
 
                     elem.children[0].className="text-bold vote-status";
                     if(txt=="Support") {
+                        supported = true;
                         elem.children[0].innerHTML="Supported";
                         next_elem.innerHTML="Downvote";
                         next_elem.className="vote-status";
                     }
                     else {
+                        supported = false;
                         elem.children[0].innerHTML="Downvoted";
                         next_elem.innerHTML="Support";
                         next_elem.className="vote-status";
                     }
                 }
+        if(supported) {
+            $(elem).parent().parent().find('.fb-share').attr('data-supported', 'supported');
+            showWarning('Would you care to share in facebook? Your share could get supports to this thread.', 
+                'shareClick('+id.toString()+')', 0);
+        }
+        else {
+            $(elem).parent().parent().find('.fb-share').attr('data-supported', undefined);
+        }
+
             }
         );
     }
+
+function shareClick(id) {
+    $('#thread-'+id.toString()).find('.fb-share').click();
+    removeWarning();
+}
 
 function toggleComments(id) {
         $.post("/complain/get-comments/", 
@@ -199,7 +216,7 @@ function deleteThread(threadid) {
     });
 }
 
-function showDeleteWarning(message, threadid) {
+function showWarning(message, onclickfunc, threadid) {
     $('#mask').css({
         "width":$(document).width(),
         "height":$(document).height(),
@@ -216,14 +233,13 @@ function showDeleteWarning(message, threadid) {
     var html =  '<div class="modal-delete">'+
                 '<div class="modal-header my-color modal-edit">'+
                 '<button onclick="removeWarning()" type="button" class="close my-close" data-dismiss="modal" data-keyboard="true" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-                '<h4 class="modal-title my-modal-title" id="myModalLabel">Warning</h4><br>'+
+                '<h4 class="modal-title my-modal-title" id="myModalLabel">Info</h4><br>'+
             '</div>'+
             '<div class="warning-text">'+
                 message +
-                'It cannot be undone.'+
             '</div>'+
             '<div class="modal-footer">'+
-                (threadid!=undefined?'<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Ok</button>':'')+
+                (threadid!=undefined?'<button class="btn btn-my" type="button" onclick="'+onclickfunc+'">Ok</button>':'')+
                 '<button class="btn btn-default" type="button" onclick="removeWarning()">'+(threadid!=undefined?'Cancel':'Ok')+'</button>'+
             '</div>'+
             '</div>';
@@ -308,7 +324,7 @@ function generate_thread(threadobj, auth) {
                     //'<a href="javascript:void()" onclick="editPost('+threadobj.id+')">'+
                     //'<span class="glyphicon glyphicon-edit"></span>'+
                     //'</a>'+
-                    '<a href="javascript:void(0)" onclick="showDeleteWarning(\'Are you sure you want to delete the thread? This can not be undone.\','+threadobj.id+')">'+
+                    '<a href="javascript:void(0)" onclick="showWarning(\'Are you sure you want to delete the thread? This can not be undone.\', \'deleteThread('+threadobj.id.toString()+')\','+threadobj.id+')">'+
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
                     ) +
@@ -373,7 +389,7 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
               '</div>'+
               '<div class="share">'+
-                '<button data-content="'+threadobj.content.substr(0,100)+' ..." data-id="'+threadobj.id.toString()+'" data-title="'+threadobj.title+'" data-image="'+(threadobj.images.length>0?threadobj.images[0]:"")+'" class="fb-share facebook shadow" aonclick="return fbs_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')" target="_blank"></button>'+
+                '<button'+(up?' data-supported="supported"':'')+' data-content="'+threadobj.content.substr(0,100)+' ..." data-id="'+threadobj.id.toString()+'" data-title="'+threadobj.title+'" data-image="'+(threadobj.images.length>0?threadobj.images[0]:"")+'" class="fb-share facebook shadow" aaaonclick="return fbs_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')" target="_blank"></button>'+
                 '<button class="twitter shadow" onclick="return twt_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')"></button>'+
               '</div>'+
             '</div>'+
