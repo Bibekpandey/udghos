@@ -97,37 +97,7 @@ body {
   margin-top: 30px;
   margin-left: 190px;
 }
-/*.bullets-login{
-  text-align: center;
-  margin-top: 100px;
-  margin-left: 70px;
-  margin-right: -50px;
-  font-size: 35px;
-  padding: 15px;
-  color: #fff;
-}
-.bubble-text{
-  background-color: #eee;
-  text-shadow: 3px solid #333;
-  color: #333;
-  border-radius: 25px;
-  margin-bottom: 35px;
-  border: 1px solid #333;
-}
-.bubble-text1{
-  width: 350px;
-  text-align: center;
-  margin-left: 0px;
-}
-.bubble-text2{
-  width: 250px;
-  margin-left: 55px;
-}
-.bubble-text3{
-  width: 150px;
-  margin-left: 105px;
-}
-*/
+
 .glyphicon{
     font-size: 25px;
     color: #fff;
@@ -531,7 +501,7 @@ p>a:hover{
 @media (max-width: 767px) {
   .navhead-nav{
     float: right;
-    margin-top: -45px;
+    margin-top: -50px;
   }
   .container{
     width: 100%;
@@ -539,23 +509,14 @@ p>a:hover{
   .navhead-nav-left{
     float: left;
   }
-  .form-signup {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-  }
+  
   body{
     background-position: center 170px;
     top: 0;
     width: 100%;
   }
-  ul.bullets-login{
-    font-size: 30px;
-    margin-left: 50px;
-  }
   li.icon-login>a{
-    font-size: 20px;
-    margin-top: -250px;
+    font-size: 15px;
   }
   .box-signin{
     margin: 100px -20px 50px 0px;
@@ -569,6 +530,7 @@ p>a:hover{
   font-size: 15px;
   line-height: 1.42857143;
   }
+
 
 }
 
@@ -616,7 +578,8 @@ p>a:hover{
   }
   .mobile-text{
     font-size: 20px;
-  display: block;
-  margin: -50px 0px 50px 25px;
-}
+    display: block;
+    margin: -50px 0px 50px 25px;
+  }
 
+}

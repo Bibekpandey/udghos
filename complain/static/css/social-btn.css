@@ -104,7 +104,7 @@ div.social-wrap.b > .twitter {
 
 @media(max-width: 767px){
     div.social-wrap button {
-    height: 35px;
+    height: 40px;
     background: none;
     border: none;
     display: block;
