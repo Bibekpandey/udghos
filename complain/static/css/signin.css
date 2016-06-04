@@ -501,7 +501,7 @@ p>a:hover{
 @media (max-width: 767px) {
   .navhead-nav{
     float: right;
-    margin-top: -42px;
+    margin-top: -50px;
   }
   .container{
     width: 100%;
@@ -509,23 +509,14 @@ p>a:hover{
   .navhead-nav-left{
     float: left;
   }
-  .form-signup {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-  }
+  
   body{
     background-position: center 170px;
     top: 0;
     width: 100%;
   }
-  ul.bullets-login{
-    font-size: 30px;
-    margin-left: 50px;
-  }
   li.icon-login>a{
-    font-size: 20px;
-    margin-top: -250px;
+    font-size: 15px;
   }
   .box-signin{
     margin: 100px -20px 50px 0px;
@@ -539,6 +530,7 @@ p>a:hover{
   font-size: 15px;
   line-height: 1.42857143;
   }
+
 
 }
 
