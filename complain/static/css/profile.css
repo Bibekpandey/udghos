@@ -39,7 +39,9 @@ textarea:focus{
   margin-top: 67px;
   border: 1px solid #aaa;
   border-radius: 3px;
-  max-height: 300px;
+}
+#activities-container{
+  max-height: 250px;
   min-height: 100px;
   overflow-x: hidden;
   overflow-y: auto; 
@@ -72,7 +74,7 @@ a#more-activities-link{
   margin-bottom: 0px;
 }
 .event-heading{
-  
+
 }
 #heading-border{
   border-bottom: 1px solid #ddd;
