@@ -102,7 +102,7 @@ function vote(elem, id, vote_type, item) // elem is the container of text for su
         if(supported) {
             $(elem).parent().parent().find('.fb-share').attr('data-supported', 'supported');
             showWarning('Would you care to share in facebook? Your share could get supports to this thread.', 
-                'shareClick('+id.toString()+')', 0);
+                'shareClick('+id.toString()+')', 0, "Ok", "No, just Support");
         }
         else {
             $(elem).parent().parent().find('.fb-share').attr('data-supported', undefined);
@@ -216,7 +216,7 @@ function deleteThread(threadid) {
     });
 }
 
-function showWarning(message, onclickfunc, threadid) {
+function showWarning(message, onclickfunc, threadid, ok, cancel) {
     $('#mask').css({
         "width":$(document).width(),
         "height":$(document).height(),
@@ -239,8 +239,8 @@ function showWarning(message, onclickfunc, threadid) {
                 message +
             '</div>'+
             '<div class="modal-footer">'+
-                (threadid!=undefined?'<button class="btn btn-my" type="button" onclick="'+onclickfunc+'">Ok</button>':'')+
-                '<button class="btn btn-default" type="button" onclick="removeWarning()">'+(threadid!=undefined?'Cancel':'Ok')+'</button>'+
+                (threadid!=undefined?'<button class="btn btn-my" type="button" onclick="'+onclickfunc+'">'+ok+'</button>':'')+
+                '<button class="btn btn-default" type="button" onclick="removeWarning()">'+(threadid!=undefined?cancel:'Ok')+'</button>'+
             '</div>'+
             '</div>';
     var box = $('<div>').attr('class','warning-box')
@@ -324,7 +324,7 @@ function generate_thread(threadobj, auth) {
                     //'<a href="javascript:void()" onclick="editPost('+threadobj.id+')">'+
                     //'<span class="glyphicon glyphicon-edit"></span>'+
                     //'</a>'+
-                    '<a href="javascript:void(0)" onclick="showWarning(\'Are you sure you want to delete the thread? This can not be undone.\', \'deleteThread('+threadobj.id.toString()+')\','+threadobj.id+')">'+
+                    '<a href="javascript:void(0)" onclick="showWarning(\'Are you sure you want to delete the thread? This can not be undone.\', \'deleteThread('+threadobj.id.toString()+')\','+threadobj.id+', \'Ok\', \'Cancel\')">'+
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
                     ) +
