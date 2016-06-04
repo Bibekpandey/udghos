@@ -754,10 +754,9 @@ class Settings(View):
             self.context['password_set'] = True if request.user.has_usable_password() else False
 
             self.context['authenticated'] = True
+            return render(request, "complain/settings.html",self.context)
         else:
-            self.context['authenticated'] = False
-        return render(request, "complain/settings.html",self.context)
-        
+            return redirect('index')        
 
 def mark_read_notifications(request):
     if request.user.is_authenticated():
