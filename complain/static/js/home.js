@@ -173,6 +173,7 @@ function submitPost() {
 
 
             $('.fb-share').click(function(e){
+                        if($(this).attr('data-supported')=="supported") alert();
                         var img = $(this).attr('data-image');
                             e.preventDefault();
                             FB.ui(
@@ -180,7 +181,7 @@ function submitPost() {
                             method: 'feed',
                             name: $(this).attr('data-title'),
                             link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
-                            caption: ($(this).attr('supported')=="supported"?'I supported this thread on ' :'') + 'udghos.com',
+                            caption: ($(this).attr('data-supported')=="supported"?'I supported this thread on ' :'') + 'udghos.com',
                             description: $(this).attr('data-content'),
                             picture:(img!=''?'http://udghos.com/media/'+img:'http://udghos.com/static/img/navbarlogo.png'),
                             message: ''
