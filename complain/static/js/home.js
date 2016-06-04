@@ -173,7 +173,6 @@ function submitPost() {
 
 
             $('.fb-share').click(function(e){
-                        if($(this).attr('data-supported')=="supported") alert();
                         var img = $(this).attr('data-image');
                             e.preventDefault();
                             FB.ui(
