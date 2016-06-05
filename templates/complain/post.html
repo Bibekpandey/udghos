@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load zip %}
+{% load subtract %}
 <!DOCTYPE html>
 
 <html lang="en">
@@ -10,8 +11,8 @@
 
 <meta property="og:url"                content="http://www.udghos.com/thread/{{id}}?threadid={{id}}" />
 <meta property="og:type"               content="article" />
-<meta property="og:title"              content="{{title}}" />
-<meta property="og:description"        content="{{description}}" />
+<meta property="og:title"              content="{{title}} -- Support the Issue!!" />
+<meta property="og:description"        content="{{description}} ... Needs {{required|subtract:votes}} more votes to reach {{required}}" />
 {% if image %}
 <meta property="og:image"              content="http://www.udghos.com/media/{{image}}" />
 {% else %}
@@ -353,7 +354,7 @@ xfbml: true});
                             method: 'feed',
                             name: data.thread.title,
                             link: 'http://udghos.com/thread/'+data.thread.id.toString(),
-                            caption: 'udghos.com',
+                            caption: ($(this).attr('data-supported')=="supported"?"I supported this on ":"")+'udghos.com',
                             description: data.thread.content.substr(0, 100),
                             picture:(data.thread.images.length>0?"http://udghos.com/media/"+data.thread.images[0]:"http://udghos.com/static/img/navbarlogo.png"),
                             message: ''

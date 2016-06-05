@@ -180,7 +180,7 @@ function submitPost() {
                             method: 'feed',
                             name: $(this).attr('data-title'),
                             link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
-                            caption: 'udghos.com',
+                            caption: ($(this).attr('data-supported')=="supported"?'I supported this thread on ' :'') + 'udghos.com',
                             description: $(this).attr('data-content'),
                             picture:(img!=''?'http://udghos.com/media/'+img:'http://udghos.com/static/img/navbarlogo.png'),
                             message: ''
