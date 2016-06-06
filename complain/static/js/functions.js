@@ -460,14 +460,14 @@ function mark_read() {
 // TWITTER AND FACEBOOK SHARE
 function fbs_click(u, t) {
       u = 'www.udghos.com'+u;
-      window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&p[title]='+encodeURIComponent(t),'facebook-sharer','toolbar=0,status=0,width=626,height=436');
+     window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&p[title]='+encodeURIComponent(t),'facebook-sharer','toolbar=0,status=0,width=626,height=436');
       return false;
 }
 
   function twt_click(u, t) {
-      u = 'www.udghos.com'+u;
-	t = t + ' '+ url;
-      window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(u), 'sharer', 'toolbar=0,status=0,width=626,height=346');
+      u = 'www.udghos.com';
+      
+      window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&p[title]='+encodeURIComponent(u), 'sharer', 'toolbar=0,status=0,width=626,height=346');
       return false;
     }
 

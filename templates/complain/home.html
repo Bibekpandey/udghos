@@ -466,7 +466,7 @@ xfbml: true});
             });
           };
           $.fn.autogrow.resize = function(textarea) {
-            var lineHeight = parseInt($(textarea).css('line-height'), 15);
+            var lineHeight = parseInt($(textarea).css('line-height'), 10);
             var lines = textarea.value.split('\n');
             var columns = textarea.cols;
             var lineCount = 0;

@@ -787,6 +787,7 @@
     height: 200px;
     width: 350px;
     border-radius: 5px;
+    margin-left: 25px;
   }
   .btn-default,.btn-my{
     font-size: 15px; 
