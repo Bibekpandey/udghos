@@ -147,15 +147,13 @@
 
   
   /*********POST CONTENT *****************/
-  .stimg{
-    margin-left: 50px;
-  }
   .img-circle{
-    width: 90px;
-    height: 90px;
+    margin-top: 0px;
+    width: 100px;
+    height: 100px;
   }
   .post-title{
-    font-size: 30px;
+    font-size: 25px;
   }
   .post-content{
     margin-top: -1px;
