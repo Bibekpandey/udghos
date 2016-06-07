@@ -355,7 +355,8 @@ xfbml: true});
                             name: data.thread.title,
                             link: 'http://udghos.com/thread/'+data.thread.id.toString(),
                             caption: ($(this).attr('data-supported')=="supported"?"I supported this on ":"")+'udghos.com',
-                            description: data.thread.content.substr(0, 100),
+                            description: data.thread.content.substr(0, 100)+ ' ... '+(data.thread.total_votes-data.thread.votes) +
+                                        ' supports required for '+data.thread.total_votes+ ' supports',
                             picture:(data.thread.images.length>0?"http://udghos.com/media/"+data.thread.images[0]:"http://udghos.com/static/img/navbarlogo.png"),
                             message: ''
                             });

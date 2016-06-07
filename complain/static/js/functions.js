@@ -394,7 +394,12 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
               '</div>'+
               '<div class="share">'+
-                '<button'+(up?' data-supported="supported"':'')+' data-content="'+threadobj.content.substr(0,100)+' ..." data-id="'+threadobj.id.toString()+'" data-title="'+threadobj.title+'" data-image="'+(threadobj.images.length>0?threadobj.images[0]:"")+'" class="fb-share facebook shadow" aaaonclick="return fbs_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')" target="_blank"></button>'+
+                '<button'+(up?' data-supported="supported"':'')+' data-content="'+threadobj.content.substr(0,100)+
+                ' ..." data-id="'+threadobj.id.toString()+'" data-title="'+threadobj.title+'" data-image="'+
+                (threadobj.images.length>0?threadobj.images[0]:"")+'" data-requiredvotes="'+
+                (threadobj.total_votes-threadobj.votes)+'" data-totalvotes="'+threadobj.total_votes+
+               '" class="fb-share facebook shadow" aaaonclick="return fbs_click(\'/thread/'+threadobj.id.toString()+
+                '/\', \''+threadobj.title+'\')" target="_blank"></button>'+
                 '<button class="twitter shadow" onclick="return twt_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')"></button>'+
               '</div>'+
             '</div>'+

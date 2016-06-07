@@ -178,10 +178,11 @@ function submitPost() {
                             FB.ui(
                             {
                             method: 'feed',
-                            name: $(this).attr('data-title'),
+                            name: $(this).attr('data-title')+ ' -- Support the Issue!!',
                             link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
                             caption: ($(this).attr('data-supported')=="supported"?'I supported this thread on ' :'') + 'udghos.com',
-                            description: $(this).attr('data-content'),
+                            description: $(this).attr('data-content')+ '... '+ $(this).attr('data-requiredvotes')+' supports required for '+
+                                        $(this).attr('data-totalvotes')+ ' supports',
                             picture:(img!=''?'http://udghos.com/media/'+img:'http://udghos.com/static/img/navbarlogo.png'),
                             message: ''
                             });
