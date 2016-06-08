@@ -337,16 +337,21 @@ function generate_thread(threadobj, auth) {
                 '<div class="post-body">'+
                     (threadobj.user.id==0?'<a href="#">':'<a href="/profile/'+threadobj.user.id+'">')+
                     '<span class="heading-property heading-post">'+threadobj.user.name+'</a>'+
-                     '<div class="progress-area">'+
-                             '<div class="progress" onmouseover="popMessage(this, \'Requires '+(threadobj.total_votes-threadobj.votes)+' supports\')">'+
-                                 '<div class="progress-bar my-progress-bar" role="progressbar" aria-valuenow="'+threadobj.votes.toString()+'" aria-valuemin="0" aria-valuemax="'+threadobj.total_votes.toString()+'" style="width:'+Math.round(threadobj.votes*100/threadobj.total_votes)+'%">'+
-                                 '</div>'+
-                             '</div>'+
-                         '</div>'+
-                        '</span>'+
-                    '<span class="sttime"> &nbsp;'+threadobj.time+
+                        '<div class="progress-area">'+
+                            '<div class="progress" onmouseover="popMessage(this, \'Requires '+(threadobj.total_votes-threadobj.votes)+' supports\')">'+
+                                '<div class="progress-bar my-progress-bar" role="progressbar" aria-valuenow="'+threadobj.votes.toString()+'" aria-valuemin="0" aria-valuemax="'+threadobj.total_votes.toString()+'" style="width:'+Math.round(threadobj.votes*100/threadobj.total_votes)+'%">'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="post-reach">'+
+                                (threadobj.total_votes-threadobj.votes)+
+                            ' needed to reach 500 supports</div>'+
+                        '</div>'+
                     '</span>'+
+                    '<span class="sttime"> &nbsp; '+threadobj.time+
+                    '</span>'+ 
                 '</div>'+
+                '<div class="post-about">'+
+                    '</div>'+
                 '<div class="post-content">'+
                     threadobj.content+
                 '</div>'+

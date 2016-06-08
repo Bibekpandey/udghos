@@ -629,7 +629,8 @@ h5.heading-property{
   color: #d71010;
 }
 .heading-post:hover{
-  color: #777;
+  color: #e82121;
+  text-decoration: underline;
 }
 .user-heading{
   color: #333;
@@ -802,7 +803,6 @@ ul.dropdown-settings{
 }
 
 
-
 .icons{
   display: none;
 }
@@ -835,9 +835,11 @@ ul.dropdown-settings{
   text-align: justify;
   color: #333;
   font-size: 15px;
+  white-space: pre-wrap;
+
 }
 .post-title{
-  font-family: 'Bitter', serif !important;
+  /*font-family: 'Bitter', serif !important;*/
   color: #222;
   font-weight: bold;
   margin-top: -7px;
@@ -1150,6 +1152,10 @@ div.share> .twitter {
 }
 .post-action>a{
   text-decoration: none;
+}
+.post-reach,
+.post-about{
+  display: none;
 }
 .img-navbar{
   margin-left: 10px;
