@@ -470,9 +470,8 @@ function fbs_click(u, t) {
 }
 
   function twt_click(u, t) {
-      u = 'www.udghos.com';
-      
-      window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&p[title]='+encodeURIComponent(u), 'sharer', 'toolbar=0,status=0,width=626,height=346');
+      u = 'http://www.udghos.com'+u;
+      window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(u)+'&via=udghosnepal', 'sharer', 'toolbar=0,status=0,width=626,height=346');
       return false;
     }
 
