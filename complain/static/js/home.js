@@ -14,7 +14,7 @@ function submitPost() {
         }
 
         // check if title is empty
-        var tit = $('input[name=title]').val();
+        var tit = $('textarea[name=title]').val();
         if(tit.trim() =='') {
             $('#title-warning').show();
             return false;
@@ -47,6 +47,7 @@ function submitPost() {
         var form = document.getElementById("thread-form");
         form.appendChild(taginputelem);
         form.appendChild(targetinputelem);
+        return true;
     }    
 
 
