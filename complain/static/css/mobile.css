@@ -648,7 +648,7 @@
   }
   .post-content{
     font-size: 15px;
-    margin-top: 25px;
+    margin-top: -5px;
   }
   .post-body>span{
     font-size: 10px;
@@ -833,9 +833,17 @@
     height: 15px;
     margin-top: -2px;
   }
+  .modal-post .close-image {
+    margin-left: -25px;
+    font-size: 25px;
+  }
   .box-footer{
     margin-top: 165px !important;
     bottom: 0 !important;
+  }
+  .post-thread-image{
+    width: 200%;
+    height: 100%;
   }
 
 

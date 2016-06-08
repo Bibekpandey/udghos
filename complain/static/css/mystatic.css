@@ -505,6 +505,7 @@ div.row.background-icons{
 .post-thread-image{
   margin-top: 5px;
   margin-bottom: 10px;
+  width: 100%;
 }
 .comment-form{
   background-color: #eee;
@@ -829,9 +830,7 @@ ul.dropdown-settings{
   border-bottom: 1px solid #ddd;
 }
 .post-content{
-  margin-top: -10px;
-  margin-left: 2px;
-  margin-right: 10px;
+  margin: -10px 10px 5px 2px;
   text-align: justify;
   color: #333;
   font-size: 15px;
