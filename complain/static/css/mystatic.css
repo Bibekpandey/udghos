@@ -507,6 +507,16 @@ div.row.background-icons{
   margin-bottom: 10px;
   width: 100%;
 }
+.post-thread-image>a>img{
+  margin: 1px 50px 5px 0px;
+  min-height: 250px;
+  max-height: 500px; /* change it to your value*/
+  width: 99%; /* or use fixed width*/
+  background: transparent url('') no-repeat center;
+  overflow: hidden; 
+}
+
+
 .comment-form{
   background-color: #eee;
 }
@@ -856,8 +866,8 @@ ul.dropdown-settings{
   margin-left: 5px;
 }
 .img-post{
-  width: 200px;
-  height: 300px;
+  padding: 5px;
+  margin-right: 200px;
 }
 .post-option{
   float: right;
