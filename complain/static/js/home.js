@@ -181,7 +181,7 @@ function submitPost() {
                             method: 'feed',
                             name: $(this).attr('data-title')+ ' -- Support and Solve!!',
                             link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
-                            caption: ($(this).attr('data-supported')=="supported"?'I supported this thread on ' :'') + 'udghos.com',
+                            caption: ($(this).attr('data-supported')=="supported"?$('#userfullname').val()+' supported this thread on ' :'') + 'udghos.com',
                             description: $(this).attr('data-content')+ '... '+ $(this).attr('data-requiredvotes')+' more supports required for Action',
                             picture:(img!=''?'http://udghos.com/media/'+img:'http://udghos.com/static/img/navbarlogo.png'),
                             message: ''

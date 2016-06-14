@@ -34,6 +34,20 @@
 
 </head>
 <body>
+<div id="fb-root"></div>
+<script>
+(function() {
+var e = document.createElement('script'); e.async = true;
+e.src = document.location.protocol +
+'//connect.facebook.net/en_US/all.js';
+document.getElementById('fb-root').appendChild(e);
+}());
+window.fbAsyncInit = function() {
+FB.init({appId: '1652950188302583', status: true, cookie: true,
+xfbml: true});
+};
+
+</script>
 
 <style>
 .notification-heading{
@@ -306,6 +320,7 @@
   </div>
 
 
+  <input id="userfullname" value="{{request.user.first_name}} {{request.user.last_name}}" type="hidden"/>
   <div class="box-footer">
     <div class="container" > 
       <footer>
@@ -339,8 +354,6 @@
     <script src="{% static 'js/functions.js' %}"></script>
 
     <script src="{% static 'js/profile.js' %}"></script>
-    <script src="{% static 'js/home.js' %}"></script>
-
 
     <script>
         window.onload = function() {
@@ -352,7 +365,7 @@
             $('.hidden-cross').hide();
             getUserThreads({});
             checkEdit();
-
+            
             load_activities();
         }
 

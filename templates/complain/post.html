@@ -206,6 +206,7 @@ xfbml: true});
   		</div>
   	</div>
 
+  <input id="userfullname" value="{{request.user.first_name}} {{request.user.last_name}}" type="hidden"/>
 
   <div id="footer" class="box-footer">
     <div class="container" > 
@@ -354,7 +355,7 @@ xfbml: true});
                             method: 'feed',
                             name: data.thread.title + ' -- Support And Solve!!',
                             link: 'http://udghos.com/thread/'+data.thread.id.toString(),
-                            caption: ($(this).attr('data-supported')=="supported"?"I supported this on ":"")+'udghos.com',
+                            caption: ($(this).attr('data-supported')=="supported"?$('#userfullname').val()+" supported this on ":"")+'udghos.com',
                             description: data.thread.content.substr(0, 100)+ ' ... '+(data.thread.total_votes-data.thread.votes) +
                                         ' supports required for Action',
                             picture:(data.thread.images.length>0?"http://udghos.com/media/"+data.thread.images[0]:"http://udghos.com/static/img/navbarlogo.png"),
