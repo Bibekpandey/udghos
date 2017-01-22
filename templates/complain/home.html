@@ -12,7 +12,6 @@
   <link href='https://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
 
   <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
   
@@ -407,11 +406,11 @@ xfbml: true});
               </div>
             </div>
           </div>
-        </div>         
-        {% endif %} 
+                 
+        {% endif %}
+      </div>   
     </div>    
   </div>
-  <input id="userfullname" value="{{request.user.first_name}} {{request.user.last_name}}" type="hidden"/>
 
   <div class="container">
     <div class="btn-review">
@@ -468,7 +467,7 @@ xfbml: true});
             });
           };
           $.fn.autogrow.resize = function(textarea) {
-            var lineHeight = parseInt($(textarea).css('line-height'), 10);
+            var lineHeight = parseInt($(textarea).css('line-height'), 15);
             var lines = textarea.value.split('\n');
             var columns = textarea.cols;
             var lineCount = 0;

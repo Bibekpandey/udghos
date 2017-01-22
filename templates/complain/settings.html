@@ -38,12 +38,7 @@
     margin-top: 10px;
   }
   .password-section{
-    margin-top: 0px;
-    padding-top: 0px;
-    border: 0px solid #aaa;
-    width: 500px;
-    height: 300px;
-    border-radius: 3px;
+    margin-top: -10px;
   }
   li.active{
     background-color: #fff;
@@ -149,7 +144,7 @@
           <div class="container">
             <!-- <h3>Settings</h3> -->
             <div class="col-md-3">
-              <ul class="nav nav-pills nav-stacked nav-pills-custom">
+              <ul class="nav nav-pills nav-stacked">
                 <li class="active" data-toggle="pill" href="#home"><a href="#">Password</a></li>
                 <!-- <li><a data-toggle="pill" href="#menu1">Mobile</a></li> -->
                 
@@ -160,19 +155,17 @@
         <div class="col-md-4 password-section">
           <div class="tab-content">
             <div id="home" class="tab-pane fade in active" style="margin-top: -20px;">
-              <h2>Change Password</h2>
+              <h3>Change Password</h3>
               <form id="form-password">
               {% csrf_token %}
             {% if password_set %}
-              Old Password:
-                <label for="inputPassword" class="sr-only">Old</label>
+                <label for="inputPassword" class="sr-only"></label>
                 <input type="password" id="old-password" class="form-control" placeholder="Old Password" name="old-password" >
             {% endif %}
-                New Password:
+                
                 <label for="inputPassword" class="sr-only"></label>
                 <input type="password" id="new-password" class="form-control" placeholder="New Password" name="new-password" required>
                 
-                Confirm Password:
                 <label for="inputPassword" class="sr-only"></label>
                 <input type="password" id="confirm-password" class="form-control" placeholder="Confirm New Password" name="confirm-password" required>
             </form>
@@ -188,9 +181,9 @@
               <p>Your Mobile no. is kept secret and used for verification purpose</p>
               <br>
               <div class="password-change-footer">
-                <button class="btn btn-black" style="margin-right: 0px">Add Phone</button>
-              </div-->
-            </div>
+                <button class="btn btn-black" style="margin-right: 0px">Verify Phone</button>
+              </div>
+            </div-->
           </div>
         </div>  			
   		</div>
@@ -238,22 +231,6 @@
                     $('#form-password').reset();
             });
         }
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            
-            reader.onload = function (e) {
-                $('#blah').attr('src', e.target.result);
-            }
-            
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    
-    $("#imgInp").change(function(){
-        readURL(this);
-    });
     </script>
     
 </html>
