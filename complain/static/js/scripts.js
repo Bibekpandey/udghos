@@ -10,3 +10,4 @@ $('#btnToggle').click(function(){
     $(this).addClass('on');
   }
 });
+})

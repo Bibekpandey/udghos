@@ -29,6 +29,7 @@ class Account(models.Model):
     verified = models.BooleanField(default=False)
     address = models.CharField(max_length=50)
     email = models.EmailField(blank=True, null=True, max_length=30)
+    #blood_group = models.CharField(max_length=3)
     points = models.IntegerField(default=10)
     profile_pic = models.ImageField(null=True, upload_to=get_image_path, blank=True)
     tags_followed = models.ManyToManyField('ThreadTag', blank=True)

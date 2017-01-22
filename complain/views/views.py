@@ -860,6 +860,8 @@ def change_password(request):
             request.user.set_password(new_password)
             request.user.save()
             return JsonResponse({'success':True, 'message':'Successfully changed password'})
+    else:
+        return JsonResponse({'success':False, 'message':'GET method not expected'})
 
 def verify_page(request):
     return render(request, "complain/verify.html")
