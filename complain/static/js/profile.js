@@ -111,6 +111,22 @@ function imageIsLoaded(e) {
                 for(var x = 0;x<data.threads.length;x++) {
                     add_item(data.threads[x], "recent-threads", data.authenticated);
                 }
+        // set fb-click function
+$('.fb-share').click(function(e){
+                        var img = $(this).attr('data-image');
+                            e.preventDefault();
+                            FB.ui(
+                            {
+                            method: 'feed',
+                            name: $(this).attr('data-title')+ ' -- Support and Solve!!',
+                            link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
+                            caption: ($(this).attr('data-supported')=="supported"?$('#userfullname').val()+' supported this thread on ' :'') + 'udghos.com',
+                            description: $(this).attr('data-content')+ '... '+ $(this).attr('data-requiredvotes')+' more supports required for Action',
+                            picture:(img!=''?'http://udghos.com/media/'+img:'http://udghos.com/static/img/navbarlogo.png'),
+                            message: ''
+                            });
+            });
+
             });
         }
         window.onscroll = function() {

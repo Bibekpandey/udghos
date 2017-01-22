@@ -67,6 +67,7 @@ function vote(elem, id, vote_type, item) // elem is the container of text for su
                     }
                 });
 
+                var supported = false;
                 if(data.action=='undo') {
                     if(txt=="Supported") {
                         elem.children[0].innerHTML="Support";
@@ -86,19 +87,35 @@ function vote(elem, id, vote_type, item) // elem is the container of text for su
 
                     elem.children[0].className="text-bold vote-status";
                     if(txt=="Support") {
+                        supported = true;
                         elem.children[0].innerHTML="Supported";
                         next_elem.innerHTML="Downvote";
                         next_elem.className="vote-status";
                     }
                     else {
+                        supported = false;
                         elem.children[0].innerHTML="Downvoted";
                         next_elem.innerHTML="Support";
                         next_elem.className="vote-status";
                     }
                 }
+        if(supported) {
+            $(elem).parent().parent().find('.fb-share').attr('data-supported', 'supported');
+            showWarning('Would you care to share in facebook? Your share could get supports to this thread.', 
+                'shareClick('+id.toString()+')', 0, "Ok", "No, just Support");
+        }
+        else {
+            $(elem).parent().parent().find('.fb-share').attr('data-supported', undefined);
+        }
+
             }
         );
     }
+
+function shareClick(id) {
+    $('#thread-'+id.toString()).find('.fb-share').click();
+    removeWarning();
+}
 
 function toggleComments(id) {
         $.post("/complain/get-comments/", 
@@ -199,7 +216,7 @@ function deleteThread(threadid) {
     });
 }
 
-function showDeleteWarning(message, threadid) {
+function showWarning(message, onclickfunc, threadid, ok, cancel) {
     $('#mask').css({
         "width":$(document).width(),
         "height":$(document).height(),
@@ -216,15 +233,14 @@ function showDeleteWarning(message, threadid) {
     var html =  '<div class="modal-delete">'+
                 '<div class="modal-header my-color modal-edit">'+
                 '<button onclick="removeWarning()" type="button" class="close my-close" data-dismiss="modal" data-keyboard="true" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-                '<h4 class="modal-title my-modal-title" id="myModalLabel">Warning</h4><br>'+
+                '<h4 class="modal-title my-modal-title" id="myModalLabel">Info</h4><br>'+
             '</div>'+
             '<div class="warning-text">'+
                 message +
-                'It cannot be undone.'+
             '</div>'+
             '<div class="modal-footer">'+
-                (threadid!=undefined?'<button class="btn btn-my" type="button" onclick="deleteThread('+threadid+')">Ok</button>':'')+
-                '<button class="btn btn-default" type="button" onclick="removeWarning()">'+(threadid!=undefined?'Cancel':'Ok')+'</button>'+
+                (threadid!=undefined?'<button class="btn btn-my" type="button" onclick="'+onclickfunc+'">'+ok+'</button>':'')+
+                '<button class="btn btn-default" type="button" onclick="removeWarning()">'+(threadid!=undefined?cancel:'Ok')+'</button>'+
             '</div>'+
             '</div>';
     var box = $('<div>').attr('class','warning-box')
@@ -308,29 +324,34 @@ function generate_thread(threadobj, auth) {
                     //'<a href="javascript:void()" onclick="editPost('+threadobj.id+')">'+
                     //'<span class="glyphicon glyphicon-edit"></span>'+
                     //'</a>'+
-                    '<a href="javascript:void(0)" onclick="showDeleteWarning(\'Are you sure you want to delete the thread? This can not be undone.\','+threadobj.id+')">'+
+                    '<a href="javascript:void(0)" onclick="showWarning(\'Are you sure you want to delete the thread? This can not be undone.\', \'deleteThread('+threadobj.id.toString()+')\','+threadobj.id+', \'Ok\', \'Cancel\')">'+
                         '<span class="glyphicon glyphicon-remove glyphicon-remove-post"></span>':''+
                         '</a>'
                     ) +
               '</div><div id="textst" class="sttext">'+
-                '<a href="/complain/thread/'+threadobj.id.toString()+'">'+
+                '<a href="/thread/'+threadobj.id.toString()+'">'+
                 '<div class="post-title">'+
                     (threadobj.title||threadobj.content)+
                 '</div>'+
                 '</a>'+
                 '<div class="post-body">'+
-                    (threadobj.user.id==0?'<a href="#">':'<a href="/complain/profile/'+threadobj.user.id+'">')+
+                    (threadobj.user.id==0?'<a href="#">':'<a href="/profile/'+threadobj.user.id+'">')+
                     '<span class="heading-property heading-post">'+threadobj.user.name+'</a>'+
-                     '<div class="progress-area">'+
-                             '<div class="progress" onmouseover="popMessage(this, \'Requires '+(threadobj.total_votes-threadobj.votes)+' votes\')">'+
-                                 '<div class="progress-bar my-progress-bar" role="progressbar" aria-valuenow="'+threadobj.votes.toString()+'" aria-valuemin="0" aria-valuemax="'+threadobj.total_votes.toString()+'" style="width:'+Math.round(threadobj.votes*100/threadobj.total_votes)+'%">'+
-                                 '</div>'+
-                             '</div>'+
-                         '</div>'+
-                        '</span>'+
-                    '<span class="sttime"> &nbsp;'+threadobj.time+
+                        '<div class="progress-area">'+
+                            '<div class="progress" onmouseover="popMessage(this, \'Requires '+(threadobj.total_votes-threadobj.votes)+' supports\')">'+
+                                '<div class="progress-bar my-progress-bar" role="progressbar" aria-valuenow="'+threadobj.votes.toString()+'" aria-valuemin="0" aria-valuemax="'+threadobj.total_votes.toString()+'" style="width:'+Math.round(threadobj.votes*100/threadobj.total_votes)+'%">'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="post-reach">'+
+                                (threadobj.total_votes-threadobj.votes)+
+                            ' needed to reach 500 supports</div>'+
+                        '</div>'+
                     '</span>'+
+                    '<span class="sttime"> &nbsp; '+threadobj.time+
+                    '</span>'+ 
                 '</div>'+
+                '<div class="post-about">'+
+                    '</div>'+
                 '<div class="post-content">'+
                     threadobj.content+
                 '</div>'+
@@ -373,7 +394,12 @@ function generate_thread(threadobj, auth) {
                 '</a>'+
               '</div>'+
               '<div class="share">'+
-                '<button data-content="'+threadobj.content.substr(0,100)+' ..." data-id="'+threadobj.id.toString()+'" data-title="'+threadobj.title+'" data-image="'+(threadobj.images.length>0?threadobj.images[0]:"")+'" class="fb-share facebook shadow" aonclick="return fbs_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')" target="_blank"></button>'+
+                '<button'+(up?' data-supported="supported"':'')+' data-content="'+threadobj.content.substr(0,100)+
+                ' ..." data-id="'+threadobj.id.toString()+'" data-title="'+threadobj.title+'" data-image="'+
+                (threadobj.images.length>0?threadobj.images[0]:"")+'" data-requiredvotes="'+
+                (threadobj.total_votes-threadobj.votes)+'" data-totalvotes="'+threadobj.total_votes+
+               '" class="fb-share facebook shadow" aaaonclick="return fbs_click(\'/thread/'+threadobj.id.toString()+
+                '/\', \''+threadobj.title+'\')" target="_blank"></button>'+
                 '<button class="twitter shadow" onclick="return twt_click(\'/thread/'+threadobj.id.toString()+'/\', \''+threadobj.title+'\')"></button>'+
               '</div>'+
             '</div>'+
@@ -417,7 +443,7 @@ function popMessage(elem, msg) {
     newdiv.style.borderRadius="3px";
     */
     child.appendChild(newdiv);
-    setTimeout(function() { $(newdiv).delay(100).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 700);
+    setTimeout(function() { $(newdiv).delay(100).fadeOut(); newdiv.parentNode.removeChild(newdiv); }, 1000);
     //$(newdiv).hide().delay(1000).fadeOut();
 }
 
@@ -439,14 +465,14 @@ function mark_read() {
 // TWITTER AND FACEBOOK SHARE
 function fbs_click(u, t) {
       u = 'www.udghos.com'+u;
-      window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&p[title]='+encodeURIComponent(t),'facebook-sharer','toolbar=0,status=0,width=626,height=436');
+     window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&p[title]='+encodeURIComponent(t),'facebook-sharer','toolbar=0,status=0,width=626,height=436');
       return false;
 }
 
   function twt_click(u, t) {
-      u = 'www.udghos.com'+u;
-	t = t + ' '+ url;
-      window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(u), 'sharer', 'toolbar=0,status=0,width=626,height=346');
+      u = 'http://www.udghos.com'+u;
+      window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(u)+'&via=udghosnepal', 'sharer', 'toolbar=0,status=0,width=626,height=346');
       return false;
     }
+
 

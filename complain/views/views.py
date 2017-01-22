@@ -405,26 +405,22 @@ class ThreadPage(View):
             self.context['authenticated'] = True
             self.context['notifications'] = get_notifications(request)
             self.context['profile_pic'] = Account.objects.get(user=request.user).profile_pic
-            comments =[]# Comment.objects.filter(thread=thread)
-            #self.context['comments']= comments
-
-            replies = []
-            # images
-            images = []#ThreadImage.objects.filter(thread=thread)
-            self.context['images'] = []
-            for i in images:
-                self.context['images'].append(i.name)
-            # comments
-            for comment in comments:
-                replys = Reply.objects.filter(comment=comment)
-                replies.append(list(replys))
-
-            self.context['replies'] = replies
-
-            self.context['total_comments'] = len(comments)
         else:
             self.context['authenticated'] = False
 
+        threads = Thread.objects.filter(id=thread_id)
+        if len(threads)>0:
+            self.context['id'] = threads[0].id
+            self.context['title'] = threads[0].title
+            self.context['description'] = threads[0].content[:140] + '...'
+            from .ThreadViews import REQUIRED_VOTES  as req
+            self.context['votes'] = threads[0].votes
+            self.context['required'] = req
+            img = ThreadImage.objects.filter(thread=threads[0])
+            if len(img)>0:
+                self.context['image'] = img[0].name 
+            else:
+                self.context['image'] = None
         return render(request, "complain/post.html", self.context)
 
 
@@ -761,10 +757,9 @@ class Settings(View):
             self.context['password_set'] = True if request.user.has_usable_password() else False
 
             self.context['authenticated'] = True
+            return render(request, "complain/settings.html",self.context)
         else:
-            self.context['authenticated'] = False
-        return render(request, "complain/settings.html",self.context)
-        
+            return redirect('index')        
 
 def mark_read_notifications(request):
     if request.user.is_authenticated():

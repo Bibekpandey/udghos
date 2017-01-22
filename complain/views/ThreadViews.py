@@ -6,7 +6,7 @@ from complain.models import *
 from datetime import datetime
 
 NEW_THREADS = 15 # new number of threads when scrolled in browser
-REQUIRED_VOTES = 2000
+REQUIRED_VOTES = 500
 
 def get_thread_json(request):
     if request.user.is_authenticated():auth=True

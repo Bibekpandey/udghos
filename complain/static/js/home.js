@@ -14,7 +14,7 @@ function submitPost() {
         }
 
         // check if title is empty
-        var tit = $('input[name=title]').val();
+        var tit = $('textarea[name=title]').val();
         if(tit.trim() =='') {
             $('#title-warning').show();
             return false;
@@ -47,6 +47,7 @@ function submitPost() {
         var form = document.getElementById("thread-form");
         form.appendChild(taginputelem);
         form.appendChild(targetinputelem);
+        return true;
     }    
 
 
@@ -178,10 +179,10 @@ function submitPost() {
                             FB.ui(
                             {
                             method: 'feed',
-                            name: $(this).attr('data-title'),
+                            name: $(this).attr('data-title')+ ' -- Support and Solve!!',
                             link: 'http://udghos.com/thread/'+$(this).attr('data-id'),
-                            caption: 'udghos.com',
-                            description: $(this).attr('data-content'),
+                            caption: ($(this).attr('data-supported')=="supported"?$('#userfullname').val()+' supported this thread on ' :'') + 'udghos.com',
+                            description: $(this).attr('data-content')+ '... '+ $(this).attr('data-requiredvotes')+' more supports required for Action',
                             picture:(img!=''?'http://udghos.com/media/'+img:'http://udghos.com/static/img/navbarlogo.png'),
                             message: ''
                             });

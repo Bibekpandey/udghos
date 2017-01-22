@@ -29,7 +29,6 @@ textarea:focus{
     font-family: 'Varela Round', sans-serif !important;
     min-height: 300px;
     padding: 20px;
-    margin: 2px;
     margin-top: 67px;
     margin-bottom: 5px;
     background-color: #fff;
@@ -40,7 +39,9 @@ textarea:focus{
   margin-top: 67px;
   border: 1px solid #aaa;
   border-radius: 3px;
-  max-height: 300px;
+}
+#activities-container{
+  max-height: 250px;
   min-height: 100px;
   overflow-x: hidden;
   overflow-y: auto; 
@@ -71,6 +72,9 @@ a#more-activities-link{
 
 .tag-heading{
   margin-bottom: 0px;
+}
+.event-heading{
+
 }
 #heading-border{
   border-bottom: 1px solid #ddd;
@@ -161,7 +165,7 @@ a#more-activities-link{
   float: left;
 }
 .info-section{
-  padding-left: 75px;
+  padding-left: 55px;
 }
 /*///////PROFILE IMAGE////////*/
 #profile-image-form{

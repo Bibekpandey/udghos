@@ -24,16 +24,17 @@ progress {
 }
 .progress{
   margin-bottom: 5px;
+  background-color: #ccc;
 }
 .my-progress-bar {
   background-color: #d71010;
 }
 .progress-area{
-  display: inlinse-block;
+  display: inline-block;
   position: relative;
   float: right;
   width: 100px;
-  margin-top: -10px;
+  margin-top: 5px;
   margin-right: 5px;
 }
 .progress-area-home{
@@ -504,7 +505,18 @@ div.row.background-icons{
 .post-thread-image{
   margin-top: 5px;
   margin-bottom: 10px;
+  width: 100%;
 }
+.post-thread-image>a>img{
+  margin: 1px 50px 5px 0px;
+  min-height: 250px;
+  max-height: 500px; /* change it to your value*/
+  width: 99%; /* or use fixed width*/
+  background: transparent url('') no-repeat center;
+  overflow: hidden; 
+}
+
+
 .comment-form{
   background-color: #eee;
 }
@@ -628,7 +640,8 @@ h5.heading-property{
   color: #d71010;
 }
 .heading-post:hover{
-  color: #777;
+  color: #e82121;
+  text-decoration: underline;
 }
 .user-heading{
   color: #333;
@@ -801,7 +814,6 @@ ul.dropdown-settings{
 }
 
 
-
 .icons{
   display: none;
 }
@@ -828,15 +840,15 @@ ul.dropdown-settings{
   border-bottom: 1px solid #ddd;
 }
 .post-content{
-  margin-top: -10px;
-  margin-left: 2px;
-  margin-right: 10px;
+  margin: -10px 10px 5px 2px;
   text-align: justify;
   color: #333;
   font-size: 15px;
+  white-space: pre-wrap;
+
 }
 .post-title{
-  font-family: 'Bitter', serif !important;
+  /*font-family: 'Bitter', serif !important;*/
   color: #222;
   font-weight: bold;
   margin-top: -7px;
@@ -854,8 +866,8 @@ ul.dropdown-settings{
   margin-left: 5px;
 }
 .img-post{
-  width: 200px;
-  height: 300px;
+  padding: 5px;
+  margin-right: 200px;
 }
 .post-option{
   float: right;
@@ -1149,6 +1161,10 @@ div.share> .twitter {
 }
 .post-action>a{
   text-decoration: none;
+}
+.post-reach,
+.post-about{
+  display: none;
 }
 .img-navbar{
   margin-left: 10px;
@@ -1459,7 +1475,7 @@ ul#tags-suggest-list{
     padding:3px;
     margin-left: 50px;
     font-size:0.9em;
-    width:;
+    max-width: 250px;
     z-index:100;
     background-color:#333;
     border:solid 1px #555;
